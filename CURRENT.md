@@ -16,8 +16,9 @@ implemented as a statically generated Next.js application.
 - Header actions that hide GitHub on phones and place the menu trigger directly
   before the theme control on tablet and phone widths.
 - Local static documentation search with a compact navigation-aligned trigger,
-  reliable touch activation, a focus-trapped and scroll-locking Atom Dialog,
-  and a generated content index.
+  a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
+  inline phone Combobox that remains inside the Drawer focus scope, and a
+  generated content index.
 - Light and dark themes with system preference and local persistence.
 - Static Markdown rendering with tables, code, deterministic headings, and
   right-hand page navigation.
@@ -36,11 +37,12 @@ implemented as a statically generated Next.js application.
 - Component examples are static code; MDX and live previews are deferred.
 - Version switching, analytics, accounts, comments, and a footer are outside
   version-one scope.
-- The permanent logo and production domain are not yet approved.
+- The permanent logo is not yet approved.
 
 ## Deployment Status
 
 The canonical source repository is
 [`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
-Local implementation is complete. A production hosting project and domain have
-not been configured.
+Vercel deploys the public site at [atom-ui.com](https://atom-ui.com) from the
+`main` branch. Cloudflare remains the authoritative DNS provider; the apex
+record resolves directly to Vercel and `www` redirects to the apex domain.

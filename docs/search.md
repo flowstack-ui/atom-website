@@ -10,14 +10,24 @@ Opening it presents a page overlay and a centered search panel. The input is
 focused immediately, page scrolling is locked, focus remains inside, Escape or
 an overlay click dismisses it, and focus returns to the trigger.
 
-Search opened from the tablet or phone navigation Drawer remains nested above
-the Drawer. The first Escape closes search; a later Escape can close navigation.
+Search opened from the tablet navigation Drawer remains nested above the
+Drawer. The first Escape closes search; a later Escape can close navigation.
 Touch and pen release explicitly opens the controlled Dialog, while ordinary
 click and keyboard activation continue through Atom Dialog.Trigger.
+
+On phones, search replaces the navigation list with an inline Atom Combobox
+inside the existing Drawer. It autofocuses once, keeps the software keyboard
+stable, and provides a back control that restores the navigation list. This
+avoids nesting a second modal focus trap inside the phone Drawer. Selecting a
+result navigates and closes the Drawer.
 
 Atom Dialog is the correct primitive because this is a centered modal task.
 Modal is a lower-level primitive foundation, Drawer implies edge placement, and
 Popover would leave the background interactive.
+
+The phone presentation is intentionally not a Dialog: the Drawer already owns
+modality, scroll locking, and focus containment. The inline Combobox remains in
+that focus scope instead of competing with it.
 
 ## Search UI
 

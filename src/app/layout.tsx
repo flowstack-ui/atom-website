@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const themeScript = `
@@ -14,9 +15,7 @@ const themeScript = `
 })();`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Atom UI — Headless React primitives",
     template: "%s — Atom UI",

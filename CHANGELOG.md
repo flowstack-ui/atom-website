@@ -2,11 +2,16 @@
 
 ## Unreleased
 
+- Recorded the Vercel production deployment at `atom-ui.com` and made that
+  canonical origin the static metadata, robots, and sitemap default.
 - Established `flowstack-ui/atom-website` as the canonical public GitHub
   repository, independent from `flowstack-ui/atom`.
 - Added a full-width desktop documentation shell with balanced navigation rails.
 - Added local documentation search backed by an Atom Dialog, Atom Combobox,
   and a statically generated Markdown index.
+- Replaced the phone's nested search Dialog with an inline Drawer Combobox so
+  autofocus no longer competes with two modal focus traps or repeatedly toggles
+  the software keyboard.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch

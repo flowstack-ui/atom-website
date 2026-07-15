@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, X } from "lucide-react";
+import { ArrowLeft, Search, X } from "lucide-react";
 import { Button } from "@flowstack-ui/atom/button";
 import { Combobox, type ComboboxOption } from "@flowstack-ui/atom/combobox";
 import { Dialog } from "@flowstack-ui/atom/dialog";
@@ -24,21 +24,26 @@ function isEditableTarget(target: EventTarget | null) {
 
 export function DocsSearch({
   enableShortcut = false,
+  mode = "dialog",
+  onActiveChange,
   onNavigate,
 }: {
   enableShortcut?: boolean;
+  mode?: "dialog" | "inline";
+  onActiveChange?: (active: boolean) => void;
   onNavigate?: () => void;
 }) {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState<SearchIndex | null>(null);
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
   const openSearch = useCallback(() => {
-    setDialogOpen(true);
+    setSearchOpen(true);
+    onActiveChange?.(true);
     if (index || loading) return;
     setLoading(true);
     setLoadError(false);
@@ -46,7 +51,13 @@ export function DocsSearch({
       .then(setIndex)
       .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
-  }, [index, loading]);
+  }, [index, loading, onActiveChange]);
+
+  const closeSearch = useCallback(() => {
+    setSearchOpen(false);
+    setQuery("");
+    onActiveChange?.(false);
+  }, [onActiveChange]);
 
   useEffect(() => {
     if (!enableShortcut) return;
@@ -83,22 +94,141 @@ export function DocsSearch({
     if (nextOpen) {
       openSearch();
     } else {
-      setDialogOpen(false);
-      setQuery("");
+      closeSearch();
     }
   }
 
   function handleSelection(value: string | null) {
     const result = results.find((entry) => entry.id === value);
     if (!result) return;
-    setDialogOpen(false);
-    setQuery("");
+    closeSearch();
     onNavigate?.();
     router.push(result.url);
   }
 
+  const triggerContents = (
+    <>
+      <Search aria-hidden="true" />
+      <span>Search docs</span>
+      <kbd aria-hidden="true">/</kbd>
+    </>
+  );
+
+  const searchInterface = (
+    <Combobox.Root
+      options={options}
+      value={null}
+      inputValue={query}
+      onInputValueChange={setQuery}
+      onValueChange={handleSelection}
+      filterOptions={keepRankedOptions}
+      openOnFocus={false}
+      clearOnSelect
+      loading={loading && Boolean(query.trim())}
+      noOptionsText={loadError ? "Search is unavailable." : "No results found."}
+    >
+      <div className="search-input-row">
+        <Search aria-hidden="true" className="search-input-icon" />
+        <Combobox.Input
+          ref={inputRef}
+          autoFocus
+          className="search-input"
+          placeholder="Search docs"
+          aria-label="Search documentation"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.preventDefault();
+              closeSearch();
+            }
+          }}
+        />
+        {query ? (
+          <Button.Root
+            className="search-clear"
+            aria-label="Clear search"
+            onClick={() => {
+              setQuery("");
+              inputRef.current?.focus();
+            }}
+          >
+            <X aria-hidden="true" />
+          </Button.Root>
+        ) : mode === "dialog" ? (
+          <Dialog.Close className="search-close" aria-label="Close search">
+            <X aria-hidden="true" />
+          </Dialog.Close>
+        ) : null}
+      </div>
+      {query.trim() ? (
+        <Combobox.Portal disabled>
+          <Combobox.Content
+            className={`search-results${
+              mode === "inline" ? " inline-search-results" : ""
+            }`}
+            sideOffset={8}
+          >
+            <Combobox.Listbox className="search-results-list">
+              <Combobox.Loading className="search-status">
+                Searching documentation…
+              </Combobox.Loading>
+              <Combobox.Empty className="search-status" />
+              {results.map((result) => (
+                <Combobox.Item
+                  key={result.id}
+                  value={result.id}
+                  label={result.heading || result.title}
+                  className="search-result"
+                >
+                  <span className="search-result-context">
+                    {result.section} · {result.title}
+                  </span>
+                  <span className="search-result-title">
+                    {result.heading || result.title}
+                  </span>
+                  {result.excerpt ? (
+                    <span className="search-result-excerpt">{result.excerpt}</span>
+                  ) : null}
+                </Combobox.Item>
+              ))}
+            </Combobox.Listbox>
+          </Combobox.Content>
+        </Combobox.Portal>
+      ) : null}
+    </Combobox.Root>
+  );
+
+  if (mode === "inline") {
+    if (!searchOpen) {
+      return (
+        <Button.Root
+          className="search-trigger"
+          aria-label="Search documentation"
+          onClick={openSearch}
+        >
+          {triggerContents}
+        </Button.Root>
+      );
+    }
+
+    return (
+      <section className="inline-search" aria-label="Search documentation">
+        <div className="inline-search-header">
+          <Button.Root
+            className="inline-search-back"
+            aria-label="Back to documentation navigation"
+            onClick={closeSearch}
+          >
+            <ArrowLeft aria-hidden="true" />
+          </Button.Root>
+          <span>Search docs</span>
+        </div>
+        {searchInterface}
+      </section>
+    );
+  }
+
   return (
-    <Dialog.Root open={dialogOpen} onOpenChange={handleDialogOpenChange}>
+    <Dialog.Root open={searchOpen} onOpenChange={handleDialogOpenChange}>
       <Dialog.Trigger
         className="search-trigger"
         aria-label="Search documentation"
@@ -108,9 +238,7 @@ export function DocsSearch({
           openSearch();
         }}
       >
-        <Search aria-hidden="true" />
-        <span>Search docs</span>
-        <kbd aria-hidden="true">/</kbd>
+        {triggerContents}
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="search-overlay" />
@@ -121,81 +249,7 @@ export function DocsSearch({
           <Dialog.Description className="sr-only">
             Search overview pages, guides, components, and utilities.
           </Dialog.Description>
-          <Combobox.Root
-            options={options}
-            value={null}
-            inputValue={query}
-            onInputValueChange={setQuery}
-            onValueChange={handleSelection}
-            filterOptions={keepRankedOptions}
-            openOnFocus={false}
-            clearOnSelect
-            loading={loading && Boolean(query.trim())}
-            noOptionsText={loadError ? "Search is unavailable." : "No results found."}
-          >
-            <div className="search-input-row">
-              <Search aria-hidden="true" className="search-input-icon" />
-              <Combobox.Input
-                ref={inputRef}
-                autoFocus
-                className="search-input"
-                placeholder="Search docs"
-                aria-label="Search documentation"
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.preventDefault();
-                    setDialogOpen(false);
-                  }
-                }}
-              />
-              {query ? (
-                <Button.Root
-                  className="search-clear"
-                  aria-label="Clear search"
-                  onClick={() => {
-                    setQuery("");
-                    inputRef.current?.focus();
-                  }}
-                >
-                  <X aria-hidden="true" />
-                </Button.Root>
-              ) : (
-                <Dialog.Close className="search-close" aria-label="Close search">
-                  <X aria-hidden="true" />
-                </Dialog.Close>
-              )}
-            </div>
-            {query.trim() ? (
-              <Combobox.Portal disabled>
-                <Combobox.Content className="search-results" sideOffset={8}>
-                  <Combobox.Listbox className="search-results-list">
-                    <Combobox.Loading className="search-status">
-                      Searching documentation…
-                    </Combobox.Loading>
-                    <Combobox.Empty className="search-status" />
-                    {results.map((result) => (
-                      <Combobox.Item
-                        key={result.id}
-                        value={result.id}
-                        label={result.heading || result.title}
-                        className="search-result"
-                      >
-                        <span className="search-result-context">
-                          {result.section} · {result.title}
-                        </span>
-                        <span className="search-result-title">
-                          {result.heading || result.title}
-                        </span>
-                        {result.excerpt ? (
-                          <span className="search-result-excerpt">{result.excerpt}</span>
-                        ) : null}
-                      </Combobox.Item>
-                    ))}
-                  </Combobox.Listbox>
-                </Combobox.Content>
-              </Combobox.Portal>
-            ) : null}
-          </Combobox.Root>
+          {searchInterface}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

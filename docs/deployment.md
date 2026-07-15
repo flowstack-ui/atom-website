@@ -11,15 +11,19 @@ It remains separate from the
 
 - Install from the committed npm lockfile.
 - Run content validation, type checking, lint, and build.
-- Provide `NEXT_PUBLIC_SITE_URL` with the canonical production origin.
+- The canonical origin defaults to `https://atom-ui.com`; use
+  `NEXT_PUBLIC_SITE_URL` only to override it deliberately.
 - Serve generated routes with trailing slashes.
 - Do not mount or clone the sibling Atom package repository.
 
 ## Vercel
 
-Vercel can host the Next.js static export, subject to current plan and Git
-organization eligibility. The website repository, deployment configuration,
-domain, and environment values remain independent from the package repository.
+Vercel hosts the production static export from the `main` branch at
+[atom-ui.com](https://atom-ui.com). Cloudflare owns DNS, the apex record is
+DNS-only so traffic reaches Vercel directly, and the proxied `www` record owns
+the redirect to the apex domain. The website repository, deployment
+configuration, domain, and environment values remain independent from the
+package repository.
 
 ## Alternative Static Hosting
 

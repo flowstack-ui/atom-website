@@ -2,6 +2,8 @@
 
 Independent public documentation website for `@flowstack-ui/atom`.
 
+Production: [atom-ui.com](https://atom-ui.com)
+
 The site presents Atom-specific overview pages, guides, component API docs, and
 utilities in a minimal responsive documentation shell built from real Atom
 primitives. It supports light and dark themes and generates one static route per

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@flowstack-ui/atom/button";
 import { Drawer } from "@flowstack-ui/atom/drawer";
@@ -8,6 +8,16 @@ import { DocsNavigation } from "./docs-navigation";
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
+  const [useInlineSearch, setUseInlineSearch] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const updateSearchMode = () => setUseInlineSearch(media.matches);
+
+    updateSearchMode();
+    media.addEventListener("change", updateSearchMode);
+    return () => media.removeEventListener("change", updateSearchMode);
+  }, []);
 
   return (
     <Drawer.Root open={open} onOpenChange={setOpen}>
@@ -32,7 +42,11 @@ export function MobileNavigation() {
             </Drawer.Close>
           </div>
           <div className="drawer-scroll">
-            <DocsNavigation onNavigate={() => setOpen(false)} />
+            <DocsNavigation
+              key={useInlineSearch ? "phone-navigation" : "tablet-navigation"}
+              inlineSearch={useInlineSearch}
+              onNavigate={() => setOpen(false)}
+            />
           </div>
         </Drawer.Content>
       </Drawer.Portal>

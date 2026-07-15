@@ -430,6 +430,74 @@ a {
   font-size: 13px;
 }
 
+.inline-search {
+  min-height: 100%;
+}
+
+.inline-search-header {
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  margin: -8px 0 16px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 620;
+}
+
+.inline-search-back {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  color: var(--muted-text);
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.inline-search-back:active {
+  color: var(--text);
+  background: var(--active-bg);
+}
+
+.inline-search-back svg {
+  width: 19px;
+  height: 19px;
+}
+
+.inline-search .search-input-row {
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.inline-search .search-input-row:focus-within {
+  box-shadow: 0 0 0 2px var(--focus-ring);
+}
+
+.inline-search .search-input {
+  height: 46px;
+}
+
+.inline-search-results {
+  position: static !important;
+  width: 100%;
+  max-height: calc(100dvh - var(--header-height) - 190px);
+  margin-top: 8px;
+  transform: none !important;
+  box-shadow: none;
+}
+
+@media (hover: hover) {
+  .inline-search-back:hover {
+    color: var(--text);
+    background: var(--hover-bg);
+  }
+}
+
 .sidebar-scroll-viewport {
   overflow-y: auto;
   padding: 30px 24px 60px;
