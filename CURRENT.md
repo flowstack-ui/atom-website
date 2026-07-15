@@ -21,8 +21,9 @@ implemented as a statically generated Next.js application.
   a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
   inline phone Combobox that remains inside the Drawer focus scope, and a
   generated content index.
-- Light and dark themes with system preference, local persistence, and root
-  page backgrounds that let mobile Safari repaint its chrome with the page.
+- Light and dark themes with system preference, local persistence, and a
+  full-height root theme surface that lets mobile Safari repaint its chrome
+  with the page.
 - Static Markdown rendering with tables, code, deterministic headings, and
   right-hand page navigation.
 - Content provenance and export-surface validation.

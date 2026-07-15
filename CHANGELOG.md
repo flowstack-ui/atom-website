@@ -21,6 +21,8 @@
 - Removed explicit theme-color metadata after comparison with the Radix website
   showed that mobile Safari repaints its chrome immediately when it derives the
   color directly from the root page background.
+- Added a full-height, direct body theme surface matching Radix Themes so its
+  background repaint is visible to Safari as soon as the theme changes.
 - Disable Atom header tooltips on touch-first devices so long presses cannot
   leave tooltip content open over the mobile navigation.
 - Aligned and compacted the search trigger with the navigation links and added

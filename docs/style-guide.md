@@ -43,7 +43,8 @@ text contrast and visible focus indicators. The browser color scheme follows
 the selected theme. The root and body backgrounds follow the same state. Do not
 add explicit theme-color metadata: mobile Safari should derive its chrome color
 from the live page background so it can repaint immediately when the theme
-changes, matching the Radix website approach.
+changes. The direct body child is a full-height theme surface whose background
+uses `--page-bg`, matching the Radix Themes root-surface approach.
 
 ## Components
 
