@@ -7,7 +7,6 @@ This tracker contains active website-owned unfinished work only.
 - Replace the temporary text mark when an approved Atom logo asset is supplied.
 - Confirm the production domain and set `NEXT_PUBLIC_SITE_URL` during builds.
 - Choose an eligible hosting plan and configure the independent deployment.
-- Add the website Git remote after its repository is created on GitHub.
 
 ## Deferred Product Work
 

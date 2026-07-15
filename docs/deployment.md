@@ -2,6 +2,11 @@
 
 The website emits a fully static `out/` directory through `npm run build`.
 
+The canonical source repository is
+[`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
+It remains separate from the
+[`flowstack-ui/atom`](https://github.com/flowstack-ui/atom) package repository.
+
 ## Requirements
 
 - Install from the committed npm lockfile.

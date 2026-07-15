@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Established `flowstack-ui/atom-website` as the canonical public GitHub
+  repository, independent from `flowstack-ui/atom`.
 - Added a full-width desktop documentation shell with balanced navigation rails.
 - Added local documentation search backed by an Atom Dialog, Atom Combobox,
   and a statically generated Markdown index.

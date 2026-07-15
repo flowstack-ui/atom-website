@@ -40,5 +40,7 @@ implemented as a statically generated Next.js application.
 
 ## Deployment Status
 
+The canonical source repository is
+[`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
 Local implementation is complete. A production hosting project and domain have
-not been configured in this repository.
+not been configured.

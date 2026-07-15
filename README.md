@@ -14,8 +14,10 @@ provides local documentation search through an Atom Dialog.
 This is an independent Git repository. It installs the published Atom package
 from npm and must build without the sibling package repository.
 
-- Package source and authoritative API docs: `flowstack-ui/atom`
-- Website source, web content, and deployment: this repository
+- Package source and authoritative API docs:
+  [`flowstack-ui/atom`](https://github.com/flowstack-ui/atom)
+- Website source, web content, and deployment:
+  [`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website)
 - Reviewed Atom version: `content/atom-source.json`
 
 ## Development
