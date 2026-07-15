@@ -18,10 +18,9 @@
 - Restored the responsive menu trigger to the far right after the theme action
   and replaced the theme control's native title with the same Atom Tooltip used
   by GitHub.
-- Synchronized the document theme-color metadata with light and dark mode so
-  supported phone URL bars follow the selected page background.
-- Reapply the page background and recreate theme-color metadata after each
-  theme change for broader mobile-browser support.
+- Removed explicit theme-color metadata after comparison with the Radix website
+  showed that mobile Safari repaints its chrome immediately when it derives the
+  color directly from the root page background.
 - Disable Atom header tooltips on touch-first devices so long presses cannot
   leave tooltip content open over the mobile navigation.
 - Aligned and compacted the search trigger with the navigation links and added

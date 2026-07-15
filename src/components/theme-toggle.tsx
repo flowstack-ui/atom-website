@@ -17,24 +17,6 @@ function getThemeSnapshot(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
-function updateBrowserTheme(theme: Theme) {
-  const color = theme === "dark" ? "#111111" : "#ffffff";
-  document.documentElement.style.backgroundColor = color;
-  document.body.style.backgroundColor = color;
-
-  const current = document.querySelector<HTMLMetaElement>(
-    'meta[name="theme-color"]',
-  );
-  const meta = current ?? document.createElement("meta");
-  meta.name = "theme-color";
-  meta.content = color;
-
-  // Reinsert the element so mobile browsers that cache theme metadata have a
-  // fresh mutation to observe after an in-page theme change.
-  meta.remove();
-  document.head.append(meta);
-}
-
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getThemeSnapshot, () => "light");
   const hoverTooltips = useHoverTooltips();
@@ -43,7 +25,6 @@ export function ThemeToggle() {
     const next = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     document.documentElement.style.colorScheme = next;
-    updateBrowserTheme(next);
     try {
       localStorage.setItem("atom-ui-theme", next);
     } catch {

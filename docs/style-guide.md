@@ -40,10 +40,10 @@ pixels to prevent automatic viewport zoom on mobile Safari.
 
 Theme values live in CSS custom properties. Both themes must maintain readable
 text contrast and visible focus indicators. The browser color scheme follows
-the selected theme. The root and body backgrounds and document theme-color
-metadata follow the same state. Supported browsers may use that state for their
-chrome; the browser remains responsible for whether and when its URL bar is
-repainted after an in-page theme change.
+the selected theme. The root and body backgrounds follow the same state. Do not
+add explicit theme-color metadata: mobile Safari should derive its chrome color
+from the live page background so it can repaint immediately when the theme
+changes, matching the Radix website approach.
 
 ## Components
 

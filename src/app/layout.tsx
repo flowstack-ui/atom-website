@@ -11,14 +11,6 @@ const themeScript = `
       : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    const color = theme === "dark" ? "#111111" : "#ffffff";
-    document.documentElement.style.backgroundColor = color;
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      meta.setAttribute("content", color);
-      meta.remove();
-      document.head.append(meta);
-    }
   } catch {}
 })();`;
 
@@ -43,7 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#ffffff" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>{children}</body>
