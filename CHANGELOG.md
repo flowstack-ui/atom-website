@@ -18,17 +18,23 @@
 - Restored the responsive menu trigger to the far right after the theme action
   and replaced the theme control's native title with the same Atom Tooltip used
   by GitHub.
-- Removed explicit theme-color metadata after comparison with the Radix website
-  showed that mobile Safari repaints its chrome immediately when it derives the
-  color directly from the root page background.
-- Added a full-height, direct body theme surface matching Radix Themes so its
-  background repaint is visible to Safari as soon as the theme changes.
-- Apply Radix-style light and dark classes to the document root so Safari sees
-  the same root-class theme mutation used by the reference website.
+- Removed explicit theme-color metadata and added a full-height direct body
+  theme surface while investigating delayed mobile Safari browser-chrome
+  repainting. These changes aligned the page structure more closely with Radix
+  but did not resolve the reported delay.
+- Applied Radix-style light and dark classes to the document root. The page
+  theme changes immediately, but the reported Safari browser chrome still
+  waits for a scroll-triggered repaint.
+- Replaced the translucent backdrop-filtered sticky header with the opaque
+  fixed header structure used by the live Radix documentation site. This
+  satisfies WebKit's documented Safari 26 requirement for extending the color
+  of a viewport-constrained edge element into browser chrome.
+- Made the full-height theme surface a positioned stacking context, matching
+  the corresponding Radix Themes root rule.
 - Increased article, desktop sidebar, and quick-navigation typography; enlarged
   desktop navigation targets; and made quick-navigation links calculate their
   landing position directly below the sticky app bar.
-- Disable Atom header tooltips on touch-first devices so long presses cannot
+- Disabled Atom header tooltips on touch-first devices so long presses cannot
   leave tooltip content open over the mobile navigation.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.

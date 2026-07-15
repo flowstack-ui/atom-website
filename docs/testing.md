@@ -35,6 +35,10 @@ Review at least:
 - Search supports `/`, Command/Ctrl+K, arrow keys, Enter, clear, loading,
   no-results, and route selection behavior.
 - Theme selection persists and respects system preference initially.
+- On the affected iPhone configuration, changing themes repaints mobile Safari
+  browser chrome immediately without requiring a scroll.
+- The header remains fixed, opaque, and synchronized with `--page-bg` in both
+  themes; no backdrop-filter or transparent header layer is introduced.
 - Heading anchors land below the sticky header.
 - Light and dark themes remain readable at desktop and mobile widths.
 - Tables and code blocks do not cause page-level horizontal overflow.
@@ -44,7 +48,7 @@ Review at least:
 Review 1280, 1440, 1920, and 2560-pixel desktop widths; 768, 834, and
 1023-pixel tablet widths; and 375 and 430-pixel phone widths. Confirm balanced
 wide-screen rails, the wider tablet Drawer and 48-pixel tablet links, the
-full-screen phone Drawer, GitHub visibility, and menu-before-theme ordering.
+full-screen phone Drawer, GitHub visibility, and theme-before-menu ordering.
 
 ## Search Index Coverage
 

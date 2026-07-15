@@ -17,13 +17,14 @@ implemented as a statically generated Next.js application.
 - Header actions that hide GitHub on phones, place the menu trigger directly
   after the theme control on tablet and phone widths, and use consistent Atom
   Tooltips for GitHub and theme actions on hover-capable, fine-pointer devices.
+- An opaque fixed header surface adjacent to the viewport edge, matching the
+  live Radix structure and Safari 26's browser-chrome color-extension criteria.
 - Local static documentation search with a compact navigation-aligned trigger,
   a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
   inline phone Combobox that remains inside the Drawer focus scope, and a
   generated content index.
-- Light and dark themes with system preference, local persistence, and a
-  full-height root theme surface that lets mobile Safari repaint its chrome
-  with the page.
+- Light and dark themes with system preference, local persistence, Radix-style
+  document classes, and a full-height root theme surface.
 - Static Markdown rendering with tables, code, deterministic headings, and
   right-hand page navigation with app-bar-aware anchor positioning.
 - Content provenance and export-surface validation.
@@ -42,6 +43,16 @@ implemented as a statically generated Next.js application.
 - Version switching, analytics, accounts, comments, and a footer are outside
   version-one scope.
 - The permanent logo is not yet approved.
+
+## Known Issues
+
+- On the currently reported iPhone configuration, Safari updates its browser
+  chrome to the selected theme only after scrolling. The page theme itself
+  changes immediately. Explicit theme-color metadata, root background changes,
+  a full-height theme surface, and Radix-style root classes have not produced
+  the same immediate browser-chrome repaint observed on the live Radix site.
+  The current candidate fix replaces the translucent sticky header with an
+  opaque fixed header; it remains a known issue until confirmed on that phone.
 
 ## Deployment Status
 

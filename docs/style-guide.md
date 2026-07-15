@@ -8,7 +8,10 @@ imagery.
 
 ## Layout
 
-- Header: 56 pixels on desktop, 52 pixels on mobile.
+- Header: 56 pixels on desktop, 52 pixels on mobile. Its inner surface is fixed
+  and uses the opaque `--page-bg`; do not add transparency or backdrop filters
+  because Safari uses this viewport-edge surface for browser-chrome color
+  extension.
 - Wide desktop shell: full viewport width with balanced 280-pixel outer rails.
 - Article: up to 858 pixels, centered inside the flexible middle region.
 - Desktop three-column layout begins at 1280 pixels.
@@ -42,12 +45,13 @@ pixels to prevent automatic viewport zoom on mobile Safari.
 
 Theme values live in CSS custom properties. Both themes must maintain readable
 text contrast and visible focus indicators. The browser color scheme follows
-the selected theme. The root and body backgrounds follow the same state. Do not
-add explicit theme-color metadata: mobile Safari should derive its chrome color
-from the live page background so it can repaint immediately when the theme
-changes. The direct body child is a full-height theme surface whose background
-uses `--page-bg`, and the document root receives `light-theme` or `dark-theme`,
-matching the Radix theme application approach.
+the selected theme. The document canvas and direct body theme surface use
+`--page-bg`; the body itself remains transparent. The document root receives
+`light-theme` or `dark-theme`. Explicit theme-color metadata is currently
+omitted. These choices match important parts of the Radix theme application
+approach but are not, by themselves, evidence that mobile browser chrome will
+repaint immediately. The fixed header must also retain an opaque theme
+background at the viewport edge.
 
 ## Components
 

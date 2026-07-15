@@ -32,6 +32,8 @@ touch-first pointers so long presses cannot leave an overlay open.
 
 ## Invariants
 
+- The header reserves its layout height while its inner surface remains fixed,
+  opaque, and painted with `--page-bg` at every breakpoint.
 - The header and documentation shell do not gain a centered maximum-width box.
 - Article line length remains capped even as the middle region expands.
 - Tablet changes must not reduce or restyle the phone navigation contract.
