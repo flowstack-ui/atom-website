@@ -31,6 +31,8 @@
   of a viewport-constrained edge element into browser chrome.
 - Made the full-height theme surface a positioned stacking context, matching
   the corresponding Radix Themes root rule.
+- Confirmed on the affected iPhone that Safari now repaints its browser chrome
+  immediately when the website theme changes, without requiring a scroll.
 - Increased article, desktop sidebar, and quick-navigation typography; enlarged
   desktop navigation targets; and made quick-navigation links calculate their
   landing position directly below the sticky app bar.
