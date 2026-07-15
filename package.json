@@ -1,17 +1,34 @@
 {
-  "name": "website",
+  "name": "@flowstack-ui/atom-website",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
+    "predev": "npm run search:index",
     "dev": "next dev",
+    "prebuild": "npm run search:index",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "content:check": "npm run search:index && node scripts/check-content.mjs",
+    "content:sync": "node scripts/sync-atom-docs.mjs",
+    "search:index": "node scripts/build-search-index.mjs",
+    "verify": "npm run content:check && npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
+    "@flowstack-ui/atom": "0.2.0",
+    "@icons-pack/react-simple-icons": "^13.11.1",
+    "github-slugger": "^2.0.0",
+    "lucide-react": "^1.24.0",
+    "minisearch": "7.2.0",
     "next": "16.2.10",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -20,5 +37,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.10"
   }
 }

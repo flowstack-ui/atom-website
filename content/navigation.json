@@ -1,0 +1,102 @@
+{
+  "sections": [
+    {
+      "slug": "overview",
+      "title": "Overview",
+      "documents": [
+        { "slug": "introduction", "title": "Introduction" },
+        { "slug": "getting-started", "title": "Getting started" },
+        { "slug": "accessibility", "title": "Accessibility" },
+        { "slug": "releases", "title": "Releases" }
+      ]
+    },
+    {
+      "slug": "guides",
+      "title": "Guides",
+      "documents": [
+        { "slug": "styling", "title": "Styling" },
+        { "slug": "animation", "title": "Animation" },
+        { "slug": "composition", "title": "Composition" },
+        { "slug": "server-side-rendering", "title": "Server-side rendering" }
+      ]
+    },
+    {
+      "slug": "components",
+      "title": "Components",
+      "documents": [
+        { "slug": "accordion", "title": "Accordion" },
+        { "slug": "alert-dialog", "title": "Alert Dialog" },
+        { "slug": "app-bar", "title": "App Bar" },
+        { "slug": "aspect-ratio", "title": "Aspect Ratio" },
+        { "slug": "avatar", "title": "Avatar" },
+        { "slug": "badge", "title": "Badge" },
+        { "slug": "bottom-navigation", "title": "Bottom Navigation" },
+        { "slug": "breadcrumb", "title": "Breadcrumb" },
+        { "slug": "button", "title": "Button" },
+        { "slug": "checkbox", "title": "Checkbox" },
+        { "slug": "checkbox-group", "title": "Checkbox Group" },
+        { "slug": "collapsible", "title": "Collapsible" },
+        { "slug": "combobox", "title": "Combobox" },
+        { "slug": "context-menu", "title": "Context Menu" },
+        { "slug": "data-grid", "title": "Data Grid" },
+        { "slug": "dialog", "title": "Dialog" },
+        { "slug": "divider", "title": "Divider" },
+        { "slug": "drawer", "title": "Drawer" },
+        { "slug": "dropdown-menu", "title": "Dropdown Menu" },
+        { "slug": "feed", "title": "Feed" },
+        { "slug": "field", "title": "Field" },
+        { "slug": "fieldset", "title": "Fieldset" },
+        { "slug": "file-upload", "title": "File Upload" },
+        { "slug": "form", "title": "Form" },
+        { "slug": "hover-card", "title": "Hover Card" },
+        { "slug": "input", "title": "Input" },
+        { "slug": "label", "title": "Label" },
+        { "slug": "list", "title": "List" },
+        { "slug": "listbox", "title": "Listbox" },
+        { "slug": "menu", "title": "Menu" },
+        { "slug": "menubar", "title": "Menubar" },
+        { "slug": "modal", "title": "Modal" },
+        { "slug": "nav-list", "title": "Nav List" },
+        { "slug": "navigation-menu", "title": "Navigation Menu" },
+        { "slug": "number-input", "title": "Number Input" },
+        { "slug": "otp-field", "title": "OTP Field" },
+        { "slug": "pagination", "title": "Pagination" },
+        { "slug": "password-toggle-field", "title": "Password Toggle Field" },
+        { "slug": "popover", "title": "Popover" },
+        { "slug": "pressable", "title": "Pressable" },
+        { "slug": "progress", "title": "Progress" },
+        { "slug": "radio-group", "title": "Radio Group" },
+        { "slug": "rating", "title": "Rating" },
+        { "slug": "scroll-area", "title": "Scroll Area" },
+        { "slug": "select", "title": "Select" },
+        { "slug": "sidebar", "title": "Sidebar" },
+        { "slug": "skip-link", "title": "Skip Link" },
+        { "slug": "slider", "title": "Slider" },
+        { "slug": "swipeable-item", "title": "Swipeable Item" },
+        { "slug": "switch", "title": "Switch" },
+        { "slug": "table", "title": "Table" },
+        { "slug": "tabs", "title": "Tabs" },
+        { "slug": "textarea", "title": "Textarea" },
+        { "slug": "toast", "title": "Toast" },
+        { "slug": "toggle", "title": "Toggle" },
+        { "slug": "toggle-group", "title": "Toggle Group" },
+        { "slug": "toolbar", "title": "Toolbar" },
+        { "slug": "tooltip", "title": "Tooltip" },
+        { "slug": "tree", "title": "Tree" },
+        { "slug": "tree-grid", "title": "Tree Grid" }
+      ]
+    },
+    {
+      "slug": "utilities",
+      "title": "Utilities",
+      "documents": [
+        { "slug": "collection", "title": "Collection" },
+        { "slug": "direction", "title": "Direction" },
+        { "slug": "hooks", "title": "Hooks" },
+        { "slug": "portal", "title": "Portal" },
+        { "slug": "virtualizer", "title": "Virtualizer" },
+        { "slug": "visually-hidden", "title": "Visually Hidden" }
+      ]
+    }
+  ]
+}

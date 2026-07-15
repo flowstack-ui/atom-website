@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Atom UI Documentation Website
 
-## Getting Started
+Independent public documentation website for `@flowstack-ui/atom`.
 
-First, run the development server:
+The site presents Atom-specific overview pages, guides, component API docs, and
+utilities in a minimal responsive documentation shell built from real Atom
+primitives. It supports light and dark themes and generates one static route per
+document without MDX or live examples. The shell spans the viewport on wide
+screens, uses a touch-sized navigation Drawer on tablet and phone widths, and
+provides local documentation search through an Atom Dialog.
+
+## Repository Boundary
+
+This is an independent Git repository. It installs the published Atom package
+from npm and must build without the sibling package repository.
+
+- Package source and authoritative API docs: `flowstack-ui/atom`
+- Website source, web content, and deployment: this repository
+- Reviewed Atom version: `content/atom-source.json`
+
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run content:check
+npm run typecheck
+npm run lint
+npm run build
+```
 
-## Learn More
+Run all checks with:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run verify
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The production build is a static export in `out/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`npm run search:index` regenerates the local documentation search index. The
+normal build and verification commands run it automatically.
 
-## Deploy on Vercel
+## Content
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `content/navigation.json` defines the public sections and routes.
+- `content/overview/` contains Overview pages.
+- `content/guides/` contains public usage guides.
+- `content/components/` contains one page per component.
+- `content/utilities/` contains utilities and hooks.
+- `content/atom-source.json` records package provenance.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`npm run content:sync` is a maintainer convenience for deliberately seeding
+component and utility docs from a sibling Atom checkout. It is not part of the
+production build, and synchronized files remain committed to this repository.
+
+## Documentation
+
+- `AGENTS.md` - repository rules and routing.
+- `CURRENT.md` - current state and constraints.
+- `TODO.md` - active unfinished work.
+- `CHANGELOG.md` - website history.
+- `docs/README.md` - durable documentation index.
