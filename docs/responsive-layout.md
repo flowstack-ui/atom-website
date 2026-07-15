@@ -23,8 +23,9 @@ controls remain at least 44 pixels.
 Below 768 pixels, navigation fills the viewport and retains 16-pixel link text,
 44-pixel minimum link targets, safe-area padding, and the established spacing.
 GitHub is hidden. The menu trigger appears on the right immediately before the
-theme control. Search opens as an inline Combobox view inside the Drawer rather
-than adding a nested modal focus scope.
+theme control. Search is an inline Combobox at the top of the Drawer: links stay
+visible while its query is empty and are replaced by unboxed results while the
+query contains text.
 
 ## Invariants
 

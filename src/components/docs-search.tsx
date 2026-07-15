@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Button } from "@flowstack-ui/atom/button";
 import { Combobox, type ComboboxOption } from "@flowstack-ui/atom/combobox";
 import { Dialog } from "@flowstack-ui/atom/dialog";
@@ -41,9 +41,7 @@ export function DocsSearch({
   const [loading, setLoading] = useState(false);
   const [loadError, setLoadError] = useState(false);
 
-  const openSearch = useCallback(() => {
-    setSearchOpen(true);
-    onActiveChange?.(true);
+  const ensureIndex = useCallback(() => {
     if (index || loading) return;
     setLoading(true);
     setLoadError(false);
@@ -51,7 +49,22 @@ export function DocsSearch({
       .then(setIndex)
       .catch(() => setLoadError(true))
       .finally(() => setLoading(false));
-  }, [index, loading, onActiveChange]);
+  }, [index, loading]);
+
+  const openSearch = useCallback(() => {
+    setSearchOpen(true);
+    ensureIndex();
+  }, [ensureIndex]);
+
+  const updateQuery = useCallback(
+    (nextQuery: string) => {
+      setQuery(nextQuery);
+      if (mode === "inline") {
+        onActiveChange?.(Boolean(nextQuery.trim()));
+      }
+    },
+    [mode, onActiveChange],
+  );
 
   const closeSearch = useCallback(() => {
     setSearchOpen(false);
@@ -119,8 +132,9 @@ export function DocsSearch({
       options={options}
       value={null}
       inputValue={query}
-      onInputValueChange={setQuery}
+      onInputValueChange={updateQuery}
       onValueChange={handleSelection}
+      open={mode === "inline" ? Boolean(query.trim()) : undefined}
       filterOptions={keepRankedOptions}
       openOnFocus={false}
       clearOnSelect
@@ -131,14 +145,19 @@ export function DocsSearch({
         <Search aria-hidden="true" className="search-input-icon" />
         <Combobox.Input
           ref={inputRef}
-          autoFocus
+          autoFocus={mode === "dialog"}
           className="search-input"
           placeholder="Search docs"
           aria-label="Search documentation"
+          onFocus={mode === "inline" ? ensureIndex : undefined}
           onKeyDown={(event) => {
             if (event.key === "Escape") {
               event.preventDefault();
-              closeSearch();
+              if (mode === "inline") {
+                inputRef.current?.blur();
+              } else {
+                closeSearch();
+              }
             }
           }}
         />
@@ -147,7 +166,7 @@ export function DocsSearch({
             className="search-clear"
             aria-label="Clear search"
             onClick={() => {
-              setQuery("");
+              updateQuery("");
               inputRef.current?.focus();
             }}
           >
@@ -198,30 +217,8 @@ export function DocsSearch({
   );
 
   if (mode === "inline") {
-    if (!searchOpen) {
-      return (
-        <Button.Root
-          className="search-trigger"
-          aria-label="Search documentation"
-          onClick={openSearch}
-        >
-          {triggerContents}
-        </Button.Root>
-      );
-    }
-
     return (
       <section className="inline-search" aria-label="Search documentation">
-        <div className="inline-search-header">
-          <Button.Root
-            className="inline-search-back"
-            aria-label="Back to documentation navigation"
-            onClick={closeSearch}
-          >
-            <ArrowLeft aria-hidden="true" />
-          </Button.Root>
-          <span>Search docs</span>
-        </div>
         {searchInterface}
       </section>
     );

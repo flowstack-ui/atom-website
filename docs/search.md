@@ -15,11 +15,13 @@ Drawer. The first Escape closes search; a later Escape can close navigation.
 Touch and pen release explicitly opens the controlled Dialog, while ordinary
 click and keyboard activation continue through Atom Dialog.Trigger.
 
-On phones, search replaces the navigation list with an inline Atom Combobox
-inside the existing Drawer. It autofocuses once, keeps the software keyboard
-stable, and provides a back control that restores the navigation list. This
-avoids nesting a second modal focus trap inside the phone Drawer. Selecting a
-result navigates and closes the Drawer.
+On phones, the first navigation control is always an inline Atom Combobox input
+inside the existing Drawer. Focusing an empty input leaves the navigation links
+in place. Once the query contains text, results replace the links directly
+below the same input without a second panel or modal treatment. Clearing the
+query restores the links, and dismissing the software keyboard leaves the
+results available for touch scrolling and selection. Selecting a result
+navigates and closes the Drawer.
 
 Atom Dialog is the correct primitive because this is a centered modal task.
 Modal is a lower-level primitive foundation, Drawer implies edge placement, and

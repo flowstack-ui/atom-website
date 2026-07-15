@@ -9,9 +9,10 @@
 - Added a full-width desktop documentation shell with balanced navigation rails.
 - Added local documentation search backed by an Atom Dialog, Atom Combobox,
   and a statically generated Markdown index.
-- Replaced the phone's nested search Dialog with an inline Drawer Combobox so
-  autofocus no longer competes with two modal focus traps or repeatedly toggles
-  the software keyboard.
+- Replaced the phone's nested search Dialog with a permanently integrated
+  Drawer Combobox: empty search retains navigation, typed queries replace links
+  with unboxed results, and clearing restores navigation without another panel
+  or back control.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch
