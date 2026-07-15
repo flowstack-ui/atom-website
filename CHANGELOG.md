@@ -13,6 +13,8 @@
   Drawer Combobox: empty search retains navigation, typed queries replace links
   with unboxed results, and clearing restores navigation without another panel
   or back control.
+- Prevented mobile Safari focus zoom by keeping the phone search input at 16
+  pixels, and increased the right page-navigation title and link typography.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch

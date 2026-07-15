@@ -25,7 +25,8 @@ Below 768 pixels, navigation fills the viewport and retains 16-pixel link text,
 GitHub is hidden. The menu trigger appears on the right immediately before the
 theme control. Search is an inline Combobox at the top of the Drawer: links stay
 visible while its query is empty and are replaced by unboxed results while the
-query contains text.
+query contains text. The input retains 16-pixel text so mobile Safari does not
+zoom the viewport when it receives focus.
 
 ## Invariants
 
@@ -35,3 +36,5 @@ query contains text.
 - Navigation and header controls remain keyboard accessible and touch sized.
 - Search appears before Overview in every navigation surface and aligns with
   the navigation-link width.
+- The wide-desktop page-navigation title is visually larger than its links;
+  both remain readable without competing with article content.

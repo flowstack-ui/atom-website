@@ -12,7 +12,8 @@ implemented as a statically generated Next.js application.
   Tooltip, and SkipLink primitives in the website shell.
 - Responsive desktop, tablet, and mobile layouts with touch-sized header
   controls, a full-width desktop shell, wider side Drawer navigation on tablet
-  widths, and full-screen phone navigation.
+  widths, full-screen phone navigation, and a readable wide-desktop page
+  navigation hierarchy.
 - Header actions that hide GitHub on phones and place the menu trigger directly
   before the theme control on tablet and phone widths.
 - Local static documentation search with a compact navigation-aligned trigger,
