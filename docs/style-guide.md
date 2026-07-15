@@ -21,7 +21,9 @@ imagery.
   44-pixel link targets.
 - On responsive widths, the menu trigger is directly after the theme control;
   the GitHub action is hidden below 768 pixels. GitHub and theme controls use
-  the same Atom Tooltip presentation.
+  the same Atom Tooltip presentation on hover-capable, fine-pointer devices.
+  Tooltips are disabled on touch-first devices, where the controls retain their
+  accessible labels without long-press overlays.
 
 Detailed invariants live in `responsive-layout.md`.
 
@@ -38,9 +40,10 @@ pixels to prevent automatic viewport zoom on mobile Safari.
 
 Theme values live in CSS custom properties. Both themes must maintain readable
 text contrast and visible focus indicators. The browser color scheme follows
-the selected theme. The document theme-color metadata follows the same state so
-supported mobile browser chrome uses the page background instead of remaining
-white in dark mode.
+the selected theme. The root and body backgrounds and document theme-color
+metadata follow the same state. Supported browsers may use that state for their
+chrome; the browser remains responsible for whether and when its URL bar is
+repainted after an in-page theme change.
 
 ## Components
 

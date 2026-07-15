@@ -26,7 +26,8 @@ GitHub is hidden. The menu trigger appears at the far right immediately after
 the theme control. Search is an inline Combobox at the top of the Drawer: links stay
 visible while its query is empty and are replaced by unboxed results while the
 query contains text. The input retains 16-pixel text so mobile Safari does not
-zoom the viewport when it receives focus.
+zoom the viewport when it receives focus. Header tooltips are disabled for
+touch-first pointers so long presses cannot leave an overlay open.
 
 ## Invariants
 

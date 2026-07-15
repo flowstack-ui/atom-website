@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@flowstack-ui/atom/button";
 import { Tooltip } from "@flowstack-ui/atom/tooltip";
+import { useHoverTooltips } from "@/lib/use-hover-tooltips";
 
 type Theme = "light" | "dark";
 
@@ -16,16 +17,33 @@ function getThemeSnapshot(): Theme {
   return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 }
 
+function updateBrowserTheme(theme: Theme) {
+  const color = theme === "dark" ? "#111111" : "#ffffff";
+  document.documentElement.style.backgroundColor = color;
+  document.body.style.backgroundColor = color;
+
+  const current = document.querySelector<HTMLMetaElement>(
+    'meta[name="theme-color"]',
+  );
+  const meta = current ?? document.createElement("meta");
+  meta.name = "theme-color";
+  meta.content = color;
+
+  // Reinsert the element so mobile browsers that cache theme metadata have a
+  // fresh mutation to observe after an in-page theme change.
+  meta.remove();
+  document.head.append(meta);
+}
+
 export function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getThemeSnapshot, () => "light");
+  const hoverTooltips = useHoverTooltips();
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     document.documentElement.style.colorScheme = next;
-    document
-      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-      ?.setAttribute("content", next === "dark" ? "#111111" : "#ffffff");
+    updateBrowserTheme(next);
     try {
       localStorage.setItem("atom-ui-theme", next);
     } catch {
@@ -37,7 +55,7 @@ export function ThemeToggle() {
   const label = theme === "dark" ? "Use light theme" : "Use dark theme";
 
   return (
-    <Tooltip.Root>
+    <Tooltip.Root disabled={!hoverTooltips}>
       <Tooltip.Trigger asChild>
         <Button.Root
           className="icon-button"

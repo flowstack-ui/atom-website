@@ -211,6 +211,12 @@ a {
   line-height: 1.35;
 }
 
+@media (hover: none), (pointer: coarse) {
+  .site-tooltip {
+    display: none;
+  }
+}
+
 .docs-shell {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--toc-width);

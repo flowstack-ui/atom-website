@@ -4,10 +4,13 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { AppBar } from "@flowstack-ui/atom/app-bar";
 import { Button } from "@flowstack-ui/atom/button";
 import { Tooltip } from "@flowstack-ui/atom/tooltip";
+import { useHoverTooltips } from "@/lib/use-hover-tooltips";
 import { MobileNavigation } from "./mobile-navigation";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
+  const hoverTooltips = useHoverTooltips();
+
   return (
     <AppBar.Root className="site-header" position="sticky">
       <AppBar.Toolbar className="site-header-inner" density="compact">
@@ -22,7 +25,7 @@ export function SiteHeader() {
           </Button.Root>
         </AppBar.Start>
         <AppBar.End className="site-header-actions">
-          <Tooltip.Root>
+          <Tooltip.Root disabled={!hoverTooltips}>
             <Tooltip.Trigger asChild>
               <Button.Root
                 className="icon-button github-button"

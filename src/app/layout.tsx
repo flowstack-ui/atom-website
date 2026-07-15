@@ -11,8 +11,14 @@ const themeScript = `
       : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
-    document.querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "dark" ? "#111111" : "#ffffff");
+    const color = theme === "dark" ? "#111111" : "#ffffff";
+    document.documentElement.style.backgroundColor = color;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", color);
+      meta.remove();
+      document.head.append(meta);
+    }
   } catch {}
 })();`;
 

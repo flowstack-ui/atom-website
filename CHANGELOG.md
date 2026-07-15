@@ -20,6 +20,10 @@
   by GitHub.
 - Synchronized the document theme-color metadata with light and dark mode so
   supported phone URL bars follow the selected page background.
+- Reapply the page background and recreate theme-color metadata after each
+  theme change for broader mobile-browser support.
+- Disable Atom header tooltips on touch-first devices so long presses cannot
+  leave tooltip content open over the mobile navigation.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch

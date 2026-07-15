@@ -16,13 +16,13 @@ implemented as a statically generated Next.js application.
   navigation hierarchy.
 - Header actions that hide GitHub on phones, place the menu trigger directly
   after the theme control on tablet and phone widths, and use consistent Atom
-  Tooltips for GitHub and theme actions.
+  Tooltips for GitHub and theme actions on hover-capable, fine-pointer devices.
 - Local static documentation search with a compact navigation-aligned trigger,
   a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
   inline phone Combobox that remains inside the Drawer focus scope, and a
   generated content index.
-- Light and dark themes with system preference, local persistence, and matching
-  mobile browser chrome through dynamic theme-color metadata.
+- Light and dark themes with system preference, local persistence, synchronized
+  page backgrounds, and dynamic theme-color metadata for supporting browsers.
 - Static Markdown rendering with tables, code, deterministic headings, and
   right-hand page navigation.
 - Content provenance and export-surface validation.
