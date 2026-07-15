@@ -23,6 +23,9 @@ export function ThemeToggle() {
     const next = theme === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     document.documentElement.style.colorScheme = next;
+    document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.setAttribute("content", next === "dark" ? "#111111" : "#ffffff");
     try {
       localStorage.setItem("atom-ui-theme", next);
     } catch {

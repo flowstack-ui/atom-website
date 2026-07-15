@@ -18,6 +18,8 @@
 - Restored the responsive menu trigger to the far right after the theme action
   and replaced the theme control's native title with the same Atom Tooltip used
   by GitHub.
+- Synchronized the document theme-color metadata with light and dark mode so
+  supported phone URL bars follow the selected page background.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch

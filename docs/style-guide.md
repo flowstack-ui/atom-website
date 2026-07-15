@@ -38,7 +38,9 @@ pixels to prevent automatic viewport zoom on mobile Safari.
 
 Theme values live in CSS custom properties. Both themes must maintain readable
 text contrast and visible focus indicators. The browser color scheme follows
-the selected theme.
+the selected theme. The document theme-color metadata follows the same state so
+supported mobile browser chrome uses the page background instead of remaining
+white in dark mode.
 
 ## Components
 
