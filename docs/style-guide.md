@@ -13,12 +13,14 @@ imagery.
 - Article: up to 858 pixels, centered inside the flexible middle region.
 - Desktop three-column layout begins at 1280 pixels.
 - Right navigation is hidden below 1280 pixels.
-- Right navigation uses a 14-pixel title and 13.5-pixel links so its hierarchy
+- Right navigation uses a 15-pixel title and 14.5-pixel links so its hierarchy
   remains readable while staying secondary to the article.
 - Desktop navigation becomes a Drawer below 1024 pixels.
 - Tablet Drawer: `clamp(360px, 48vw, 420px)` with 48-pixel link targets.
 - Phone Drawer: full viewport with the existing 16-pixel navigation and
   44-pixel link targets.
+- Desktop navigation uses 14-pixel section titles, 14.5-pixel links, and
+  38-pixel minimum link targets.
 - On responsive widths, the menu trigger is directly after the theme control;
   the GitHub action is hidden below 768 pixels. GitHub and theme controls use
   the same Atom Tooltip presentation on hover-capable, fine-pointer devices.
@@ -44,7 +46,8 @@ the selected theme. The root and body backgrounds follow the same state. Do not
 add explicit theme-color metadata: mobile Safari should derive its chrome color
 from the live page background so it can repaint immediately when the theme
 changes. The direct body child is a full-height theme surface whose background
-uses `--page-bg`, matching the Radix Themes root-surface approach.
+uses `--page-bg`, and the document root receives `light-theme` or `dark-theme`,
+matching the Radix theme application approach.
 
 ## Components
 

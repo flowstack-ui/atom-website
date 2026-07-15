@@ -23,8 +23,11 @@ export function ThemeToggle() {
 
   function toggleTheme() {
     const next = theme === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    document.documentElement.style.colorScheme = next;
+    const root = document.documentElement;
+    root.classList.remove("light-theme", "dark-theme");
+    root.classList.add(`${next}-theme`);
+    root.dataset.theme = next;
+    root.style.colorScheme = next;
     try {
       localStorage.setItem("atom-ui-theme", next);
     } catch {

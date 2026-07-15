@@ -5,7 +5,8 @@
 At 1280 pixels and wider, the shell spans the full viewport. The left
 documentation navigation and right quick-navigation rail are each 280 pixels.
 The middle region absorbs remaining width while the readable article stays at
-or below 858 pixels.
+or below 858 pixels. Desktop section titles use 14-pixel text, links use
+14.5-pixel text, and navigation links retain a 38-pixel minimum target.
 
 The right quick navigation is hidden from 1024 through 1279 pixels. The left
 desktop navigation remains visible in that range.
@@ -39,3 +40,5 @@ touch-first pointers so long presses cannot leave an overlay open.
   the navigation-link width.
 - The wide-desktop page-navigation title is visually larger than its links;
   both remain readable without competing with article content.
+- Quick-navigation links place their target heading 16 pixels below the sticky
+  app bar instead of relying on the browser's default hash alignment.

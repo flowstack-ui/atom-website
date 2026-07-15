@@ -9,6 +9,8 @@ const themeScript = `
     const theme = saved === "light" || saved === "dark"
       ? saved
       : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.classList.remove("light-theme", "dark-theme");
+    document.documentElement.classList.add(theme + "-theme");
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
   } catch {}

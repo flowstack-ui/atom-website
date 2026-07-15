@@ -1,11 +1,36 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 import { NavList } from "@flowstack-ui/atom/nav-list";
 import type { DocumentHeading } from "@/lib/documents";
 
 export function OnThisPage({ headings }: { headings: DocumentHeading[] }) {
   const [active, setActive] = useState(headings[0]?.id ?? "");
+
+  function navigateToHeading(event: MouseEvent<HTMLAnchorElement>, id: string) {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    event.preventDefault();
+    const headerHeight = Number.parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue("--header-height"),
+    );
+    const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 16;
+
+    window.history.pushState(null, "", `#${id}`);
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    setActive(id);
+  }
 
   useEffect(() => {
     const elements = headings
@@ -38,6 +63,7 @@ export function OnThisPage({ headings }: { headings: DocumentHeading[] }) {
             <NavList.Item key={heading.id}>
               <NavList.Link
                 href={`#${heading.id}`}
+                onClick={(event) => navigateToHeading(event, heading.id)}
                 active={active === heading.id}
                 current="location"
                 className={heading.depth === 3 ? "toc-link toc-link-nested" : "toc-link"}

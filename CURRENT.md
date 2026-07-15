@@ -12,8 +12,8 @@ implemented as a statically generated Next.js application.
   Tooltip, and SkipLink primitives in the website shell.
 - Responsive desktop, tablet, and mobile layouts with touch-sized header
   controls, a full-width desktop shell, wider side Drawer navigation on tablet
-  widths, full-screen phone navigation, and a readable wide-desktop page
-  navigation hierarchy.
+  widths, full-screen phone navigation, larger desktop navigation targets, and
+  a readable wide-desktop page navigation hierarchy.
 - Header actions that hide GitHub on phones, place the menu trigger directly
   after the theme control on tablet and phone widths, and use consistent Atom
   Tooltips for GitHub and theme actions on hover-capable, fine-pointer devices.
@@ -25,7 +25,7 @@ implemented as a statically generated Next.js application.
   full-height root theme surface that lets mobile Safari repaint its chrome
   with the page.
 - Static Markdown rendering with tables, code, deterministic headings, and
-  right-hand page navigation.
+  right-hand page navigation with app-bar-aware anchor positioning.
 - Content provenance and export-surface validation.
 - Static export suitable for independent hosting.
 

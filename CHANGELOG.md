@@ -23,6 +23,11 @@
   color directly from the root page background.
 - Added a full-height, direct body theme surface matching Radix Themes so its
   background repaint is visible to Safari as soon as the theme changes.
+- Apply Radix-style light and dark classes to the document root so Safari sees
+  the same root-class theme mutation used by the reference website.
+- Increased article, desktop sidebar, and quick-navigation typography; enlarged
+  desktop navigation targets; and made quick-navigation links calculate their
+  landing position directly below the sticky app bar.
 - Disable Atom header tooltips on touch-first devices so long presses cannot
   leave tooltip content open over the mobile navigation.
 - Aligned and compacted the search trigger with the navigation links and added
