@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@flowstack-ui/atom/button";
+import { Tooltip } from "@flowstack-ui/atom/tooltip";
 
 type Theme = "light" | "dark";
 
@@ -33,13 +34,25 @@ export function ThemeToggle() {
   const label = theme === "dark" ? "Use light theme" : "Use dark theme";
 
   return (
-    <Button.Root
-      className="icon-button"
-      aria-label={label}
-      title={label}
-      onClick={toggleTheme}
-    >
-      {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-    </Button.Root>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>
+        <Button.Root
+          className="icon-button"
+          aria-label={label}
+          onClick={toggleTheme}
+        >
+          {theme === "dark" ? (
+            <Sun aria-hidden="true" />
+          ) : (
+            <Moon aria-hidden="true" />
+          )}
+        </Button.Root>
+      </Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Content className="site-tooltip" side="bottom" sideOffset={8}>
+          {label}
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    </Tooltip.Root>
   );
 }

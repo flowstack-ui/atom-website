@@ -15,13 +15,16 @@
   or back control.
 - Prevented mobile Safari focus zoom by keeping the phone search input at 16
   pixels, and increased the right page-navigation title and link typography.
+- Restored the responsive menu trigger to the far right after the theme action
+  and replaced the theme control's native title with the same Atom Tooltip used
+  by GitHub.
 - Aligned and compacted the search trigger with the navigation links and added
   direct touch and pen activation for tablet and phone reliability.
 - Widened the tablet navigation Drawer and increased tablet navigation touch
   targets without changing the established phone layout.
 - Expanded the phone navigation Drawer to the full viewport with larger menu
   typography, spacing, and 44-pixel minimum link targets.
-- Placed the responsive navigation trigger on the right before the theme
+- Placed the responsive navigation trigger on the right after the theme
   control, hid the GitHub action on phone widths, and made both controls
   reliable touch targets.
 - Allowed the local network development origin so phone and tablet browsers

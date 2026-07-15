@@ -14,8 +14,9 @@ implemented as a statically generated Next.js application.
   controls, a full-width desktop shell, wider side Drawer navigation on tablet
   widths, full-screen phone navigation, and a readable wide-desktop page
   navigation hierarchy.
-- Header actions that hide GitHub on phones and place the menu trigger directly
-  before the theme control on tablet and phone widths.
+- Header actions that hide GitHub on phones, place the menu trigger directly
+  after the theme control on tablet and phone widths, and use consistent Atom
+  Tooltips for GitHub and theme actions.
 - Local static documentation search with a compact navigation-aligned trigger,
   a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
   inline phone Combobox that remains inside the Drawer focus scope, and a

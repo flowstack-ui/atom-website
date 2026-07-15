@@ -39,8 +39,8 @@ export function SiteHeader() {
               </Tooltip.Content>
             </Tooltip.Portal>
           </Tooltip.Root>
-          <MobileNavigation />
           <ThemeToggle />
+          <MobileNavigation />
         </AppBar.End>
       </AppBar.Toolbar>
     </AppBar.Root>

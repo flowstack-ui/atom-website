@@ -19,8 +19,9 @@ imagery.
 - Tablet Drawer: `clamp(360px, 48vw, 420px)` with 48-pixel link targets.
 - Phone Drawer: full viewport with the existing 16-pixel navigation and
   44-pixel link targets.
-- On responsive widths, the menu trigger is directly before the theme control;
-  the GitHub action is hidden below 768 pixels.
+- On responsive widths, the menu trigger is directly after the theme control;
+  the GitHub action is hidden below 768 pixels. GitHub and theme controls use
+  the same Atom Tooltip presentation.
 
 Detailed invariants live in `responsive-layout.md`.
 
