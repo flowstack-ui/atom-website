@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Updated the website to the published `@flowstack-ui/atom` `0.3.1` patch,
+  refreshed Atom provenance, and picked up the overlay cleanup fix that keeps
+  page controls clickable after closing documentation search.
 - Updated the website to the published `@flowstack-ui/atom` `0.3.0` package,
   refreshed Atom provenance, and synchronized the Button, Modal, Dialog,
   AlertDialog, and Drawer documentation with the reviewed package release.

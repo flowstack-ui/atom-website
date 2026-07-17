@@ -4,13 +4,16 @@ Atom follows semantic versioning for the published `@flowstack-ui/atom` package.
 
 ## Current release
 
-### 0.3.0
+### 0.3.1
 
-Atom 0.3.0 is the current published release used by this website. The release
-adds the shared Modal foundation used by Dialog, AlertDialog, and Drawer,
-including stack-aware focus ownership, background inert isolation, exact scroll
-restoration, native ARIA precedence, touch-safe initial focus, and
-`Modal.Branch` for consumer-owned portalled content.
+Atom 0.3.1 is the current published release used by this website. The patch
+keeps the 0.3.0 Modal foundation and fixes overlay cleanup so page controls
+remain interactive after closing search and other Dialog surfaces.
+
+The 0.3.0 release added the shared Modal foundation used by Dialog,
+AlertDialog, and Drawer, including stack-aware focus ownership, background
+inert isolation, exact scroll restoration, native ARIA precedence, touch-safe
+initial focus, and `Modal.Branch` for consumer-owned portalled content.
 
 The website also includes the 0.2.1 Button documentation update for composed
 links. Native anchors and inactive-safe link adapters keep link semantics, while
