@@ -4,11 +4,13 @@ Atom follows semantic versioning for the published `@flowstack-ui/atom` package.
 
 ## Current release
 
-### 0.3.1
+### 0.3.2
 
-Atom 0.3.1 is the current published release used by this website. The patch
-keeps the 0.3.0 Modal foundation and fixes overlay cleanup so page controls
-remain interactive after closing search and other Dialog surfaces.
+Atom 0.3.2 is the current published release used by this website. The patch
+keeps the 0.3.0 Modal foundation and fixes Dialog modal cleanup so page
+controls remain interactive after closing search and other Dialog surfaces.
+
+The 0.3.1 patch updated overlay cleanup for Dialog surfaces.
 
 The 0.3.0 release added the shared Modal foundation used by Dialog,
 AlertDialog, and Drawer, including stack-aware focus ownership, background

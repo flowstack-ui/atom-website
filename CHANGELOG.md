@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Updated the website to the published `@flowstack-ui/atom` `0.3.2` patch,
+  refreshed Atom provenance, and picked up the Dialog modal cleanup fix for
+  restoring page interactivity after closing documentation search.
 - Updated the website to the published `@flowstack-ui/atom` `0.3.1` patch,
   refreshed Atom provenance, and picked up the overlay cleanup fix that keeps
   page controls clickable after closing documentation search.
