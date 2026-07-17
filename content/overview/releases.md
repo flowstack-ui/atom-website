@@ -4,11 +4,21 @@ Atom follows semantic versioning for the published `@flowstack-ui/atom` package.
 
 ## Current release
 
-### 0.2.0
+### 0.3.0
 
-Atom 0.2.0 is the current published release used by this website. The release completed the public primitive extraction, stabilized namespace and documented subpath exports, expanded component API documentation, and qualified the package with React 18 and React 19 consumers.
+Atom 0.3.0 is the current published release used by this website. The release
+adds the shared Modal foundation used by Dialog, AlertDialog, and Drawer,
+including stack-aware focus ownership, background inert isolation, exact scroll
+restoration, native ARIA precedence, touch-safe initial focus, and
+`Modal.Branch` for consumer-owned portalled content.
 
-The release includes 67 export targets covering the main package entry, components, hooks, collection helpers, direction, portals, and virtualizer utilities.
+The website also includes the 0.2.1 Button documentation update for composed
+links. Native anchors and inactive-safe link adapters keep link semantics, while
+disabled or loading links remove live destinations and block activation.
+
+The release includes 67 export targets covering the main package entry,
+components, hooks, collection helpers, direction, portals, and virtualizer
+utilities.
 
 ## Release policy
 

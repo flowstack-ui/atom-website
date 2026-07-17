@@ -22,7 +22,7 @@ export function AccountDialog() {
     <Dialog.Root>
       <Dialog.Trigger>Account</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Content ariaLabel="Account settings" />
+        <Dialog.Content aria-label="Account settings" />
       </Dialog.Portal>
     </Dialog.Root>
   );
@@ -32,6 +32,13 @@ export function AccountDialog() {
 ## Portals and hydration
 
 Portal content is created after a browser container is available. Keep required titles, descriptions, and fallback page structure valid in the initial render. Avoid reading `window`, `document`, or local storage during server rendering.
+
+Modal-family Content parts, including Dialog, AlertDialog, and Drawer, prefer
+native ARIA relationships during hydration. Use `aria-label`,
+`aria-labelledby`, or `aria-describedby` when a relationship must exist in the
+server markup. Registered Title and Description parts still supply generated
+relationships after client registration settles, and `ariaLabel` remains a
+compatibility fallback.
 
 ## Stable initial state
 

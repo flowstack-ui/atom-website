@@ -1,7 +1,7 @@
 {
   "package": "@flowstack-ui/atom",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "sourceRepository": "https://github.com/flowstack-ui/atom",
-  "sourceCommit": "75c477ae962ab23566971cb289cebd7f2f192449",
-  "lastReviewed": "2026-07-14"
+  "sourceCommit": "51616c232bf94b3c1878fdb3ae7534a624554e2b",
+  "lastReviewed": "2026-07-17"
 }

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Updated the website to the published `@flowstack-ui/atom` `0.3.0` package,
+  refreshed Atom provenance, and synchronized the Button, Modal, Dialog,
+  AlertDialog, and Drawer documentation with the reviewed package release.
 - Recorded the Vercel production deployment at `atom-ui.com` and made that
   canonical origin the static metadata, robots, and sitemap default.
 - Established `flowstack-ui/atom-website` as the canonical public GitHub
