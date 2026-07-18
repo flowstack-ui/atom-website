@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Standardized local and LAN development on port `3002`, documented the
+  matching phone/tablet URL, and reserved `4002` for future browser automation.
 - Updated the website to the published `@flowstack-ui/atom` `0.3.2` patch,
   refreshed Atom provenance, and picked up the Dialog modal cleanup fix for
   restoring page interactivity after closing documentation search.

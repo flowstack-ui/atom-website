@@ -10,6 +10,11 @@ npm run build
 ```
 
 `npm run verify` runs the full sequence.
+`npm run test:all` is the equivalent one-shot verification alias.
+
+The current website verification does not launch a browser-test server. Port
+`4002` is reserved for a future website-owned browser suite. Manual real-device
+review uses `npm run dev:network` on development port `3002`.
 
 ## Representative Routes
 

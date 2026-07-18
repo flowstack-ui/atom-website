@@ -30,6 +30,8 @@ implemented as a statically generated Next.js application.
   right-hand page navigation with app-bar-aware anchor positioning.
 - Content provenance and export-surface validation.
 - Static export suitable for independent hosting.
+- Fixed local development on port `3002` with an explicit LAN command using
+  the same port for real-phone and tablet review.
 
 ## Current Atom Baseline
 

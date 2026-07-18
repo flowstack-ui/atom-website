@@ -29,7 +29,16 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://127.0.0.1:3002`.
+
+For a real phone, tablet, or another computer on the trusted local network:
+
+```bash
+npm run dev:network
+```
+
+Open the Network URL printed by Next.js. With the currently used FLOWSTACK LAN
+address, that is `http://192.168.4.36:3002`.
 
 ## Verification
 
@@ -45,6 +54,10 @@ Run all checks with:
 ```bash
 npm run verify
 ```
+
+`npm run test:all` is the equivalent comprehensive verification alias. The
+website does not yet own an automated browser server; port `4002` is reserved
+for that future test layer.
 
 The production build is a static export in `out/`.
 
