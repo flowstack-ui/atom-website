@@ -20,7 +20,7 @@ or an appropriate live-region pattern when an update must be announced.
 ## Import
 
 ```tsx
-import { Badge } from "@flowstack-ui/atom";
+import { Badge } from "@flowstack-ui/atom/badge";
 ```
 
 ## Anatomy
@@ -50,12 +50,12 @@ without changing the meaning or announcement behavior of its children.
 ### Unread Count
 
 ```tsx
-import { Badge } from "@flowstack-ui/atom";
+import { Badge } from "@flowstack-ui/atom/badge";
 
 export function UnreadCount() {
   return (
     <span>
-      Inbox <Badge.Root aria-label="3 unread messages">3</Badge.Root>
+      Unread messages <Badge.Root>3</Badge.Root>
     </span>
   );
 }
@@ -64,7 +64,7 @@ export function UnreadCount() {
 ### Text Status
 
 ```tsx
-import { Badge } from "@flowstack-ui/atom";
+import { Badge } from "@flowstack-ui/atom/badge";
 
 export function AccountStatus() {
   return (
@@ -80,6 +80,10 @@ export function AccountStatus() {
 WAI-ARIA defines no dedicated Badge pattern. Badge text is announced as normal
 inline content, so make sure a number or status has enough nearby context to be
 understood. Do not communicate meaning through color alone.
+
+Do not rely on `aria-label` to name a generic `span` badge. For a count
+attached to a button or link, give the owning control the complete accessible
+name and treat the visible Badge as supporting content.
 
 Root does not add `aria-live`. If a changing count must be announced, apply the
 appropriate live-region behavior deliberately based on the urgency and
