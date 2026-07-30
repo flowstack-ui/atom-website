@@ -22,8 +22,9 @@ page inside a floating box.
 - Floating UI positioning that tries alternate alignments on the requested
   side, repeats them on the opposite side, and uses perpendicular sides only as
   final fallbacks; collision shift and Arrow coordinates follow the result.
-- Modal mode with focus trap and scroll lock.
-- Non-modal focus guards and outside interaction dismissal.
+- Modal mode with focus trap, background isolation, and scroll lock.
+- Non-modal focus guards and layer-aware completed-activation outside
+  dismissal with a preventable consumer event.
 - Stack-aware Escape dismissal for nested overlays.
 - Close button part and portal support.
 
@@ -131,8 +132,11 @@ ancestors. It renders no wrapper.
 ### Content
 
 Renders the positioned dialog, manages outside dismissal, and manages focus.
-Modal Content traps focus and locks scrolling; non-modal Content closes when
-focus leaves its trigger/content scope.
+Modal Content traps focus, makes background subtrees inert through Atom's
+stacked modal-layer system, and locks document scrolling; non-modal Content
+does none of those things and closes when focus leaves its trigger/content
+scope. Closing or unmounting modal Content restores author-provided background
+state.
 Non-Arrow children render inside `[data-slot="popover-viewport"]`; a direct
 Arrow remains its sibling so styled layers can scroll the viewport without
 clipping the pointer. Content exposes measured
@@ -148,6 +152,12 @@ from the mounted Anchor/Trigger and then `Direction.Provider`.
 | `sideOffset` | `number` | `8` |
 | `initialFocus` | `PopoverFocusTarget<PopoverInitialFocusDetails>` | safe interaction-aware target |
 | `finalFocus` | `PopoverFocusTarget<PopoverFinalFocusDetails>` | prior valid target, then Trigger |
+| `onInteractOutside` | `(event: OutsideInteractionEvent) => void` | - |
+
+`onInteractOutside` runs before dismissal. Calling its `preventDefault()`
+method keeps Content open without cancelling the original destination click.
+Only the topmost registered layer receives an outside activation; dragged,
+cancelled, secondary-button, and multi-pointer sessions do not dismiss.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -170,6 +180,13 @@ Explicitly passing
 relationship. `initialFocus` and `finalFocus` accept an element ref, a callback
 receiving interaction/reason details, or `false` to suppress that automatic
 operation.
+
+Atom identifies Content as the allowed modal scroll region, but remains
+headless: consumers set its maximum size and scrolling styles. For long
+content, constrain `[data-slot="popover-viewport"]`, apply `overflow: auto`,
+and choose any desired `overscroll-behavior`. If another library portals an
+interactive child, target a container rendered inside Content so it remains on
+the modal's owned DOM path.
 
 ### Title
 
@@ -314,6 +331,18 @@ opened by descendants.
 | `Tab` | In modal mode, focus remains trapped inside content. In non-modal mode, focus guards close the popover when tabbing away. |
 
 ## Changelog
+
+### 0.20.1
+
+- Made modal Content participate in Atom's stacked background-isolation system
+  and restore background inert state on close or unmount.
+- Clarified consumer ownership of scroll dimensions, overscroll styling, and
+  third-party portal containers.
+
+### 0.20.0
+
+- Added preventable `Content.onInteractOutside` and moved outside dismissal to
+  the shared layer-aware completed-activation contract.
 
 ### 0.6.10
 

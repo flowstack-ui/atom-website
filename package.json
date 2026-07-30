@@ -1,6 +1,6 @@
 {
   "name": "@flowstack-ui/atom-website",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "engines": {
     "node": ">=20.19.0"
@@ -22,7 +22,7 @@
     "test:all": "npm run verify"
   },
   "dependencies": {
-    "@flowstack-ui/atom": "0.19.9",
+    "@flowstack-ui/atom": "0.20.1",
     "@icons-pack/react-simple-icons": "^13.11.1",
     "github-slugger": "^2.0.0",
     "lucide-react": "^1.24.0",

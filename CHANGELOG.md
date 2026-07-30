@@ -1,8 +1,12 @@
 # Atom UI Website Changelog
 
-## Unreleased
+## 0.2.1 - 2026-07-30
 
-- No unreleased changes.
+- Updated the exact website dependency and reviewed source provenance to
+  published `@flowstack-ui/atom` `0.20.1`.
+- Refreshed all package-owned component pages, changelogs, guides,
+  architecture audits, and release history so the deployed website includes
+  the completed mobile-readiness guidance and Menu/Popover corrections.
 
 ## 0.2.0 - 2026-07-30
 

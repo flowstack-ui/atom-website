@@ -9,6 +9,12 @@ Archive, or Show grid. Use Select or Listbox when the main job is choosing a
 form value, NavigationMenu for links that move around a website, and Menubar
 when several top-level application menus must sit in one horizontal row.
 
+Nested SubContent is an explicit cascading-menu model. It remains operable by
+tap/click and keyboard, but Atom does not switch it to drill-in navigation from
+viewport size or pointer media queries. For a mobile-first drill-in flow,
+compose a separate panel, Dialog, Drawer, or grouped list with explicit depth
+and back controls at the application layer.
+
 ## Features
 
 - Full keyboard navigation for menu items and submenus.
@@ -18,6 +24,8 @@ when several top-level application menus must sit in one horizontal row.
 - Supports grouped items, separators, and nested submenus.
 - Supports configurable `closeOnSelect`, looping, escape close, side, align, and offsets.
 - Stack-aware Escape dismissal when nested inside parent overlays.
+- Layer-aware completed-activation outside dismissal with a preventable
+  consumer event.
 - Exposes state data attributes for styling without shipping styles.
 
 ## Import
@@ -78,6 +86,13 @@ Portals and positions the focus-managed `menu` surface. Focus moves to real
 `menuitem*` elements. Modal mode uses Atom's stacked isolation and scroll lock;
 non-modal outside interaction keeps its destination.
 
+Content is an allowed scroll region while its modal lock is active. Atom does
+not impose dimensions or scrolling styles: consumers constrain Content, apply
+`overflow: auto`, and choose any desired `overscroll-behavior`. Portalled
+submenus are owned by the same focus and modal systems. For a third-party
+portalled child, target a container rendered inside Content so it remains on
+the modal's owned DOM path.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | required |
@@ -89,6 +104,13 @@ non-modal outside interaction keeps its destination.
 | `anchorPoint` | `{ x: number; y: number }` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
+| `onInteractOutside` | `(event: OutsideInteractionEvent) => void` | - |
+
+Outside dismissal is committed on click/activation rather than pointer start.
+Only the topmost Menu or SubContent layer receives the event. Calling
+`event.preventDefault()` keeps that layer open without cancelling the original
+destination click. Dragged, cancelled, secondary-button, and multi-pointer
+sessions do not dismiss.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -357,6 +379,7 @@ registry, highlight state, typeahead, and nested submenu support.
 | `ariaLabel` | `string` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
+| `onInteractOutside` | `(event: OutsideInteractionEvent) => void` | - |
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -457,6 +480,17 @@ buffers match exact prefixes.
 | `Tab` / `Shift+Tab` | Closes all levels and moves after/before the owning composite |
 
 ## Changelog
+
+### 0.20.1
+
+- Kept the public available-size and trigger-size CSS variables on Content and
+  SubContent stable across positioning rerenders, including viewport resize.
+
+### 0.20.0
+
+- Added preventable `Content` and `SubContent.onInteractOutside`, committed
+  dismissal on completed activation, and routed outside interaction only to the
+  topmost Menu layer.
 
 ### 0.12.0
 
