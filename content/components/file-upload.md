@@ -54,6 +54,8 @@ formatFileSize()
 
 Renders a `div`, owns selection and validation state, and supplies behavior to
 all parts. Local field-state props override Field context.
+An uncancelled native form reset restores uncontrolled `defaultFiles`, clears
+rejections and drag state, and resets the native file picker.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -67,12 +69,14 @@ all parts. Local field-state props override Field context.
 | `maxFiles` | `number` | `1` when single; otherwise - |
 | `maxSize` | `number` | - |
 | `validateFile` | `(file) => string \| null \| undefined \| false` | - |
+| `preventDocumentDrop` | `boolean` | `true` |
 | `name` | `string` | - |
 | `form` | `string` | - |
 | `disabled` | `boolean` | Field state or `false` |
 | `required` | `boolean` | Field state or `false` |
 | `readOnly` | `boolean` | Field state or `false` |
 | `invalid` | `boolean` | Field state or `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -90,8 +94,11 @@ all parts. Local field-state props override Field context.
 
 ### HiddenInput
 
-Renders the hidden native `input type="file"`, opens through Trigger, and sends
-selected `FileList` values into Root validation.
+Renders the transparent native `input type="file"`, opens through Trigger, and
+sends selected `FileList` values into Root validation. It is aligned with
+Trigger so native required feedback points to the visible control and redirects
+validation focus there. Accepted drag/drop files are synchronized back to the
+native input when the browser permits `FileList` assignment.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -112,7 +119,10 @@ selected `FileList` values into Root validation.
 ### Trigger
 
 Opens HiddenInput's native file picker. It renders a button by default and adds
-button semantics to non-native custom elements.
+button semantics to non-native custom elements. Inside Field, its accessible
+name combines the Field label with its authored action text, and it receives
+the Field description/error and invalid state. Explicit native ARIA naming and
+description props override those defaults.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -123,17 +133,26 @@ button semantics to non-native custom elements.
 | --- | --- |
 | `role` | `"button"` for non-native custom elements |
 | `aria-disabled` | `"true"` when a custom trigger is disabled or read-only |
+| `aria-labelledby` | Field label plus Trigger text when no explicit accessible name is supplied |
+| `aria-describedby` | Explicit value or Field description/error IDs |
+| `aria-invalid` | `"true"` when Root or Field is invalid |
 
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"file-upload-trigger"` |
 | `[data-disabled]` | Present when Root is disabled |
 | `[data-readonly]` | Present when Root is read-only |
+| `[data-required]` | Present when Root or Field is required |
+| `[data-invalid]` | Present when Root or Field is invalid |
 
 ### Dropzone
 
 Renders a `div` that accepts dropped files. It owns drag events but adds no
 button role or tab stop; include Trigger when keyboard picker access is needed.
+Drag state is validated against the same type, count, size, and custom rules as
+the eventual drop. Root prevents file drops on the surrounding document by
+default so an accidental outside drop does not replace the current page;
+`preventDocumentDrop={false}` opts out without affecting non-file drag/drop.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -308,6 +327,13 @@ export function ImageUpload() {
 
 ## Accessibility
 
+HiddenInput remains an aligned native file control and owns its constraints.
+A validation attempt is mirrored to Root, Trigger, and Field. Inline behavior
+suppresses the browser bubble; native behavior keeps it at Trigger's bounds.
+The visible Trigger carries the Field label, description/error, and invalid
+relationships while preserving its own action wording. Drag/drop is optional;
+always include a Trigger for keyboard, touch, and single-pointer selection.
+
 HiddenInput supplies native file-input semantics and must be present for
 Trigger to open a picker. Give the upload a visible Field.Label or another
 accessible name. Trigger and ItemDeleteTrigger use button keyboard behavior;
@@ -320,4 +346,42 @@ validate file type, size, and content again on the server.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.7
+
+- Related the visible Trigger to its Field label, description/error, required,
+  and invalid state while preserving authored action wording.
+- Made Dropzone accept/reject state follow the configured file constraints
+  before drop and added default file-only document-drop protection.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored HiddenInput constraints to the visible upload surface, Field, and
+  Form under the shared inline/native validation contract.
+
+### 0.6.12
+
+- Aligned the native file input with Trigger for required feedback and
+  synchronized accepted files after picker and drag/drop updates.
+
+### 0.5.0
+
+- Synchronized uncontrolled files, rejection state, and the native picker with
+  native form reset while preserving Field state and relationships.
+
+### 0.2.0
+
+- Fixed read-only Trigger, Dropzone, and ItemDeleteTrigger parts so they expose
+  `data-readonly` instead of only reporting disabled state.
+
+### 0.1.0
+
+- Initial Atom release.

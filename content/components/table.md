@@ -198,4 +198,9 @@ Table adds no keyboard behavior; only interactive descendants enter the Tab orde
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+### 0.1.0
+
+- Initial Atom release.

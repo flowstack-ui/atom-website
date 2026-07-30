@@ -1,4 +1,4 @@
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -14,6 +14,9 @@ const atomManifest = JSON.parse(
     path.join(root, "node_modules/@flowstack-ui/atom/package.json"),
     "utf8",
   ),
+);
+const websiteManifest = JSON.parse(
+  await readFile(path.join(root, "package.json"), "utf8"),
 );
 const searchRecords = JSON.parse(
   await readFile(path.join(root, "public/search-index.json"), "utf8"),
@@ -37,6 +40,16 @@ for (const section of navigation.sections) {
       if (/from ["']radix-ui["']|@radix-ui\//.test(source)) {
         errors.push(`${route} teaches a Radix package import`);
       }
+      if (/\]\((?!(?:https?:)?\/\/)[^)]*\.md(?:#[^)]*)?\)/.test(source)) {
+        errors.push(`${route} contains a package-local Markdown link`);
+      }
+      if (
+        (section.slug === "components" ||
+          (section.slug === "utilities" && document.slug !== "hooks")) &&
+        !source.includes("\n## Changelog\n")
+      ) {
+        errors.push(`${route} has no synchronized changelog`);
+      }
     } catch {
       errors.push(`Missing content: ${route}`);
     }
@@ -44,6 +57,14 @@ for (const section of navigation.sections) {
     if (section.slug === "components" || section.slug === "utilities") {
       publicSubpaths.add(`./${document.slug}`);
     }
+  }
+}
+
+for (const section of navigation.sections) {
+  const expected = new Set(section.documents.map(({ slug }) => `${slug}.md`));
+  const actual = await readdir(path.join(root, "content", section.slug));
+  for (const file of actual.filter((name) => name.endsWith(".md"))) {
+    if (!expected.has(file)) errors.push(`Unlisted content file: ${section.slug}/${file}`);
   }
 }
 
@@ -81,6 +102,12 @@ if (provenance.version !== atomManifest.version) {
   errors.push(
     `Content reviewed for Atom ${provenance.version}, installed ${atomManifest.version}`,
   );
+}
+if (websiteManifest.dependencies["@flowstack-ui/atom"] !== atomManifest.version) {
+  errors.push("Atom must be installed as the exact reviewed package version");
+}
+if (!/^[0-9a-f]{40}$/.test(provenance.sourceCommit)) {
+  errors.push("Content provenance has no exact Atom source commit");
 }
 
 if (errors.length) {

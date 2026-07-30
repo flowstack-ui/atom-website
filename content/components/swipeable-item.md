@@ -13,6 +13,7 @@ when there are many actions or when a hidden swipe gesture would be surprising.
 
 - Supports start and end action panels.
 - Supports pointer dragging and keyboard opening.
+- Preserves native vertical panning with an axis-compatible touch policy.
 - Supports controlled and uncontrolled open side state.
 - Supports left-to-right and right-to-left direction.
 - Supports optional full-swipe actions.
@@ -77,6 +78,10 @@ widths shared by Content and Actions.
 
 Renders the focusable row surface that interprets horizontal pointer movement
 and keyboard commands. It mirrors Root state and remains focusable when read-only.
+Atom applies `touch-action: pan-y` so vertical document or scroll-container
+panning remains native. An authored `style.touchAction` can override that
+default deliberately. Arrow-key reveal runs only while Content itself is the
+keyboard target; interactive descendants retain their own Arrow behavior.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -174,6 +179,10 @@ full-swipe action panels when `onFullSwipe` is provided. `Escape` closes the
 item. Hidden action panels are removed from the accessibility tree and made
 inert until open.
 
+Swipe must remain an enhancement. Provide an obvious tap/click path to every
+command, such as a visible overflow-menu trigger or persistent action. Keyboard
+support alone is not the required single-pointer alternative to dragging.
+
 | Key | Description |
 | --- | --- |
 | `ArrowLeft` / `ArrowRight` | Opens a direction-aware action side. When a side is open, the opposite arrow closes it. Pressing the same arrow again triggers `onFullSwipe` when available. |
@@ -181,4 +190,20 @@ inert until open.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.9
+
+- Preserved native vertical panning with an axis-compatible Content touch
+  policy and stopped bubbled Arrow keys from nested controls from revealing
+  action panels.
+- Added real-browser and numbered manual evidence for gesture settlement,
+  cancellation, keyboard isolation, logical direction, and scrolling.
+
+### 0.2.0
+
+- Added `closeOnClick` to `SwipeableItem.Actions`, defaulting to closing the open item after an action click.
+- Updated keyboard handling so the opposite arrow closes an open side and the same arrow can trigger `onFullSwipe`.
+- Allowed drag travel to full content width even when no full-swipe callback is configured; release still settles using the configured threshold.
+
+### 0.1.0
+
+- Initial Atom release.

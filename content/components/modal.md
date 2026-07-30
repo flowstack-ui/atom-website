@@ -334,7 +334,9 @@ parts.
   content. It blocks wheel/touch movement on the background and at an owned
   region's scroll boundary so scrolling cannot chain into the page. Author
   inline body overflow, padding, position, offsets, width, and page scroll
-  position are restored exactly after the final lock closes.
+  position are restored exactly after the final lock closes. Scrollbar
+  compensation is based on viewport width actually released by locking, so a
+  document using `scrollbar-gutter: stable` is not compensated twice.
 - Every open layer retains a document lock registration while only the top layer
   supplies active scroll regions. Parent-to-child and child-to-parent handoff
   therefore never restores body styles, calls `scrollTo`, or exposes an unlocked
@@ -356,4 +358,63 @@ parts.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.7
+
+- Replaced fixed-body scroll locking with root/body overflow locking while
+  retaining nested ownership, internal scroll containment, scrollbar
+  compensation, and exact authored-style restoration.
+- Preserved document scroll coordinates without an unlock-time `scrollTo`,
+  preventing iOS Safari visual-viewport and browser-toolbar transitions.
+
+### 0.3.4
+
+- Fixed shared scroll locking to avoid duplicate body-padding compensation when
+  the document already preserves its scrollbar gutter.
+
+### 0.3.2
+
+- Fixed nested isolation handoff and final cleanup so closing every modal
+  restores the application instead of leaving its root `inert`.
+
+### 0.3.1
+
+- Fixed shared exit-presence cleanup with a computed motion fallback that
+  handles repeated timing lists and animation iterations without retaining a
+  closed modal layer indefinitely.
+
+### 0.3.0
+
+- Prefer native Content ARIA while retaining `ariaLabel` compatibility, and
+  preserve explicit native values over generated relationships.
+- Register Title and Description parts with deterministic SSR hints and live,
+  ref-counted hydration updates so generated IDs never dangle.
+- Add interaction-aware `initialFocus` and `finalFocus` Content options,
+  including touch-safe Content focus and controlled workflow restoration.
+- Add a shared nested-modal layer stack and public `Modal.Branch` registration
+  for consumer-owned portalled subtrees.
+- Add metadata-aware focus containment without flattening Menu, Select,
+  Popover, public Branch, and nested Dialog into one Tab sequence.
+- Add per-document wheel/touch containment, registered portal scroll regions,
+  fixed-body mobile locking, boundary blocking, and exact restoration.
+- Isolate background subtrees with `inert` while preserving owned portal paths,
+  dynamic branches, nested-modal ownership, and author-provided inert state.
+- Limit custom modal portal containers to same-document `HTMLElement` nodes;
+  ShadowRoot, DocumentFragment, and cross-document containers are unsupported.
+- Establish modal activation and isolation before paint, and make exit-present
+  closed Content inert and accessibility-hidden rather than modal.
+- Preserve author `inert` changes during ownership, ref-count overlapping
+  registrations, filter unavailable Tab candidates, and keep nested scroll-lock
+  handoff continuously locked.
+
+### 0.2.0
+
+- Added shared dismissable layer Escape handling so nested overlays close
+  before the parent modal closes.
+- Added scoped modal focus containment so focus that moves outside an active
+  modal scope is restored inside the modal while registered portalled
+  descendants remain valid focus targets.
+- Treat `ariaLabel` passed to modal content helpers as the fallback accessible name by omitting the generated title reference when it is provided.
+
+### 0.1.0
+
+- Initial Atom release.

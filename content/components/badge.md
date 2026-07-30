@@ -12,6 +12,7 @@ or an appropriate live-region pattern when an update must be announced.
 ## Features
 
 - Renders a native `span` by default.
+- Keeps the explicit `@flowstack-ui/atom/badge` subpath server-safe.
 - Keeps text content in the accessibility tree.
 - Passes native span props through to the rendered element.
 - Supports `asChild` and `render`.
@@ -20,7 +21,7 @@ or an appropriate live-region pattern when an update must be announced.
 ## Import
 
 ```tsx
-import { Badge } from "@flowstack-ui/atom/badge";
+import { Badge } from "@flowstack-ui/atom";
 ```
 
 ## Anatomy
@@ -64,7 +65,7 @@ export function UnreadCount() {
 ### Text Status
 
 ```tsx
-import { Badge } from "@flowstack-ui/atom/badge";
+import { Badge } from "@flowstack-ui/atom";
 
 export function AccountStatus() {
   return (
@@ -79,11 +80,12 @@ export function AccountStatus() {
 
 WAI-ARIA defines no dedicated Badge pattern. Badge text is announced as normal
 inline content, so make sure a number or status has enough nearby context to be
-understood. Do not communicate meaning through color alone.
+understood. Do not rely on `aria-label` to name the default generic `span`, and
+do not communicate meaning through color alone.
 
-Do not rely on `aria-label` to name a generic `span` badge. For a count
-attached to a button or link, give the owning control the complete accessible
-name and treat the visible Badge as supporting content.
+When a visual notification count is attached to a control, include the count
+in that control's accessible name or other appropriate owning context. A
+sibling Badge does not automatically become part of a button's name.
 
 Root does not add `aria-live`. If a changing count must be announced, apply the
 appropriate live-region behavior deliberately based on the urgency and
@@ -91,4 +93,16 @@ frequency of the update.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.3.3
+
+- Kept the pure-render primitive and explicit Badge subpath server-safe.
+- Corrected numeric Badge accessibility guidance to use meaningful surrounding
+  or owning-control context instead of naming a generic `span`.
+
+### 0.1.0
+
+- Initial Atom release.

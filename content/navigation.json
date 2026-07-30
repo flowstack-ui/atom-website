@@ -17,7 +17,21 @@
         { "slug": "styling", "title": "Styling" },
         { "slug": "animation", "title": "Animation" },
         { "slug": "composition", "title": "Composition" },
-        { "slug": "server-side-rendering", "title": "Server-side rendering" }
+        { "slug": "server-side-rendering", "title": "Server-side rendering" },
+        { "slug": "imports", "title": "Imports" },
+        { "slug": "public-api", "title": "Public API" },
+        { "slug": "continuous-integration", "title": "Continuous integration" },
+        { "slug": "component-documentation", "title": "Component documentation" },
+        { "slug": "release-checklist", "title": "Release checklist" }
+      ]
+    },
+    {
+      "slug": "architecture",
+      "title": "Architecture",
+      "documents": [
+        { "slug": "overview", "title": "Package boundary" },
+        { "slug": "public-api-audit", "title": "Public API audit" },
+        { "slug": "release-readiness-audit", "title": "Release readiness audit" }
       ]
     },
     {
@@ -35,6 +49,7 @@
         { "slug": "button", "title": "Button" },
         { "slug": "checkbox", "title": "Checkbox" },
         { "slug": "checkbox-group", "title": "Checkbox Group" },
+        { "slug": "clipboard", "title": "Clipboard" },
         { "slug": "collapsible", "title": "Collapsible" },
         { "slug": "combobox", "title": "Combobox" },
         { "slug": "context-menu", "title": "Context Menu" },
@@ -49,13 +64,16 @@
         { "slug": "file-upload", "title": "File Upload" },
         { "slug": "form", "title": "Form" },
         { "slug": "hover-card", "title": "Hover Card" },
+        { "slug": "image", "title": "Image" },
         { "slug": "input", "title": "Input" },
         { "slug": "label", "title": "Label" },
+        { "slug": "link", "title": "Link" },
         { "slug": "list", "title": "List" },
         { "slug": "listbox", "title": "Listbox" },
         { "slug": "menu", "title": "Menu" },
         { "slug": "menubar", "title": "Menubar" },
         { "slug": "modal", "title": "Modal" },
+        { "slug": "multi-select", "title": "Multi Select" },
         { "slug": "nav-list", "title": "Nav List" },
         { "slug": "navigation-menu", "title": "Navigation Menu" },
         { "slug": "number-input", "title": "Number Input" },

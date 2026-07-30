@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+- No unreleased changes.
+
+## 0.2.0 - 2026-07-30
+
+- Updated the exact website dependency and reviewed documentation baseline to
+  published `@flowstack-ui/atom` `0.19.9`.
+- Expanded navigation from 74 to 86 documentation routes and now cover all 70
+  public package subpaths, including Clipboard, Image, Link, and Multi Select.
+- Replaced stale component and utility pages with current authoritative package
+  documentation and embedded each page's complete component changelog.
+- Added the current package guides, architecture records, release-readiness
+  audit, public API audit, and full package changelog to the website.
+- Corrected Hooks documentation to match the current public hook exports.
+- Strengthened content synchronization and validation for exact provenance,
+  changelog coverage, unlisted files, package-local links, and exact dependency
+  alignment.
+- Updated Next.js to `16.2.12` and pinned patched PostCSS, Sharp, Minimatch, and
+  brace-expansion transitives, clearing the website dependency audit.
+- Added GitHub Actions verification for pull requests and `main`.
+
+## 0.1.0 - 2026-07-30
+
 - Updated the website to published `@flowstack-ui/atom` `0.4.0`, refreshed
   source provenance, and aligned Popover documentation with visible Title and
   Description relationships, native ARIA naming, and interaction-aware focus.

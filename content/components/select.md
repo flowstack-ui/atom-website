@@ -1,6 +1,7 @@
 # Select
 
-Single-value select with a combobox trigger, popup listbox, option collection, scroll controls, portal, and hidden form input.
+Single-value select with a combobox trigger, popup listbox, option collection,
+scroll controls, portal, and a visually hidden native form control.
 
 ## When to Use
 
@@ -15,7 +16,8 @@ filter or enter a value.
 - Controlled and uncontrolled open state.
 - Keyboard navigation, typeahead search, highlighting, and selection.
 - Group, label, separator, viewport, scroll buttons, item text, and item indicator parts.
-- Hidden input for native form submission.
+- Native select for submission, required validity, external form association,
+  and reset behavior.
 - Stack-aware Escape dismissal when nested inside parent overlays.
 - Integrates with `Field.Root` for trigger labels, descriptions, disabled state,
   and required state.
@@ -62,7 +64,7 @@ import { Select } from "@flowstack-ui/atom";
 ### Root
 
 Owns value, open state, item registration, form submission, and Field
-integration. Root renders no DOM wrapper except its hidden form input when
+integration. Root renders no DOM wrapper except its hidden native select when
 `name` is provided.
 
 | Prop | Type | Default |
@@ -74,7 +76,10 @@ integration. Root renders no DOM wrapper except its hidden form input when
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `(open: boolean) => void` | - |
 | `disabled` | `boolean` | `false` |
+| `readOnly` | `boolean` | Field state or `false` |
+| `invalid` | `boolean` | Field state or `false` |
 | `required` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `name` | `string` | - |
 | `form` | `string` | - |
 
@@ -83,8 +88,8 @@ contract.
 
 **Data attributes:** Root renders no wrapper and exposes none.
 
-When used inside `Field.Root`, `disabled` and `required` default to the Field
-state unless explicitly provided on `Select.Root`.
+When used inside `Field.Root`, disabled, read-only, invalid, and required state
+default to Field unless explicitly provided on `Select.Root`.
 
 ### Trigger
 
@@ -92,7 +97,6 @@ Combobox button that opens the listbox and owns keyboard interaction.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `ariaLabel` | `string` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -103,11 +107,13 @@ Combobox button that opens the listbox and owns keyboard interaction.
 | `aria-expanded` | Current open state |
 | `aria-controls` | Generated Content/Listbox ID |
 | `aria-activedescendant` | Highlighted Item ID while open |
-| `aria-label` | Explicit native value or value from `ariaLabel` |
+| `aria-label` | Explicit native value |
 | `aria-labelledby` | Explicit IDs or inherited Field label ID |
 | `aria-describedby` | Explicit IDs or inherited Field description/error IDs |
 | `aria-disabled` | `true` when disabled |
 | `aria-required` | `true` when required |
+| `aria-readonly` | `true` when read only |
+| `aria-invalid` | `true` when invalid |
 
 | Data attribute | Values |
 | --- | --- |
@@ -179,19 +185,20 @@ It owns dismissal, initial highlighting, and focus-scope registration.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disablePortal` | `boolean` | `false` |
-| `ariaLabel` | `string` | - |
 | `container` | `HTMLElement \| null` | `document.body` after mount |
 
 | ARIA attribute | Values |
 | --- | --- |
 | `role` | `"listbox"` |
-| `aria-label` | Value from `ariaLabel` when provided |
+| `aria-label` | Native value when provided |
 
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"select-listbox"` |
 | `[data-state]` | `"open"` while rendered |
 | `[data-positioned]` | Present after the first positioning frame |
+| `[data-side]` | `"top" \| "right" \| "bottom" \| "left"` after collision handling |
+| `[data-align]` | `"start" \| "center" \| "end"` after collision handling |
 
 ### ScrollUpButton
 
@@ -341,11 +348,12 @@ Atom-owned behavior props.
 
 ### Arrow
 
-Provides a decorative `span` hook for a consumer-drawn popup arrow. Select does
-not calculate arrow geometry.
+Provides a decorative `span` hook positioned against the trigger by the same
+Floating UI calculation as Content. Consumers draw the arrow and may size it
+with CSS; Atom owns its collision-aware physical edge and coordinates.
 
-**Props:** Arrow has no Atom-owned behavior props and accepts native `span`
-props.
+**Props:** Arrow has no Atom-owned behavior props, accepts optional decorative
+`children`, and forwards native `span` props.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -354,6 +362,13 @@ props.
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"select-arrow"` |
+| `[data-side]` | Actual Content side after collision handling |
+| `[data-align]` | Actual Content alignment after collision handling |
+
+Arrow must be inside Content/Listbox. Atom composes its ref with the positioning
+middleware and applies absolute positioning through inline `top`/`left` plus
+the appropriate static edge. Consumer `children`, `className`, native span
+props, and non-positioning style values remain supported.
 
 ### Listbox
 
@@ -363,19 +378,20 @@ Use either `Content` or `Listbox`, not both for the same popup.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disablePortal` | `boolean` | `false` |
-| `ariaLabel` | `string` | - |
 | `container` | `HTMLElement \| null` | `document.body` after mount |
 
 | ARIA attribute | Values |
 | --- | --- |
 | `role` | `"listbox"` |
-| `aria-label` | Value from `ariaLabel` when provided |
+| `aria-label` | Native value when provided |
 
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"select-listbox"` |
 | `[data-state]` | `"open"` while rendered |
 | `[data-positioned]` | Present after the first positioning frame |
+| `[data-side]` | Actual physical side after collision handling |
+| `[data-align]` | Actual alignment after collision handling |
 
 Advanced compound parts can read `useSelectContext`, `useSelectItemContext`,
 or `useSelectGroupContext`. Their matching public providers expose the same
@@ -422,7 +438,7 @@ import { Select } from "@flowstack-ui/atom";
 export default function GroupedSelect() {
   return (
     <Select.Root>
-      <Select.Trigger ariaLabel="Choose a plan">
+      <Select.Trigger aria-label="Choose a plan">
         <Select.Value placeholder="Choose a plan" />
       </Select.Trigger>
       <Select.Content>
@@ -443,11 +459,19 @@ export default function GroupedSelect() {
 
 ## Accessibility
 
+The aligned native select owns required validity. A validation attempt mirrors
+its state to Trigger and Field. Inline behavior suppresses the browser bubble;
+native behavior keeps it and redirects focus to Trigger.
+
 Select follows the
 [WAI-ARIA select-only combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/):
 a button-based
 combobox controls a listbox, and Trigger references the highlighted option with
-`aria-activedescendant`. Provide a visible Field label, `ariaLabel`, or native
+`aria-activedescendant`. Provide a visible Field label or native
+`aria-label`/`aria-labelledby`. Uncontrolled value returns to `defaultValue`
+on native form reset. The transparent native select owns submission and
+required constraint validation, is aligned with Trigger, works when required
+without a submission name, and redirects browser validation focus to Trigger.
 `aria-labelledby`.
 Portalled Select content registers with a parent modal focus scope when opened
 inside Dialog, Drawer, or another modal primitive.
@@ -469,4 +493,75 @@ buffers match exact prefixes.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.9.3
+
+- Fixed Arrow's public TypeScript props to accept replaceable decorative
+  children.
+
+### 0.9.2
+
+- Deferred touch and pen outside dismissal until the gesture resolves as a
+  tap, preserving the open Select during movement, cancellation, or scrolling.
+- Positioned Arrow through the Select Floating UI calculation and exposed
+  collision-resolved `data-side` and `data-align` on Content and Arrow.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored aligned native-select validity to Trigger, Field, and Form under the
+  shared inline/native validation contract.
+
+### 0.6.12
+
+- Aligned the native select with Trigger and redirected browser validation
+  focus, including required Selects without a submission name.
+
+### 0.5.0
+
+- Added complete Field invalid/read-only integration, native-only Trigger and
+  Listbox naming, uncontrolled reset, and a visually hidden native select for
+  submission and required constraint validation.
+
+### 0.2.0
+
+- Fixed Select part `data-slot` pass-through so Value, Icon, Content/Listbox,
+  Viewport, Group, Label, Item, ItemText, ItemIndicator, Separator, Arrow, and
+  scroll buttons can be overridden consistently.
+- Standardized Select typeahead so a single-character search cycles from the
+  current matching option while multi-character buffers still match exact
+  prefixes.
+- Added shared dismissable layer Escape handling so Select closes before
+  parent overlays when nested inside Dialog, Drawer, Modal, or Popover.
+- Fixed outside pointer dismissal so Select closes reliably when clicking
+  outside the trigger or listbox during inspection-heavy renders.
+- Fixed value display so selected option labels resolve on initial closed
+  render and remain stable after the listbox unmounts.
+- Fixed trigger `asChild` composition so the trigger does not render a nested
+  copy of its child.
+- Fixed keyboard opening so `ArrowDown`, `ArrowUp`, `Home`, `End`, `Enter`,
+  and `Space` apply the intended initial highlight after portalled listbox
+  items mount, keeping `aria-activedescendant` in sync.
+- Fixed closed-state typeahead so typing a matching character opens the listbox
+  with the matching enabled item highlighted before items mount.
+- Registered portalled Select content with parent modal focus scopes so Select
+  can remain a valid focus target inside Dialog, Drawer, and other modal
+  primitives.
+- Added Field integration so `Select.Trigger` inherits Field labels and
+  descriptions while `Select.Root` inherits Field disabled and required state.
+- Refined `Select.Trigger` keyboard handler dependencies to avoid recreating callbacks from the full context object.
+
+### 0.1.0
+
+- Initial Atom release.

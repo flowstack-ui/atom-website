@@ -17,6 +17,7 @@ or phone number, because those values should not be incremented or clamped.
 - Supports keyboard stepping with arrows, Page Up/Down, Home, and End.
 - Supports custom parser and formatter functions.
 - Renders a hidden input for native form submission when named.
+- Provides Input, Increment, and Decrement parts for compound control layouts.
 
 ## Import
 
@@ -27,7 +28,11 @@ import { NumberInput } from "@flowstack-ui/atom";
 ## Anatomy
 
 ```tsx
-<NumberInput.Root />
+<NumberInput.Root>
+  <NumberInput.Decrement />
+  <NumberInput.Input />
+  <NumberInput.Increment />
+</NumberInput.Root>
 ```
 
 ## API Reference
@@ -50,29 +55,30 @@ input.
 | `clampOnBlur` | `boolean` | `true` |
 | `formatter` | `(value: string) => string` | - |
 | `parser` | `(displayValue: string) => string` | - |
-| `disabled` | `boolean` | `false` |
-| `readOnly` | `boolean` | `false` |
-| `required` | `boolean` | `false` |
-| `invalid` | `boolean` | `false` |
+| `disabled` | `boolean` | Field state or `false` |
+| `readOnly` | `boolean` | Field state or `false` |
+| `required` | `boolean` | Field state or `false` |
+| `invalid` | `boolean` | Field state or `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `placeholder` | `string` | - |
 | `name` | `string` | - |
 | `form` | `string` | - |
 | `id` | `string` | - |
-| `ariaLabel` | `string` | - |
-| `ariaValueText` | `(value: number) => string` | - |
-| `ariaDescribedBy` | `string` | - |
+| `aria-label` | `string` | Field label relationship |
+| `aria-valuetext` | `string \| (value: number) => string` | - |
+| `aria-describedby` | `string` | Field messages |
 | `className` | `string` | - |
 | `inputClassName` | `string` | - |
 | `children` | `ReactNode \| (state: NumberInputRenderState) => ReactNode` | - |
 
 | ARIA attribute | Values |
 | --- | --- |
-| `aria-label` | Value from `ariaLabel` |
+| `aria-label` | Native value when provided |
 | `aria-valuenow` | Current numeric value when not empty |
 | `aria-valuemin` | Value from `min` |
 | `aria-valuemax` | Value from `max` |
-| `aria-valuetext` | Result of `ariaValueText` |
-| `aria-describedby` | Value from `ariaDescribedBy` |
+| `aria-valuetext` | Native string or callback result |
+| `aria-describedby` | Native value or inherited Field messages |
 | `aria-invalid` | Present when invalid |
 | `aria-readonly` | Present when read only |
 | `aria-required` | Present when required |
@@ -86,8 +92,26 @@ input.
 
 When `children` is a function, it receives `numericValue`, `displayValue`,
 `isAtMin`, `isAtMax`, `disabled`, `readOnly`, `handleStep`, and `inputRef`.
-This supports consumer-owned increment and decrement controls without adding
-new styled parts to Atom.
+This preserves the legacy render-callback path for custom controls.
+
+When Root has no children or uses the legacy render callback, it renders its
+Input automatically. Static children opt into compound anatomy and should
+include exactly one Input.
+
+### Input
+
+Renders the editable spinbutton. Native input props, `render`, `asChild`, and a
+native input ref are supported. Root owns value, limits, form state, and the
+generated Field relationships.
+
+### Increment and Decrement
+
+Render native buttons that call Root's step behavior, preserve input focus on
+pointer activation, reference the Input with `aria-controls`, and expose
+`aria-disabled` plus `[data-boundary]` at a known limit. They default to
+`tabIndex={-1}` while remaining available to pointer, touch, and voice access.
+Provide localized action labels when the English `Increment` and `Decrement`
+defaults are not appropriate.
 
 ## Examples
 
@@ -97,7 +121,7 @@ new styled parts to Atom.
 import { NumberInput } from "@flowstack-ui/atom";
 
 export function QuantityInput() {
-  return <NumberInput.Root ariaLabel="Quantity" min={0} max={10} step={1} />;
+  return <NumberInput.Root aria-label="Quantity" min={0} max={10} step={1} />;
 }
 ```
 
@@ -109,7 +133,7 @@ import { NumberInput } from "@flowstack-ui/atom";
 export function CurrencyInput() {
   return (
     <NumberInput.Root
-      ariaLabel="Price"
+      aria-label="Price"
       parser={(value) => value.replace(/[$,]/g, "")}
       formatter={(value) => `$${value}`}
     />
@@ -123,11 +147,17 @@ numeric calculations outside the rendered component.
 
 ## Accessibility
 
+The visible spinbutton owns native required validity; the named hidden input
+remains submission-only. A validation attempt is mirrored to Root and the
+spinbutton. Inline behavior suppresses only the browser bubble.
+
 NumberInput follows the [WAI-ARIA spinbutton pattern](https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/).
 The inner input renders `role="spinbutton"`.
 - Atom owns `aria-valuenow`, `aria-valuemin`, `aria-valuemax`,
   `aria-valuetext`, `aria-required`, `aria-readonly`, and `aria-invalid`.
-- Provide an accessible name through `ariaLabel` or external labeling.
+- Provide an accessible name through native ARIA or Field. The visible
+  spinbutton participates in external-form validity; the hidden value input
+  submits the parsed number. Uncontrolled state resets to `defaultValue`.
 
 | Key | Description |
 | --- | --- |
@@ -140,4 +170,29 @@ The inner input renders `role="spinbutton"`.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.0
+
+- Added compound Input, Increment, and Decrement parts while preserving the
+  no-children and render-callback Root APIs.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Added inline/native validation presentation and native numeric-invalid
+  reporting to the visible spinbutton, Field, and Form.
+
+### 0.5.0
+
+- Added complete Field integration, native ARIA prop names, external-form
+  validity association, and uncontrolled reset behavior.
+### 0.1.0
+
+- Initial Atom release with spinbutton semantics, keyboard stepping, formatting, parsing, and hidden form input.

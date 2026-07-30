@@ -131,4 +131,9 @@ Home, End, and assistive scrolling commands work when the viewport is focused.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+### 0.1.0
+
+- Initial Atom release.

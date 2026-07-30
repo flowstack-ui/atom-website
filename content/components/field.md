@@ -18,6 +18,11 @@ state or description/error wiring is needed.
 - Supports built-in or separately composed required/optional indicators.
 - Exposes layout orientation as metadata without applying layout.
 - Supports custom parts through public context hooks.
+- Preserves server relationships when Root composes one wrapper with
+  `asChild`.
+- Bridges a containing Fieldset's disabled, required, invalid, and validation
+  state to its control and reports aggregate Field validity back through that
+  Fieldset before Form.
 
 ## Import
 
@@ -37,6 +42,7 @@ import { Field } from "@flowstack-ui/atom";
 
 useFieldContext()
 useRequiredFieldContext()
+markFieldPart()
 ```
 
 ## API Reference
@@ -48,10 +54,11 @@ state. It does not render the actual form control.
 
 | Prop | Type | Default |
 | --- | --- | --- |
-| `disabled` | `boolean` | `false` |
-| `required` | `boolean` | `false` |
+| `disabled` | `boolean` | Fieldset state or `false` |
+| `required` | `boolean` | Fieldset state or `false` |
 | `readOnly` | `boolean` | `false` |
-| `invalid` | `boolean` | `false` |
+| `invalid` | `boolean` | Fieldset state or `false` |
+| `validationBehavior` | `"inline" \| "native"` | Fieldset/Form value, then automatic |
 | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
@@ -98,8 +105,8 @@ as provided.
 
 ### Description
 
-Renders a `p` and registers its generated ID while mounted so Field-aware
-controls can include it in `aria-describedby`.
+Renders a `p` with a generated ID. Statically visible parts are included in
+server markup; committed registration keeps conditional client parts current.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -112,8 +119,10 @@ controls can include it in `aria-describedby`.
 
 ### Error
 
-Renders a live alert only when Field is invalid and `match` is not false, or
-when `forceMatch` is true. A visible Error registers for `aria-describedby`.
+Renders only when Field is invalid and `match` is not false, or when
+`forceMatch` is true. A visible Error participates in `aria-describedby`.
+Error does not announce by default; pass native `role="alert"` or `aria-live`
+when a newly inserted message should be announced.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -121,10 +130,6 @@ when `forceMatch` is true. A visible Error registers for `aria-describedby`.
 | `forceMatch` | `boolean` | `false` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
-
-| ARIA attribute | Values |
-| --- | --- |
-| `role` | `"alert"` while rendered |
 
 | Data attribute | Values |
 | --- | --- |
@@ -159,6 +164,26 @@ Returns Field state and generated relationships, or `null` outside Root.
 
 Returns the same context but throws when used outside Root. Use it for a custom
 part that cannot function without Field.
+
+### markFieldPart
+
+Marks a styled public wrapper around `Field.Description` or `Field.Error` so
+Root can include that wrapper in deterministic server-rendered relationships.
+Call it once at module scope after creating the wrapper. The wrapper must
+render the matching Atom part and forward its props and ref.
+
+```tsx
+const StyledDescription = markFieldPart(
+  forwardRef<HTMLParagraphElement, FieldDescriptionProps>((props, ref) => (
+    <Field.Description {...props} className="description" ref={ref} />
+  )),
+  "description",
+);
+```
+
+Calling it again with the same kind is safe. Marking one component as two
+different semantic kinds throws so server inspection cannot silently use the
+wrong relationship.
 
 ## Examples
 
@@ -200,15 +225,66 @@ export function NicknameField() {
 }
 ```
 
+### Composed Root
+
+`asChild` composes Root state and props onto one wrapper. Put Label, the
+Field-aware control, Description, and Error directly inside that wrapper so
+their generated relationships are present in server markup.
+
+```tsx
+<Field.Root asChild id="email">
+  <section>
+    <Field.Label>Email</Field.Label>
+    <Input.Root name="email" />
+    <Field.Description>Use a work address.</Field.Description>
+  </section>
+</Field.Root>
+```
+
 ## Accessibility
+
+A native validation attempt from a Field-aware control marks Root and the
+visible control invalid. A compatible Error part makes omitted behavior resolve
+to `inline`; otherwise it resolves to `native`. Inline behavior reveals Error,
+suppresses only the browser bubble, and focuses the first invalid visible
+control. Correcting the value or resetting the form clears native-derived state
+without clearing an explicit `invalid` source.
 
 Field follows native form labeling and the
 [WAI forms labeling guidance](https://www.w3.org/WAI/tutorials/forms/labels/).
 Field-aware controls use Label's ID relationship and include mounted
 Description and visible Error IDs in `aria-describedby`. Error uses
-`role="alert"`; do not use invalid state before there is a useful message for
+an explicit live-region role; do not use invalid state before there is a useful message for
 the user. Field owns no keyboard behavior.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.0
+
+- Inherited containing Fieldset state and validation behavior and routed Field
+  validity through Fieldset before Form.
+
+### 0.6.13
+
+- Added validation behavior inheritance, native-invalid aggregation, automatic
+  Error presentation, and visible-control focus support.
+
+### 0.5.2
+
+- Added `markFieldPart` for styled Description and Error wrappers that must
+  remain statically discoverable during server rendering.
+
+### 0.5.1
+
+- Made Root `asChild` inspect the composed wrapper's immediate children so
+  Description and visible Error relationships remain present in server markup.
+
+### 0.5.0
+
+- Added server-stable Description/Error relationships with hydration-safe
+  registration and removed the forced alert role from Error.
+- Completed Field state, generated ID, and description integration across the
+  supported single-value form controls.
+### 0.1.0
+
+- Initial Atom release.

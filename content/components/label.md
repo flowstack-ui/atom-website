@@ -96,4 +96,9 @@ anything and do not replace native `disabled`, `required`, `readOnly`, or
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+### 0.1.0
+
+- Initial Atom release.

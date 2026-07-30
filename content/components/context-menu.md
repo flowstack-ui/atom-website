@@ -14,6 +14,7 @@ persistent application command bar.
 ## Features
 
 - Opens at right-click coordinates or the keyboard trigger location.
+- Opens from a cancel-safe 700 ms touch/pen long press with a 10 px tolerance.
 - Supports controlled state, modal behavior, looping, and dismissal settings.
 - Includes actions, checkbox choices, radio choices, groups, separators, and nested menus.
 - Positions and collision-adjusts Content with Floating UI.
@@ -31,10 +32,13 @@ import { ContextMenu } from "@flowstack-ui/atom";
 ```tsx
 <ContextMenu.Root>
   <ContextMenu.Trigger />
+  <ContextMenu.Portal>
   <ContextMenu.Content>
+    <ContextMenu.Arrow />
     <ContextMenu.Group>
+      <ContextMenu.Label />
       <ContextMenu.Item />
-      <ContextMenu.CheckboxItem />
+      <ContextMenu.CheckboxItem><ContextMenu.ItemIndicator /></ContextMenu.CheckboxItem>
       <ContextMenu.RadioGroup>
         <ContextMenu.RadioItem />
       </ContextMenu.RadioGroup>
@@ -47,6 +51,7 @@ import { ContextMenu } from "@flowstack-ui/atom";
       </ContextMenu.SubContent>
     </ContextMenu.Sub>
   </ContextMenu.Content>
+  </ContextMenu.Portal>
 </ContextMenu.Root>
 ```
 
@@ -72,6 +77,10 @@ Wraps the area that owns the menu. It renders a `span` with `display: contents`
 by default, opens on the context-menu gesture, and does not add button
 semantics to the wrapped area.
 
+Touch and pen track one primary long press. Movement beyond 10 px, scrolling,
+early release, cancellation, a second pointer, disabled state, unmount, or a
+native `contextmenu` event cancels the fallback.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
@@ -83,6 +92,7 @@ semantics to the wrapped area.
 | `[data-slot]` | `"context-menu-trigger"` |
 | `[data-state]` | `"open" \| "closed"` |
 | `[data-disabled]` | Present when disabled |
+| `[data-pressed]` | Present only while a long press is pending |
 
 ### Content
 
@@ -162,7 +172,7 @@ so several choices can be changed in one visit.
 | --- | --- | --- |
 | `value` | `string` | required |
 | `textValue` | `string` | Text child or value |
-| `checked` | `boolean` | `false` |
+| `checked` | `boolean \| "indeterminate"` | `false` |
 | `onCheckedChange` | `(checked: boolean) => void` | - |
 | `disabled` | `boolean` | `false` |
 | `closeOnSelect` | `boolean` | `false` |
@@ -303,6 +313,11 @@ and mirrors its side and open/close keys in RTL.
 The package also exports `useContextMenuContext` for advanced custom parts. It
 returns the current anchor point and its setter and must be used within Root.
 
+`Portal`, `Arrow`, `Label`, and `ItemIndicator` use the shared Menu contract.
+CheckboxItem supports `"indeterminate"`; retained DOM parts accept refs,
+native props, `asChild`, and `render`; Content/SubContent expose the shared
+`--atom-menu-*` geometry variables.
+
 ## Examples
 
 ### File Actions
@@ -370,22 +385,68 @@ export function CanvasContextMenu() {
 
 ContextMenu follows the
 [WAI-ARIA Menu pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/).
-Trigger supports the platform context-menu gestures, while Content owns focus,
-highlight, and menu navigation. Keep important actions available through a
-visible control as well.
+Trigger supports right click, keyboard invocation, and deliberate touch/pen
+long press. Content moves real item focus. Keep important actions available
+through a visible control as well.
 
 | Key | Description |
 | --- | --- |
 | `Shift+F10` / `ContextMenu` | Opens at the keyboard anchor and highlights the first item. |
-| `ArrowDown` / `ArrowUp` | Moves through enabled items, following `loop`. |
-| `Home` / `End` | Moves to the first or last enabled item. |
-| `Enter` / `Space` | Activates the highlighted item. |
+| `ArrowDown` / `ArrowUp` | Moves through items, including disabled items, following `loop`. |
+| `Home` / `End` | Moves to the first or last item. |
+| `Enter` / `Space` | Activates the focused item unless disabled. |
 | Printable character | Moves by typeahead label. |
 | `ArrowRight` | Opens a submenu in LTR; closes it in RTL. |
 | `ArrowLeft` | Closes a submenu in LTR; opens it in RTL. |
 | `Escape` | Closes the topmost submenu or menu. |
-| `Tab` | Closes the menu and restores focus to Trigger. |
+| `Tab` / `Shift+Tab` | Closes and exits after/before the invoking context. |
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.12.0
+
+- Added a cancel-safe 700 ms touch/pen long press with 10 px movement tolerance,
+  native-contextmenu de-duplication, temporary pressed state, and full cleanup.
+- Inherited real item focus, disabled-item navigation, owner-aware Tab exit,
+  modal isolation, shared anatomy, mixed state, composition, and geometry.
+
+### 0.3.4
+
+- Inherited corrected modal Menu scroll-lock compensation for documents that
+  preserve their scrollbar gutter.
+
+### 0.3.1
+
+- Inherited reliable Menu exit-presence cleanup for closed ContextMenu and
+  submenu Content under global motion CSS.
+
+### 0.2.0
+
+- Fixed `Trigger` so custom `data-slot` values override the default
+  `context-menu-trigger` slot.
+- Inherited fixed submenu keyboard behavior under `Direction.Provider dir="rtl"`
+  so ArrowLeft opens submenus, ArrowRight closes submenus, and submenu
+  placement mirrors to the left side.
+- Fixed `Trigger` so its documented `asChild` and `render` composition props
+  are implemented while preserving context-menu behavior.
+- Fixed `Content` so refs forward to the underlying shared menu content
+  element.
+- Fixed pointer-open behavior so right-click opens without pre-highlighting the
+  first item; keyboard context-menu opens still seed the first highlight.
+- Inherited the shared Menu typeahead behavior so a single-character search
+  cycles from the current matching item while multi-character buffers still
+  match exact prefixes.
+- Added shared dismissable layer Escape handling so ContextMenu closes before
+  parent overlays when nested inside Dialog, Drawer, Modal, or Popover.
+- Registered shared Menu content with parent modal focus scopes so ContextMenu
+  can remain a valid focus target inside Dialog, Drawer, and other modal
+  primitives.
+- Added shared menu item parts to the `ContextMenu` namespace object.
+
+### 0.1.0
+
+- Initial Atom release.

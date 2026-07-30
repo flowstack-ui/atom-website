@@ -73,9 +73,10 @@ normal build and verification commands run it automatically.
 - `content/utilities/` contains utilities and hooks.
 - `content/atom-source.json` records package provenance.
 
-`npm run content:sync` is a maintainer convenience for deliberately seeding
-component and utility docs from a sibling Atom checkout. It is not part of the
-production build, and synchronized files remain committed to this repository.
+`npm run content:sync` is a maintainer command for refreshing component and
+utility pages with their changelogs, package guides, architecture audits, and
+release history from a sibling Atom checkout. It is not part of the production
+build, and all reviewed output remains committed to this repository.
 
 ## Documentation
 

@@ -14,7 +14,9 @@ rather than simply being more or less.
 - Implements rating as a WAI-ARIA slider.
 - Supports controlled and uncontrolled values.
 - Supports fractional values with configurable `step`.
-- Supports pointer selection, drag updates, keyboard control, and click-to-clear.
+- Supports pointer selection, drag updates, keyboard control, and opt-in clear.
+- Preserves vertical page scrolling, reverts true pointer cancellation, and
+  finalizes the live value if pointer capture is lost.
 - Mirrors horizontal pointer and keyboard behavior in RTL direction.
 - Supports disabled, read-only, invalid, and required states.
 - Renders an optional hidden input for form submission.
@@ -49,6 +51,7 @@ focusable control; Item parts only provide pointer targets and visual state.
 | `value` | `number` | - |
 | `defaultValue` | `number` | `min` |
 | `onValueChange` | `(value: number) => void` | - |
+| `allowClear` | `boolean` | `false` |
 | `min` | `number` | `0` |
 | `max` | `number` | `5` |
 | `step` | `number` | `1` |
@@ -57,6 +60,7 @@ focusable control; Item parts only provide pointer targets and visual state.
 | `readOnly` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `dir` | `"ltr" \| "rtl"` | Direction context |
 | `name` | `string` | - |
 | `formValue` | `string` | Current value |
@@ -96,7 +100,8 @@ focusable control; Item parts only provide pointer targets and visual state.
 
 Represents one point on the rating scale. It reports empty, partial, or full
 fill state and forwards pointer interaction to Root while remaining decorative
-to assistive technology.
+to assistive technology. Item permits vertical page scrolling while reserving
+horizontal movement for rating selection.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -105,6 +110,7 @@ to assistive technology.
 | `onPointerMove` | `PointerEventHandler<HTMLSpanElement>` | - |
 | `onPointerUp` | `PointerEventHandler<HTMLSpanElement>` | - |
 | `onPointerCancel` | `PointerEventHandler<HTMLSpanElement>` | - |
+| `onLostPointerCapture` | `PointerEventHandler<HTMLSpanElement>` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -187,11 +193,26 @@ export default function ReviewRating() {
 
 ## Accessibility
 
+Required validity is owned by the aligned native proxy and means a value above
+the minimum. A validation attempt is mirrored to the visible slider and Field.
+Inline behavior suppresses the browser bubble; native behavior keeps it.
+
 Rating follows the
 [WAI-ARIA slider pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/)
 so the whole control is one Tab
 stop. Items are decorative and hidden from assistive technology. Provide an
 accessible name on Root with `aria-label` or `aria-labelledby`.
+Inside Field, Rating inherits the generated control ID, accessible name,
+description relationships, and state unless a local prop is supplied.
+Uncontrolled value returns to `defaultValue` on native form reset.
+When required, a transparent native proxy aligned with Root treats the minimum
+value as empty and redirects browser validation focus to the visible slider.
+The optional named hidden input remains submission-only.
+True pointer cancellation restores the value present at pointer down. Lost
+pointer capture finalizes the current value because browsers can release
+capture during a valid interaction. Activating the selected segment remains
+stable unless `allowClear` is enabled. Only one pointer session can control a
+Rating at a time.
 
 | Key | Description |
 | --- | --- |
@@ -204,4 +225,55 @@ accessible name on Root with `aria-label` or `aria-labelledby`.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.6
+
+- Resolved drag coordinates against the nearest Rating Item so a captured
+  pointer can move continuously across the complete scale, including gaps and
+  RTL layouts.
+
+### 0.19.5
+
+- Kept repeated activation on the selected value stable by default and added
+  opt-in `allowClear` behavior, including fractional values.
+- Finalized the live Rating value when pointer capture is lost; true
+  `pointercancel` still restores the pointer-down value.
+
+### 0.19.3
+
+- Preserved vertical page scrolling, limited Rating to one active pointer, and
+  restored the pointer-down value when interaction is cancelled or capture is
+  lost.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored aligned required validity to Rating, Field, and Form under the
+  shared inline/native validation contract.
+
+### 0.6.12
+
+- Added aligned native required validation that treats the minimum rating as
+  empty and redirects browser focus to Root.
+
+### 0.5.0
+
+- Added Field state, generated ID, label, and description integration plus
+  uncontrolled form reset behavior.
+
+### 0.2.0
+
+- Added direction-aware Rating pointer and keyboard behavior for RTL contexts.
+- Improved fractional Rating pointer selection so pointer down can select half-step values directly.
+- Reduced `Rating.Item` callback churn by destructuring context dependencies while preserving pointer and clear behavior.
+
+### 0.1.0
+
+- Initial Atom release.

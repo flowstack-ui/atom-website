@@ -1,13 +1,18 @@
 # Current Atom UI Website State
 
-The independent website repository is initialized and version one is
-implemented as a statically generated Next.js application.
+The independent website is implemented as a statically generated Next.js
+application and its public documentation is aligned with Atom 0.19.9.
 
 ## Implemented
 
-- Overview, Guides, Components, and Utilities navigation.
+- Overview, Guides, Architecture, Components, and Utilities navigation.
 - Static routes for every navigation document.
-- Sixty component pages and six utility pages.
+- Eighty-six documentation routes: four Overview pages, nine Guides, three
+  Architecture records, sixty-four component pages, and six utility pages.
+- Complete coverage of all 70 Atom public subpaths, including Clipboard, Image,
+  Link, and Multi Select.
+- Component and utility API pages merged with their current package changelogs,
+  plus synchronized package guides, architecture audits, and release history.
 - Atom AppBar, Sidebar, Drawer, Dialog, Combobox, NavList, ScrollArea, Button,
   Tooltip, and SkipLink primitives in the website shell.
 - Responsive desktop, tablet, and mobile layouts with touch-sized header
@@ -29,6 +34,8 @@ implemented as a statically generated Next.js application.
 - Static Markdown rendering with tables, code, deterministic headings, and
   right-hand page navigation with app-bar-aware anchor positioning.
 - Content provenance and export-surface validation.
+- Pull-request and main-branch CI for content, types, lint, static build,
+  dependency audit, and generated-file cleanliness.
 - Static export suitable for independent hosting.
 - Fixed local development on port `3002` with an explicit LAN command using
   the same port for real-phone and tablet review.
@@ -36,7 +43,7 @@ implemented as a statically generated Next.js application.
 ## Current Atom Baseline
 
 - Package: `@flowstack-ui/atom`
-- Version: `0.4.0`
+- Version: `0.19.9`
 - Exact source commit: recorded in `content/atom-source.json`
 
 ## Constraints
@@ -46,6 +53,7 @@ implemented as a statically generated Next.js application.
 - Version switching, analytics, accounts, comments, and a footer are outside
   version-one scope.
 - The permanent logo is not yet approved.
+- Real-device and assistive-technology review remains a manual release check.
 
 ## Deployment Status
 

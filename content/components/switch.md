@@ -36,7 +36,10 @@ import { Switch } from "@flowstack-ui/atom";
 ### Root
 
 Owns the checked and form state and renders a native button by default. It also
-provides state to Thumb and renders a hidden checkbox when `name` is present.
+provides state to Thumb and renders a transparent native checkbox when `name`
+or `required` needs native form behavior. The proxy is aligned to Root,
+participates in required validation without `readonly`, and redirects browser
+validation focus to the visible switch.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -47,10 +50,10 @@ provides state to Thumb and renders a hidden checkbox when `name` is present.
 | `readOnly` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `name` | `string` | - |
 | `value` | `string` | `"on"` |
 | `form` | `string` | - |
-| `ariaLabel` | `string` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -58,7 +61,7 @@ provides state to Thumb and renders a hidden checkbox when `name` is present.
 | --- | --- |
 | `role` | `"switch"` |
 | `aria-checked` | Current checked state |
-| `aria-label` | Value from `ariaLabel` when provided |
+| `aria-label` | Native value when provided |
 | `aria-required` | `true` when required |
 | `aria-readonly` | `true` when read-only |
 | `aria-invalid` | `true` when invalid |
@@ -106,7 +109,7 @@ Advanced compound parts can read `useSwitchContext` or use the public
 import { Switch } from "@flowstack-ui/atom";
 
 export default function NotificationSetting() {
-  return <Switch.Root name="notifications" value="enabled" ariaLabel="Notifications"><Switch.Thumb /></Switch.Root>;
+  return <Switch.Root name="notifications" value="enabled" aria-label="Notifications"><Switch.Thumb /></Switch.Root>;
 }
 ```
 
@@ -118,11 +121,15 @@ import { Switch } from "@flowstack-ui/atom";
 
 export default function ControlledSwitch() {
   const [enabled, setEnabled] = useState(false);
-  return <Switch.Root checked={enabled} onCheckedChange={setEnabled} ariaLabel="Notifications"><Switch.Thumb /></Switch.Root>;
+  return <Switch.Root checked={enabled} onCheckedChange={setEnabled} aria-label="Notifications"><Switch.Thumb /></Switch.Root>;
 }
 ```
 
 ## Accessibility
+
+After native constraint validation runs, proxy invalidity is mirrored to the
+visible Root and its Field. Inline behavior suppresses the browser bubble while
+native behavior keeps the aligned browser UI.
 
 Switch follows the [WAI-ARIA switch pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/).
 Root owns the switch role and checked state; Thumb is decorative.
@@ -132,8 +139,45 @@ Root owns the switch role and checked state; Thumb is decorative.
 | `Enter` | Toggles checked state. |
 | `Space` | Toggles checked state. |
 
-Provide visible text, `ariaLabel`, or `aria-labelledby`. Read-only switches remain focusable but cannot toggle. Disabled switches use native button disabled behavior. Non-native `asChild` and `render` switches receive Atom keyboard activation.
+Provide visible text, native `aria-label`, or `aria-labelledby`. Inside Field,
+Switch inherits state, control ID, and descriptions. Uncontrolled state resets
+to `defaultChecked`. Read-only switches remain focusable but cannot toggle.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored aligned-proxy validity to the visible Switch, Field, and Form under
+  the shared inline/native validation contract.
+
+### 0.6.12
+
+- Restored native required validity by removing `readonly` from the aligned
+  proxy, including required Switches without a submission name.
+
+### 0.5.0
+
+- Added Field state, generated control ID, and description integration; removed
+  `ariaLabel` in favor of native ARIA; uncontrolled state now follows native
+  form reset.
+
+### 0.2.0
+
+- Added `readOnly` support.
+- Added `aria-required`, `data-required`, `data-readonly`, and mirrored thumb data attributes.
+- Added keyboard activation for non-native `asChild` and `render` switch roots.
+- Memoized the compound context value.
+- Changed toggling to use functional controllable-state updates.
+
+### 0.1.0
+
+- Initial Atom release with root, thumb, checked state, and optional form input.

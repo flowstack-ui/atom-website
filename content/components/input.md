@@ -51,9 +51,11 @@ wrapper element. Local state props override Field context.
 | `required` | `boolean` | Field state or `false` |
 | `readOnly` | `boolean` | Field state or `false` |
 | `invalid` | `boolean` | Field state or `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 
 Native input props, including `type`, `name`, `form`, `onChange`, and explicit
-ARIA relationships, pass through.
+ARIA relationships, pass through. Uncontrolled values return to `defaultValue`
+on native form reset.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -141,6 +143,10 @@ export function SearchInput() {
 
 ## Accessibility
 
+After native constraint validation runs, Root mirrors `ValidityState` through
+`aria-invalid` and `data-invalid`. Inline behavior suppresses the browser
+bubble while preserving native submission blocking; native behavior keeps it.
+
 Root uses native input semantics. Give it an accessible name with a native
 label, Field.Label, `aria-label`, or `aria-labelledby`. Clear has an accessible
 default label but is intentionally outside the Tab sequence; pointer users can
@@ -149,4 +155,29 @@ normal editing keys.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored attempted native validity to Input, Field, and Form under the new
+  inline/native validation presentation contract.
+
+### 0.5.0
+
+- Synchronized uncontrolled Field-aware values with native form reset.
+
+### 0.2.0
+
+- Added `data-required` to `Input.Root` when required state is inherited from
+  Field context or provided directly.
+
+### 0.1.0
+
+- Initial Atom release.

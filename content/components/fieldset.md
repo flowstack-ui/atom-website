@@ -18,6 +18,8 @@ group represents.
 - Exposes required and invalid group state without invalid `aria-required` usage.
 - Supports required and optional legend indicators.
 - Exposes public optional and required context hooks.
+- Preserves server relationships when Root composes one fieldset wrapper with
+  `asChild`.
 
 ## Import
 
@@ -36,26 +38,28 @@ import { Fieldset } from "@flowstack-ui/atom";
 
 useFieldsetContext()
 useRequiredFieldsetContext()
+markFieldsetPart()
 ```
 
 ## API Reference
 
 ### Root
 
-Renders a native `fieldset`, owns shared state, and references only the
-Description and currently visible Error parts that are mounted.
+Renders a native `fieldset`, owns shared state, and emits server-stable
+relationships to its Description and currently visible Error.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Form value, then automatic |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
 | ARIA attribute | Values |
 | --- | --- |
-| `aria-describedby` | Mounted Description and visible Error IDs |
+| `aria-describedby` | Description and visible Error IDs unless explicitly provided |
 | `aria-invalid` | `"true"` when invalid |
 
 Root does not emit `aria-required`; required group state must be communicated
@@ -70,8 +74,8 @@ through Legend text and the descendant controls where appropriate.
 
 ### Legend
 
-Renders the native `legend` that names the group. It appends the required or
-optional indicator selected by Root state.
+Renders the native `legend` that names the fieldset and receives the stable ID
+used by nested CheckboxGroup or RadioGroup widgets.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -93,7 +97,7 @@ indicators remain readable.
 
 ### Description
 
-Renders a `p` and registers its generated ID for Root's accessible description.
+Renders a `p` with a server-stable generated ID for Root's description.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -106,18 +110,15 @@ Renders a `p` and registers its generated ID for Root's accessible description.
 
 ### Error
 
-Renders only when Root is invalid or `forceMatch` is true and registers itself
-in Root's accessible description.
+Renders only when Root is invalid or `forceMatch` is true and participates in
+Root's accessible description. It has no live role by default; pass native
+`role="alert"` or `aria-live` for a newly inserted announcement.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `forceMatch` | `boolean` | `false` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
-
-| ARIA attribute | Values |
-| --- | --- |
-| `role` | `"alert"` while rendered |
 
 | Data attribute | Values |
 | --- | --- |
@@ -131,6 +132,26 @@ Returns group state and generated relationships, or `null` outside Root.
 
 Returns the same context but throws outside Root. Use it for custom parts that
 require a Fieldset parent.
+
+### markFieldsetPart
+
+Marks a styled public wrapper around `Fieldset.Legend`,
+`Fieldset.Description`, or `Fieldset.Error` so Root can include that wrapper
+in deterministic server-rendered naming and description relationships. Call
+it once at module scope after creating the wrapper. The wrapper must render
+the matching Atom part and forward its props and ref.
+
+```tsx
+const StyledLegend = markFieldsetPart(
+  forwardRef<HTMLLegendElement, FieldsetLegendProps>((props, ref) => (
+    <Fieldset.Legend {...props} className="legend" ref={ref} />
+  )),
+  "legend",
+);
+```
+
+Calling it again with the same kind is safe. A conflicting semantic kind
+throws rather than producing a silently incorrect server relationship.
 
 ## Examples
 
@@ -149,8 +170,8 @@ export function ShippingMethod() {
       <Fieldset.Legend>Shipping method</Fieldset.Legend>
       <Fieldset.Description>Choose how quickly the order should arrive.</Fieldset.Description>
       <RadioGroup.Root value={method} onValueChange={setMethod}>
-        <RadioGroup.Item value="standard">Standard</RadioGroup.Item>
-        <RadioGroup.Item value="express">Express</RadioGroup.Item>
+        <RadioGroup.Radio value="standard">Standard</RadioGroup.Radio>
+        <RadioGroup.Radio value="express">Express</RadioGroup.Radio>
       </RadioGroup.Root>
       <Fieldset.Error>Choose a shipping method.</Fieldset.Error>
     </Fieldset.Root>
@@ -160,6 +181,12 @@ export function ShippingMethod() {
 
 ## Accessibility
 
+A grouped control reports native constraint failures to Root as one logical
+invalid state. A compatible Error part makes omitted behavior resolve to
+`inline`; otherwise it resolves to `native`. Inline behavior suppresses the
+browser bubble, reveals the group Error, and focuses the first enabled item
+without adding the group container to the Tab order.
+
 Fieldset follows native
 [WAI grouped-control guidance](https://www.w3.org/WAI/tutorials/forms/grouping/).
 Legend supplies the group name, native `disabled` disables descendant controls,
@@ -167,6 +194,40 @@ and Root references its supporting messages. Required state is not valid on a
 fieldset through `aria-required`, so communicate it in the Legend and apply
 required semantics to the actual controls. Fieldset owns no keyboard behavior.
 
+When Root uses `asChild`, the composed element must remain a native `fieldset`
+and forward Atom props and the ref. Keep Legend, Description, and Error direct
+children of that element so their generated server relationships remain
+deterministic.
+
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.13
+
+- Added validation behavior inheritance and group-level native-invalid/Error
+  presentation with first-enabled-control focus support.
+
+### 0.5.2
+
+- Added `markFieldsetPart` for styled Legend, Description, and Error wrappers
+  that must remain statically discoverable during server rendering.
+
+### 0.5.1
+
+- Made Root `asChild` inspect the composed fieldset's immediate children so
+  Legend, Description, and visible Error relationships remain present in
+  server markup.
+
+### 0.5.0
+
+- Added a stable Legend ID plus server-stable Description/Error relationships.
+- Added native naming and state integration for CheckboxGroup and RadioGroup,
+  and removed the forced alert role from Error.
+
+### 0.2.0
+
+- Removed invalid `aria-required` output from `Fieldset.Root`; required state
+  remains available through Fieldset context and `[data-required]`.
+
+### 0.1.0
+
+- Initial Atom release.

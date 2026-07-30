@@ -93,4 +93,9 @@ but not visible. Do not use it to hide content from assistive technology; use
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+### 0.1.0
+
+- Initial Atom release.

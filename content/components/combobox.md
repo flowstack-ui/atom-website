@@ -15,8 +15,10 @@ valid.
 
 - Controls selection, input text, and open state independently.
 - Filters, groups, highlights, and selects options.
+- Provides a native disclosure Trigger and sizes Content from the full Control.
 - Supports free-form values, loading, empty state, clearing, and disabled items.
 - Positions Content with Floating UI and portals on request.
+- Defers touch and pen outside dismissal until a completed, uncancelled tap.
 - Provides generated combobox/listbox ARIA relationships.
 - Submits the selected value through a hidden named input.
 - Exposes reusable option filtering, labeling, grouping, and navigation helpers.
@@ -32,8 +34,11 @@ import { Combobox } from "@flowstack-ui/atom";
 ```tsx
 <Combobox.Root>
   <Combobox.Label />
-  <Combobox.Input />
-  <Combobox.Clear />
+  <Combobox.Control>
+    <Combobox.Input />
+    <Combobox.Clear />
+    <Combobox.Trigger />
+  </Combobox.Control>
   <Combobox.Portal>
     <Combobox.Content>
       <Combobox.Listbox>
@@ -69,7 +74,7 @@ adds an accessibility-hidden input containing the selected value.
 | `defaultValue` | `string \| null` | `null` |
 | `onValueChange` | `(value: string \| null) => void` | - |
 | `inputValue` | `string` | - |
-| `defaultInputValue` | `string` | `""` |
+| `defaultInputValue` | `string` | Selected option label or `""` |
 | `onInputValueChange` | `(value: string) => void` | - |
 | `open` | `boolean` | - |
 | `defaultOpen` | `boolean` | `false` |
@@ -86,11 +91,23 @@ adds an accessibility-hidden input containing the selected value.
 | `readOnly` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `name` | `string` | - |
 | `form` | `string` | - |
 
-The hidden input receives `name`, `form`, value, and disabled state. Root does
-not attach native `required` validation to that hidden input.
+The transparent native value proxy receives `name`, `form`, the committed
+value, disabled state, and required state. It aligns to the visible Input and
+redirects browser validation focus there, so typed display text does not
+satisfy required validity until a value is committed. The visible Input
+receives Field state, the generated control ID, Field label and description
+relationships, and external form association. Uncontrolled value,
+input text, and open state return to their defaults on native form reset.
+
+When composed inside `Field.Root`, Combobox inherits disabled, read-only,
+required, invalid, validation behavior, label, description, and error
+relationships. It also works standalone through the equivalent Root props.
+`Fieldset.Root` and `Form.Root` aggregate native/inline validity through the
+shared Field and form validation contracts.
 
 ### Label
 
@@ -136,6 +153,20 @@ all combobox keyboard interaction.
 | `[data-readonly]` | Present when read only |
 | `[data-invalid]` | Present when invalid |
 
+### Control
+
+Wraps Input, Clear, and Trigger as the complete visible control. Content uses
+this element as its positioning reference and minimum inline size.
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"combobox-control"` |
+| `[data-state]` | `"open" \| "closed"` |
+| `[data-disabled]` | Present when disabled |
+| `[data-readonly]` | Present when read only |
+| `[data-required]` | Present when required |
+| `[data-invalid]` | Present when invalid |
+
 ### Clear
 
 Clears the selected value and input, then returns focus to Input. It renders a
@@ -157,6 +188,23 @@ disabled/read-only.
 | `[data-slot]` | `"combobox-clear"` |
 | `[data-hidden]` | Present while hidden |
 
+### Trigger
+
+Renders the button that toggles Content without taking focus away from Input.
+It inherits disabled/read-only behavior from Root or Field.
+
+| ARIA attribute | Values |
+| --- | --- |
+| `aria-expanded` | Current open state |
+| `aria-haspopup` | `"listbox"` |
+| `aria-controls` | Generated Listbox ID |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"combobox-trigger"` |
+| `[data-state]` | `"open" \| "closed"` |
+| `[data-invalid]` | Present when invalid |
+
 ### Portal
 
 Moves its children to `document.body` by default without a wrapper.
@@ -168,7 +216,7 @@ Moves its children to `document.body` by default without a wrapper.
 
 ### Content
 
-Renders and positions the open popup below Input with flip and viewport-shift
+Renders and positions the open popup below Control with flip and viewport-shift
 collision handling. It owns no listbox role; place Listbox inside it.
 
 | Prop | Type | Default |
@@ -211,7 +259,8 @@ native `aria-label` or `aria-labelledby` overrides that relationship.
 
 ### Item
 
-Represents one selectable option and registers its value in list order.
+Represents one selectable option, registers its value in list order, and hides
+itself when its matching Root option is excluded by the active filter.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -353,6 +402,10 @@ export function TagCombobox() {
 
 ## Accessibility
 
+The aligned committed-value input owns required validity. A validation attempt
+is mirrored to the visible Input and Field. Inline behavior suppresses the
+browser bubble; native behavior keeps it and redirects focus to Input.
+
 Combobox follows the
 [WAI-ARIA Editable Combobox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/).
 Provide an accessible Label, render every available value as an Item, and keep
@@ -370,4 +423,58 @@ disabled options marked with `disabled`.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.18.2
+
+- Added Control and Trigger parts, anchored Content to the full Control, and
+  exposed inherited form state on the Control styling surface.
+- Made authored Items filter themselves from Root options and initialized
+  display text from `defaultValue` when `defaultInputValue` is omitted.
+
+### 0.18.1
+
+- Made touch and pen outside dismissal wait for a completed tap and cancel on
+  movement, scrolling, or pointer cancellation.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Mirrored committed-value proxy validity to the visible Combobox, Field, and
+  Form under the shared inline/native validation contract.
+
+### 0.6.12
+
+- Moved native required validity to an aligned proxy holding the committed
+  logical value, so display text alone no longer satisfies selection validity.
+
+### 0.5.0
+
+- Added Field state, generated input ID, label, and description integration plus
+  external-form and uncontrolled reset behavior.
+
+### 0.2.0
+
+- Fixed option selection so pointer clicks, including already-selected options,
+  close the listbox consistently, and `clearOnSelect` also applies to
+  free-solo Enter commits.
+- Fixed `openOnFocus` so empty states can open on focus when
+  `Combobox.Empty` is mounted.
+- Added shared dismissable layer Escape handling so Combobox closes before
+  parent overlays when nested inside Dialog, Drawer, Modal, or Popover.
+- Fixed outside pointer dismissal so Combobox closes reliably when clicking
+  outside the input or content during inspection-heavy renders.
+
+### 0.1.0
+
+- Initial Atom release.

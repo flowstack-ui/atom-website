@@ -15,6 +15,7 @@ It remains separate from the
   `NEXT_PUBLIC_SITE_URL` only to override it deliberately.
 - Serve generated routes with trailing slashes.
 - Do not mount or clone the sibling Atom package repository.
+- Merge only after the repository CI workflow passes.
 
 ## Vercel
 

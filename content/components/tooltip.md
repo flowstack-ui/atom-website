@@ -13,8 +13,15 @@ the floating content contains buttons, links, or other controls.
 
 - Provider-level delay configuration.
 - Controlled and uncontrolled open state.
-- Opens on pointer hover, keyboard focus-visible, and touch long press.
-- Floating UI positioning with side, align, side offset, collision shift, flip, and arrow coordinates.
+- Opens on pointer hover, keyboard focus-visible, and a stationary 700 ms touch
+  long press.
+- Cancels touch opening on early release, movement beyond 10 CSS pixels,
+  scrolling, a second touch, `touchcancel`, disabling, or Trigger unmount.
+- Starts finite touch dismissal after release: 1500 ms for plain and 3000 ms
+  for rich.
+- Floating UI positioning that tries alternate alignments on the requested
+  side, repeats them on the opposite side, and uses perpendicular sides only as
+  final fallbacks; collision shift and Arrow coordinates follow the result.
 - `aria-describedby` wiring between trigger and tooltip content.
 - Portal and arrow parts.
 
@@ -109,8 +116,12 @@ Moves Content to another DOM container without rendering a wrapper.
 
 ### Content
 
-Renders the positioned tooltip text and keeps rich variants open while the
+Renders the positioned tooltip text and keeps Content available while the
 pointer moves from Trigger into Content.
+Content exposes measured `--atom-floating-available-width` and
+`--atom-floating-available-height` properties.
+Portalled Content preserves an explicit `dir`; otherwise it resolves direction
+from Trigger and then `Direction.Provider`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -133,6 +144,12 @@ pointer moves from Trigger into Content.
 | `[data-side]` | `"top" \| "right" \| "bottom" \| "left"` |
 | `[data-variant]` | `"plain" \| "rich"` |
 | `[data-positioned]` | Present after the first positioning frame |
+
+Plain Content is normally one short description. Rich Content may use a short
+title, supporting description, and non-interactive inline formatting. Both
+variants retain `role="tooltip"`; neither may contain links, buttons, inputs,
+or other focusable controls. Use `HoverCard` for a larger non-interactive
+preview and `Popover` for an interactive surface.
 
 ### Arrow
 
@@ -201,11 +218,37 @@ export default function HelpTooltip() {
 }
 ```
 
+### Rich, Non-Interactive Tooltip
+
+```tsx
+import { Tooltip } from "@flowstack-ui/atom";
+
+export default function SearchTooltip() {
+  return (
+    <Tooltip.Provider>
+      <Tooltip.Root variant="rich">
+        <Tooltip.Trigger asChild>
+          <button type="button" aria-label="Search workspace">Search</button>
+        </Tooltip.Trigger>
+        <Tooltip.Portal>
+          <Tooltip.Content>
+            <strong>Workspace search</strong>
+            <span>Search projects, files, and commands.</span>
+          </Tooltip.Content>
+        </Tooltip.Portal>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+  );
+}
+```
+
 ## Accessibility
 
 Tooltip follows the [WAI-ARIA tooltip pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/).
 Content is referenced by `aria-describedby` while open and must remain
-non-interactive.
+non-interactive in both plain and rich variants. The Trigger needs a complete
+accessible name independently; Tooltip provides only a supplemental
+description.
 
 | Key | Description |
 | --- | --- |
@@ -213,6 +256,73 @@ non-interactive.
 | `Shift+Tab` | Moving focus away closes the tooltip. |
 | `Escape` | Closes the topmost open tooltip immediately. |
 
+On touch devices, a stationary 700 ms press opens Tooltip immediately without
+adding the hover `openDelay`. Touch-generated compatibility hover/focus events
+do not open Tooltip after a quick tap. Ordinary taps and scrolling are not
+suppressed; native text selection and the context callout are suppressed only
+while the Trigger is tracking the competing stationary long-press gesture.
+An opened Tooltip remains visible while the initiating finger is down. After
+release, plain dismisses after 1500 ms and rich after 3000 ms; an outside touch
+or scroll dismisses either immediately. Moving more than 10 CSS pixels,
+scrolling, adding a second touch, receiving `touchcancel`, disabling the
+Trigger, or unmounting it cancels the touch session.
+
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.9
+
+- Preserved resolved Trigger or provider direction on portalled Content while
+  retaining explicit Content `dir` precedence.
+
+### 0.6.8
+
+- Exposed measured available dimensions through headless floating properties
+  for constrained styled surfaces.
+
+### 0.6.3
+
+- Prioritized every usable alignment on the requested side, followed by the
+  opposite side, before allowing perpendicular-axis collision fallbacks.
+
+### 0.6.2
+
+- Added perpendicular-side collision fallbacks after the preferred and opposite
+  sides so constrained tooltips can resolve onto the axis with available room.
+
+### 0.6.1
+
+- Added immediate outside-touch and scroll dismissal after a long-press Tooltip
+  has opened and the initiating finger is released.
+
+### 0.3.5
+
+- Corrected touch long press to open once at the 700 ms threshold without also
+  paying the hover delay.
+- Added complete touch-session cancellation for early release, movement beyond
+  10 CSS pixels, scrolling, a second touch, `touchcancel`, disabled changes,
+  and Trigger unmount.
+- Ignored touch-generated compatibility hover/focus events after release so a
+  quick tap cannot enter the desktop opening path, and suppressed native text
+  selection/callout only while a long press is actively being tracked.
+- Moved touch auto-dismissal to release time, retaining 1500 ms for plain and
+  adding a finite 3000 ms rich dismissal.
+- Clarified that plain and rich Content are both non-interactive and that
+  actionable floating content belongs in Popover.
+
+### 0.3.1
+
+- Fixed exit-presence cleanup so closed Tooltip Content unmounts after its CSS
+  motion window even when no end event is emitted.
+
+### 0.2.0
+
+- Fixed Tooltip render trigger positioning by updating Floating UI after the
+  trigger ref commits.
+- Added `data-variant="plain|rich"` to Tooltip content and documented the
+  `variant` Root prop.
+- Added shared dismissable layer Escape handling so Tooltip participates in
+  topmost-layer dismissal with other overlays.
+
+### 0.1.0
+
+- Initial Atom release.

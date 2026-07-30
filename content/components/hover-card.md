@@ -14,9 +14,16 @@ accessibility relationship, so never put required actions inside it.
 ## Features
 
 - Supports controlled and uncontrolled open state.
-- Opens from pointer hover and focus-visible Trigger interaction.
-- Uses configurable open and close delays and keeps open while Content is hovered.
-- Positions Content with flip, shift, offset, and Arrow coordinates.
+- Opens from mouse-capable pointer hover and focus-visible Trigger interaction;
+  touch input and its browser-generated compatibility events do not open the
+  preview or replace the Trigger's native action.
+- Does not install hover disclosure on touch-only devices and updates that
+  capability when the browser's available input devices change.
+- Uses configurable open and close delays and a safe pointer corridor that keeps
+  Content open while the pointer crosses the gap from Trigger to Content.
+- Positions Content by trying alternate alignments on the requested side,
+  repeating them on the opposite side, and using perpendicular sides only as
+  final fallbacks; collision shift and Arrow coordinates follow the result.
 - Supports inline or custom-container portals.
 - Participates in topmost-layer Escape dismissal.
 
@@ -58,8 +65,9 @@ Owns delayed open state and renders no wrapper.
 
 ### Trigger
 
-Provides the positioning reference and hover/focus events. It renders a
-focusable `span` by default. With `asChild`, the child keeps its own tab order.
+Provides the positioning reference and mouse-capable hover/focus events. It
+renders a focusable `span` by default. With `asChild`, the child keeps its own
+tab order and native touch behavior.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -88,6 +96,10 @@ Moves Content to `document.body` by default without a wrapper.
 
 Renders a positioned generic `div`. It has no owned landmark or popup role;
 `ariaLabel` is passed as `aria-label` but does not create a Trigger relationship.
+Content exposes measured `--atom-floating-available-width` and
+`--atom-floating-available-height` properties.
+Portalled Content preserves an explicit `dir`; otherwise it resolves direction
+from Trigger and then `Direction.Provider`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -168,7 +180,8 @@ export function ProfilePreview() {
 HoverCard has no standalone WAI-ARIA popup pattern. Trigger remains the
 semantic element supplied by the consumer, Content is supplemental document
 content, and Arrow is hidden from assistive technology. The preview must not be
-the only place important information or actions are available.
+the only place important information or actions are available. Touch does not
+open HoverCard, so a Trigger link keeps its normal tap and long-press behavior.
 
 | Key | Description |
 | --- | --- |
@@ -177,4 +190,58 @@ the only place important information or actions are available.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.9
+
+- Preserved resolved Trigger or provider direction on portalled Content while
+  retaining explicit Content `dir` precedence.
+
+### 0.6.8
+
+- Exposed measured available dimensions through headless floating properties
+  for constrained styled surfaces.
+
+### 0.6.6
+
+- Disabled hover interaction when the browser reports no hover-capable input
+  and captured touch pointer entry before native compatibility mouse events on
+  hybrid devices.
+
+### 0.6.5
+
+- Added a short post-touch compatibility-event guard so intermittent Safari
+  mouse and focus synthesis cannot open HoverCard after touch activation.
+
+### 0.6.4
+
+- Limited hover disclosure to mouse-capable pointers so touch keeps the
+  Trigger's native tap and long-press behavior.
+- Added a safe geometric corridor from Trigger to Content and prevented
+  exit-retained Content from reopening itself during its closing motion.
+
+### 0.6.3
+
+- Prioritized every usable alignment on the requested side, followed by the
+  opposite side, before allowing perpendicular-axis collision fallbacks.
+
+### 0.6.2
+
+- Added perpendicular-side collision fallbacks after the preferred and opposite
+  sides, preventing wide previews from remaining cropped on a constrained axis.
+
+### 0.3.1
+
+- Fixed exit-presence cleanup so closed HoverCard Content unmounts after its
+  CSS motion window even when no end event is emitted.
+
+### 0.2.0
+
+- Fixed HoverCard render/default trigger positioning by updating Floating UI
+  after the trigger ref commits.
+- Made default and `render` HoverCard triggers keyboard focusable while keeping
+  opening scoped to hover and focus-visible interactions.
+- Added shared dismissable layer Escape handling so HoverCard participates in
+  topmost-layer dismissal with other overlays.
+
+### 0.1.0
+
+- Initial Atom release.

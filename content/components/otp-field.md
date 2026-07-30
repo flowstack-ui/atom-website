@@ -58,24 +58,23 @@ Field state, completion behavior, and optional hidden form input.
 | `name` | `string` | - |
 | `form` | `string` | - |
 | `inputId` | `string` | Generated or inherited from Field |
+| `getInputLabel` | `(index, length, type) => string` | Generated English position label |
 | `autoFocus` | `boolean` | `false` |
 | `autoSubmit` | `boolean` | `false` |
 | `disabled` | `boolean` | `false` |
 | `readOnly` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
-| `ariaLabel` | `string` | `"Verification code"` |
-| `ariaDescribedBy` | `string` | Field description IDs |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
 | ARIA attribute | Values |
 | --- | --- |
-| `aria-label` | Value from `ariaLabel`, or `"Verification code"` without an external label |
+| `aria-label` | Native value, or `"Verification code"` without an external label |
 | `aria-labelledby` | Inherited Field label ID when no direct label is provided |
-| `aria-describedby` | Value from `ariaDescribedBy` or Field descriptions |
+| `aria-describedby` | Native value or Field descriptions |
 | `aria-invalid` | Present when invalid |
-| `aria-required` | Present when required |
 
 | Data attribute | Values |
 | --- | --- |
@@ -178,10 +177,21 @@ export function GroupedCode() {
 
 ## Accessibility
 
+The first visible cell owns required validity and `aria-required` for the logical OTP value; the
+combined named input remains submission-only. A validation attempt is mirrored
+across Root and every cell. Inline behavior suppresses the browser bubble.
+
 The root uses `role="group"` and the visible inputs use roving `tabIndex`, so
 Tab enters the OTP field once. Each input receives a generated position label,
-and the separator is hidden from assistive technology. Give the group a clear
-label through `ariaLabel`, native labeling, or Field.
+and the separator is hidden from assistive technology. The group does not carry
+`aria-required`, because that attribute is unsupported on `role="group"`. Give the group a clear
+label through native `aria-label`/`aria-labelledby` or Field. The first visible
+cell owns required validity and anchors native browser feedback. The combined
+hidden native input is submission-only;
+uncontrolled content resets to `defaultValue`.
+
+Use `getInputLabel` to localize every generated cell position label. A direct
+`aria-label` on an Input still overrides the generated label for that cell.
 
 | Key | Description |
 | --- | --- |
@@ -196,4 +206,38 @@ label through `ariaLabel`, native labeling, or Field.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.2
+
+- Removed unsupported `aria-required` from the `role="group"` root while
+  preserving required semantics and native validity on the visible cells.
+
+### 0.19.0
+
+- Added `getInputLabel` for localizing generated cell position labels.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Added logical-field inline/native validation presentation and synchronized
+  invalid state across Root, visible cells, Field, and Form.
+
+### 0.6.12
+
+- Moved required validity to the first visible cell and made the combined
+  named value submission-only.
+
+### 0.5.0
+
+- Removed `ariaLabel`/`ariaDescribedBy` in favor of native ARIA and added a
+  required-capable native combined-value input with uncontrolled reset.
+### 0.1.0
+
+- Initial Atom release.

@@ -13,7 +13,7 @@ not a menu-role widget.
 ## Features
 
 - Supports root and nested navigation menu scopes.
-- Supports delayed open, skip delay, pointer open, click open, and keyboard open.
+- Supports mouse-hover delay, click/tap, and keyboard open. Touch/pen never start hover timers.
 - Provides a shared viewport that adapts to the active content size.
 - Provides indicator geometry CSS variables for styling arrows or active markers.
 - Supports active links and `aria-current`.
@@ -315,6 +315,11 @@ default parts.
 
 `Root` renders a `nav` landmark with an accessible name. Triggers expose expanded state and controlled content IDs. Links use native anchor semantics and `aria-current="page"` when active. Text direction can be set with `dir` on `Root` or inherited from `Direction.Provider`.
 
+Pointer hover timing is restricted to mouse input. Touch and pen use the same
+click disclosure path as other directly activated controls. Responsive
+replacement with a Drawer is an application/styled-layer decision; Atom does
+not change this native disclosure navigation into command-menu semantics.
+
 NavigationMenu follows the WAI-ARIA APG
 [disclosure navigation example](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
 for site navigation. It
@@ -360,4 +365,39 @@ the parent panel.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.12.0
+
+- Restricted delayed hover open/close timers to mouse input so touch and pen
+  use only the existing click/tap disclosure path.
+- Requalified native navigation semantics, orientation, RTL, direct links,
+  viewport geometry, indicator geometry, nested scopes, and focus-out close.
+
+### 0.2.0
+
+- Fixed `NavigationMenu.Indicator` and `NavigationMenu.Sub` `asChild`
+  rendering so slotted children keep their own contents.
+- Split `NavigationMenu` looping so `Root` controls top-level Trigger/Link
+  wrapping and `Content` can override content arrow-key wrapping.
+- Completed disclosure-navigation keyboard behavior for `NavigationMenu`,
+  including direct top-level links, vertical orientation, content arrow
+  navigation, focus-out closing, and nested Escape focus restoration.
+- Added `loop` to control content arrow-key wrapping and made content arrows
+  follow focusable DOM order.
+- Added standard `asChild`/`render` customization support to the remaining
+  `NavigationMenu` parts, including viewport-rendered content.
+- Fixed `data-slot` override support across `NavigationMenu` parts,
+  including viewport-rendered content.
+- Added horizontal trigger roving keyboard navigation for `NavigationMenu`,
+  including RTL-mirrored ArrowLeft and ArrowRight handling.
+- Added `Direction.Provider` fallback for `NavigationMenu.Root` direction.
+- Added shared dismissable layer Escape handling so NavigationMenu panels close
+  as the topmost active layer when nested with other overlays.
+- Refined trigger, indicator, and viewport callback dependencies to avoid recreating callbacks from the full context object.
+
+### 0.1.0
+
+- Initial Atom release.
