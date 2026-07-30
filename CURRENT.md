@@ -36,7 +36,7 @@ implemented as a statically generated Next.js application.
 ## Current Atom Baseline
 
 - Package: `@flowstack-ui/atom`
-- Version: `0.3.3`
+- Version: `0.4.0`
 - Exact source commit: recorded in `content/atom-source.json`
 
 ## Constraints

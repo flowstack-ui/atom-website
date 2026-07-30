@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Updated the website to published `@flowstack-ui/atom` `0.4.0`, refreshed
+  source provenance, and aligned Popover documentation with visible Title and
+  Description relationships, native ARIA naming, and interaction-aware focus.
 - Updated the website to the published `@flowstack-ui/atom` `0.3.3` patch,
   refreshed Atom provenance, and corrected Badge count guidance for server-safe
   explicit-subpath use and accessible owning-control labels.
