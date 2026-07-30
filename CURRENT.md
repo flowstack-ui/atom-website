@@ -1,7 +1,7 @@
 # Current Atom UI Website State
 
 The independent website is implemented as a statically generated Next.js
-application and its public documentation is aligned with Atom 0.20.1.
+application and its public documentation is aligned with Atom 0.20.2.
 
 ## Implemented
 
@@ -43,7 +43,7 @@ application and its public documentation is aligned with Atom 0.20.1.
 ## Current Atom Baseline
 
 - Package: `@flowstack-ui/atom`
-- Version: `0.20.1`
+- Version: `0.20.2`
 - Exact source commit: recorded in `content/atom-source.json`
 
 ## Constraints

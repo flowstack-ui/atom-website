@@ -1,5 +1,12 @@
 # Atom UI Website Changelog
 
+## 0.2.2 - 2026-07-30
+
+- Updated the exact website dependency and reviewed source provenance to
+  published `@flowstack-ui/atom` `0.20.2`.
+- Refreshed package-owned documentation and release history for the Combobox
+  mobile Trigger focus correction and the verified release-command graph.
+
 ## 0.2.1 - 2026-07-30
 
 - Updated the exact website dependency and reviewed source provenance to
