@@ -14,6 +14,8 @@ price range. Use `NumberInput` when the exact typed number matters, and use
 - Supports controlled and uncontrolled values.
 - Supports horizontal and vertical orientation.
 - Supports pointer dragging, keyboard changes, and commit callbacks.
+- Preserves page scrolling on the non-slider axis, reverts true pointer
+  cancellation, and commits the latest value when capture is lost.
 - Supports hidden form inputs.
 - Supports `Direction.Provider` for horizontal right-to-left pointer and
   keyboard behavior.
@@ -54,12 +56,15 @@ and hidden form inputs. Root renders a `div`; each Thumb owns slider semantics.
 | `step` | `number` | `1` |
 | `largeStep` | `number` | `step * 10` |
 | `minStepsBetweenThumbs` | `number` | `0` |
-| `disabled` | `boolean` | `false` |
+| `disabled` | `boolean` | Field state or `false` |
+| `readOnly` | `boolean` | Field state or `false` |
+| `invalid` | `boolean` | Field state or `false` |
+| `required` | `boolean` | Field state or `false` |
 | `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `dir` | `"ltr" \| "rtl"` | Direction context |
 | `name` | `string` | - |
 | `form` | `string` | - |
-| `ariaLabel` | `string` | - |
+| `aria-label` | `string` | Field label relationship |
 | `ariaValueText` | `(value: number) => string` | - |
 
 **ARIA:** Root adds no role or ARIA attributes. Its label and value-text props
@@ -74,7 +79,8 @@ are applied to each Thumb.
 ### Track
 
 Registers the pointer interaction surface used to choose and drag the nearest
-Thumb. It renders a `div` by default.
+Thumb. It renders a `div` by default. Horizontal Tracks preserve vertical page
+scrolling; vertical Tracks preserve horizontal scrolling.
 
 **ARIA:** Track adds no role or ARIA attributes.
 
@@ -125,8 +131,8 @@ value in Root. Range sliders need one Thumb for each value.
 | ARIA attribute | Values |
 | --- | --- |
 | `role` | `"slider"` |
-| `aria-valuemin` | Root minimum |
-| `aria-valuemax` | Root maximum |
+| `aria-valuemin` | Effective minimum after the preceding thumb and required gap |
+| `aria-valuemax` | Effective maximum before the following thumb and required gap |
 | `aria-valuenow` | Current thumb value |
 | `aria-valuetext` | Result from `ariaValueText` when provided |
 | `aria-orientation` | Root orientation |
@@ -152,7 +158,7 @@ import { Slider } from "@flowstack-ui/atom";
 
 export default function VolumeSlider() {
   return (
-    <Slider.Root defaultValue={50} ariaLabel="Volume">
+    <Slider.Root defaultValue={50} aria-label="Volume">
       <Slider.Track><Slider.Range /><Slider.Thumb /></Slider.Track>
     </Slider.Root>
   );
@@ -166,7 +172,7 @@ import { Slider } from "@flowstack-ui/atom";
 
 export default function PriceRange() {
   return (
-    <Slider.Root defaultValue={[20, 80]} minStepsBetweenThumbs={2} ariaLabel="Price">
+    <Slider.Root defaultValue={[20, 80]} minStepsBetweenThumbs={2} aria-label="Price">
       <Slider.Track>
         <Slider.Range />
         <Slider.Thumb index={0} />
@@ -180,8 +186,14 @@ export default function PriceRange() {
 ## Accessibility
 
 Slider follows the [WAI-ARIA slider pattern](https://www.w3.org/WAI/ARIA/apg/patterns/slider/).
-Each Thumb is a focusable slider with its own value. Provide `ariaLabel`, and
-use `ariaValueText` when a raw number would not explain the value.
+Each Thumb is a focusable slider with its own value. Provide native
+`aria-label`, or use Field for the label and messages. `ariaValueText` can
+describe non-obvious values. Field state reaches every Thumb, read-only blocks
+editing, and uncontrolled values reset to `defaultValue`.
+Pointer cancellation restores the value present at pointer down and does not
+call `onValueCommit`. Lost pointer capture finalizes the latest value so normal
+browser capture release cannot make a completed click or drag jump backward.
+Only one pointer session can control a Slider at a time.
 
 | Key | Description |
 | --- | --- |
@@ -194,4 +206,29 @@ use `ariaValueText` when a raw number would not explain the value.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.4
+
+- Finalize the latest pointer value when capture is lost instead of restoring
+  the pointer-down value; true `pointercancel` still rolls back without commit.
+
+### 0.19.3
+
+- Exposed effective adjacent-thumb bounds through each Thumb's ARIA range.
+- Preserved non-slider-axis page scrolling and restored the pointer-down value
+  without committing when a drag is cancelled or capture is lost.
+
+### 0.5.0
+
+- Added Field disabled/read-only/invalid/required, generated naming and
+  description integration, native `aria-label`, and uncontrolled reset.
+
+### 0.2.0
+
+- Added `Direction.Provider` support for horizontal right-to-left pointer and
+  keyboard behavior.
+- Fixed percent geometry so `data-percent` and inline percent offsets do not
+  expose floating-point artifacts such as `55.00000000000001`.
+
+### 0.1.0
+
+- Initial Atom release.

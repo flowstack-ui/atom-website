@@ -19,7 +19,9 @@ page inside a floating box.
 - Configurable interaction-aware initial and final focus, including a
   touch-safe Content default and outside-dismissal focus preservation.
 - Optional anchor separate from the trigger.
-- Floating UI positioning with side, align, side offset, collision shift, flip, and arrow coordinates.
+- Floating UI positioning that tries alternate alignments on the requested
+  side, repeats them on the opposite side, and uses perpendicular sides only as
+  final fallbacks; collision shift and Arrow coordinates follow the result.
 - Modal mode with focus trap and scroll lock.
 - Non-modal focus guards and outside interaction dismissal.
 - Stack-aware Escape dismissal for nested overlays.
@@ -131,6 +133,13 @@ ancestors. It renders no wrapper.
 Renders the positioned dialog, manages outside dismissal, and manages focus.
 Modal Content traps focus and locks scrolling; non-modal Content closes when
 focus leaves its trigger/content scope.
+Non-Arrow children render inside `[data-slot="popover-viewport"]`; a direct
+Arrow remains its sibling so styled layers can scroll the viewport without
+clipping the pointer. Content exposes measured
+`--atom-floating-available-width` and `--atom-floating-available-height`
+properties.
+Portalled Content preserves an explicit `dir`; otherwise it resolves direction
+from the mounted Anchor/Trigger and then `Direction.Provider`.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -291,7 +300,9 @@ Intentional keyboard, mouse, and pen openings focus an explicit
 Touch defaults to Content so opening does not unexpectedly raise a virtual
 keyboard. Pointer-hover opening never moves focus. Escape and Close restore a
 valid explicit `finalFocus`, the prior element, or Trigger; outside pointer and
-focus dismissal preserve the destination. In modal mode, focus remains
+focus dismissal preserve the destination. Touch and pen outside interactions
+dismiss only after resolving as taps; movement, scrolling, and pointer
+cancellation keep the Popover open. In modal mode, focus remains
 contained inside the popover scope, including registered portalled layers
 opened by descendants.
 
@@ -304,4 +315,73 @@ opened by descendants.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.10
+
+- Distinguished outside touch and pen taps from scroll gestures so scrolling
+  no longer dismisses an open Popover; mouse outside dismissal remains
+  immediate.
+
+### 0.6.9
+
+- Preserved resolved trigger/anchor or provider direction on portalled Content,
+  while retaining explicit Content `dir` precedence.
+
+### 0.6.8
+
+- Added an internal `[data-slot="popover-viewport"]` around non-Arrow Content
+  children so constrained content can scroll without clipping the Arrow.
+- Exposed measured available dimensions through headless floating properties.
+
+### 0.6.7
+
+- Modal Popover now inherits root/body overflow locking without fixed-body
+  repositioning or unlock-time scroll restoration, avoiding iOS Safari
+  browser-toolbar flicker while retaining focus and scroll containment.
+
+### 0.6.3
+
+- Prioritized every usable alignment on the requested side, followed by the
+  opposite side, before allowing perpendicular-axis collision fallbacks.
+
+### 0.6.2
+
+- Added perpendicular-side collision fallbacks after the preferred and opposite
+  sides so constrained popovers can resolve onto the axis with available room.
+
+### 0.4.0
+
+- Added visible `Title` and `Description` parts with generated,
+  hydration-stable `aria-labelledby` and `aria-describedby` relationships.
+- Standardized naming on native `aria-label`, `aria-labelledby`, and
+  `aria-describedby`; removed the custom `ariaLabel` alias.
+- Added interaction-aware `initialFocus` and `finalFocus` targets, touch-safe
+  Content focus, hover-without-focus-steal, dismissal reasons, and
+  outside-destination preservation.
+
+### 0.3.4
+
+- Fixed modal Popover scroll locking to avoid duplicate body-padding
+  compensation when the document already preserves its scrollbar gutter.
+
+### 0.3.1
+
+- Fixed exit-presence cleanup so closed Popover Content unmounts after its CSS
+  motion window even when no end event is emitted.
+
+### 0.2.0
+
+- Fixed Popover positioning when `Anchor` uses its default `display: contents`
+  wrapper by resolving the usable child element as the Floating UI reference
+  and refreshing the reference after refs commit.
+- Fixed non-modal and modal Popover dismissal so clicks and focus movement
+  inside nested portalled Popover layers do not close the parent Popover.
+- Added shared dismissable layer Escape handling so nested overlays close
+  before parent Popover layers.
+- Added scoped modal focus containment for modal Popover and registered
+  Popover content with parent modal focus scopes when nested inside another
+  modal primitive.
+- Removed redundant `role="button"` and `tabIndex={0}` from the default native button trigger path.
+
+### 0.1.0
+
+- Initial Atom release.

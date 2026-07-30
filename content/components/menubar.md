@@ -1,6 +1,6 @@
 # Menubar
 
-Headless horizontal menubar primitives for application-style menu systems.
+Headless horizontal or vertical menubar primitives for application-style menu systems.
 
 ## When to Use
 
@@ -12,10 +12,13 @@ Menubar is usually unnecessary for a small set of buttons.
 ## Features
 
 - Renders a `role="menubar"` root with roving top-level trigger focus.
+- Supports horizontal and vertical orientation.
 - Opens adjacent top-level menus with ArrowLeft and ArrowRight.
 - Mirrors horizontal top-level navigation in RTL through `dir` or `Direction.Provider`.
 - Provides menu items, checkbox items, radio items, groups, separators, and submenus through the `Menubar` namespace.
 - Supports controlled and uncontrolled active top-level menu state.
+- Preserves Root and Content behavior through `asChild` and `render`
+  composition.
 - Supports per-menu `closeOnSelect`, looping, and Escape close behavior.
 - Exposes state and styling data attributes without shipping styles.
 
@@ -32,7 +35,9 @@ import { Menubar } from "@flowstack-ui/atom";
   <Menubar.Menu value="file">
     <Menubar.Trigger />
     <Menubar.Content>
+      <Menubar.Arrow />
       <Menubar.Group>
+        <Menubar.Label />
         <Menubar.Item />
         <Menubar.CheckboxItem />
         <Menubar.RadioGroup>
@@ -70,20 +75,24 @@ Renders a `div` with `role="menubar"` and the resolved `dir` attribute.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | required |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
 | `value` | `string \| null` | - |
 | `defaultValue` | `string` | - |
 | `onValueChange` | `(value: string \| null) => void` | - |
 | `loop` | `boolean` | `true` |
 | `dir` | `"ltr" \| "rtl"` | `Direction.Provider` |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` |
 | `className` | `string` | - |
 
 | ARIA attribute | Values |
 | --- | --- |
-| `aria-orientation` | `"horizontal"` |
+| `aria-orientation` | Root orientation |
 
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"menubar"` by default |
+| `[data-orientation]` | `"horizontal" \| "vertical"` |
 
 ### Menu
 
@@ -112,6 +121,8 @@ Opens and closes one top-level menu. `Trigger` renders a native `button` with
 | --- | --- | --- |
 | `children` | `ReactNode` | required |
 | `disabled` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
 | `className` | `string` | - |
 
 | ARIA attribute | Values |
@@ -134,6 +145,8 @@ with `role="menu"` and `tabIndex={-1}`.
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | required |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
 | `side` | `"top" \| "right" \| "bottom" \| "left"` | `"bottom"` |
 | `align` | `"start" \| "center" \| "end"` | `"start"` |
 | `sideOffset` | `number` | `4` |
@@ -191,7 +204,7 @@ Renders a `menuitemcheckbox` with `tabIndex={-1}`.
 | `children` | `ReactNode` | required |
 | `value` | `string` | required |
 | `textValue` | `string` | children text or `value` |
-| `checked` | `boolean` | `false` |
+| `checked` | `boolean \| "indeterminate"` | `false` |
 | `onCheckedChange` | `(checked: boolean) => void` | - |
 | `disabled` | `boolean` | `false` |
 | `closeOnSelect` | `boolean` | `false` |
@@ -423,6 +436,11 @@ export function ViewMenubar() {
 }
 ```
 
+`Portal`, `Arrow`, `Label`, and `ItemIndicator` use the shared Menu contract.
+CheckboxItem supports mixed state and all retained DOM parts accept refs,
+native props, `asChild`, and `render`. Hover switching is mouse-only; touch and
+pen use click/tap.
+
 ## Accessibility
 
 Follows the [WAI-ARIA menubar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/menubar/).
@@ -436,23 +454,77 @@ mirror in RTL when `dir="rtl"` is set on `Menubar.Root` or inherited from
 focus remains owned by the active trigger so `Enter`, `Space`, and `Escape`
 target the active menu.
 
-Pointer-opened menus do not pre-highlight an item; ArrowDown and ArrowUp seed
-the first and last item highlight for keyboard navigation. Portalled menu
+Pointer/tap-opened menus focus the first item; ArrowDown and ArrowUp seed the
+first and last item for keyboard opening. Portalled menu
 content registers with a parent modal focus scope when opened inside Dialog,
 Drawer, or another modal primitive. Menubar menu content inherits Menu
 typeahead behavior for printable-character searches.
 
 | Key | Description |
 | --- | --- |
-| `ArrowRight` / `ArrowLeft` | Moves between top-level menus, mirrored in RTL |
-| `ArrowDown` | Opens a top-level menu and highlights the first item |
-| `ArrowUp` | Opens a top-level menu and highlights the last item |
+| `ArrowRight` / `ArrowLeft` | Moves horizontal top-level focus, mirrored in RTL |
+| `ArrowDown` / `ArrowUp` | Moves vertical top-level focus; in horizontal mode opens first/last item |
 | `Home` / `End` | Moves to the first or last top-level trigger, or item inside open content |
 | `Enter` / `Space` on trigger | Opens or closes the top-level menu |
-| `Enter` / `Space` on item | Selects the highlighted item |
+| `Enter` / `Space` on item | Selects the focused item unless disabled |
 | `Escape` | Closes the topmost submenu first, then the active top-level menu |
 | Printable character | Typeahead search inside open menu content |
+| `Tab` / `Shift+Tab` | Closes and exits after/before the complete Menubar Root |
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.12.1
+
+- Fixed Root and Content to preserve their behavior, refs, native props, and
+  children through the documented `asChild` and `render` composition paths.
+- Fixed Content composition to preserve consumer `onKeyDownCapture` handlers
+  before Menubar-owned adjacent-menu navigation.
+
+### 0.12.0
+
+- Added horizontal/vertical orientation with matching ARIA/data state and
+  orientation-aware top-level roving focus.
+- Added Trigger ref, `asChild`, and `render` composition and made hover
+  switching mouse-only while keeping click/tap universal.
+- Inherited real menu-item focus, complete shared anatomy, mixed state,
+  geometry variables, submenu corrections, and whole-Menubar Tab exit.
+
+### 0.3.1
+
+- Inherited reliable Menu exit-presence cleanup for closed Menubar and submenu
+  Content under global motion CSS.
+
+### 0.2.0
+
+- Fixed local `Menubar.Root dir="rtl"` so shared nested submenu placement also
+  mirrors to the left, matching `Direction.Provider dir="rtl"`.
+- Fixed adjacent top-level menu handoff so the active trigger keeps focus for
+  `Enter`, `Space`, and `Escape` after ArrowLeft or ArrowRight navigation.
+- Fixed custom `data-slot` overrides on `Menubar.Root` and `Menubar.Trigger`.
+- Added `Direction.Provider` and `dir` support to mirror Menubar top-level
+  ArrowLeft and ArrowRight navigation in RTL.
+- Inherited the shared Menu typeahead behavior so a single-character search
+  cycles from the current matching item while multi-character buffers still
+  match exact prefixes.
+- Fixed pointer-open behavior so clicking or hovering between top-level menus
+  opens content without pre-highlighting the first item; keyboard ArrowDown and
+  ArrowUp still seed first and last item highlight.
+- Registered shared Menu content with parent modal focus scopes so Menubar
+  menus can remain valid focus targets inside Dialog, Drawer, and other modal
+  primitives.
+- Fixed `Menubar.Trigger` semantics so top-level triggers expose `role="menuitem"`
+  as valid children of the `role="menubar"` root.
+- Inherited the shared Menu radio item fix so separate Menubar radio groups can
+  reuse the same public values without sharing highlight state.
+- Inherited the shared Menu highlight fix so pointer movement over non-item
+  content or item gaps does not reset highlight back to the first item.
+- Added shared menu item parts to the `Menubar` namespace object.
+- Refined `Menubar.Content` keyboard handler dependencies to avoid recreating callbacks from the full context objects.
+
+### 0.1.0
+
+- Initial Atom release.

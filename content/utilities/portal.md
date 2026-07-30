@@ -92,4 +92,9 @@ should compose primitives that own focus and ARIA behavior.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+### 0.1.0
+
+- Initial Atom release.

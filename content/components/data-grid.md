@@ -19,6 +19,7 @@ to connect those application features.
 - Supports controlled active cell and none, single, or multiple row selection.
 - Navigates in document order while skipping disabled cells.
 - Supports row/column counts, looping, row wrapping, and row-click selection.
+- Gives actionable column headers equivalent pointer and Enter activation.
 - Mirrors horizontal arrows in RTL.
 - Supports native table rendering plus `asChild` and `render` composition.
 
@@ -177,6 +178,7 @@ not change sorting when clicked.
 | `index` | `number` | - |
 | `disabled` | `boolean` | `false` |
 | `sortDirection` | `"ascending" \| "descending" \| "none" \| "other"` | - |
+| `onAction` | `() => void` | - |
 | `scope` | native `th` scope | `"col"` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
@@ -194,6 +196,7 @@ not change sorting when clicked.
 | `[data-slot]` | `"data-grid-column-header"` |
 | `[data-column-index]` | Normalized index |
 | `[data-sort]` | Sort direction when supplied |
+| `[data-actionable]` | Present when an enabled indexed header has `onAction` |
 | `[data-active]` | Present when active and Root is focused |
 | `[data-selected]` | Present when its Row is selected |
 | `[data-disabled]` | Present when explicitly, row, or grid disabled |
@@ -320,15 +323,14 @@ export function SortableHeader() {
     <DataGrid.Root aria-label="People" rowCount={1} columnCount={1}>
       <DataGrid.Header>
         <DataGrid.Row rowIndex={1} selectable={false}>
-          <DataGrid.ColumnHeader columnIndex={1} sortDirection={direction}>
-            <button
-              type="button"
-              onClick={() => setDirection(
-                direction === "ascending" ? "descending" : "ascending",
-              )}
-            >
-              Name
-            </button>
+          <DataGrid.ColumnHeader
+            columnIndex={1}
+            sortDirection={direction}
+            onAction={() => setDirection(
+              direction === "ascending" ? "descending" : "ascending",
+            )}
+          >
+            Name
           </DataGrid.ColumnHeader>
         </DataGrid.Row>
       </DataGrid.Header>
@@ -353,11 +355,40 @@ focus while `aria-activedescendant` identifies the active Cell.
 | `Ctrl+Home` / `Cmd+Home` | Moves to the first enabled grid cell. |
 | `Ctrl+End` / `Cmd+End` | Moves to the last enabled grid cell. |
 | `Enter` / `Space` | Toggles/selects the active Cell's Row when selection is enabled. |
+| `Enter` | Calls `onAction` when the active cell is an actionable ColumnHeader. |
 
 `readOnly` prevents selection changes but still permits navigation. `disabled`
 prevents Root keyboard handling. Rows with `selectable={false}` ignore row
 selection from click, Enter, and Space.
 
+`ColumnHeader.onAction` is the pointer/keyboard activation boundary for
+application-controlled sorting or another header command. Atom calls it after
+an enabled indexed header is clicked and when Enter is pressed while that
+header is active. Atom does not change `sortDirection` or reorder data.
+Consumer `onClick` remains a native pointer-only escape hatch and may prevent
+Atom's composed pointer behavior with `event.preventDefault()`.
+
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.17.0
+
+- Added `ColumnHeader.onAction` with `data-actionable` and equivalent pointer
+  and active-header Enter dispatch for application-controlled sorting.
+
+### 0.2.0
+
+- Fixed vertical keyboard navigation to preserve the active column while
+  skipping disabled cells in intervening rows.
+- Added `DataGrid.Row selectable` behavior with `data-selectable` and
+  `data-selection-disabled` attributes so rows can opt out of selection without
+  being disabled.
+- Added `dir` and `Direction.Provider` support so horizontal cell navigation
+  mirrors in RTL.
+
+### 0.1.0
+
+- Initial Atom release.

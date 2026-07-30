@@ -15,6 +15,7 @@ import {
   useEscapeKey,
   usePresence,
   useScrollSpy,
+  useVirtualizer,
 } from "@flowstack-ui/atom/hooks";
 ```
 
@@ -42,13 +43,29 @@ Registers Escape handling through Atom's stack-aware interaction layer. Use it w
 
 Observes pointer interaction outside supplied elements. The consuming component must decide what outside interaction means for its accessibility pattern.
 
-### `useDismissableLayer`
-
-Coordinates nested dismissable layers and escape behavior. Prefer an existing overlay primitive when possible.
-
 ## Focus and scrolling
 
-Atom exposes focus helpers, scroll locking, and `useScrollSpy` for interfaces that need consistent low-level behavior. These utilities do not supply complete widget semantics by themselves.
+### Focus scope helpers
+
+`FocusScopeProvider`, `useCreateFocusScope`, `useFocusScopeContainer`,
+`useFocusOnMount`, `useFocusRestore`, and `useFocusTrap` expose the same focus
+coordination used by Atom overlays. Prefer a complete overlay primitive unless
+you are building another low-level primitive.
+
+### `useScrollLock`
+
+Locks document scrolling for a mounted surface and restores the previous scroll
+state during cleanup.
+
+### `useScrollSpy`
+
+Tracks the active item within a set of observed page regions.
+
+### Virtualization
+
+`useVirtualizer` and the `getVirtualItems`, `getVirtualOffsetForIndex`,
+`getVirtualScrollOffsetForIndex`, and `getVirtualTotalSize` helpers are also
+available from this subpath. See the Virtualizer utility for the complete API.
 
 ## Accessibility
 

@@ -10,6 +10,11 @@ submitted, and validation state. A plain `form` is enough when those states are
 not needed. Form does not provide a schema, field messages, or server
 validation; combine it with Field and your application validation.
 
+React function actions keep React's native action contract. Read their pending
+state with `useFormStatus`; Atom's `data-submitting` describes only the optional
+Atom callback/validation path. Rejected callbacks remain observable and are
+rethrown after Atom clears its callback submission state.
+
 ## Features
 
 - Renders a native `form` and preserves native attributes.
@@ -17,6 +22,8 @@ validation; combine it with Field and your application validation.
 - Optionally prevents the browser's default submit navigation.
 - Tracks submitting, submitted, and failed-validation state.
 - Resets Atom state after an uncancelled native reset.
+- Lets descendant uncontrolled Atom controls restore their defaults through the
+  same native reset event.
 - Exposes state through `useFormContext` and data attributes.
 
 ## Import
@@ -46,6 +53,7 @@ provides submission state to descendants.
 | `onReset` | `(event) => void` | - |
 | `preventDefaultOnSubmit` | `boolean` | `false` |
 | `validateOnSubmit` | `(event) => boolean \| Promise<boolean>` | - |
+| `validationBehavior` | `"inline" \| "native"` | Automatic |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -53,19 +61,21 @@ Async validation always prevents default navigation so validation can finish.
 A synchronous `false` result also prevents submission and marks the Form
 invalid. For an async `onSubmit` without async validation, set
 `preventDefaultOnSubmit` when browser navigation is not wanted. Rejected submit
-handlers leave submitted state false; the error is not rethrown by Form.
+handlers leave submitted state false and rethrow the error so the application
+or framework can observe it.
 
 | Data attribute | Values |
 | --- | --- |
 | `[data-slot]` | `"form"` |
 | `[data-submitting]` | Present while validation or async submission is pending |
 | `[data-submitted]` | Present after the handler completes successfully |
-| `[data-invalid]` | Present after `validateOnSubmit` returns false |
+| `[data-invalid]` | Present after callback validation fails or a descendant reports invalid |
 
 ### useFormContext
 
-Returns `{ submitting, submitted, invalid }` for custom status parts. It must
-be called below Root.
+Returns submission state, derived invalid state, inherited validation behavior,
+and the validity reporter used by custom Atom-aware controls. It must be called
+below Root.
 
 ## Examples
 
@@ -123,11 +133,47 @@ export function InvitationForm() {
 
 ## Accessibility
 
+`validationBehavior="inline"` keeps HTML constraints and invalid submission
+blocking active while suppressing the browser validation bubble. Descendant
+Atom controls expose the failure through `aria-invalid` and `data-invalid`.
+`"native"` keeps the browser bubble. An explicit control value overrides Field,
+Fieldset, and Form inheritance.
+
 Form preserves native form semantics and owns no special keyboard model.
-Consumers must label controls, expose errors, move focus when appropriate, and
-announce asynchronous results. Use Field and Fieldset for accessible names,
-descriptions, and visible validation messages.
+Consumers must label controls, provide error content, and announce asynchronous
+results. Inline constraint validation moves focus to the first invalid visible
+control, explicitly scrolls it into view, and marks it with
+`[data-focus-visible]` until focus leaves, so styled layers can render the same
+focus indicator after pointer and keyboard submission. Use Field and Fieldset
+for accessible names, descriptions, and visible validation messages.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.17
+
+- Kept explicit inline validation focus scrolling safe in non-browser DOM
+  implementations that omit `scrollIntoView`.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation's first invalid visible control into
+  view after focusing it.
+
+### 0.6.15
+
+- Marked the first invalid control focused by inline validation with
+  `[data-focus-visible]` until blur so styled layers can expose the focus move.
+
+### 0.6.13
+
+- Added inherited inline/native validation presentation and aggregate
+  descendant invalid state without disabling native constraints.
+
+### 0.5.0
+
+- Preserved native and React function-action submission paths, kept React action
+  pending state with `useFormStatus`, and stopped swallowing rejected Atom
+  submit callbacks while retaining resettable Atom callback metadata.
+### 0.1.0
+
+- Initial Atom release.

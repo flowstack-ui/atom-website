@@ -52,6 +52,9 @@ DOM element.
 | `readOnly` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
+| `showLabel` | `string` | `"Show password"` |
+| `hideLabel` | `string` | `"Hide password"` |
 
 ### Input
 
@@ -167,7 +170,21 @@ export function ControlledPasswordField() {
 
 ## Accessibility
 
+When nested in `Field.Root`, `Input` inherits the generated control ID plus the
+label, description, and error relationships. Explicit input relationship props
+continue to take precedence.
+
+The visible password input owns native validity. After a validation attempt,
+Root coordinates its invalid state across Input and Toggle. Inline behavior
+suppresses the browser bubble while keeping constraint validation active.
+
 The toggle remains keyboard reachable. Its accessible label changes between “Show password” and “Hide password”; `aria-pressed` is intentionally not used because the label already communicates the action.
+
+Root's `showLabel` and `hideLabel` localize those state-aware actions. Native
+form reset restores uncontrolled visibility to `defaultVisible`. Native form
+submission restores the input element to `type="password"` before submission.
+The changing action label communicates the state change; Atom does not add a
+separate live-region announcement.
 
 | Key | Description |
 | --- | --- |
@@ -177,4 +194,30 @@ The toggle remains keyboard reachable. Its accessible label changes between “S
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.19.1
+
+- Fixed `Input` to inherit the containing Field's generated control ID,
+  accessible label, description, and error relationships.
+
+### 0.19.0
+
+- Added state-aware `showLabel` and `hideLabel` localization, form-reset
+  visibility restoration, and password-type restoration before submission.
+
+### 0.6.16
+
+- Explicitly scrolled inline validation-directed focus into view.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus through `[data-focus-visible]`
+  until blur.
+
+### 0.6.13
+
+- Added inline/native validation presentation and synchronized invalid state
+  across Root, Input, Toggle, Field, and Form.
+
+### 0.1.0
+
+- Initial Atom release.

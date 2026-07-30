@@ -39,9 +39,9 @@ import { Checkbox } from "@flowstack-ui/atom";
 
 ### Root
 
-Renders a `button` with checkbox semantics and owns the checked state. When
-`name` is provided, Root also renders an assistive-technology-hidden native
-checkbox input for form submission.
+Renders a `button` with checkbox semantics and owns the checked state. Root
+also renders an assistive-technology-hidden native checkbox when `name` or
+`required` needs native form behavior.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -52,10 +52,10 @@ checkbox input for form submission.
 | `readOnly` | `boolean` | `false` |
 | `invalid` | `boolean` | `false` |
 | `required` | `boolean` | `false` |
+| `validationBehavior` | `"inline" \| "native"` | Field/Form value or `"native"` |
 | `name` | `string` | - |
 | `value` | `string` | `"on"` |
 | `form` | `string` | - |
-| `ariaLabel` | `string` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -63,7 +63,8 @@ checkbox input for form submission.
 | --- | --- |
 | `role` | `"checkbox"` |
 | `aria-checked` | `"true" \| "false" \| "mixed"` |
-| `aria-label` | Value from `ariaLabel` when provided |
+| `aria-label` | Native value when provided |
+| `aria-disabled` | `"true"` when disabled |
 | `aria-required` | `"true"` when required |
 | `aria-invalid` | `"true"` when invalid |
 | `aria-readonly` | `"true"` when read-only |
@@ -76,10 +77,15 @@ checkbox input for form submission.
 | `[data-readonly]` | Present when read-only |
 | `[data-invalid]` | Present when invalid |
 
-The hidden input receives `name`, `value`, `form`, `checked`, `disabled`, and
-`required` from Root. Indeterminate is an ARIA state and does not submit the
-hidden input as checked. A disabled default Root uses the native `disabled`
-attribute; read-only Root remains focusable but does not toggle.
+The transparent native proxy receives `name`, `value`, `form`, `checked`,
+`disabled`, and `required` from Root. It is aligned to the visible Root and
+remains eligible for native constraint validation even without `name`;
+read-only behavior belongs to the visible semantic Root and does not place a
+`readonly` attribute on the proxy. Native validation focus is redirected to
+the visible Root. Indeterminate is an ARIA state and
+does not submit the hidden input as checked. A disabled Root exposes
+`aria-disabled`; the default button also uses the native `disabled` attribute.
+Read-only Root remains focusable but does not toggle.
 
 ### Indicator
 
@@ -113,7 +119,7 @@ export function SelectAllCheckbox() {
   return (
     <Checkbox.Root
       defaultChecked="indeterminate"
-      ariaLabel="Select all messages"
+      aria-label="Select all messages"
     >
       <Checkbox.Indicator>Selected</Checkbox.Indicator>
     </Checkbox.Root>
@@ -141,11 +147,24 @@ export function TermsCheckbox() {
 
 ## Accessibility
 
+An untouched required Checkbox remains visually neutral. Leaving it unchecked
+after focus, removing its checked state after interaction, or attempting
+validation mirrors proxy invalidity to the visible Root and its Field.
+Correction clears the derived invalid state immediately, and form reset returns
+it to untouched. Inline behavior suppresses the browser bubble and uses Field
+Error when available; native behavior keeps the aligned browser UI. When inline
+validation redirects focus to Root, it explicitly scrolls Root into view and
+keeps `[data-focus-visible]` present until blur so a styled layer can expose the
+focus move.
+
 Checkbox follows the
 [WAI-ARIA Checkbox pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/).
 Root exposes `role="checkbox"` and its state through `aria-checked`; the
 indeterminate state is announced as `mixed`. Provide an accessible name through
-visible text, `ariaLabel`, or `aria-labelledby`.
+visible text, native `aria-label`, or `aria-labelledby`. Inside `Field.Root`,
+Checkbox inherits the control ID, state, and description relationships unless
+an explicit control prop overrides that state. Uncontrolled checked state
+returns to `defaultChecked` on native form reset.
 
 Indicator is decorative and hidden from assistive technology because Root
 already communicates the state. Disabled Root is removed from interaction;
@@ -158,4 +177,47 @@ read-only Root remains focusable so its value can still be inspected.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### 0.6.16
+
+- Explicitly scrolled the visible Root into view when inline validation directs
+  focus there.
+
+### 0.6.15
+
+- Exposed inline validation-directed focus on the visible Root through
+  `[data-focus-visible]` until blur.
+
+### 0.6.14
+
+- Revealed required invalid state after the visible checkbox loses focus or an
+  interacted checkbox becomes unchecked, while preserving neutral initial and
+  reset states.
+
+### 0.6.13
+
+- Mirrored aligned-proxy validity to the visible Checkbox, Field, and Form with
+  inline Error presentation or opt-in native browser UI.
+
+### 0.6.12
+
+- Aligned the native validation proxy with Root, redirected validation focus,
+  and supported required validity without a submission name.
+
+### 0.6.11
+
+- Restored native required validation by keeping the controlled hidden form
+  input eligible for browser constraint validation.
+
+### 0.6.0
+
+- Exposed `aria-disabled="true"` consistently on disabled Root composition,
+  including non-button `asChild` and `render` targets.
+
+### 0.5.0
+
+- Added Field state, generated control ID, and description integration; removed
+  `ariaLabel` in favor of native ARIA; uncontrolled state now follows native
+  form reset while submission and required validity remain native.
+### 0.1.0
+
+- Initial Atom release with root, indicator, indeterminate state, and optional form input.

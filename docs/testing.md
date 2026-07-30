@@ -23,11 +23,16 @@ Review at least:
 - Introduction;
 - Getting started;
 - Styling;
+- Public API and Package boundary;
 - Button;
-- Dialog or Data Grid;
+- Clipboard, Dialog, or Data Grid;
 - Hooks;
 - Releases;
 - the 404 page.
+
+CI repeats content validation, type checking, linting, the production build,
+the dependency audit, and the generated-file cleanliness check on pull requests
+and `main`.
 
 ## Interaction Coverage
 

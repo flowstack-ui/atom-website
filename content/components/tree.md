@@ -64,7 +64,7 @@ the single focus target that points to the active Item.
 | `invalid` | `boolean` | Field value |
 | `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
 | `dir` | `"ltr" \| "rtl"` | `Direction.Provider` |
-| `loop` | `boolean` | `true` |
+| `loop` | `boolean` | `false` |
 | `name` | `string` | - |
 | `form` | `string` | - |
 | `asChild` | `boolean` | `false` |
@@ -190,6 +190,10 @@ export default function ComponentTree() {
 Tree follows the [WAI-ARIA tree view pattern](https://www.w3.org/WAI/ARIA/apg/patterns/treeview/)
 with Root focus and `aria-activedescendant`. Provide an accessible name with a
 visible Field label, `aria-label`, or `aria-labelledby`.
+When focus first enters, the first enabled visible selected Item becomes
+active; if there is no such selection, the first enabled visible Item becomes
+active. Arrow navigation stops at the first and last visible Item by default;
+set `loop` to opt into wrapping.
 Printable-character typeahead matches enabled visible item text; a
 single-character search cycles forward from the current matching item, while
 multi-character buffers match exact prefixes.
@@ -206,4 +210,27 @@ multi-character buffers match exact prefixes.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.17.1
+
+- Corrected initial focus so the first enabled visible selected Item becomes
+  active before falling back to the first enabled visible Item.
+- Changed the default `loop` value to `false` so arrow navigation stops at the
+  first and last visible Item; wrapping remains available with `loop`.
+
+### 0.2.0
+
+- Fixed pointer targeting so whitespace inside nested groups does not
+  reactivate or select the parent item.
+- Added `Direction.Provider` and `dir` support to mirror horizontal Tree
+  navigation and expand/collapse arrow behavior in RTL.
+- Standardized Tree typeahead so a single-character search cycles from the
+  current matching item while multi-character buffers still match exact
+  prefixes.
+
+### 0.1.0
+
+- Initial Atom release.

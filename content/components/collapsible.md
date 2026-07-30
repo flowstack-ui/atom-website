@@ -12,10 +12,11 @@ content must interrupt the page in a separate modal layer.
 ## Features
 
 - Supports controlled and uncontrolled open state.
+- Supports vertical and horizontal expansion intent.
 - Connects Trigger and Content with generated ARIA IDs.
 - Supports disabled triggers and custom trigger rendering.
 - Keeps Content mounted on request for exit animations.
-- Exposes open state and measured content height for consumer-owned animation.
+- Exposes open state and measured content size for consumer-owned animation.
 
 ## Import
 
@@ -45,6 +46,7 @@ Owns the disclosure state and shares it with Trigger and Content. It renders a
 | `defaultOpen` | `boolean` | `false` |
 | `onOpenChange` | `(open: boolean) => void` | - |
 | `disabled` | `boolean` | `false` |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -53,6 +55,7 @@ Owns the disclosure state and shares it with Trigger and Content. It renders a
 | `[data-slot]` | `"collapsible"` |
 | `[data-state]` | `"open" \| "closed"` |
 | `[data-disabled]` | Present when disabled |
+| `[data-orientation]` | `"vertical" \| "horizontal"` |
 
 ### Trigger
 
@@ -76,6 +79,7 @@ keyboard behavior; custom elements receive button semantics.
 | `[data-slot]` | `"collapsible-trigger"` |
 | `[data-state]` | `"open" \| "closed"` |
 | `[data-disabled]` | Present when disabled |
+| `[data-orientation]` | `"vertical" \| "horizontal"` |
 
 ### Content
 
@@ -96,9 +100,14 @@ available for consumer-owned exit animation.
 | --- | --- |
 | `[data-slot]` | `"collapsible-content"` |
 | `[data-state]` | `"open" \| "closed"` |
+| `[data-orientation]` | `"vertical" \| "horizontal"` |
 
-Content also sets `--content-height` to its measured height for optional
-consumer-owned animation.
+Content sets `--content-height` and `--content-width` to its measured natural
+size for optional consumer-owned animation. Both stay synchronized while
+mounted when responsive reflow, fonts, images, or other intrinsic changes
+alter the panel. `orientation` is behavior metadata for styled layers:
+vertical motion uses height and horizontal motion uses width. Trigger keyboard
+activation does not change.
 
 ## Examples
 
@@ -154,4 +163,22 @@ the user what will be revealed.
 
 ## Changelog
 
-See [CHANGELOG.md](./CHANGELOG.md).
+### Unreleased
+
+- No unreleased changes.
+
+### 0.14.0
+
+- Add `orientation="vertical" | "horizontal"` with vertical default and
+  consistent Root, Trigger, and Content attributes.
+- Publish live `--content-width` alongside `--content-height` for two-axis
+  styled disclosure motion.
+
+### 0.13.1
+
+- Keep `--content-height` synchronized while mounted when responsive reflow,
+  fonts, images, or other intrinsic resizing changes the panel height.
+
+### 0.1.0
+
+- Initial Atom release.
