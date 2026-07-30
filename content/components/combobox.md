@@ -191,8 +191,10 @@ disabled/read-only.
 
 ### Trigger
 
-Renders the button that toggles Content without taking focus away from Input.
-It inherits disabled/read-only behavior from Root or Field.
+Renders the button that toggles Content and returns focus to Input. Native focus
+scrolling remains enabled so a mobile browser can reveal Input when opening its
+virtual keyboard. Trigger inherits disabled/read-only behavior from Root or
+Field.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -433,6 +435,11 @@ disabled options marked with `disabled`.
 ### Unreleased
 
 - No unreleased changes.
+
+### 0.20.2
+
+- Allowed native focus scrolling when Trigger returns focus to Input, so mobile
+  browsers can reveal the control above the virtual keyboard.
 
 ### 0.20.0
 

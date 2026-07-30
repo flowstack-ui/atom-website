@@ -2,6 +2,20 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
+## Unreleased
+
+- No unreleased changes.
+
+## 0.20.2
+
+- Allowed native focus scrolling when Combobox Trigger returns focus to Input,
+  so mobile browsers can reveal the control above the virtual keyboard.
+- Added focused public-subpath test commands and explicit focused, repository,
+  and release verification tiers without changing package runtime behavior.
+- Fixed the release verification orchestrator so the release tier runs the
+  repository, browser, archive, and consumer checks without recursively
+  invoking itself.
+
 ## 0.20.1
 
 - Kept Menu and submenu available-size and trigger-size CSS variables stable
