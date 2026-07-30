@@ -2,6 +2,29 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
+## 0.20.1
+
+- Kept Menu and submenu available-size and trigger-size CSS variables stable
+  across Floating UI positioning rerenders so consumer overflow constraints
+  continue working in short and resized viewports.
+- Made modal Popover use Atom's stacked background-isolation system so its
+  `aria-modal` semantics now match its focus and scroll containment; non-modal
+  Popover behavior is unchanged.
+- Documented consumer-owned modal scrolling, mobile menu presentation, and
+  Toast safe-area/application offsets without adding styling or automatic
+  virtual-keyboard behavior to the headless package.
+
+## 0.20.0
+
+- Added the public `useOutsideInteraction` hook and preventable
+  `onInteractOutside` contract for Combobox, Select, MultiSelect, Menu-family,
+  and Popover content.
+- Changed those primitives to commit outside dismissal on completed
+  click/activation semantics through a topmost-layer stack, rejecting drags,
+  boundary crossings, cancellation, secondary buttons, and multi-pointer
+  sessions while preserving the destination activation.
+- Deprecated `useClickAway`; it remains available for compatibility.
+
 ## 0.19.9
 
 - Made SwipeableItem preserve native vertical panning and stopped nested

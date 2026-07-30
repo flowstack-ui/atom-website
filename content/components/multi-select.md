@@ -70,7 +70,9 @@ their defaults on form reset.
   `First (+N more)` for several. `renderValue(values, labels)` customizes the
   summary without changing behavior.
 - `Content` and its `Listbox` alias render the positioned popup, portal by
-  default, and expose `data-side`, `data-align`, and `data-positioned`.
+  default, expose `data-side`, `data-align`, and `data-positioned`, and accept
+  `onInteractOutside(event)`. Calling `event.preventDefault()` keeps the popup
+  open without cancelling the outside destination activation.
 - `Viewport`, scroll buttons, and `Arrow` own the specialized overflow and
   positioned-popup anatomy.
 - `Item` requires `value`, accepts `label` and `disabled`, exposes option ARIA,
@@ -91,7 +93,8 @@ Content has `role="listbox"` and `aria-multiselectable="true"`; Items have
 - Space or Enter toggles the active option and keeps Content open.
 - Printable keys use option labels for typeahead.
 - Escape closes and restores Trigger focus.
-- Tab and touch-safe outside interaction close the popup.
+- Tab and completed mouse, touch, pen, or virtual outside activation close the
+  popup; dragged and cancelled pointer sessions do not.
 
 ## Forms and Field
 
@@ -125,6 +128,11 @@ mandatory chips. Those require separate interaction contracts.
 - playground `multi-select` scenario and `MultiSelect` workbook sheet
 
 ## Changelog
+
+### 0.20.0
+
+- Added preventable `Content`/`Listbox.onInteractOutside` and moved outside
+  dismissal to the shared layer-aware completed-activation contract.
 
 ### 0.10.1
 
