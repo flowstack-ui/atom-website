@@ -1,5 +1,12 @@
 # Atom UI Website Changelog
 
+## 0.2.4 - 2026-08-01
+
+- Updated the exact website dependency and reviewed source provenance to
+  published `@flowstack-ui/atom` `0.20.10`.
+- Added the Navigation Menu Viewport active-trigger geometry variables and the
+  reviewed `0.20.10` release notes.
+
 ## 0.2.3 - 2026-07-31
 
 - Updated the exact website dependency and reviewed source provenance to
