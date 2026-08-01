@@ -6,6 +6,12 @@ Atom follows semantic versioning. The website and npm package release independen
 
 - No unreleased changes.
 
+## 0.20.11
+
+- Kept a Navigation Menu trigger open when the same mouse movement that
+  hover-opens it is immediately followed by a click, preventing cross-browser
+  open-then-close races when switching triggers.
+
 ## 0.20.10
 
 - Exposed Navigation Menu active-trigger geometry variables on Viewport as

@@ -1,5 +1,12 @@
 # Atom UI Website Changelog
 
+## 0.2.5 - 2026-08-01
+
+- Updated the exact website dependency and reviewed source provenance to
+  published `@flowstack-ui/atom` `0.20.11`.
+- Added the Navigation Menu hover-click trigger-switching correction and the
+  reviewed `0.20.11` release notes.
+
 ## 0.2.4 - 2026-08-01
 
 - Updated the exact website dependency and reviewed source provenance to
