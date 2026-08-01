@@ -31,9 +31,12 @@ The installed Atom version and recorded content version must match.
 `npm run content:sync` deliberately refreshes the package-owned documentation
 surface from `../package/` for maintainers who have both repositories locally.
 It merges every component and selected utility README with its changelog, and
-copies the public package guides, architecture audits, and root release history.
-The command also updates the exact source commit and review date. It is not run
-by install, build, CI, or deployment.
+copies only consumer-facing package guides, the package-boundary overview, and
+root release history. It removes maintainer-only sections such as test evidence
+from synchronized component pages. CI procedures, documentation-authoring
+instructions, playground and release checklists, and package audits are never
+published as website routes. The command also updates the exact source commit
+and review date. It is not run by install, build, CI, or deployment.
 
 Review synchronized changes before committing them. Website-specific
 Introduction, Accessibility, Styling, Animation, Composition, server-rendering,
@@ -41,4 +44,5 @@ and Hooks pages are not overwritten by the sync script.
 
 `npm run content:check` verifies that all 70 installed Atom subpaths are
 represented, synchronized pages include changelogs, source provenance is exact,
-and the content tree contains no unlisted Markdown pages.
+the content tree contains no unlisted Markdown pages, and maintainer-only routes
+or evidence references have not leaked into public content.

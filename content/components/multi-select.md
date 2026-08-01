@@ -121,12 +121,6 @@ MultiSelect intentionally excludes editable filtering, arbitrary tags,
 creation, select-all, range selection, virtualization, async loading, and
 mandatory chips. Those require separate interaction contracts.
 
-## Evidence
-
-- `test/primitives/multi-select.test.mjs`
-- `playground/manual-tests/multi-select.md`
-- playground `multi-select` scenario and `MultiSelect` workbook sheet
-
 ## Changelog
 
 ### 0.20.0

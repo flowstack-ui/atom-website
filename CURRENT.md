@@ -1,18 +1,21 @@
 # Current Atom UI Website State
 
 The independent website is implemented as a statically generated Next.js
-application and its public documentation is aligned with Atom 0.20.2.
+application and its public documentation is aligned with Atom 0.20.9.
 
 ## Implemented
 
 - Overview, Guides, Architecture, Components, and Utilities navigation.
 - Static routes for every navigation document.
-- Eighty-six documentation routes: four Overview pages, nine Guides, three
-  Architecture records, sixty-four component pages, and six utility pages.
+- Eighty-one documentation routes: four Overview pages, six consumer Guides,
+  one package-boundary Architecture page, sixty-four component pages, and six
+  utility pages.
 - Complete coverage of all 70 Atom public subpaths, including Clipboard, Image,
   Link, and Multi Select.
 - Component and utility API pages merged with their current package changelogs,
-  plus synchronized package guides, architecture audits, and release history.
+  plus selected consumer guides, package-boundary guidance, and release history.
+- Public-content validation that rejects maintainer-only routes, package test
+  evidence, playground instructions, and coverage-workbook references.
 - Atom AppBar, Sidebar, Drawer, Dialog, Combobox, NavList, ScrollArea, Button,
   Tooltip, and SkipLink primitives in the website shell.
 - Responsive desktop, tablet, and mobile layouts with touch-sized header
@@ -43,13 +46,15 @@ application and its public documentation is aligned with Atom 0.20.2.
 ## Current Atom Baseline
 
 - Package: `@flowstack-ui/atom`
-- Version: `0.20.2`
+- Version: `0.20.9`
 - Exact source commit: recorded in `content/atom-source.json`
 
 ## Constraints
 
 - The production build cannot depend on `../package/`.
 - Component examples are static code; MDX and live previews are deferred.
+- Repository setup, documentation authoring, CI, playground testing, release
+  operations, and internal audit evidence remain outside the public site.
 - Version switching, analytics, accounts, comments, and a footer are outside
   version-one scope.
 - The permanent logo is not yet approved.

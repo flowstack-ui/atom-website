@@ -19,19 +19,14 @@
         { "slug": "composition", "title": "Composition" },
         { "slug": "server-side-rendering", "title": "Server-side rendering" },
         { "slug": "imports", "title": "Imports" },
-        { "slug": "public-api", "title": "Public API" },
-        { "slug": "continuous-integration", "title": "Continuous integration" },
-        { "slug": "component-documentation", "title": "Component documentation" },
-        { "slug": "release-checklist", "title": "Release checklist" }
+        { "slug": "public-api", "title": "Public API" }
       ]
     },
     {
       "slug": "architecture",
       "title": "Architecture",
       "documents": [
-        { "slug": "overview", "title": "Package boundary" },
-        { "slug": "public-api-audit", "title": "Public API audit" },
-        { "slug": "release-readiness-audit", "title": "Release readiness audit" }
+        { "slug": "overview", "title": "Package boundary" }
       ]
     },
     {

@@ -149,6 +149,7 @@ after any closing animation finishes.
 | --- | --- |
 | `[data-slot]` | `"accordion-content"` |
 | `[data-state]` | `"open" \| "closed"` |
+| `[data-initial-open]` | Present while initially open Content has not transitioned |
 | `[data-orientation]` | `"vertical" \| "horizontal"` |
 
 | CSS variable | Description |
@@ -245,6 +246,16 @@ the current APG documents the vertically stacked presentation.
 ### Unreleased
 
 - No unreleased changes.
+
+### 0.20.9
+
+- Expose initially open Content with `data-initial-open` until its first state
+  transition so styled layers can suppress page-load entrance motion.
+
+### 0.20.8
+
+- Measure newly opened Content before its first painted animation frame so
+  height and width transitions begin with stable intrinsic dimensions.
 
 ### 0.14.0
 

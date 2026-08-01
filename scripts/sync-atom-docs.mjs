@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
@@ -20,38 +20,47 @@ const packageGuideRoutes = new Map([
   ["getting-started", ["overview", "getting-started"]],
   ["imports", ["guides", "imports"]],
   ["public-api", ["guides", "public-api"]],
-  ["continuous-integration", ["guides", "continuous-integration"]],
-  ["component-documentation", ["guides", "component-documentation"]],
-  ["release-checklist", ["guides", "release-checklist"]],
 ]);
 const architectureRoutes = new Map([
   ["README", "overview"],
-  ["public-api-audit", "public-api-audit"],
-  ["release-readiness-audit", "release-readiness-audit"],
+]);
+const maintainerOnlyContent = [
+  ["architecture", "public-api-audit"],
+  ["architecture", "release-readiness-audit"],
+  ["guides", "component-documentation"],
+  ["guides", "continuous-integration"],
+  ["guides", "release-checklist"],
+];
+
+const maintainerSectionHeadings = new Set([
+  "Audits",
+  "Documentation Shape",
+  "Evidence",
 ]);
 
 function trimDocument(source) {
   return `${source.trim()}\n`;
 }
 
-function rewritePackageLinks(source) {
-  return source
-    .replaceAll(
-      "[Public API audit](public-api-audit.md)",
-      "[Public API audit](/docs/architecture/public-api-audit/)",
-    )
-    .replaceAll(
-      "[Release readiness audit](release-readiness-audit.md)",
-      "[Release readiness audit](/docs/architecture/release-readiness-audit/)",
-    )
-    .replaceAll(
-      "[`../architecture/release-readiness-audit.md`](../architecture/release-readiness-audit.md)",
-      "[release readiness audit](/docs/architecture/release-readiness-audit/)",
-    )
-    .replaceAll(
-      "[`../../playground/docs/versioning.md`](../../playground/docs/versioning.md)",
-      "[playground versioning policy](https://github.com/flowstack-ui/atom/blob/main/playground/docs/versioning.md)",
-    );
+function removeMaintainerSections(source) {
+  const lines = source.split("\n");
+  const output = [];
+  let skippedLevel = null;
+
+  for (const line of lines) {
+    const heading = /^(#{2,6})\s+(.+?)\s*$/u.exec(line);
+    if (heading) {
+      const level = heading[1].length;
+      if (skippedLevel !== null && level <= skippedLevel) skippedLevel = null;
+      if (maintainerSectionHeadings.has(heading[2])) {
+        skippedLevel = level;
+        continue;
+      }
+    }
+    if (skippedLevel === null) output.push(line);
+  }
+
+  return output.join("\n").replace(/\n{3,}/gu, "\n\n").trim();
 }
 
 async function writeContent(section, slug, source) {
@@ -61,7 +70,7 @@ async function writeContent(section, slug, source) {
 }
 
 function mergeComponentHistory(readme, changelog) {
-  const body = readme
+  const body = removeMaintainerSections(readme)
     .replace(/\n## Changelog\s*\n+(?:See )?\[CHANGELOG\.md\]\(\.\/CHANGELOG\.md\)\.?\s*$/u, "")
     .trim();
   const history = changelog
@@ -100,7 +109,11 @@ for (const [sourceSlug, [section, targetSlug]] of packageGuideRoutes) {
     path.join(atomRoot, "docs/guides", `${sourceSlug}.md`),
     "utf8",
   );
-  await writeContent(section, targetSlug, rewritePackageLinks(source));
+  await writeContent(
+    section,
+    targetSlug,
+    removeMaintainerSections(source),
+  );
 }
 
 for (const [sourceSlug, targetSlug] of architectureRoutes) {
@@ -108,7 +121,7 @@ for (const [sourceSlug, targetSlug] of architectureRoutes) {
     path.join(atomRoot, "docs/architecture", `${sourceSlug}.md`),
     "utf8",
   );
-  await writeContent("architecture", targetSlug, rewritePackageLinks(source));
+  await writeContent("architecture", targetSlug, removeMaintainerSections(source));
 }
 
 const packageChangelog = await readFile(path.join(atomRoot, "CHANGELOG.md"), "utf8");
@@ -117,6 +130,10 @@ await writeContent(
   "releases",
   `# Releases\n\nAtom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.\n\n${packageChangelog.replace(/^# .+?\n+/u, "")}`,
 );
+
+for (const [section, slug] of maintainerOnlyContent) {
+  await rm(path.join(root, "content", section, `${slug}.md`), { force: true });
+}
 
 const packageManifest = JSON.parse(
   await readFile(path.join(atomRoot, "package.json"), "utf8"),
@@ -150,4 +167,4 @@ await writeFile(
   )}\n`,
 );
 
-console.log("Atom package, component, utility, guide, architecture, and release docs synchronized.");
+console.log("Atom consumer documentation and release notes synchronized.");

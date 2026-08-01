@@ -312,7 +312,9 @@ Provides nested submenu state.
 ### SubTrigger
 
 Renders the item that opens a nested submenu with `role="menuitem"` and
-`tabIndex={-1}`.
+`tabIndex={-1}`. Mouse hover opening starts only after the pointer actually
+moves over the item, so newly positioned content beneath a stationary pointer
+does not open it.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -473,9 +475,10 @@ typeahead behavior for printable-character searches.
 
 ## Changelog
 
-### Unreleased
+### 0.20.6
 
-- No unreleased changes.
+- Inherited movement-gated submenu hover intent so opening a top-level menu
+  cannot also open a submenu that appears beneath a stationary pointer.
 
 ### 0.12.1
 

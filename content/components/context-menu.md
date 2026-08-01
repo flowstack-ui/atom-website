@@ -14,6 +14,8 @@ persistent application command bar.
 ## Features
 
 - Opens at right-click coordinates or the keyboard trigger location.
+- Re-invokes at the latest right-click point and transfers an open menu directly
+  between registered ContextMenu targets without exposing the browser menu.
 - Opens from a cancel-safe 700 ms touch/pen long press with a 10 px tolerance.
 - Supports controlled state, modal behavior, looping, and dismissal settings.
 - Includes actions, checkbox choices, radio choices, groups, separators, and nested menus.
@@ -81,6 +83,12 @@ Touch and pen track one primary long press. Movement beyond 10 px, scrolling,
 early release, cancellation, a second pointer, disabled state, unmount, or a
 native `contextmenu` event cancels the fallback.
 
+While a ContextMenu is open, another secondary click inside its Trigger updates
+the point anchor and keeps the custom menu active. A secondary click on another
+ContextMenu Trigger closes the previous root and opens the new one. Consumer
+`onContextMenu` handlers still run for the new invocation and may prevent Atom's
+open or reposition behavior.
+
 | Prop | Type | Default |
 | --- | --- | --- |
 | `disabled` | `boolean` | `false` |
@@ -98,6 +106,12 @@ native `contextmenu` event cancels the fallback.
 
 Renders the portalled menu at Trigger's pointer or keyboard anchor, manages
 focus and highlight, locks scrolling when modal, and closes on outside click.
+The resolved explicit, Trigger, or provider direction is preserved on the
+portalled Content and nested SubContent DOM.
+
+With a submenu open, an activation inside an ancestor menu but outside that
+submenu closes only the submenu. An activation outside every menu surface
+closes the complete ContextMenu tree in one activation.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -261,8 +275,9 @@ wrapper.
 
 ### SubTrigger
 
-Registers a menu item that opens SubContent by pointer delay, click, or the
-direction-aware submenu key.
+Registers a menu item that opens SubContent after intentional mouse movement
+and a hover delay, by click, or with the direction-aware submenu key. Merely
+positioning a menu beneath a stationary pointer does not open the submenu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -403,9 +418,31 @@ through a visible control as well.
 
 ## Changelog
 
-### Unreleased
+### 0.20.7
 
-- No unreleased changes.
+- Kept the custom menu active on repeated secondary clicks, repositioned it at
+  the latest invocation point, and transferred it directly between registered
+  ContextMenu targets instead of exposing the browser menu.
+- Corrected point-anchor wiring so Content positions from its pointer or
+  keyboard coordinate rather than falling back to the viewport corner.
+- Inherited whole-tree outside dismissal when a submenu is open.
+
+### 0.20.6
+
+- Inherited movement-gated submenu hover intent so opening a parent ContextMenu
+  cannot also open a submenu that appears beneath a stationary pointer.
+
+### 0.20.5
+
+- Inherited resolved direction on portalled Content and SubContent so logical
+  row anatomy and submenu chevrons mirror with the trigger.
+- Inherited block-axis submenu collision fallbacks and narrow-viewport
+  containment when neither inline side fits.
+
+### 0.20.3
+
+- Inherited document-only overflow locking so sticky application chrome
+  remains anchored while a modal ContextMenu is open.
 
 ### 0.12.0
 

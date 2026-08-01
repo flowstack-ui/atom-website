@@ -1,5 +1,19 @@
 # Atom UI Website Changelog
 
+## 0.2.3 - 2026-07-31
+
+- Updated the exact website dependency and reviewed source provenance to
+  published `@flowstack-ui/atom` `0.20.9`.
+- Refreshed consumer documentation for initial Accordion/Collapsible motion,
+  menu direction and collision handling, submenu intent and tree dismissal,
+  repeated Context Menu invocation, and Select portal direction.
+- Removed maintainer-only CI, documentation-authoring, playground/release, and
+  package-audit material from public website navigation and content.
+- Restricted package synchronization to consumer-facing guides and stripped
+  maintainer evidence sections from synchronized component pages.
+- Added content validation that prevents the removed routes and package test,
+  playground, or coverage-workbook references from being published again.
+
 ## 0.2.2 - 2026-07-30
 
 - Updated the exact website dependency and reviewed source provenance to

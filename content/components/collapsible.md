@@ -100,6 +100,7 @@ available for consumer-owned exit animation.
 | --- | --- |
 | `[data-slot]` | `"collapsible-content"` |
 | `[data-state]` | `"open" \| "closed"` |
+| `[data-initial-open]` | Present while initially open Content has not transitioned |
 | `[data-orientation]` | `"vertical" \| "horizontal"` |
 
 Content sets `--content-height` and `--content-width` to its measured natural
@@ -166,6 +167,16 @@ the user what will be revealed.
 ### Unreleased
 
 - No unreleased changes.
+
+### 0.20.9
+
+- Expose initially open Content with `data-initial-open` until its first state
+  transition so styled layers can suppress page-load entrance motion.
+
+### 0.20.8
+
+- Measure newly opened Content before its first painted animation frame so
+  height and width transitions begin with stable intrinsic dimensions.
 
 ### 0.14.0
 

@@ -41,16 +41,3 @@ import { Dialog } from "@flowstack-ui/atom/dialog";
 ```
 
 Direct part exports are also available for advanced composition and migration.
-
-## Documentation Shape
-
-- `README.md` explains package-level usage.
-- `docs/guides/` explains public package behavior.
-- `docs/components/` stores component-facing docs and changelogs.
-
-## Audits
-
-- [Public API audit](/docs/architecture/public-api-audit/) verifies exports, docs coverage,
-  client boundaries, and the headless package boundary.
-- [Release readiness audit](/docs/architecture/release-readiness-audit/) records the latest
-  clean-build, package, consumer, and release-metadata verification.

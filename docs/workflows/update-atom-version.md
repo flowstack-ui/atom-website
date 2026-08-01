@@ -4,9 +4,12 @@
 2. Install the exact approved package version.
 3. Check out the reviewed Atom source commit in `../package/`.
 4. Run `npm run content:sync` to refresh component and utility docs and their
-   changelogs, public guides, architecture audits, package releases, and source
-   provenance.
+   changelogs, selected consumer guides, the package-boundary overview, package
+   releases, and source provenance.
 5. Review every changed page rather than accepting mechanical copies blindly.
+   Confirm that repository setup, documentation authoring, CI, playground
+   testing, release operations, audit records, and maintainer evidence remain
+   excluded from `content/navigation.json` and public Markdown.
 6. Review the website-owned Introduction, Accessibility, Guides, and Hooks
    pages against the current package API.
 7. Run `npm audit --audit-level=high` and `npm run verify`.

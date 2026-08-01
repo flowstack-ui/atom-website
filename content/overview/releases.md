@@ -2,9 +2,52 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
-## Unreleased
+## 0.20.9
 
-- No unreleased changes.
+- Exposed initially open Accordion and Collapsible Content with
+  `data-initial-open` until its first state transition so styled layers can
+  suppress page-load entrance motion without disabling interactive motion.
+
+## 0.20.8
+
+- Measured newly opened Accordion and Collapsible content before its first
+  painted animation frame so styled height transitions begin from a stable,
+  available intrinsic size.
+
+## 0.20.7
+
+- Kept an open ContextMenu custom on repeated or cross-target secondary clicks,
+  repositioned it from the latest invocation coordinate, and prevented the
+  browser menu from replacing it.
+- Made an activation outside a complete Menu subtree dismiss the root and its
+  open submenu in one step while preserving submenu-only dismissal inside the
+  parent surface.
+
+## 0.20.6
+
+- Required actual mouse movement before hover-opening a Menu submenu so a
+  newly positioned parent menu cannot open a submenu beneath a stationary
+  pointer.
+
+## 0.20.5
+
+- Preserved Menu and submenu direction across portal boundaries so
+  DropdownMenu and ContextMenu logical layout agrees with their trigger,
+  explicit `dir`, or Direction provider.
+- Allowed nested menus to use block-axis collision fallbacks and final
+  cross-axis shifting instead of overflowing narrow viewports when neither
+  inline side fits.
+
+## 0.20.4
+
+- Preserved Select's resolved LTR/RTL direction across its portal boundary so
+  logical `start` alignment and option content follow the trigger direction.
+
+## 0.20.3
+
+- Kept sticky application chrome anchored at its existing viewport position
+  while Dialog, Drawer, AlertDialog, modal Popover, and modal Menu-family
+  layers lock background scrolling.
 
 ## 0.20.2
 

@@ -25,11 +25,26 @@ const searchRecords = JSON.parse(
 const seenRoutes = new Set();
 const publicSubpaths = new Set();
 const errors = [];
+const maintainerOnlyRoutes = new Set([
+  "architecture/public-api-audit",
+  "architecture/release-readiness-audit",
+  "guides/component-documentation",
+  "guides/continuous-integration",
+  "guides/release-checklist",
+]);
+const maintainerContentPatterns = [
+  [/^## Evidence\s*$/mu, "contains a maintainer Evidence section"],
+  [/`(?:playground\/manual-tests|test\/primitives)\//u, "references package test evidence"],
+  [/coverage workbook/iu, "references the maintainer coverage workbook"],
+];
 
 for (const section of navigation.sections) {
   for (const document of section.documents) {
     const route = `${section.slug}/${document.slug}`;
     if (seenRoutes.has(route)) errors.push(`Duplicate route: ${route}`);
+    if (maintainerOnlyRoutes.has(route)) {
+      errors.push(`Maintainer-only route is public: ${route}`);
+    }
     seenRoutes.add(route);
 
     const file = path.join(root, "content", section.slug, `${document.slug}.md`);
@@ -42,6 +57,9 @@ for (const section of navigation.sections) {
       }
       if (/\]\((?!(?:https?:)?\/\/)[^)]*\.md(?:#[^)]*)?\)/.test(source)) {
         errors.push(`${route} contains a package-local Markdown link`);
+      }
+      for (const [pattern, message] of maintainerContentPatterns) {
+        if (pattern.test(source)) errors.push(`${route} ${message}`);
       }
       if (
         (section.slug === "components" ||

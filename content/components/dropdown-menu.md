@@ -102,6 +102,8 @@ with focus on the first item; ArrowUp opens with focus on the last.
 
 Renders the portalled vertical menu, positions it against Trigger, manages real
 item focus/typeahead, and applies reason-aware final focus.
+The resolved explicit, Trigger, or provider direction is preserved on the
+portalled Content and nested SubContent DOM.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -262,8 +264,9 @@ Owns controlled or uncontrolled state for one nested menu and renders no DOM.
 
 ### SubTrigger
 
-Renders a menu item that opens SubContent by hover delay, click, or the
-direction-aware submenu key.
+Renders a menu item that opens SubContent after intentional mouse movement and
+a hover delay, by click, or with the direction-aware submenu key. Merely
+positioning a menu beneath a stationary pointer does not open the submenu.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -387,9 +390,23 @@ Trigger text that describes the menu.
 
 ## Changelog
 
-### Unreleased
+### 0.20.6
 
-- No unreleased changes.
+- Inherited movement-gated submenu hover intent so opening a parent
+  DropdownMenu cannot also open a submenu that appears beneath a stationary
+  pointer.
+
+### 0.20.5
+
+- Inherited resolved direction on portalled Content and SubContent so logical
+  row anatomy and submenu chevrons mirror with the trigger.
+- Inherited block-axis submenu collision fallbacks and narrow-viewport
+  containment when neither inline side fits.
+
+### 0.20.3
+
+- Inherited document-only overflow locking so sticky application chrome
+  remains anchored while a modal DropdownMenu is open.
 
 ### 0.12.0
 

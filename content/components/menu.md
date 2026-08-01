@@ -86,6 +86,14 @@ Portals and positions the focus-managed `menu` surface. Focus moves to real
 `menuitem*` elements. Modal mode uses Atom's stacked isolation and scroll lock;
 non-modal outside interaction keeps its destination.
 
+Content resolves text direction from its explicit native `dir`, its trigger's
+computed direction, or `Direction.Provider`, then applies that direction to
+the portalled surface. SubContent repeats the same resolution from its
+SubTrigger so logical layout and submenu keys remain aligned across portals.
+SubContent prefers the logical inline side, tries the opposite inline side,
+then uses block-axis placements when neither side fits. Its final shift keeps
+the surface inside the visual viewport.
+
 Content is an allowed scroll region while its modal lock is active. Atom does
 not impose dimensions or scrolling styles: consumers constrain Content, apply
 `overflow: auto`, and choose any desired `overscroll-behavior`. Portalled
@@ -107,10 +115,12 @@ the modal's owned DOM path.
 | `onInteractOutside` | `(event: OutsideInteractionEvent) => void` | - |
 
 Outside dismissal is committed on click/activation rather than pointer start.
-Only the topmost Menu or SubContent layer receives the event. Calling
-`event.preventDefault()` keeps that layer open without cancelling the original
-destination click. Dragged, cancelled, secondary-button, and multi-pointer
-sessions do not dismiss.
+Only the topmost Menu or SubContent layer receives `onInteractOutside`. With a
+submenu open, an activation inside an ancestor menu closes only that submenu;
+an activation outside every menu surface closes the complete menu tree. Calling
+`event.preventDefault()` keeps the affected layer or tree open without
+cancelling the original destination click. Dragged, cancelled,
+secondary-button, and multi-pointer sessions do not dismiss.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -342,6 +352,8 @@ not render a DOM element.
 ### SubTrigger
 
 Renders the parent `menuitem` that opens, closes, and labels its `SubContent`.
+Mouse hover opening starts only after the pointer actually moves over the item,
+so newly positioned content beneath a stationary pointer does not open it.
 
 | Prop | Type | Default |
 | --- | --- | --- |
@@ -480,6 +492,34 @@ buffers match exact prefixes.
 | `Tab` / `Shift+Tab` | Closes all levels and moves after/before the owning composite |
 
 ## Changelog
+
+### 0.20.7
+
+- Made one completed activation outside every open menu surface dismiss the
+  complete root/submenu tree, while an activation inside an ancestor menu still
+  closes only its submenu and only the topmost layer receives
+  `onInteractOutside`.
+- Corrected virtual point references so ContextMenu-backed Content positions
+  and repositions from its invocation coordinate.
+
+### 0.20.6
+
+- SubTrigger now requires actual mouse movement before its hover delay starts,
+  preventing newly positioned menu content from opening a submenu beneath a
+  stationary pointer.
+
+### 0.20.5
+
+- Content and SubContent now carry their resolved explicit, trigger, or
+  provider direction across portals and provide that value to nested menu
+  behavior.
+- SubContent now tries block-axis placements after both inline sides and uses
+  a final cross-axis shift to remain inside narrow visual viewports.
+
+### 0.20.3
+
+- Modal Content now inherits document-only overflow locking so sticky
+  application chrome remains anchored at nonzero page scroll positions.
 
 ### 0.20.1
 
