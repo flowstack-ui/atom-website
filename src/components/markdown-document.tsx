@@ -60,6 +60,16 @@ export function MarkdownDocument({
         </a>
       );
     },
+    pre: ({ children, ...props }) => (
+      <pre tabIndex={0} {...props}>
+        {children}
+      </pre>
+    ),
+    table: ({ children, ...props }) => (
+      <table tabIndex={0} {...props}>
+        {children}
+      </table>
+    ),
   };
 
   return (

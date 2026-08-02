@@ -55,9 +55,11 @@ Run all checks with:
 npm run verify
 ```
 
-`npm run test:all` is the equivalent comprehensive verification alias. The
-website does not yet own an automated browser server; port `4002` is reserved
-for that future test layer.
+Use `npm run check:focused` while editing content, `npm run check:repository`
+for a merge candidate, and `npm run check:release` for the production build
+plus desktop/mobile Chromium and WebKit smoke coverage. `npm run test:all` is
+the comprehensive release alias. Browser tests own strict preview port `4002`
+and never reuse an existing listener.
 
 The production build is a static export in `out/`.
 

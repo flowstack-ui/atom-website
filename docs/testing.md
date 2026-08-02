@@ -9,12 +9,19 @@ npm run lint
 npm run build
 ```
 
-`npm run verify` runs the full sequence.
-`npm run test:all` is the equivalent one-shot verification alias.
+Use the explicit tiers:
 
-The current website verification does not launch a browser-test server. Port
-`4002` is reserved for a future website-owned browser suite. Manual real-device
-review uses `npm run dev:network` on development port `3002`.
+- `npm run check:focused` for content and type validation during editing;
+- `npm run check:repository` for the repository contract, complete content,
+  types, lint, and production build;
+- `npm run check:release` for the repository gate plus desktop/mobile Chromium
+  and WebKit smoke coverage.
+
+`npm run verify` aliases the repository tier and `npm run test:all` aliases the
+release tier. Browser tests serve the static `out/` directory on strict port
+`4002`, fail if another listener occupies it, and stop their owned server on
+exit. `npm run test:processes` performs the read-only preflight. Manual
+real-device review uses `npm run dev:network` on development port `3002`.
 
 ## Representative Routes
 
@@ -31,8 +38,9 @@ Review at least:
 - the 404 page.
 
 CI repeats content validation, type checking, linting, the production build,
-the dependency audit, and the generated-file cleanliness check on pull requests
-and `main`.
+the dependency audit, generated-file cleanliness, and four parallel browser
+profiles on pull requests and `main`. A nightly workflow repeats complete
+release qualification on a clean remote runner.
 
 ## Interaction Coverage
 

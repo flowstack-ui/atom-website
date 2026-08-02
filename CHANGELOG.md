@@ -1,5 +1,14 @@
 # Atom UI Website Changelog
 
+## Unreleased
+
+- Added focused, repository, and release verification tiers, repository-owned
+  readiness metadata, strict automated-preview lifecycle on port `4002`,
+  representative responsive browser smoke coverage, parallel browser CI, and
+  nightly clean-run qualification.
+- Increased light-theme secondary-text contrast and made horizontally
+  scrollable Markdown code and table regions keyboard-focusable.
+
 ## 0.2.5 - 2026-08-01
 
 - Updated the exact website dependency and reviewed source provenance to

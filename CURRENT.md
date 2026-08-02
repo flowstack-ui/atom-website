@@ -38,10 +38,13 @@ application and its public documentation is aligned with Atom 0.20.11.
   right-hand page navigation with app-bar-aware anchor positioning.
 - Content provenance and export-surface validation.
 - Pull-request and main-branch CI for content, types, lint, static build,
-  dependency audit, and generated-file cleanliness.
+  dependency audit, generated-file cleanliness, and parallel desktop/mobile
+  Chromium and WebKit smoke coverage; nightly release qualification runs on a
+  clean remote runner.
 - Static export suitable for independent hosting.
 - Fixed local development on port `3002` with an explicit LAN command using
-  the same port for real-phone and tablet review.
+  the same port for real-phone and tablet review, plus an owned non-reusing
+  automated preview on strict port `4002`.
 
 ## Current Atom Baseline
 
