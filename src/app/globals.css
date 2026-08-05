@@ -765,6 +765,7 @@
   .markdown-body .brick-code { font-size: .87em; }
   .markdown-token-cluster { display: flex; flex-wrap: wrap; gap: .35rem; }
   .markdown-body .brick-code-block { margin-block: 1.45rem; }
+  .markdown-body .brick-code-block-pre { -webkit-text-size-adjust: none; text-size-adjust: none; }
   .markdown-body .brick-code-block-content { font-size: .82rem; }
   .markdown-body .brick-code-block-content { border-end-start-radius: calc(var(--brick-code-block-radius) - var(--brick-code-block-border-width)); border-end-end-radius: calc(var(--brick-code-block-radius) - var(--brick-code-block-border-width)); }
   .markdown-body .brick-code-block-content:focus-visible { outline: 2px solid var(--brick-color-focus-ring); outline-offset: -2px; }
