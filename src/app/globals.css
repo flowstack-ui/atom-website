@@ -197,6 +197,7 @@
   /* Homepage */
   .home-hero { display: grid; min-height: calc(100dvh - var(--site-header-height)); grid-template-columns: minmax(0, .86fr) minmax(34rem, 1.14fr); align-items: center; gap: clamp(2rem, 5vw, 6rem); padding-block: clamp(2.75rem, 6dvh, 5rem); }
   .home-hero__copy { position: relative; z-index: 3; }
+  .icon-label-badge { gap: .45rem; }
   .hero-title { max-width: 10ch; margin: 1.25rem 0 1.25rem; font-family: var(--site-font-display); font-size: clamp(3.8rem, min(6.25vw, 10dvh), 7.4rem); font-weight: 650; letter-spacing: -.07em; line-height: .89; }
   .hero-title span { display: inline; color: transparent; background: linear-gradient(108deg, var(--brick-color-accent-solid) 5%, var(--site-blue) 55%, var(--site-violet)); background-clip: text; -webkit-background-clip: text; }
   .hero-lede { max-width: 39rem; }

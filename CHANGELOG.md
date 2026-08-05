@@ -1,5 +1,13 @@
 # Atom UI Website Changelog
 
+## 1.0.1 — 2026-08-05
+
+- Preserved the visibly adjacent `Atom v0.20.11` text in the branded home
+  link's accessible name, satisfying experimental WCAG 2.5.3 label-content
+  matching without removing the link's product and destination context.
+- Added deliberate icon-to-label spacing to the homepage version and 404
+  signal eyebrows.
+
 ## 1.0.0 — 2026-08-05
 
 - Rebuilt Atom UI as a designed product and learning website powered by exact

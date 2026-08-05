@@ -411,6 +411,8 @@ test("404 route keeps the site shell and recovery actions", async ({ page }) => 
   await expect(page.getByRole("link", { name: "Return home" })).toBeVisible();
   const actions = page.locator(".not-found .hero-actions");
   await expect(actions).toHaveCSS("gap", "12px");
+  const eyebrowGap = await page.locator(".not-found .icon-label-badge").evaluate((element) => Number.parseFloat(getComputedStyle(element).columnGap));
+  expect(eyebrowGap).toBeGreaterThanOrEqual(7);
 });
 
 test("homepage and documentation load without browser exceptions", async ({ page }) => {
@@ -435,7 +437,10 @@ test("desktop documentation navigation owns a usable native scroll region", asyn
 test("homepage focus indicators follow their visible control geometry", async ({ page }) => {
   await page.goto("/");
 
-  const brand = page.getByRole("link", { name: `Atom UI v${atomVersion} home` });
+  const eyebrowGap = await page.locator(".home-hero .icon-label-badge").evaluate((element) => Number.parseFloat(getComputedStyle(element).columnGap));
+  expect(eyebrowGap).toBeGreaterThanOrEqual(7);
+
+  const brand = page.getByRole("link", { name: `Atom v${atomVersion} — Atom UI home` });
   await brand.focus();
   await expect(brand).toHaveCSS("outline-style", "solid");
   await expect(brand).toHaveCSS("border-radius", "11.2px");
