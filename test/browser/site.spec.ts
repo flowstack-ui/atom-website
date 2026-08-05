@@ -522,6 +522,26 @@ test("code block focus geometry follows the rounded lower surface", async ({ pag
   await expect(tableViewport).toHaveCSS("outline-offset", "-2px");
 });
 
+test("long and short code blocks disable mobile WebKit text inflation", async ({ page, isMobile, browserName }) => {
+  test.skip(!isMobile || browserName !== "webkit", "iPhone WebKit owns automatic text-inflation behavior");
+  await page.goto("/docs/overview/getting-started/");
+
+  const codeBlocks = page.locator(".brick-code-block-pre");
+  await expect(codeBlocks).toHaveCount(5);
+  const typography = await codeBlocks.evaluateAll((elements) => elements.map((element) => {
+    const style = getComputedStyle(element);
+    return { fontSize: style.fontSize };
+  }));
+  const hasWebKitInflationGuard = await page.evaluate(async () => {
+    const stylesheets = [...document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
+    const css = (await Promise.all(stylesheets.map(async ({ href }) => (await fetch(href)).text()))).join("\n");
+    return css.includes(".markdown-body .brick-code-block-pre") && css.includes("-webkit-text-size-adjust:none");
+  });
+
+  expect(new Set(typography.map(({ fontSize }) => fontSize))).toEqual(new Set(["16px"]));
+  expect(hasWebKitInflationGuard).toBe(true);
+});
+
 test("guide pagination keeps content-sized destinations", async ({ page }) => {
   await page.goto("/docs/overview/getting-started/");
   const pagination = page.locator(".guide-pagination");

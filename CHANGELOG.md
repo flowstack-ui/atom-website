@@ -1,5 +1,16 @@
 # Atom UI Website Changelog
 
+## 1.0.3 — 2026-08-05
+
+- Disabled automatic mobile text inflation on documentation Code Blocks so
+  long highlighted examples retain the same authored size as short commands
+  on physical iPhones.
+- Declared the qualified iOS Safari production floor so Next preserves the
+  WebKit-prefixed correction, and added built-site iPhone WebKit evidence for
+  every Getting Started Code Block.
+- Protected `main` with the website and four browser checks, up-to-date branch
+  enforcement, resolved conversations, and force-push/delete prevention.
+
 ## 1.0.2 — 2026-08-05
 
 - Matched the branded home link's accessible name exactly to its rendered

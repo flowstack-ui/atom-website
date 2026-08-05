@@ -1,7 +1,8 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.0.2` is the production follow-up for strict visible-label matching.
+Website `1.0.3` is the production follow-up for consistent physical-iPhone
+Code Block typography.
 
 ## Implemented Version Two
 
@@ -54,20 +55,25 @@ Website `1.0.2` is the production follow-up for strict visible-label matching.
   Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
   70-route specimen coverage, cross-family interaction, mobile canvas geometry,
   and 404 recovery. The current dependency audit has zero findings.
+- Documentation Code Blocks temporarily carry Brick's unreleased
+  component-owned mobile text-inflation correction. The built iPhone WebKit
+  profile proves that Next retains the required prefixed declaration and that
+  all Getting Started examples resolve to one selected font size.
+- GitHub `main` requires the repository check plus desktop/mobile Chromium and
+  WebKit checks, resolved conversations, and an up-to-date pull request; force
+  pushes and branch deletion are disabled.
 
 ## Current Package Baseline
 
 - Documented product: `@flowstack-ui/atom` `0.20.11`
 - Exact Atom source commit: `content/atom-source.json`
 - Website presentation system: `@flowstack-ui/brick` `0.1.2`
-- Website application version: `1.0.2`
+- Website application version: `1.0.3`
 
 ## Remaining Release Gates
 
 - Manual macOS/iPhone assistive-technology, zoom, orientation, motion, and
   forced-colors evidence.
-- Google Search Console and Bing Webmaster Tools sitemap submission and
-  priority indexing requests.
 
 Owner review has covered the complete localhost and public preview experience.
 The release gate passes in desktop/mobile Chromium and WebKit. Preview
@@ -83,4 +89,5 @@ The canonical repository is
 Vercel deploys version two at [atom-ui.com](https://atom-ui.com) from `main`.
 Canonical redirects, schema, social artwork, analytics injection, crawler
 outputs, all sitemap URLs, and the retained pre-release rollback revision have
-been verified in production.
+been verified in production. Google Search Console and Bing Webmaster Tools
+sitemap submission and priority indexing requests are complete.
