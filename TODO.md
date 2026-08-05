@@ -7,8 +7,6 @@ This tracker contains active website-owned unfinished work only.
 - Complete physical iPhone touch and VoiceOver review plus macOS Safari
   VoiceOver, 200/400 percent zoom, text enlargement, landscape, reduced-motion,
   and forced-colors manual evidence.
-- Adopt the published Brick patch that owns the physical-iPhone Code Block
-  text-inflation correction, then remove the website's bounded temporary rule.
 
 ## Deferred Product Work
 

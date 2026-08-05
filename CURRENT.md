@@ -1,8 +1,8 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.0.3` is the production follow-up for consistent physical-iPhone
-Code Block typography.
+Website `1.0.4` adopts Brick's published physical-iPhone Code Block correction
+and restores bounded mobile documentation tables.
 
 ## Implemented Version Two
 
@@ -11,7 +11,7 @@ Code Block typography.
 - A permanent code-native origin mark, favicon, social artwork, and coherent
   ion-cyan light/dark Atom theme assigned through Brick's public semantic
   tokens.
-- Exact published `@flowstack-ui/brick` `0.1.2` as the presentation system and
+- Exact published `@flowstack-ui/brick` `0.1.3` as the presentation system and
   exact published `@flowstack-ui/atom` `0.20.11` as the direct live-specimen
   subject. Shell and reading UI use Brick; route-scoped specimens import Atom
   explicitly and receive only application-owned visual styling.
@@ -55,10 +55,13 @@ Code Block typography.
   Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
   70-route specimen coverage, cross-family interaction, mobile canvas geometry,
   and 404 recovery. The current dependency audit has zero findings.
-- Documentation Code Blocks temporarily carry Brick's unreleased
-  component-owned mobile text-inflation correction. The built iPhone WebKit
-  profile proves that Next retains the required prefixed declaration and that
-  all Getting Started examples resolve to one selected font size.
+- Brick owns Code Block's mobile text-inflation correction. The website keeps
+  an explicit iOS Safari production target and built iPhone WebKit evidence
+  proving that Next retains the required prefixed declaration and every
+  Getting Started example resolves to one selected font size.
+- Mobile API-table scroll frames remain inside the documentation reading plane
+  while their wide semantic contents scroll internally through the final
+  column in both mobile Chromium and WebKit.
 - GitHub `main` requires the repository check plus desktop/mobile Chromium and
   WebKit checks, resolved conversations, and an up-to-date pull request; force
   pushes and branch deletion are disabled.
@@ -67,8 +70,8 @@ Code Block typography.
 
 - Documented product: `@flowstack-ui/atom` `0.20.11`
 - Exact Atom source commit: `content/atom-source.json`
-- Website presentation system: `@flowstack-ui/brick` `0.1.2`
-- Website application version: `1.0.3`
+- Website presentation system: `@flowstack-ui/brick` `0.1.3`
+- Website application version: `1.0.4`
 
 ## Remaining Release Gates
 

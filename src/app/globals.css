@@ -765,7 +765,6 @@
   .markdown-body .brick-code { font-size: .87em; }
   .markdown-token-cluster { display: flex; flex-wrap: wrap; gap: .35rem; }
   .markdown-body .brick-code-block { margin-block: 1.45rem; }
-  .markdown-body .brick-code-block-pre { -webkit-text-size-adjust: none; text-size-adjust: none; }
   .markdown-body .brick-code-block-content { font-size: .82rem; }
   .markdown-body .brick-code-block-content { border-end-start-radius: calc(var(--brick-code-block-radius) - var(--brick-code-block-border-width)); border-end-end-radius: calc(var(--brick-code-block-radius) - var(--brick-code-block-border-width)); }
   .markdown-body .brick-code-block-content:focus-visible { outline: 2px solid var(--brick-color-focus-ring); outline-offset: -2px; }
@@ -974,7 +973,6 @@
     .markdown-body h1 { font-size: 2.8rem; }
     .markdown-body h2 { margin-block-start: 3.2rem; }
     .markdown-body .brick-code-block-content { font-size: .76rem; }
-    .markdown-table-wrap { margin-inline: -1rem; border-inline: 0; border-radius: 0; }
     .guide-pagination { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .45rem; }
     .guide-pagination > a { gap: .35rem; padding: .65rem; }
     .guide-pagination strong { font-size: .75rem; }

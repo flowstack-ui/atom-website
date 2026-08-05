@@ -23,7 +23,9 @@ categories. Previous/next navigation remains inside the current scope.
   right outline is available from the responsive page control.
 - Below 1024 pixels: both rails become sticky-toolbar Drawers.
 - Below 640 pixels: article gutters reduce, API tables and code stay internally
-  scrollable, and previous/next remain one balanced row.
+  scrollable, and previous/next remain one balanced row. Table scroll frames
+  remain inside the article reading plane; their contents may overflow
+  internally, but the frame never uses negative gutters or loses either edge.
 
 Each primitive page owns a bounded live-behavior canvas. The canvas centers
 compact specimens, aligns expanding specimens from the top so disclosure grows
@@ -49,6 +51,8 @@ viewport on phone widths and closes automatically when returning to desktop.
 
 - No page-level horizontal overflow at any supported width.
 - Tables and code expose keyboard-accessible internal overflow.
+- Every table scroll frame remains bounded by the reading plane, exposes both
+  physical edges, and can reach its final column without document scrolling.
 - Search, theme, GitHub, menu, and Drawer-close controls retain centered icons,
   accessible names, and touch-sized targets.
 - Focus indicators remain visible inside rails, code, tables, and footer links.
