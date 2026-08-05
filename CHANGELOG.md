@@ -1,5 +1,14 @@
 # Atom UI Website Changelog
 
+## 1.0.4 — 2026-08-05
+
+- Adopted exact published Brick `0.1.3` and removed the website's temporary
+  Code Block text-inflation rule; optimized iPhone WebKit evidence now proves
+  the component-owned declaration survives the Next production pipeline.
+- Kept mobile API-table scroll frames inside the documentation reading plane
+  while preserving real horizontal overflow, keyboard focus, scroll-end
+  reachability, and visibility of the final column in Chromium and WebKit.
+
 ## 1.0.3 — 2026-08-05
 
 - Disabled automatic mobile text inflation on documentation Code Blocks so

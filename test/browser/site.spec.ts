@@ -522,6 +522,39 @@ test("code block focus geometry follows the rounded lower surface", async ({ pag
   await expect(tableViewport).toHaveCSS("outline-offset", "-2px");
 });
 
+test("mobile documentation tables stay in the reading plane and expose both horizontal edges", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "mobile table containment owns this responsive contract");
+  await page.goto("/docs/components/button/");
+
+  const tables = page.locator(".markdown-table-wrap");
+  expect(await tables.count()).toBeGreaterThan(0);
+  const initialGeometry = await tables.evaluateAll((elements) => {
+    const reading = document.querySelector(".markdown-body")!.getBoundingClientRect();
+    return elements.map((element) => {
+      const wrapper = element.getBoundingClientRect();
+      return {
+        leftInset: wrapper.left - reading.left,
+        rightInset: reading.right - wrapper.right,
+        scrollable: element.scrollWidth > element.clientWidth,
+      };
+    });
+  });
+
+  expect(initialGeometry.every(({ leftInset, rightInset }) => leftInset >= -1 && rightInset >= -1)).toBe(true);
+  expect(initialGeometry.every(({ scrollable }) => scrollable)).toBe(true);
+
+  const endingGeometry = await tables.evaluateAll((elements) => elements.map((element) => {
+    element.scrollLeft = element.scrollWidth;
+    const wrapper = element.getBoundingClientRect();
+    const lastCell = element.querySelector("tr > :last-child")!.getBoundingClientRect();
+    return {
+      reachedEnd: element.scrollLeft > 0,
+      lastCellVisible: lastCell.left < wrapper.right && lastCell.right <= wrapper.right + 1,
+    };
+  }));
+  expect(endingGeometry.every(({ reachedEnd, lastCellVisible }) => reachedEnd && lastCellVisible)).toBe(true);
+});
+
 test("long and short code blocks disable mobile WebKit text inflation", async ({ page, isMobile, browserName }) => {
   test.skip(!isMobile || browserName !== "webkit", "iPhone WebKit owns automatic text-inflation behavior");
   await page.goto("/docs/overview/getting-started/");
@@ -535,7 +568,7 @@ test("long and short code blocks disable mobile WebKit text inflation", async ({
   const hasWebKitInflationGuard = await page.evaluate(async () => {
     const stylesheets = [...document.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')];
     const css = (await Promise.all(stylesheets.map(async ({ href }) => (await fetch(href)).text()))).join("\n");
-    return css.includes(".markdown-body .brick-code-block-pre") && css.includes("-webkit-text-size-adjust:none");
+    return css.includes(".brick-code-block-pre") && css.includes("-webkit-text-size-adjust:none");
   });
 
   expect(new Set(typography.map(({ fontSize }) => fontSize))).toEqual(new Set(["16px"]));
