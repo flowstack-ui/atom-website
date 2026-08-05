@@ -32,11 +32,13 @@ This repository owns the independent public documentation website for
 - Keep this repository independently installable and buildable from a clean
   clone. Production must not read from `../package/`.
 - Install Atom from npm with an explicit version.
-- Use Atom primitives for behavioral website UI. Do not add another primitive
-  library for navigation, overlays, buttons, tooltips, or focus behavior.
-- Keep Atom headless: website CSS owns all visual presentation.
-- Keep content in Markdown. Do not add MDX or live examples until a later
-  approved phase.
+- Use Brick as the website presentation system. Import Atom directly only in
+  the route-scoped live specimens that demonstrate Atom's public behavior; do
+  not add another primitive library.
+- Keep Atom headless: website CSS owns every specimen's visual presentation,
+  while Atom owns only the behavior its public primitive or utility documents.
+- Keep consumer content in Markdown. Live specimens remain typed website code
+  selected by the committed primitive taxonomy; do not add MDX.
 - Keep the responsive behavior documented in `docs/responsive-layout.md` and
   preserve it when changing the shell or header.
 - Keep search local and statically generated from committed website content;

@@ -1,72 +1,80 @@
 # Current Atom UI Website State
 
-The independent website is implemented as a statically generated Next.js
-application and its public documentation is aligned with Atom 0.20.11.
+Version two is implemented on the `rebuild/atom-website-v2` review branch. The
+canonical production site remains version one until owner review and release
+qualification approve promotion.
 
-## Implemented
+## Implemented Version Two
 
-- Overview, Guides, Architecture, Components, and Utilities navigation.
-- Static routes for every navigation document.
-- Eighty-one documentation routes: four Overview pages, six consumer Guides,
-  one package-boundary Architecture page, sixty-four component pages, and six
-  utility pages.
-- Complete coverage of all 70 Atom public subpaths, including Clipboard, Image,
-  Link, and Multi Select.
-- Component and utility API pages merged with their current package changelogs,
-  plus selected consumer guides, package-boundary guidance, and release history.
-- Public-content validation that rejects maintainer-only routes, package test
-  evidence, playground instructions, and coverage-workbook references.
-- Atom AppBar, Sidebar, Drawer, Dialog, Combobox, NavList, ScrollArea, Button,
-  Tooltip, and SkipLink primitives in the website shell.
-- Responsive desktop, tablet, and mobile layouts with touch-sized header
-  controls, a full-width desktop shell, wider side Drawer navigation on tablet
-  widths, full-screen phone navigation, larger desktop navigation targets, and
-  a readable wide-desktop page navigation hierarchy.
-- Header actions that hide GitHub on phones, place the menu trigger directly
-  after the theme control on tablet and phone widths, and use consistent Atom
-  Tooltips for GitHub and theme actions on hover-capable, fine-pointer devices.
-- An opaque fixed header surface adjacent to the viewport edge, matching the
-  live Radix structure and Safari 26's browser-chrome color-extension criteria;
-  immediate theme repainting is confirmed on the affected iPhone.
-- Local static documentation search with a compact navigation-aligned trigger,
-  a focus-trapped and scroll-locking Atom Dialog on desktop and tablet, an
-  inline phone Combobox that remains inside the Drawer focus scope, and a
-  generated content index.
-- Light and dark themes with system preference, local persistence, Radix-style
-  document classes, and a full-height root theme surface.
-- Static Markdown rendering with tables, code, deterministic headings, and
-  right-hand page navigation with app-bar-aware anchor positioning.
-- Content provenance and export-surface validation.
-- Pull-request and main-branch CI for content, types, lint, static build,
-  dependency audit, generated-file cleanliness, and parallel desktop/mobile
-  Chromium and WebKit smoke coverage; nightly release qualification runs on a
-  clean remote runner.
-- Static export suitable for independent hosting.
-- Fixed local development on port `3002` with an explicit LAN command using
-  the same port for real-phone and tablet review, plus an owned non-reusing
-  automated preview on strict port `4002`.
+- A designed product homepage that explains Atom, accessibility, headless
+  ownership, the Atom-to-Brick relationship, primitive families, and adoption.
+- A permanent code-native origin mark, favicon, social artwork, and coherent
+  ion-cyan light/dark Atom theme assigned through Brick's public semantic
+  tokens.
+- Exact published `@flowstack-ui/brick` `0.1.2` as the presentation system and
+  exact published `@flowstack-ui/atom` `0.20.11` as the direct live-specimen
+  subject. Shell and reading UI use Brick; route-scoped specimens import Atom
+  explicitly and receive only application-owned visual styling.
+- Eighty-one provenance-checked documentation routes covering all seventy Atom
+  public subpaths, plus product home, docs overview, primitive catalog, and 404.
+- Brick-powered header, search Dialog, mobile Drawers, NavLists, Buttons,
+  Cards, Badges, Tabs, Progress, Accordion, Code, CodeBlock, Table, Input, Text,
+  Grid, and Stack compositions where their public contracts fit.
+- A responsive documentation reading plane with separate Guide and Primitive
+  route scopes, mutually exclusive global selection, scoped desktop/mobile
+  navigation and pagination, page-aware anchors, build-time Shiki, copyable
+  code, and keyboard-scrollable tables.
+- A flagship Accessibility guide with an interactive keyboard, screen-reader,
+  touch, and focus contract instrument; clear ownership highlights; an
+  evidence-qualified responsibility matrix; and practical validation guidance.
+- A searchable primitive reference spanning all 70 component and utility
+  subpaths, with counted collapsible rail categories, grouped compact overview
+  cards, top-right category badges, readable navigation rows, continuous
+  open-state dividers, one Atom-colored focus treatment, and a designed empty
+  state.
+- A live behavior canvas on every public subpath, split into seven lazy category
+  chunks, plus semantic Feature Signals that turn each document's real feature
+  list into consistent compact prose cards without duplicating its content.
+  Form, selection, navigation, overlay, collection, disclosure, feedback, and
+  utility specimens use the documented Atom parts and live state rather than
+  hardcoded visual selection, including measured swipe actions, expandable
+  trees, a store-rendered Toast viewport, and application-owned progress
+  geometry.
+- Pre-paint appearance selection, local persistence, reduced-motion and
+  forced-colors handling, responsive footer, branded 404, and quiet Flowstack
+  and Swifty endorsement.
+- Unique metadata and canonical URLs, sitemap, robots, manifest, favicon,
+  dynamic social image, linked AI-readable outputs, Vercel Analytics, security
+  headers, and WebSite, Organization, SoftwareSourceCode, FAQ, CollectionPage,
+  TechArticle, and breadcrumb structured data.
+- Native Next.js/Vercel output with all known content routes statically
+  prerendered.
+- Exact published Brick owner styles for the sixteen used components, reducing
+  emitted CSS by 59 percent from the correctness baseline without cascade drift.
+- Four-profile Chromium and WebKit verification covering both appearances,
+  Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
+  70-route specimen coverage, cross-family interaction, mobile canvas geometry,
+  and 404 recovery. The current dependency audit has zero findings.
 
-## Current Atom Baseline
+## Current Package Baseline
 
-- Package: `@flowstack-ui/atom`
-- Version: `0.20.11`
-- Exact source commit: recorded in `content/atom-source.json`
+- Documented product: `@flowstack-ui/atom` `0.20.11`
+- Exact Atom source commit: `content/atom-source.json`
+- Website presentation system: `@flowstack-ui/brick` `0.1.2`
+- Website application version: `0.2.5` until the approved `1.0.0` release commit
 
-## Constraints
+## Remaining Release Gates
 
-- The production build cannot depend on `../package/`.
-- Component examples are static code; MDX and live previews are deferred.
-- Repository setup, documentation authoring, CI, playground testing, release
-  operations, and internal audit evidence remain outside the public site.
-- Version switching, analytics, accounts, comments, and a footer are outside
-  version-one scope.
-- The permanent logo is not yet approved.
-- Real-device and assistive-technology review remains a manual release check.
+- Owner visual review on localhost and immutable Vercel preview.
+- Manual macOS/iPhone assistive-technology, zoom, orientation, motion, and
+  forced-colors evidence.
+- Preview Lighthouse and delivery diagnostics.
+- Production schema, social-card, analytics, canonical-domain, sitemap,
+  indexing, and rollback verification.
 
 ## Deployment Status
 
-The canonical source repository is
+The canonical repository is
 [`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
-Vercel deploys the public site at [atom-ui.com](https://atom-ui.com) from the
-`main` branch. Cloudflare remains the authoritative DNS provider; the apex
-record resolves directly to Vercel and `www` redirects to the apex domain.
+Vercel currently deploys version one at [atom-ui.com](https://atom-ui.com) from
+`main`; version two has not been published.

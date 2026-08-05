@@ -1,43 +1,27 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { ScrollArea } from "@flowstack-ui/atom/scroll-area";
-import { Sidebar } from "@flowstack-ui/atom/sidebar";
-import { SkipLink } from "@flowstack-ui/atom/skip-link";
-import { Tooltip } from "@flowstack-ui/atom/tooltip";
-import type { DocumentHeading } from "@/lib/documents";
+import Link from "next/link";
+import { DocsMobileNavigation } from "./docs-mobile-navigation";
 import { DocsNavigation } from "./docs-navigation";
 import { OnThisPage } from "./on-this-page";
-import { SiteHeader } from "./site-header";
+import type { DocumentHeading } from "@/lib/documents";
+import type { DocumentationScope } from "@/lib/docs-manifest";
 
-export function DocsShell({
-  children,
-  headings,
-}: {
-  children: ReactNode;
-  headings: DocumentHeading[];
-}) {
+export function DocsShell({ children, headings, scope = "guides", title }: { children: ReactNode; headings: DocumentHeading[]; scope?: DocumentationScope; title: string }) {
+  const overview = scope === "primitives"
+    ? { href: "/docs/components/", label: "Primitives overview" }
+    : { href: "/docs/", label: "Guides overview" };
   return (
-    <Tooltip.Provider>
-      <SkipLink.Root className="skip-link" href="#main-content">
-        Skip to content
-      </SkipLink.Root>
-      <SiteHeader />
-      <Sidebar.Root className="docs-shell" state="expanded">
-        <Sidebar.Panel className="desktop-sidebar" aria-label="Documentation navigation">
-          <ScrollArea.Root className="sidebar-scroll-area">
-            <ScrollArea.Viewport className="sidebar-scroll-viewport">
-              <DocsNavigation enableSearchShortcut />
-            </ScrollArea.Viewport>
-          </ScrollArea.Root>
-        </Sidebar.Panel>
-        <Sidebar.Main id="main-content" tabIndex={-1} className="docs-main">
-          <div className="docs-layout">
-            <article className="docs-article">{children}</article>
-          </div>
-        </Sidebar.Main>
-        <OnThisPage headings={headings} />
-      </Sidebar.Root>
-    </Tooltip.Provider>
+    <main id="main-content" className="docs-shell section-shell">
+      <aside className="docs-sidebar" aria-label="Documentation navigation">
+        <div className="docs-sidebar__scroll">
+          <div className="docs-sidebar__inner"><Link className="docs-overview-link" href={overview.href}>{overview.label}</Link><DocsNavigation scope={scope} /></div>
+        </div>
+      </aside>
+      <div className="docs-content">
+        <DocsMobileNavigation headings={headings} scope={scope} title={title} />
+        {children}
+      </div>
+      <aside className="docs-rail" aria-label="On this page"><span>On this page</span><OnThisPage headings={headings} /></aside>
+    </main>
   );
 }

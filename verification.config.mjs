@@ -1,7 +1,7 @@
 const verification = {
   schemaVersion: 1,
   id: "atom-website",
-  kind: "public-static-website",
+  kind: "public-prerendered-next-website",
   commands: {
     focused: "check:focused",
     repository: "check:repository",
@@ -14,7 +14,7 @@ const verification = {
       name: "website",
       developmentPort: 3002,
       testPort: 4002,
-      configurationFiles: ["package.json", "scripts/serve-static.mjs"],
+      configurationFiles: ["package.json", "playwright.config.ts"],
       strictPort: false,
     },
   ],

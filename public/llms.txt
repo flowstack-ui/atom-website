@@ -1,0 +1,113 @@
+# Atom UI
+
+Atom UI is an accessible, headless React primitive library and the behavioral foundation beneath Brick.
+
+## Canonical resources
+
+- [Website](https://atom-ui.com/)
+- [Documentation overview](https://atom-ui.com/docs/)
+- [Getting started](https://atom-ui.com/docs/overview/getting-started/)
+- [Accessibility](https://atom-ui.com/docs/overview/accessibility/)
+- [Primitive catalog](https://atom-ui.com/docs/components/)
+- [GitHub repository](https://github.com/flowstack-ui/atom)
+- [npm package](https://www.npmjs.com/package/@flowstack-ui/atom)
+
+## Documentation map
+
+### Overview
+
+- [Introduction](https://atom-ui.com/docs/overview/introduction/)
+- [Getting started](https://atom-ui.com/docs/overview/getting-started/)
+- [Accessibility](https://atom-ui.com/docs/overview/accessibility/)
+- [Releases](https://atom-ui.com/docs/overview/releases/)
+
+### Guides
+
+- [Styling](https://atom-ui.com/docs/guides/styling/)
+- [Animation](https://atom-ui.com/docs/guides/animation/)
+- [Composition](https://atom-ui.com/docs/guides/composition/)
+- [Server-side rendering](https://atom-ui.com/docs/guides/server-side-rendering/)
+- [Imports](https://atom-ui.com/docs/guides/imports/)
+- [Public API](https://atom-ui.com/docs/guides/public-api/)
+
+### Architecture
+
+- [Package boundary](https://atom-ui.com/docs/architecture/overview/)
+
+### Components
+
+- [Accordion](https://atom-ui.com/docs/components/accordion/)
+- [Alert Dialog](https://atom-ui.com/docs/components/alert-dialog/)
+- [App Bar](https://atom-ui.com/docs/components/app-bar/)
+- [Aspect Ratio](https://atom-ui.com/docs/components/aspect-ratio/)
+- [Avatar](https://atom-ui.com/docs/components/avatar/)
+- [Badge](https://atom-ui.com/docs/components/badge/)
+- [Bottom Navigation](https://atom-ui.com/docs/components/bottom-navigation/)
+- [Breadcrumb](https://atom-ui.com/docs/components/breadcrumb/)
+- [Button](https://atom-ui.com/docs/components/button/)
+- [Checkbox](https://atom-ui.com/docs/components/checkbox/)
+- [Checkbox Group](https://atom-ui.com/docs/components/checkbox-group/)
+- [Clipboard](https://atom-ui.com/docs/components/clipboard/)
+- [Collapsible](https://atom-ui.com/docs/components/collapsible/)
+- [Combobox](https://atom-ui.com/docs/components/combobox/)
+- [Context Menu](https://atom-ui.com/docs/components/context-menu/)
+- [Data Grid](https://atom-ui.com/docs/components/data-grid/)
+- [Dialog](https://atom-ui.com/docs/components/dialog/)
+- [Divider](https://atom-ui.com/docs/components/divider/)
+- [Drawer](https://atom-ui.com/docs/components/drawer/)
+- [Dropdown Menu](https://atom-ui.com/docs/components/dropdown-menu/)
+- [Feed](https://atom-ui.com/docs/components/feed/)
+- [Field](https://atom-ui.com/docs/components/field/)
+- [Fieldset](https://atom-ui.com/docs/components/fieldset/)
+- [File Upload](https://atom-ui.com/docs/components/file-upload/)
+- [Form](https://atom-ui.com/docs/components/form/)
+- [Hover Card](https://atom-ui.com/docs/components/hover-card/)
+- [Image](https://atom-ui.com/docs/components/image/)
+- [Input](https://atom-ui.com/docs/components/input/)
+- [Label](https://atom-ui.com/docs/components/label/)
+- [Link](https://atom-ui.com/docs/components/link/)
+- [List](https://atom-ui.com/docs/components/list/)
+- [Listbox](https://atom-ui.com/docs/components/listbox/)
+- [Menu](https://atom-ui.com/docs/components/menu/)
+- [Menubar](https://atom-ui.com/docs/components/menubar/)
+- [Modal](https://atom-ui.com/docs/components/modal/)
+- [Multi Select](https://atom-ui.com/docs/components/multi-select/)
+- [Nav List](https://atom-ui.com/docs/components/nav-list/)
+- [Navigation Menu](https://atom-ui.com/docs/components/navigation-menu/)
+- [Number Input](https://atom-ui.com/docs/components/number-input/)
+- [OTP Field](https://atom-ui.com/docs/components/otp-field/)
+- [Pagination](https://atom-ui.com/docs/components/pagination/)
+- [Password Toggle Field](https://atom-ui.com/docs/components/password-toggle-field/)
+- [Popover](https://atom-ui.com/docs/components/popover/)
+- [Pressable](https://atom-ui.com/docs/components/pressable/)
+- [Progress](https://atom-ui.com/docs/components/progress/)
+- [Radio Group](https://atom-ui.com/docs/components/radio-group/)
+- [Rating](https://atom-ui.com/docs/components/rating/)
+- [Scroll Area](https://atom-ui.com/docs/components/scroll-area/)
+- [Select](https://atom-ui.com/docs/components/select/)
+- [Sidebar](https://atom-ui.com/docs/components/sidebar/)
+- [Skip Link](https://atom-ui.com/docs/components/skip-link/)
+- [Slider](https://atom-ui.com/docs/components/slider/)
+- [Swipeable Item](https://atom-ui.com/docs/components/swipeable-item/)
+- [Switch](https://atom-ui.com/docs/components/switch/)
+- [Table](https://atom-ui.com/docs/components/table/)
+- [Tabs](https://atom-ui.com/docs/components/tabs/)
+- [Textarea](https://atom-ui.com/docs/components/textarea/)
+- [Toast](https://atom-ui.com/docs/components/toast/)
+- [Toggle](https://atom-ui.com/docs/components/toggle/)
+- [Toggle Group](https://atom-ui.com/docs/components/toggle-group/)
+- [Toolbar](https://atom-ui.com/docs/components/toolbar/)
+- [Tooltip](https://atom-ui.com/docs/components/tooltip/)
+- [Tree](https://atom-ui.com/docs/components/tree/)
+- [Tree Grid](https://atom-ui.com/docs/components/tree-grid/)
+
+### Utilities
+
+- [Collection](https://atom-ui.com/docs/utilities/collection/)
+- [Direction](https://atom-ui.com/docs/utilities/direction/)
+- [Hooks](https://atom-ui.com/docs/utilities/hooks/)
+- [Portal](https://atom-ui.com/docs/utilities/portal/)
+- [Virtualizer](https://atom-ui.com/docs/utilities/virtualizer/)
+- [Visually Hidden](https://atom-ui.com/docs/utilities/visually-hidden/)
+
+Use the canonical documentation for public APIs, accessibility contracts, and current package-version guidance.

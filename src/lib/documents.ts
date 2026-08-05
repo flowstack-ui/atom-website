@@ -95,3 +95,12 @@ export function loadDocument(entry: DocumentEntry): LoadedDocument {
     headings: extractHeadings(source),
   };
 }
+
+export function primitiveDocumentBody(source: string) {
+  const lines = source.split("\n");
+  let index = 1;
+  while (index < lines.length && !lines[index].trim()) index += 1;
+  while (index < lines.length && lines[index].trim()) index += 1;
+  while (index < lines.length && !lines[index].trim()) index += 1;
+  return lines.slice(index).join("\n").trimStart();
+}

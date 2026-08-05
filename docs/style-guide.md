@@ -2,63 +2,58 @@
 
 ## Direction
 
-The site is deliberately quiet and documentation-first: system typography,
-neutral colors, one-pixel borders, compact navigation, and no decorative
-imagery.
+Use quiet cosmic precision: ion cyan, spectral blue, plasma mint, deep
+blue-black, mineral white, restrained spatial fields, and technical geometry.
+Homepage visuals may be expressive; documentation remains on an opaque, calm
+reading plane.
+
+The permanent origin mark combines one central particle, an interrupted orbit,
+and two asymmetric signals. It must remain recognizable without a background
+tile at favicon, app-bar, footer, and social sizes.
 
 ## Layout
 
-- Header: 56 pixels on desktop, 52 pixels on mobile. Its inner surface is fixed
-  and uses the opaque `--page-bg`; do not add transparency or backdrop filters
-  because Safari uses this viewport-edge surface for browser-chrome color
-  extension.
-- Wide desktop shell: full viewport width with balanced 280-pixel outer rails.
-- Article: up to 858 pixels, centered inside the flexible middle region.
-- Desktop three-column layout begins at 1280 pixels.
-- Right navigation is hidden below 1280 pixels.
-- Right navigation uses a 15-pixel title and 14.5-pixel links so its hierarchy
-  remains readable while staying secondary to the article.
-- Desktop navigation becomes a Drawer below 1024 pixels.
-- Tablet Drawer: `clamp(360px, 48vw, 420px)` with 48-pixel link targets.
-- Phone Drawer: full viewport with the existing 16-pixel navigation and
-  44-pixel link targets.
-- Desktop navigation uses 14-pixel section titles, 14.5-pixel links, and
-  38-pixel minimum link targets.
-- On responsive widths, the menu trigger is directly after the theme control;
-  the GitHub action is hidden below 768 pixels. GitHub and theme controls use
-  the same Atom Tooltip presentation on hover-capable, fine-pointer devices.
-  Tooltips are disabled on touch-first devices, where the controls retain their
-  accessible labels without long-press overlays.
+- App bar: 72 pixels on desktop and 64 pixels at compact widths.
+- Marketing content: centered within a 92rem maximum and responsive gutters.
+- Documentation: up to 100rem with 15.5rem left and 14rem right rails.
+- Article: up to 51rem for long-form reading.
+- Right outline disappears below 1181 pixels; both rails become responsive
+  Drawers below 1024 pixels.
+- Homepage composition transitions follow content pressure at 1320, 1180,
+  1024, 900, and 640 pixels rather than device names.
 
-Detailed invariants live in `responsive-layout.md`.
+## Theme
 
-## Search
+Theme values map Brick's public semantic tokens in `globals.css`. Both
+appearances must qualify foreground/surface pairs, action states, focus,
+selection, borders, code syntax, and compact text. The pre-paint script assigns
+`data-brick-appearance` before hydration and synchronizes native color scheme.
 
-The navigation search trigger appears before Overview. It opens a centered
-Atom Dialog with a page overlay, focused search input, and scrollable results.
-The desktop panel is at most 580 pixels wide; smaller viewports retain safe
-outer space. Search uses the same neutral palette, focus treatment, and reduced
-motion rules as the rest of the shell. The phone input must remain at least 16
-pixels to prevent automatic viewport zoom on mobile Safari.
+Brand artwork may use website-owned raw values. Finished components use Brick
+semantic roles. Do not patch private Brick or Atom anatomy.
 
-## Themes
+## Search And Drawers
 
-Theme values live in CSS custom properties. Both themes must maintain readable
-text contrast and visible focus indicators. The browser color scheme follows
-the selected theme. The document canvas and direct body theme surface use
-`--page-bg`; the body itself remains transparent. The document root receives
-`light-theme` or `dark-theme`. Explicit theme-color metadata is currently
-omitted. These choices match important parts of the Radix theme application
-approach but are not, by themselves, evidence that mobile browser chrome will
-repaint immediately. The fixed header must also retain an opaque theme
-background at the viewport edge.
+The app-bar trigger opens a Brick Dialog with a focused Input and locally ranked
+results. Desktop and tablet use a centered panel; phone uses a full-viewport
+surface. The phone input stays at least 16 pixels to prevent Safari focus zoom.
 
-## Components
+Global mobile navigation is a branded full-height Drawer. Documentation uses
+separate Browse and page-outline Drawers below its rail breakpoint. Controls
+remain touch sized and carry explicit accessible names.
 
-Atom data attributes are the preferred state styling surface. Do not style
-private implementation structure or import a visual component framework.
+## Documentation
 
-## Motion
+- Use ordinary sentence case for explanatory prose. Uppercase treatment is
+  reserved for short labels and eyebrows.
+- Build-time syntax color serves comprehension without a browser Shiki runtime.
+- Code and API tables scroll inside bounded, keyboard-focusable regions.
+- Page outlines derive from real headings; previous/next navigation follows the
+  complete manifest.
+- Decorative diagrams must not compete with body text, code, or focus rings.
 
-Use only restrained feedback transitions. Respect `prefers-reduced-motion` and
-never delay semantic or focus state for decorative motion.
+## Motion And Alternate Modes
+
+Use restrained motion only for spatial ambience and direct state feedback.
+Respect reduced motion, forced colors, and native focus indication. Decorative
+motion never communicates an accessibility claim by itself.

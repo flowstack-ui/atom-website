@@ -17,7 +17,7 @@ export default defineConfig({
     { name: "mobile-ios-webkit", use: { ...devices["iPhone 15"] } },
   ],
   webServer: {
-    command: "node scripts/serve-static.mjs",
+    command: "next start --hostname 127.0.0.1 --port 4002",
     url: "http://127.0.0.1:4002",
     reuseExistingServer: false,
     timeout: 30_000,

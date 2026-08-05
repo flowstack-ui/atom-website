@@ -7,6 +7,8 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: siteUrl, changeFrequency: "weekly", priority: 1 },
+    { url: `${siteUrl}/docs/`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/docs/components/`, changeFrequency: "weekly", priority: 0.9 },
     ...allDocuments.map((document) => ({
       url: `${siteUrl}${document.href}`,
       changeFrequency: "weekly" as const,

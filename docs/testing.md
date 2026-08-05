@@ -18,16 +18,16 @@ Use the explicit tiers:
   and WebKit smoke coverage.
 
 `npm run verify` aliases the repository tier and `npm run test:all` aliases the
-release tier. Browser tests serve the static `out/` directory on strict port
-`4002`, fail if another listener occupies it, and stop their owned server on
-exit. `npm run test:processes` performs the read-only preflight. Manual
+release tier. Browser tests start the built Next.js application on reserved
+port `4002`, fail if another listener occupies it, and stop their owned server
+on exit. `npm run test:processes` performs the read-only preflight. Manual
 real-device review uses `npm run dev:network` on development port `3002`.
 
 ## Representative Routes
 
 Review at least:
 
-- Introduction;
+- the product homepage and documentation overview;
 - Getting started;
 - Styling;
 - Public API and Package boundary;

@@ -1,46 +1,57 @@
 # Responsive Layout
 
-## Wide Desktop
+## Marketing Pages
 
-At 1280 pixels and wider, the shell spans the full viewport. The left
-documentation navigation and right quick-navigation rail are each 280 pixels.
-The middle region absorbs remaining width while the readable article stays at
-or below 858 pixels. Desktop section titles use 14-pixel text, links use
-14.5-pixel text, and navigation links retain a 38-pixel minimum target.
+The desktop hero balances product copy and the interaction field. At 1320
+pixels the copy owns the first viewport and the interaction field moves below
+it, preventing both columns from compressing. Content sections change columns
+at their own pressure points; the 640-pixel state stacks actions, cards,
+expressions, families, FAQ, footer navigation, and 404 content.
 
-The right quick navigation is hidden from 1024 through 1279 pixels. The left
-desktop navigation remains visible in that range.
+Review 1440, 1320, 1280, 1180, 1080, 1024, 900, 768, 640, 430, 390, and 320
+pixels, plus short desktop viewports.
 
-## Tablet
+## Documentation
 
-From 768 through 1023 pixels, navigation uses a left Drawer sized with
-`clamp(360px, 48vw, 420px)`. Navigation links use 15-pixel text and a minimum
-48-pixel target. The search trigger aligns with the link edges but uses a
-compact 44-pixel touch target. Section labels use 12-pixel text. Header icon
-controls remain at least 44 pixels.
+Guides and Primitives share the reading plane but never share a local route
+list. Guide routes expose overview, guides, and architecture; primitive routes
+expose all component and utility public subpaths through counted, collapsible
+categories. Previous/next navigation remains inside the current scope.
 
-## Phone
+- Above 1180 pixels: left navigation, article, and right page outline.
+- From 1024 through 1180 pixels: persistent left navigation and article; the
+  right outline is available from the responsive page control.
+- Below 1024 pixels: both rails become sticky-toolbar Drawers.
+- Below 640 pixels: article gutters reduce, API tables and code stay internally
+  scrollable, and previous/next remain one balanced row.
 
-Below 768 pixels, navigation fills the viewport and retains 16-pixel link text,
-44-pixel minimum link targets, safe-area padding, and the established spacing.
-GitHub is hidden. The menu trigger appears at the far right immediately after
-the theme control. Search is an inline Combobox at the top of the Drawer: links stay
-visible while its query is empty and are replaced by unboxed results while the
-query contains text. The input retains 16-pixel text so mobile Safari does not
-zoom the viewport when it receives focus. Header tooltips are disabled for
-touch-first pointers so long presses cannot leave an overlay open.
+Each primitive page owns a bounded live-behavior canvas. The canvas centers
+compact specimens, aligns expanding specimens from the top so disclosure grows
+downward, gives collection specimens the available width, and owns internal
+horizontal overflow when a semantic collection cannot compress further. On
+phones it becomes full bleed without creating document-level overflow; the
+Interactive status remains a single-line header Badge and the behavior signal
+stacks below its instruction.
+
+The page owns vertical scrolling. The desktop navigation is sticky but does not
+create an independent Brick ScrollArea, preserving route and rail position and
+avoiding nested page-scale landmarks.
+
+## Global Navigation
+
+Guides, Primitives, and Accessibility are mutually exclusive global sections.
+Primary links disappear below 1181 pixels and a Drawer trigger appears. Search
+becomes icon-only below 900 pixels, GitHub hides below 640 pixels, and the Atom
+mark plus exact package version remain visible. The global Drawer becomes full
+viewport on phone widths and closes automatically when returning to desktop.
 
 ## Invariants
 
-- The header reserves its layout height while its inner surface remains fixed,
-  opaque, and painted with `--page-bg` at every breakpoint.
-- The header and documentation shell do not gain a centered maximum-width box.
-- Article line length remains capped even as the middle region expands.
-- Tablet changes must not reduce or restyle the phone navigation contract.
-- Navigation and header controls remain keyboard accessible and touch sized.
-- Search appears before Overview in every navigation surface and aligns with
-  the navigation-link width.
-- The wide-desktop page-navigation title is visually larger than its links;
-  both remain readable without competing with article content.
-- Quick-navigation links place their target heading 16 pixels below the sticky
-  app bar instead of relying on the browser's default hash alignment.
+- No page-level horizontal overflow at any supported width.
+- Tables and code expose keyboard-accessible internal overflow.
+- Search, theme, GitHub, menu, and Drawer-close controls retain centered icons,
+  accessible names, and touch-sized targets.
+- Focus indicators remain visible inside rails, code, tables, and footer links.
+- Responsive changes preserve reading order and heading hierarchy.
+- Live specimens never clip their active content or move overflow responsibility
+  to the document viewport.
