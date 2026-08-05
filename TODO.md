@@ -7,9 +7,8 @@ This tracker contains active website-owned unfinished work only.
 - Complete physical iPhone touch and VoiceOver review plus macOS Safari
   VoiceOver, 200/400 percent zoom, text enlargement, landscape, reduced-motion,
   and forced-colors manual evidence.
-- Verify schema, social cards, analytics, canonical redirects, sitemap, and
-  rollback after production promotion; then submit the canonical sitemap to
-  Google Search Console and Bing Webmaster Tools and request priority indexing.
+- Submit the canonical sitemap to Google Search Console and Bing Webmaster
+  Tools and request priority indexing.
 
 ## Deferred Product Work
 

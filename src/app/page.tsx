@@ -46,7 +46,7 @@ export default function Home() {
       <main id="main-content">
         <section className="home-hero section-shell">
           <div className="home-hero__copy">
-            <Badge tone="accent" variant="soft" shape="pill"><Orbit size={14} aria-hidden="true" /> Atom v{atomVersion}</Badge>
+            <Badge className="icon-label-badge" tone="accent" variant="soft" shape="pill"><Orbit size={14} aria-hidden="true" /> Atom v{atomVersion}</Badge>
             <Text as="h1" className="hero-title" wrap="balance">Behavior at the <span>smallest useful unit.</span></Text>
             <Text as="p" className="hero-lede" tone="secondary" variant="body-lg" wrap="pretty">Accessible, headless React primitives for keyboard, touch, focus, state, and screen-reader semantics—ready for the visual system only you can design.</Text>
             <HStack className="hero-actions" gap="3" wrap>

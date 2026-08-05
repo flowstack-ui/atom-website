@@ -82,7 +82,7 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <Link className="brand-link" href="/" aria-label={`Atom UI v${atomVersion} home`}>
+      <Link className="brand-link" href="/" aria-label={`Atom v${atomVersion} — Atom UI home`}>
         <BrandMark />
         <span className="version-pill">v{atomVersion}</span>
       </Link>

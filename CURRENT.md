@@ -1,8 +1,7 @@
 # Current Atom UI Website State
 
-Version two is qualified as the `1.0.0` release candidate on the
-`rebuild/atom-website-v2` review branch. The canonical production site remains
-version one until the approved release is promoted from `main`.
+Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
+Website `1.0.1` is the production follow-up for strict visible-label matching.
 
 ## Implemented Version Two
 
@@ -61,14 +60,14 @@ version one until the approved release is promoted from `main`.
 - Documented product: `@flowstack-ui/atom` `0.20.11`
 - Exact Atom source commit: `content/atom-source.json`
 - Website presentation system: `@flowstack-ui/brick` `0.1.2`
-- Website application version: `1.0.0`
+- Website application version: `1.0.1`
 
 ## Remaining Release Gates
 
 - Manual macOS/iPhone assistive-technology, zoom, orientation, motion, and
   forced-colors evidence.
-- Production schema, social-card, analytics, canonical-domain, sitemap,
-  indexing, and rollback verification.
+- Google Search Console and Bing Webmaster Tools sitemap submission and
+  priority indexing requests.
 
 Owner review has covered the complete localhost and public preview experience.
 The release gate passes in desktop/mobile Chromium and WebKit. Preview
@@ -81,5 +80,7 @@ because Vercel adds `X-Robots-Tag: noindex` outside the application.
 
 The canonical repository is
 [`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
-Vercel currently deploys version one at [atom-ui.com](https://atom-ui.com) from
-`main`; version two has not been published.
+Vercel deploys version two at [atom-ui.com](https://atom-ui.com) from `main`.
+Canonical redirects, schema, social artwork, analytics injection, crawler
+outputs, all sitemap URLs, and the retained pre-release rollback revision have
+been verified in production.

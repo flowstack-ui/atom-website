@@ -25,7 +25,7 @@ export default function NotFound() {
   return (
     <main id="main-content" className="not-found">
       <div className="not-found__copy">
-        <Badge tone="accent" variant="soft"><Orbit size={14} aria-hidden="true" /> Signal lost</Badge>
+        <Badge className="icon-label-badge" tone="accent" variant="soft"><Orbit size={14} aria-hidden="true" /> Signal lost</Badge>
         <h1>404</h1>
         <h2>This particle left the system.</h2>
         <p>The route does not belong to the current Atom documentation graph. Return home or continue with the public primitive catalog.</p>
