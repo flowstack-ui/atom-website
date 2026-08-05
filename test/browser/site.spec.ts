@@ -440,7 +440,7 @@ test("homepage focus indicators follow their visible control geometry", async ({
   const eyebrowGap = await page.locator(".home-hero .icon-label-badge").evaluate((element) => Number.parseFloat(getComputedStyle(element).columnGap));
   expect(eyebrowGap).toBeGreaterThanOrEqual(7);
 
-  const brand = page.getByRole("link", { name: `Atom v${atomVersion} — Atom UI home` });
+  const brand = page.getByRole("link", { name: `Atom v${atomVersion}` });
   await brand.focus();
   await expect(brand).toHaveCSS("outline-style", "solid");
   await expect(brand).toHaveCSS("border-radius", "11.2px");
@@ -460,6 +460,12 @@ test("homepage focus indicators follow their visible control geometry", async ({
   await footerLink.focus();
   await expect(footerLink).toHaveCSS("outline-style", "none");
   await expect(footerLink.locator("span")).toHaveCSS("outline-style", "solid");
+});
+
+test("header brand passes strict visible-label matching", async ({ page }) => {
+  await page.goto("/");
+  const results = await new AxeBuilder({ page }).withRules(["label-content-name-mismatch"]).analyze();
+  expect(results.violations).toEqual([]);
 });
 
 test("mobile navigation keeps square focus geometry and centers icon-copy pairs", async ({ page, isMobile }) => {

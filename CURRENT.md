@@ -1,7 +1,7 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.0.1` is the production follow-up for strict visible-label matching.
+Website `1.0.2` is the production follow-up for strict visible-label matching.
 
 ## Implemented Version Two
 
@@ -60,7 +60,7 @@ Website `1.0.1` is the production follow-up for strict visible-label matching.
 - Documented product: `@flowstack-ui/atom` `0.20.11`
 - Exact Atom source commit: `content/atom-source.json`
 - Website presentation system: `@flowstack-ui/brick` `0.1.2`
-- Website application version: `1.0.1`
+- Website application version: `1.0.2`
 
 ## Remaining Release Gates
 
