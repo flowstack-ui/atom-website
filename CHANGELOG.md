@@ -1,10 +1,15 @@
 # Atom UI Website Changelog
 
+## 1.0.2 — 2026-08-05
+
+- Matched the branded home link's accessible name exactly to its rendered
+  `Atom v0.20.11` label and enabled Axe's experimental WCAG 2.5.3
+  label-content rule in the permanent cross-browser suite.
+
 ## 1.0.1 — 2026-08-05
 
 - Preserved the visibly adjacent `Atom v0.20.11` text in the branded home
-  link's accessible name, satisfying experimental WCAG 2.5.3 label-content
-  matching without removing the link's product and destination context.
+  link's accessible name while retaining product and destination context.
 - Added deliberate icon-to-label spacing to the homepage version and 404
   signal eyebrows.
 

@@ -82,7 +82,7 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <Link className="brand-link" href="/" aria-label={`Atom v${atomVersion} — Atom UI home`}>
+      <Link className="brand-link" href="/">
         <BrandMark />
         <span className="version-pill">v{atomVersion}</span>
       </Link>
@@ -97,7 +97,7 @@ export function SiteHeader() {
         <Dialog.Root open={searchOpen} onOpenChange={(open) => { if (open) loadSearch(); setSearchOpen(open); }}>
           <Dialog.Trigger asChild>
             <Button
-              aria-label="Search documentation"
+              aria-label="Search ⌘K"
               aria-keyshortcuts="Meta+K Control+K"
               className="search-trigger"
               size="sm"
