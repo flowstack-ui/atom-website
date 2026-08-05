@@ -1,6 +1,6 @@
 # Atom UI Website Changelog
 
-## Unreleased
+## 1.0.0 — 2026-08-05
 
 - Rebuilt Atom UI as a designed product and learning website powered by exact
   published Brick `0.1.2`, with exact published Atom `0.20.11` installed

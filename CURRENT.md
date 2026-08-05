@@ -1,8 +1,8 @@
 # Current Atom UI Website State
 
-Version two is implemented on the `rebuild/atom-website-v2` review branch. The
-canonical production site remains version one until owner review and release
-qualification approve promotion.
+Version two is qualified as the `1.0.0` release candidate on the
+`rebuild/atom-website-v2` review branch. The canonical production site remains
+version one until the approved release is promoted from `main`.
 
 ## Implemented Version Two
 
@@ -61,16 +61,21 @@ qualification approve promotion.
 - Documented product: `@flowstack-ui/atom` `0.20.11`
 - Exact Atom source commit: `content/atom-source.json`
 - Website presentation system: `@flowstack-ui/brick` `0.1.2`
-- Website application version: `0.2.5` until the approved `1.0.0` release commit
+- Website application version: `1.0.0`
 
 ## Remaining Release Gates
 
-- Owner visual review on localhost and immutable Vercel preview.
 - Manual macOS/iPhone assistive-technology, zoom, orientation, motion, and
   forced-colors evidence.
-- Preview Lighthouse and delivery diagnostics.
 - Production schema, social-card, analytics, canonical-domain, sitemap,
   indexing, and rollback verification.
+
+Owner review has covered the complete localhost and public preview experience.
+The release gate passes in desktop/mobile Chromium and WebKit. Preview
+Lighthouse measured 100 Accessibility, Best Practices, and Agentic Browsing;
+performance varied from 94–99 mobile and 99–100 desktop with zero layout shift
+and at most 30 ms total blocking time. Preview SEO is intentionally unscored
+because Vercel adds `X-Robots-Tag: noindex` outside the application.
 
 ## Deployment Status
 
