@@ -81,6 +81,8 @@
   nightly clean-run qualification.
 - Increased light-theme secondary-text contrast and made horizontally
   scrollable Markdown code and table regions keyboard-focusable.
+- Kept the visible Atom version in the header brand's accessible link name so
+  experimental label-content validation agrees with the rendered identity.
 - Simplified every primitive Feature Signals list into consistent compact
   prose cards with natural inline code; corrected duplicated required markers;
   and rebuilt the Slider, App Bar, Bottom Navigation, Nav List, Context Menu,

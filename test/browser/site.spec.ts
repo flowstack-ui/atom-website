@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
+import { atomVersion } from "../../src/lib/site";
 
 const navigation = JSON.parse(readFileSync(new URL("../../content/navigation.json", import.meta.url), "utf8")) as {
   sections: Array<{ slug: string; documents: Array<{ slug: string; title: string }> }>;
@@ -434,7 +435,7 @@ test("desktop documentation navigation owns a usable native scroll region", asyn
 test("homepage focus indicators follow their visible control geometry", async ({ page }) => {
   await page.goto("/");
 
-  const brand = page.getByRole("link", { name: "Atom UI home" });
+  const brand = page.getByRole("link", { name: `Atom UI v${atomVersion} home` });
   await brand.focus();
   await expect(brand).toHaveCSS("outline-style", "solid");
   await expect(brand).toHaveCSS("border-radius", "11.2px");
