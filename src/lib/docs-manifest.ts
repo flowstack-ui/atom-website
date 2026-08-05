@@ -1,6 +1,6 @@
 import navigation from "../../content/navigation.json";
 
-export type SectionSlug = "overview" | "guides" | "components" | "utilities";
+export type SectionSlug = "overview" | "guides" | "architecture" | "components" | "utilities";
 
 export type DocumentEntry = {
   slug: string;
@@ -16,6 +16,8 @@ export type NavigationSection = {
   documents: Array<{ slug: string; title: string }>;
 };
 
+export type DocumentationScope = "guides" | "primitives";
+
 export const navigationSections = navigation.sections as NavigationSection[];
 
 export const allDocuments: DocumentEntry[] = navigationSections.flatMap(
@@ -27,6 +29,19 @@ export const allDocuments: DocumentEntry[] = navigationSections.flatMap(
       href: `/docs/${section.slug}/${document.slug}/`,
     })),
 );
+
+export const guideDocuments = allDocuments.filter((document) => document.section !== "components" && document.section !== "utilities");
+export const primitiveDocuments = allDocuments.filter((document) => document.section === "components" || document.section === "utilities");
+
+export function documentationScopeFor(entry: DocumentEntry): DocumentationScope {
+  return entry.section === "components" || entry.section === "utilities" ? "primitives" : "guides";
+}
+
+export function navigationSectionsFor(scope: DocumentationScope) {
+  return navigationSections.filter((section) => scope === "primitives"
+    ? section.slug === "components" || section.slug === "utilities"
+    : section.slug !== "components" && section.slug !== "utilities");
+}
 
 export function getDocumentEntry(section: string, slug: string) {
   return allDocuments.find(

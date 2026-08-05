@@ -1,6 +1,7 @@
 # Website Deployment
 
-The website emits a fully static `out/` directory through `npm run build`.
+The website uses native Next.js output on Vercel. Every known content route is
+prerendered at build time; runtime dynamic rendering is not required.
 
 The canonical source repository is
 [`flowstack-ui/atom-website`](https://github.com/flowstack-ui/atom-website).
@@ -19,14 +20,15 @@ It remains separate from the
 
 ## Vercel
 
-Vercel hosts the production static export from the `main` branch at
+Vercel hosts the production Next.js application from the `main` branch at
 [atom-ui.com](https://atom-ui.com). Cloudflare owns DNS, the apex record is
 DNS-only so traffic reaches Vercel directly, and the proxied `www` record owns
 the redirect to the apex domain. The website repository, deployment
 configuration, domain, and environment values remain independent from the
 package repository.
 
-## Alternative Static Hosting
+## Hosting Boundary
 
-Because the output is static, another host can serve `out/` if Vercel plan or
-repository restrictions do not fit the project.
+Do not assume the `.next/` directory is a portable static artifact. A future
+alternative host must support Next.js output or deliberately restore and
+qualify an export pipeline.

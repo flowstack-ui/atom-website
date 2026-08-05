@@ -15,6 +15,12 @@ const atomManifest = JSON.parse(
     "utf8",
   ),
 );
+const brickManifest = JSON.parse(
+  await readFile(
+    path.join(root, "node_modules/@flowstack-ui/brick/package.json"),
+    "utf8",
+  ),
+);
 const websiteManifest = JSON.parse(
   await readFile(path.join(root, "package.json"), "utf8"),
 );
@@ -121,8 +127,11 @@ if (provenance.version !== atomManifest.version) {
     `Content reviewed for Atom ${provenance.version}, installed ${atomManifest.version}`,
   );
 }
-if (websiteManifest.dependencies["@flowstack-ui/atom"] !== atomManifest.version) {
-  errors.push("Atom must be installed as the exact reviewed package version");
+if (websiteManifest.dependencies["@flowstack-ui/brick"] !== brickManifest.version) {
+  errors.push("Brick must be installed as the exact reviewed package version");
+}
+if (brickManifest.dependencies["@flowstack-ui/atom"] !== atomManifest.version) {
+  errors.push("Brick must resolve the exact reviewed Atom package version");
 }
 if (!/^[0-9a-f]{40}$/.test(provenance.sourceCommit)) {
   errors.push("Content provenance has no exact Atom source commit");

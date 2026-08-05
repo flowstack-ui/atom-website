@@ -4,17 +4,19 @@ Independent public documentation website for `@flowstack-ui/atom`.
 
 Production: [atom-ui.com](https://atom-ui.com)
 
-The site presents Atom-specific overview pages, guides, component API docs, and
-utilities in a minimal responsive documentation shell built from real Atom
-primitives. It supports light and dark themes and generates one static route per
-document without MDX or live examples. The shell spans the viewport on wide
-screens, uses a touch-sized navigation Drawer on tablet and phone widths, and
-provides local documentation search through an Atom Dialog.
+The site presents Atom as the headless behavioral foundation beneath accessible
+React interfaces. Its product shell consumes exact published Brick components
+through an application-owned Atom theme. Primitive pages import exact published
+Atom directly for route-scoped live behavior specimens, with all specimen
+appearance remaining website-owned. Every known route is statically
+prerendered by native Next.js and deployed through Vercel.
 
 ## Repository Boundary
 
-This is an independent Git repository. It installs the published Atom package
-from npm and must build without the sibling package repository.
+This is an independent Git repository. It installs exact published Brick and
+Atom releases and must build without either sibling package repository. Brick
+owns the finished website shell; direct Atom imports are limited to documented
+live behavior specimens.
 
 - Package source and authoritative API docs:
   [`flowstack-ui/atom`](https://github.com/flowstack-ui/atom)
@@ -55,14 +57,18 @@ Run all checks with:
 npm run verify
 ```
 
-`npm run test:all` is the equivalent comprehensive verification alias. The
-website does not yet own an automated browser server; port `4002` is reserved
-for that future test layer.
+Use `npm run check:focused` while editing content, `npm run check:repository`
+for a merge candidate, and `npm run check:release` for the production build
+plus desktop/mobile Chromium and WebKit smoke coverage. `npm run test:all` is
+the comprehensive release alias. Browser tests own strict preview port `4002`
+and never reuse an existing listener.
 
-The production build is a static export in `out/`.
+The production build uses native Next.js output. All known content routes are
+still prerendered as static HTML; no request-time application server behavior is
+required by the website.
 
-`npm run search:index` regenerates the local documentation search index. The
-normal build and verification commands run it automatically.
+The normal build regenerates the local search index, build-time syntax tokens,
+and linked `llms.txt`/complete `llms-full.txt` documentation outputs.
 
 ## Content
 

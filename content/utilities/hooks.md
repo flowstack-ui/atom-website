@@ -2,6 +2,15 @@
 
 Atom exports small hooks for controlled state, disclosure, presence, dismissal, focus, scrolling, and shared interaction behavior.
 
+## Features
+
+- Controlled-state and disclosure foundations for application-owned compositions.
+- Presence, Escape, and outside-interaction coordination shared with Atom primitives.
+- Focus scopes, containment, mount focus, and restoration for custom interaction layers.
+- Scroll locking and scroll-spy behavior with cleanup-aware lifecycle ownership.
+- Virtualization state and pure geometry helpers for large collections.
+- No prescribed DOM, roles, labels, or appearance beyond the contract each hook owns.
+
 ## When to use
 
 Use Atom hooks when building a styled or higher-level component that needs the same low-level behavior as Atom primitives. Prefer a complete primitive when it already matches the intended interaction pattern.

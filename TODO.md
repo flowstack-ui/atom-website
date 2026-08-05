@@ -2,12 +2,16 @@
 
 This tracker contains active website-owned unfinished work only.
 
-## Brand
+## Version Two Release Qualification
 
-- Replace the temporary text mark when an approved Atom logo asset is supplied.
+- Complete physical iPhone touch and VoiceOver review plus macOS Safari
+  VoiceOver, 200/400 percent zoom, text enlargement, landscape, reduced-motion,
+  and forced-colors manual evidence.
+- Verify schema, social cards, analytics, canonical redirects, sitemap, and
+  rollback after production promotion; then submit the canonical sitemap to
+  Google Search Console and Bing Webmaster Tools and request priority indexing.
 
 ## Deferred Product Work
 
-- MDX and live component examples.
 - Versioned documentation.
 - Automated package-to-website content update proposals.
