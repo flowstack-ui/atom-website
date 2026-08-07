@@ -199,7 +199,9 @@ its visual icon and accessible name. Atom never removes the label from the DOM.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.13.0
 

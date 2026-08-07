@@ -78,15 +78,15 @@ Source: https://atom-ui.com/docs/overview/getting-started/
 Atom UI is a headless React primitive package. It provides accessible behavior
 and semantic structure without visual styling.
 
+Install Atom in an existing React application:
+
 ```bash
 npm install @flowstack-ui/atom
 ```
 
-React and React DOM are peer dependencies:
-
-```bash
-npm install react react-dom
-```
+React and React DOM 18 or newer are peer dependencies and must be provided by
+the consuming application. Atom installs its Floating UI runtime dependency
+automatically.
 
 ## Usage
 
@@ -206,9 +206,25 @@ Source: https://atom-ui.com/docs/overview/releases/
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
-## Unreleased
+## 0.21.0
 
-- No unreleased changes.
+- Centered Navigation Menu's horizontal Viewport on its active trigger and
+  added collision-aware visual-viewport geometry, configurable padding, and
+  public resolved-position variables for styled connector alignment.
+
+## 0.20.12
+
+- Added package-level layer-selection and behavior-composition Agent Knowledge,
+  plus navigation and structural guidance for AppBar, Breadcrumb, Bottom
+  Navigation, Divider, Drawer, Image, Navigation Menu, Nav List, Pagination,
+  Scroll Area, Sidebar, Skip Link, Tabs, and Toolbar.
+- Extended the agent manifest with a backward-compatible `guides` collection
+  and validated `flowstack.agent-guide.v1` artifacts.
+- Added repository-owned verification metadata, stale test-port diagnostics,
+  non-reusing Playwright previews, parallel browser CI, nightly release
+  qualification, and exact-archive distributed publication checks.
+- Added a consumer-first npm README and packaged getting-started, import, and
+  public-API guides while keeping repository-only guidance out of the archive.
 
 ## 0.20.11
 
@@ -1130,7 +1146,7 @@ Source: https://atom-ui.com/docs/guides/imports/
 
 # Imports
 
-Atom docs use the main namespace import in component anatomy and examples:
+Use the main namespace import for convenient access to several primitives:
 
 ```tsx
 import { Input, Dialog, MultiSelect } from "@flowstack-ui/atom";
@@ -1183,8 +1199,8 @@ import { Image } from "@flowstack-ui/atom/image";
 import { useControllableState } from "@flowstack-ui/atom/hooks";
 ```
 
-Every subpath must be listed in `package.json` and emit JavaScript plus
-declaration files.
+Every supported subpath is declared by the package and provides JavaScript plus
+TypeScript declarations.
 
 ## Direct Part Exports
 
@@ -1211,7 +1227,8 @@ The following are not public package API:
 - tests
 - internal helper functions that are not exported from a public subpath
 
-Changing non-API files can still be a behavior change if public output changes.
+These implementation files may change between releases even when the public
+entrypoints remain compatible.
 
 ## Composition
 
@@ -2127,7 +2144,9 @@ controls need `role="toolbar"` and arrow-key navigation.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Added semantic `AppBar` root, toolbar, and section primitives.
@@ -2719,7 +2738,9 @@ its visual icon and accessible name. Atom never removes the label from the DOM.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.13.0
 
@@ -2992,7 +3013,9 @@ label that explains what it reveals.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.2.0
 
@@ -3850,19 +3873,22 @@ Source: https://atom-ui.com/docs/components/clipboard/
 Headless text-copy behavior with coordinated value, native controls, truthful
 asynchronous status, and accessible authored feedback.
 
-## Features
-
-- Controlled and uncontrolled text values with native input coordination.
-- Truthful `idle`, `copying`, `copied`, and `error` status transitions.
-- Latest-operation concurrency so an older request cannot overwrite a newer result.
-- Native Label and Input relationships with application-authored live feedback.
-- Secure Clipboard API integration without a deprecated success-claiming fallback.
-
 ## When to Use
 
 Use `Clipboard` when a user needs to copy a known text value, such as a command,
 URL, token, or code sample. Applications provide all styling, icons, and status
 wording. Clipboard does not read, paste, cut, or copy binary data.
+
+## Features
+
+- Coordinates controlled and uncontrolled text values across Label, Input,
+  ValueText, and Trigger parts.
+- Reports truthful `idle`, `copying`, `copied`, and `error` states for
+  asynchronous clipboard writes.
+- Keeps the newest copy attempt authoritative when earlier writes resolve or
+  reject later.
+- Supports disabled state, configurable status reset timing, an explicit write
+  adapter, authored live feedback, and public composition APIs.
 
 ## Import
 
@@ -6039,7 +6065,9 @@ no keyboard interaction.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -6334,6 +6362,11 @@ its registered descendant portals, and returns after close.
 | `Enter` / `Space` | Opens from Trigger and activates native button controls. |
 
 ## Changelog
+
+### Unreleased
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.20.3
 
@@ -8519,6 +8552,11 @@ region. Image adds no keyboard or focus behavior. See the
 [W3C WAI Images Tutorial](https://www.w3.org/WAI/tutorials/images/).
 
 ## Changelog
+
+### Unreleased
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.9.0
 
@@ -10954,14 +10992,6 @@ Source: https://atom-ui.com/docs/components/multi-select/
 
 Headless compact multi-value selection primitives.
 
-## Features
-
-- Controlled and uncontrolled value arrays with deduplication and form reset.
-- Keyboard-complete multi-selection that keeps the listbox open while toggling.
-- Native form participation, validation, required state, and Field relationships.
-- Label-aware compact summaries for zero, one, or several selected values.
-- Layer-aware positioning and completed-interaction dismissal across input types.
-
 ## When to use
 
 Use MultiSelect when users choose several values from a predefined moderate
@@ -10969,6 +10999,18 @@ collection and the options should stay collapsed until requested. Use
 CheckboxGroup for a short visible choice set, Listbox when the collection
 should remain visible, Select for one value, and Combobox when editable
 filtering is required.
+
+## Features
+
+- Coordinates controlled and uncontrolled multi-value selection while keeping
+  the popup open as options are toggled.
+- Provides listbox semantics, roving option focus, typeahead, keyboard
+  selection, focus restoration, and completed outside-interaction dismissal.
+- Supports Field and Form relationships, native multiple-select
+  participation, required validation, reset behavior, and disabled, readonly,
+  and invalid states.
+- Includes positioned popup, portal, viewport, group, label, separator,
+  indicator, scroll-button, and arrow anatomy.
 
 ## Import
 
@@ -11423,7 +11465,9 @@ current item represents that ARIA current state instead of a page.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Added native navigation list, collapsible section, and active link primitives.
@@ -11449,6 +11493,8 @@ not a menu-role widget.
 - Supports root and nested navigation menu scopes.
 - Supports mouse-hover delay, click/tap, and keyboard open. Touch/pen never start hover timers.
 - Provides a shared viewport that adapts to the active content size.
+- Centers horizontal viewport content on the active trigger and shifts it back
+  inside the visible browser viewport when it would collide with an edge.
 - Provides indicator geometry CSS variables for styling arrows or active markers.
 - Supports active links and `aria-current`.
 - Supports horizontal and vertical orientation.
@@ -11623,6 +11669,7 @@ Renders an optional active trigger indicator.
 | --- | --- | --- |
 | `children` | `ReactNode` | - |
 | `forceMount` | `boolean` | `false` |
+| `collisionPadding` | `number` | `8` |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -11666,6 +11713,8 @@ Renders the active content panel.
 | --- | --- |
 | `--atom-navigation-menu-viewport-width` | Active content width |
 | `--atom-navigation-menu-viewport-height` | Active content height |
+| `--atom-navigation-menu-viewport-left` | Collision-resolved Root-relative left offset |
+| `--atom-navigation-menu-viewport-available-width` | Width available inside the visible viewport and collision padding |
 | `--atom-navigation-menu-trigger-left` | Active trigger left offset |
 | `--atom-navigation-menu-trigger-top` | Active trigger top offset |
 | `--atom-navigation-menu-trigger-width` | Active trigger width |
@@ -11805,9 +11854,18 @@ the parent panel.
 
 ## Changelog
 
-### Unreleased
+### 0.21.0
 
-- No unreleased changes.
+- Added collision-aware, active-trigger-centered horizontal Viewport geometry.
+  Viewport now exposes its resolved Root-relative inline position and available
+  visible width, follows visual-viewport resize and zoom movement, and accepts
+  `collisionPadding` without requiring a styled layer to remeasure the panel.
+
+### 0.20.12
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.20.11
 
@@ -12608,7 +12666,9 @@ type are also public exports.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.16.0
 
@@ -14228,7 +14288,9 @@ Home, End, and assistive scrolling commands work when the viewport is focused.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -15028,7 +15090,9 @@ reached.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -15160,7 +15224,9 @@ extra Tab stop.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -16232,7 +16298,9 @@ in RTL; vertical navigation does not change with text direction.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.2.0
 
@@ -17341,6 +17409,11 @@ Use it for groups of controls, not page navigation. Local `dir` overrides
 | `End` | Moves focus to the last enabled item. |
 
 ## Changelog
+
+### Unreleased
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.7.0
 

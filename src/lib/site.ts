@@ -5,8 +5,8 @@ const configuredSiteUrl =
 
 export const siteUrl = configuredSiteUrl.replace(/\/$/, "");
 
-export const atomVersion = "0.20.11";
-export const brickVersion = "0.1.3";
+export const atomVersion = "0.21.0";
+export const brickVersion = "0.1.5";
 export const siteName = "Atom UI";
 export const siteDescription =
   "Accessible, headless React primitives for keyboard, touch, focus, state, and screen-reader semantics.";

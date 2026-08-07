@@ -2,9 +2,25 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
-## Unreleased
+## 0.21.0
 
-- No unreleased changes.
+- Centered Navigation Menu's horizontal Viewport on its active trigger and
+  added collision-aware visual-viewport geometry, configurable padding, and
+  public resolved-position variables for styled connector alignment.
+
+## 0.20.12
+
+- Added package-level layer-selection and behavior-composition Agent Knowledge,
+  plus navigation and structural guidance for AppBar, Breadcrumb, Bottom
+  Navigation, Divider, Drawer, Image, Navigation Menu, Nav List, Pagination,
+  Scroll Area, Sidebar, Skip Link, Tabs, and Toolbar.
+- Extended the agent manifest with a backward-compatible `guides` collection
+  and validated `flowstack.agent-guide.v1` artifacts.
+- Added repository-owned verification metadata, stale test-port diagnostics,
+  non-reusing Playwright previews, parallel browser CI, nightly release
+  qualification, and exact-archive distributed publication checks.
+- Added a consumer-first npm README and packaged getting-started, import, and
+  public-API guides while keeping repository-only guidance out of the archive.
 
 ## 0.20.11
 

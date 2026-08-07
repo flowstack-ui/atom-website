@@ -2,14 +2,6 @@
 
 Headless compact multi-value selection primitives.
 
-## Features
-
-- Controlled and uncontrolled value arrays with deduplication and form reset.
-- Keyboard-complete multi-selection that keeps the listbox open while toggling.
-- Native form participation, validation, required state, and Field relationships.
-- Label-aware compact summaries for zero, one, or several selected values.
-- Layer-aware positioning and completed-interaction dismissal across input types.
-
 ## When to use
 
 Use MultiSelect when users choose several values from a predefined moderate
@@ -17,6 +9,18 @@ collection and the options should stay collapsed until requested. Use
 CheckboxGroup for a short visible choice set, Listbox when the collection
 should remain visible, Select for one value, and Combobox when editable
 filtering is required.
+
+## Features
+
+- Coordinates controlled and uncontrolled multi-value selection while keeping
+  the popup open as options are toggled.
+- Provides listbox semantics, roving option focus, typeahead, keyboard
+  selection, focus restoration, and completed outside-interaction dismissal.
+- Supports Field and Form relationships, native multiple-select
+  participation, required validation, reset behavior, and disabled, readonly,
+  and invalid states.
+- Includes positioned popup, portal, viewport, group, label, separator,
+  indicator, scroll-button, and arrow anatomy.
 
 ## Import
 

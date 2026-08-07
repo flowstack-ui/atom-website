@@ -1,8 +1,8 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.0.4` adopts Brick's published physical-iPhone Code Block correction
-and restores bounded mobile documentation tables.
+Website `1.0.5` adopts the synchronized Atom `0.21.0` and Brick `0.1.5`
+baseline while retaining the qualified website design and behavior.
 
 ## Implemented Version Two
 
@@ -11,8 +11,8 @@ and restores bounded mobile documentation tables.
 - A permanent code-native origin mark, favicon, social artwork, and coherent
   ion-cyan light/dark Atom theme assigned through Brick's public semantic
   tokens.
-- Exact published `@flowstack-ui/brick` `0.1.3` as the presentation system and
-  exact published `@flowstack-ui/atom` `0.20.11` as the direct live-specimen
+- Exact published `@flowstack-ui/brick` `0.1.5` as the presentation system and
+  exact published `@flowstack-ui/atom` `0.21.0` as the direct live-specimen
   subject. Shell and reading UI use Brick; route-scoped specimens import Atom
   explicitly and receive only application-owned visual styling.
 - Eighty-one provenance-checked documentation routes covering all seventy Atom
@@ -68,10 +68,10 @@ and restores bounded mobile documentation tables.
 
 ## Current Package Baseline
 
-- Documented product: `@flowstack-ui/atom` `0.20.11`
+- Documented product: `@flowstack-ui/atom` `0.21.0`
 - Exact Atom source commit: `content/atom-source.json`
-- Website presentation system: `@flowstack-ui/brick` `0.1.3`
-- Website application version: `1.0.4`
+- Website presentation system: `@flowstack-ui/brick` `0.1.5`
+- Website application version: `1.0.5`
 
 ## Remaining Release Gates
 

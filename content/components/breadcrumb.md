@@ -250,7 +250,9 @@ label that explains what it reveals.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.2.0
 

@@ -133,7 +133,9 @@ Home, End, and assistive scrolling commands work when the viewport is focused.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Initial Atom release.

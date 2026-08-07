@@ -295,7 +295,9 @@ type are also public exports.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.16.0
 
