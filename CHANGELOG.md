@@ -1,5 +1,15 @@
 # Atom UI Website Changelog
 
+## 1.0.5 — 2026-08-07
+
+- Synchronized all public consumer documentation and provenance with exact
+  published Atom `0.21.0`.
+- Adopted exact published Brick `0.1.5`, keeping the website presentation
+  system and its transitive Atom dependency on the same release baseline.
+- Kept Atom's machine-readable Agent Knowledge exports outside the human
+  primitive-navigation inventory while continuing to validate every runtime
+  component and utility subpath.
+
 ## 1.0.4 — 2026-08-05
 
 - Adopted exact published Brick `0.1.3` and removed the website's temporary

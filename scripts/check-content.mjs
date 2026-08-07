@@ -93,7 +93,9 @@ for (const section of navigation.sections) {
 }
 
 const exportedSubpaths = new Set(
-  Object.keys(atomManifest.exports).filter((subpath) => subpath !== "."),
+  Object.keys(atomManifest.exports).filter(
+    (subpath) => subpath !== "." && !subpath.startsWith("./agents/"),
+  ),
 );
 for (const subpath of exportedSubpaths) {
   if (!publicSubpaths.has(subpath)) errors.push(`Export missing from navigation: ${subpath}`);

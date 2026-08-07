@@ -318,7 +318,9 @@ current item represents that ARIA current state instead of a page.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.1.0
 
 - Added native navigation list, collapsible section, and active link primitives.

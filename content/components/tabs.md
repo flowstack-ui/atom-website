@@ -209,7 +209,9 @@ in RTL; vertical navigation does not change with text direction.
 
 ### Unreleased
 
-- No unreleased changes.
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 
 ### 0.2.0
 

@@ -1,6 +1,6 @@
 {
   "name": "@flowstack-ui/atom-website",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "type": "module",
   "engines": {
@@ -42,8 +42,8 @@
     "test:all": "npm run check:release"
   },
   "dependencies": {
-    "@flowstack-ui/atom": "0.20.11",
-    "@flowstack-ui/brick": "0.1.3",
+    "@flowstack-ui/atom": "0.21.0",
+    "@flowstack-ui/brick": "0.1.5",
     "@icons-pack/react-simple-icons": "^13.11.1",
     "@vercel/analytics": "2.0.1",
     "github-slugger": "2.0.0",

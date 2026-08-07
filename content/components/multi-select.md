@@ -2,14 +2,6 @@
 
 Headless compact multi-value selection primitives.
 
-## Features
-
-- Controlled and uncontrolled value arrays with deduplication and form reset.
-- Keyboard-complete multi-selection that keeps the listbox open while toggling.
-- Native form participation, validation, required state, and Field relationships.
-- Label-aware compact summaries for zero, one, or several selected values.
-- Layer-aware positioning and completed-interaction dismissal across input types.
-
 ## When to use
 
 Use MultiSelect when users choose several values from a predefined moderate

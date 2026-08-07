@@ -3,14 +3,6 @@
 Headless text-copy behavior with coordinated value, native controls, truthful
 asynchronous status, and accessible authored feedback.
 
-## Features
-
-- Controlled and uncontrolled text values with native input coordination.
-- Truthful `idle`, `copying`, `copied`, and `error` status transitions.
-- Latest-operation concurrency so an older request cannot overwrite a newer result.
-- Native Label and Input relationships with application-authored live feedback.
-- Secure Clipboard API integration without a deprecated success-claiming fallback.
-
 ## When to Use
 
 Use `Clipboard` when a user needs to copy a known text value, such as a command,
