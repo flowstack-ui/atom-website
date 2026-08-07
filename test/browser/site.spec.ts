@@ -560,7 +560,7 @@ test("long and short code blocks disable mobile WebKit text inflation", async ({
   await page.goto("/docs/overview/getting-started/");
 
   const codeBlocks = page.locator(".brick-code-block-pre");
-  await expect(codeBlocks).toHaveCount(5);
+  expect(await codeBlocks.count()).toBeGreaterThan(1);
   const typography = await codeBlocks.evaluateAll((elements) => elements.map((element) => {
     const style = getComputedStyle(element);
     return { fontSize: style.fontSize };

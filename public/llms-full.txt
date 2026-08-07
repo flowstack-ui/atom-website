@@ -3879,6 +3879,17 @@ Use `Clipboard` when a user needs to copy a known text value, such as a command,
 URL, token, or code sample. Applications provide all styling, icons, and status
 wording. Clipboard does not read, paste, cut, or copy binary data.
 
+## Features
+
+- Coordinates controlled and uncontrolled text values across Label, Input,
+  ValueText, and Trigger parts.
+- Reports truthful `idle`, `copying`, `copied`, and `error` states for
+  asynchronous clipboard writes.
+- Keeps the newest copy attempt authoritative when earlier writes resolve or
+  reject later.
+- Supports disabled state, configurable status reset timing, an explicit write
+  adapter, authored live feedback, and public composition APIs.
+
 ## Import
 
 ```tsx
@@ -10988,6 +10999,18 @@ collection and the options should stay collapsed until requested. Use
 CheckboxGroup for a short visible choice set, Listbox when the collection
 should remain visible, Select for one value, and Combobox when editable
 filtering is required.
+
+## Features
+
+- Coordinates controlled and uncontrolled multi-value selection while keeping
+  the popup open as options are toggled.
+- Provides listbox semantics, roving option focus, typeahead, keyboard
+  selection, focus restoration, and completed outside-interaction dismissal.
+- Supports Field and Form relationships, native multiple-select
+  participation, required validation, reset behavior, and disabled, readonly,
+  and invalid states.
+- Includes positioned popup, portal, viewport, group, label, separator,
+  indicator, scroll-button, and arrow anatomy.
 
 ## Import
 

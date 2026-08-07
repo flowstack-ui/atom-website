@@ -9,6 +9,9 @@
 - Kept Atom's machine-readable Agent Knowledge exports outside the human
   primitive-navigation inventory while continuing to validate every runtime
   component and utility subpath.
+- Restored Clipboard Feature Signals from their Atom-owned documentation and
+  made the iPhone text-inflation regression cover every rendered Getting
+  Started block without coupling the test to an obsolete example count.
 
 ## 1.0.4 — 2026-08-05
 
