@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Accessibility, ChevronDown, Code2, Palette, Rocket } from "lucide-react";
+import { Accessibility, ChevronDown, ChevronLeft, ChevronRight, Code2, Palette, Rocket } from "lucide-react";
 import { Accordion } from "@flowstack-ui/atom/accordion";
 import { AspectRatio } from "@flowstack-ui/atom/aspect-ratio";
 import { Avatar } from "@flowstack-ui/atom/avatar";
 import { Badge } from "@flowstack-ui/atom/badge";
+import { Carousel } from "@flowstack-ui/atom/carousel";
 import { Collapsible } from "@flowstack-ui/atom/collapsible";
 import { Divider } from "@flowstack-ui/atom/divider";
 import { Image } from "@flowstack-ui/atom/image";
@@ -35,6 +36,43 @@ function BadgeSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   return <DemoSurface className="atom-demo-badge-set" onClick={() => onSignal("passive status semantics preserved")}><Badge.Root className="atom-demo-status-badge" data-tone="success">Ready</Badge.Root><Badge.Root className="atom-demo-status-badge" data-tone="warning">Review</Badge.Root><Badge.Root className="atom-demo-status-badge" data-tone="danger">Blocked</Badge.Root></DemoSurface>;
 }
 
+function CarouselSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
+  const slides = [
+    ["behavior", "Behavior first", "Selection, scrolling, and inactive-slide semantics stay synchronized.", Code2],
+    ["appearance", "Appearance is yours", "Layout, color, spacing, and motion remain in the application layer.", Palette],
+    ["access", "Every input counts", "Keyboard, pointer, touch, and assistive technology share one contract.", Accessibility],
+  ] as const;
+
+  return (
+    <Carousel.Root
+      aria-label="Atom product qualities"
+      className="atom-demo-carousel"
+      defaultValue="behavior"
+      loop={false}
+      onValueChange={(value, reason) => onSignal(`active slide: ${value} via ${reason}`)}
+    >
+      <Carousel.Viewport className="atom-demo-carousel__viewport">
+        <Carousel.Track className="atom-demo-carousel__track">
+          {slides.map(([value, heading, copy, Icon]) => (
+            <Carousel.Slide className="atom-demo-carousel__slide" key={value} label={heading} value={value}>
+              <span><Icon size={22} aria-hidden="true" /></span>
+              <strong>{heading}</strong>
+              <p>{copy}</p>
+            </Carousel.Slide>
+          ))}
+        </Carousel.Track>
+      </Carousel.Viewport>
+      <div className="atom-demo-carousel__controls">
+        <Carousel.Previous><ChevronLeft size={16} aria-hidden="true" /><span>Previous</span></Carousel.Previous>
+        <Carousel.Picker ariaLabel="Choose an Atom product quality">
+          {slides.map(([value, heading]) => <Carousel.PickerItem key={value} aria-label={`Show ${heading}`} value={value}><span aria-hidden="true" /></Carousel.PickerItem>)}
+        </Carousel.Picker>
+        <Carousel.Next><span>Next</span><ChevronRight size={16} aria-hidden="true" /></Carousel.Next>
+      </div>
+    </Carousel.Root>
+  );
+}
+
 function DividerSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   return <DemoSurface className="atom-demo-divider-card" onClick={() => onSignal("role: separator · orientation: horizontal")}><div className="atom-demo-layer"><span><Accessibility size={17} /></span><div><strong>Atom behavior</strong><small>Semantics, state, focus, and input</small></div></div><div className="atom-demo-divider-label"><Divider.Root className="atom-demo-divider" /><span>composed with</span><Divider.Root className="atom-demo-divider" /></div><div className="atom-demo-layer"><span><Palette size={17} /></span><div><strong>Your appearance</strong><small>Brand, layout, color, and motion</small></div></div></DemoSurface>;
 }
@@ -60,6 +98,7 @@ export default function StructureSpecimens(props: ExampleProps) {
     case "aspect-ratio": return <AspectSpecimen onSignal={props.onSignal} />;
     case "avatar": return <AvatarSpecimen onSignal={props.onSignal} />;
     case "badge": return <BadgeSpecimen onSignal={props.onSignal} />;
+    case "carousel": return <CarouselSpecimen onSignal={props.onSignal} />;
     case "divider": return <DividerSpecimen onSignal={props.onSignal} />;
     case "image": return <ImageSpecimen onSignal={props.onSignal} />;
     case "progress": return <ProgressSpecimen onSignal={props.onSignal} />;

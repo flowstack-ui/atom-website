@@ -33,7 +33,7 @@ at build time. Route-scoped client boundaries own only interaction:
   page outline;
 - catalog filtering;
 - one route-selected Atom specimen, lazy-loaded through its seven-category
-  behavior family rather than a monolithic 70-example client registry;
+  behavior family rather than a monolithic 71-example client registry;
 - copy controls, homepage interaction field, Accessibility channel instrument,
   and FAQ Accordion; and
 - an explicit client wrapper for interactive Brick Button use from server pages.
@@ -46,7 +46,7 @@ Only the current specimen family enters a primitive route's client graph.
 - `/` is the designed product homepage.
 - `/docs/` is the Guides overview and excludes the primitive catalog from its
   local navigation.
-- `/docs/components/` is the Primitives overview for all 70 component and
+- `/docs/components/` is the Primitives overview for all 71 component and
   utility public subpaths, with categorized catalog-only local navigation and
   one scoped pagination sequence. Utility detail URLs remain under
   `/docs/utilities/` while belonging to this reference experience.

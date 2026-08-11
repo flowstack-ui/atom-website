@@ -1,7 +1,7 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.0.5` adopts the synchronized Atom `0.21.0` and Brick `0.1.5`
+Website `1.1.0` adopts the synchronized Atom `0.22.6` and Brick `0.1.6`
 baseline while retaining the qualified website design and behavior.
 
 ## Implemented Version Two
@@ -11,11 +11,11 @@ baseline while retaining the qualified website design and behavior.
 - A permanent code-native origin mark, favicon, social artwork, and coherent
   ion-cyan light/dark Atom theme assigned through Brick's public semantic
   tokens.
-- Exact published `@flowstack-ui/brick` `0.1.5` as the presentation system and
-  exact published `@flowstack-ui/atom` `0.21.0` as the direct live-specimen
+- Exact published `@flowstack-ui/brick` `0.1.6` as the presentation system and
+  exact published `@flowstack-ui/atom` `0.22.6` as the direct live-specimen
   subject. Shell and reading UI use Brick; route-scoped specimens import Atom
   explicitly and receive only application-owned visual styling.
-- Eighty-one provenance-checked documentation routes covering all seventy Atom
+- Eighty-two provenance-checked documentation routes covering all seventy-one Atom
   public subpaths, plus product home, docs overview, primitive catalog, and 404.
 - Brick-powered header, search Dialog, mobile Drawers, NavLists, Buttons,
   Cards, Badges, Tabs, Progress, Accordion, Code, CodeBlock, Table, Input, Text,
@@ -27,7 +27,7 @@ baseline while retaining the qualified website design and behavior.
 - A flagship Accessibility guide with an interactive keyboard, screen-reader,
   touch, and focus contract instrument; clear ownership highlights; an
   evidence-qualified responsibility matrix; and practical validation guidance.
-- A searchable primitive reference spanning all 70 component and utility
+- A searchable primitive reference spanning all 71 component and utility
   subpaths, with counted collapsible rail categories, grouped compact overview
   cards, top-right category badges, readable navigation rows, continuous
   open-state dividers, one Atom-colored focus treatment, and a designed empty
@@ -53,7 +53,7 @@ baseline while retaining the qualified website design and behavior.
   emitted CSS by 59 percent from the correctness baseline without cascade drift.
 - Four-profile Chromium and WebKit verification covering both appearances,
   Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
-  70-route specimen coverage, cross-family interaction, mobile canvas geometry,
+  71-route specimen coverage, cross-family interaction, mobile canvas geometry,
   and 404 recovery. The current dependency audit has zero findings.
 - Brick owns Code Block's mobile text-inflation correction. The website keeps
   an explicit iOS Safari production target and built iPhone WebKit evidence
@@ -68,10 +68,10 @@ baseline while retaining the qualified website design and behavior.
 
 ## Current Package Baseline
 
-- Documented product: `@flowstack-ui/atom` `0.21.0`
+- Documented product: `@flowstack-ui/atom` `0.22.6`
 - Exact Atom source commit: `content/atom-source.json`
-- Website presentation system: `@flowstack-ui/brick` `0.1.5`
-- Website application version: `1.0.5`
+- Website presentation system: `@flowstack-ui/brick` `0.1.6`
+- Website application version: `1.1.0`
 
 ## Remaining Release Gates
 

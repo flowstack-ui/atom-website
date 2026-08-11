@@ -10,6 +10,7 @@ import { Drawer } from "@flowstack-ui/brick/drawer";
 import { NavList } from "@flowstack-ui/brick/nav-list";
 import { ArrowRight, ArrowUpRight, BookOpen, Boxes, Home, Menu, Moon, Orbit, Package, Search, ShieldCheck, Sun, X } from "lucide-react";
 import { atomVersion } from "@/lib/site";
+import { primitiveCount } from "@/lib/docs-manifest";
 import { BrandMark } from "./brand-mark";
 
 const navigation = [
@@ -21,7 +22,7 @@ const navigation = [
 const drawerNavigation = [
   { href: "/", label: "Home", description: "Meet the behavioral foundation", icon: Home, section: "home" },
   { href: "/docs/", label: "Guides", description: "Follow the learning path", icon: BookOpen, section: "guides" },
-  { href: "/docs/components/", label: "Primitives", description: "Explore 70 public subpaths", icon: Boxes, section: "primitives" },
+  { href: "/docs/components/", label: "Primitives", description: `Explore ${primitiveCount} public subpaths`, icon: Boxes, section: "primitives" },
   { href: "/docs/overview/accessibility/", label: "Accessibility", description: "Semantics across every input", icon: ShieldCheck, section: "accessibility" },
 ];
 
@@ -164,7 +165,7 @@ export function SiteHeader() {
                   </div>
                 </Drawer.Body>
                 <Drawer.Footer className="mobile-drawer__footer">
-                  <p className="drawer-proof"><span>70 subpaths</span><span>React 18 + 19</span><span>Headless</span></p>
+                  <p className="drawer-proof"><span>{primitiveCount} subpaths</span><span>React 18 + 19</span><span>Headless</span></p>
                   <Drawer.Close asChild><Button href="/docs/overview/getting-started/" fullWidth endIcon={<ArrowRight size={17} aria-hidden="true" />}>Get started</Button></Drawer.Close>
                 </Drawer.Footer>
               </Drawer.Content>

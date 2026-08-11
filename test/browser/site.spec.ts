@@ -162,7 +162,7 @@ test("guide and primitive rails expose only their own information architecture",
 
 test("primitive overview groups compact cards across components and utilities", async ({ page }) => {
   await page.goto("/docs/components/");
-  await expect(page.getByText("70 primitives")).toBeVisible();
+  await expect(page.getByText("71 primitives")).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "Utilities", exact: true })).toBeVisible();
   const hooksCard = page.locator("#primitive-category-utilities article").filter({ hasText: /^Hooks/ });
   await expect(hooksCard.locator('[data-slot="card-action"] [data-slot="badge"]')).toHaveText("Utilities");
@@ -179,7 +179,7 @@ test("every public primitive route presents one live specimen and semantic featu
   test.skip(testInfo.project.name !== "desktop-chromium", "one canonical browser owns the complete primitive crawl");
   test.setTimeout(120_000);
 
-  expect(primitiveRoutes).toHaveLength(70);
+  expect(primitiveRoutes).toHaveLength(71);
   for (const route of primitiveRoutes) {
     await page.goto(route.path);
     await expect(page.getByRole("heading", { level: 1, name: route.title })).toBeVisible();
@@ -203,6 +203,7 @@ test("live specimens expose meaningful behavior across every example family", as
     ["/docs/components/checkbox/", "checkbox", "Automatic launch window", /aria-checked: true/],
     ["/docs/components/tabs/", "tab", "Voice", /tab: voice/],
     ["/docs/components/accordion/", "button", "Keyboard behavior", /open panels: none/],
+    ["/docs/components/carousel/", "button", "Next slide", /active slide: appearance via next/],
     ["/docs/components/data-grid/", "row", /Horizon Review Touch/, /selected row: Horizon/],
     ["/docs/utilities/virtualizer/", "button", "Advance virtual window", /offset 190px/],
   ] as const;
@@ -336,6 +337,7 @@ test("live example families have no automated accessibility violations", async (
       "/docs/components/dialog/",
       "/docs/components/data-grid/",
       "/docs/components/accordion/",
+      "/docs/components/carousel/",
       "/docs/utilities/hooks/",
     ]) {
       await page.goto(path);
@@ -347,7 +349,7 @@ test("live example families have no automated accessibility violations", async (
 
 test("mobile example canvas keeps its status badge and specimens inside a usable viewport", async ({ page, isMobile }) => {
   test.skip(!isMobile, "mobile canvas geometry belongs to mobile profiles");
-  for (const path of ["/docs/components/button/", "/docs/components/data-grid/", "/docs/components/file-upload/", "/docs/components/tree/"]) {
+  for (const path of ["/docs/components/button/", "/docs/components/carousel/", "/docs/components/data-grid/", "/docs/components/file-upload/", "/docs/components/tree/"]) {
     await page.goto(path);
     const example = page.locator(".atom-example");
     const badge = example.getByText("Interactive", { exact: true });

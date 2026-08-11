@@ -32,6 +32,7 @@ export const allDocuments: DocumentEntry[] = navigationSections.flatMap(
 
 export const guideDocuments = allDocuments.filter((document) => document.section !== "components" && document.section !== "utilities");
 export const primitiveDocuments = allDocuments.filter((document) => document.section === "components" || document.section === "utilities");
+export const primitiveCount = primitiveDocuments.length;
 
 export function documentationScopeFor(entry: DocumentEntry): DocumentationScope {
   return entry.section === "components" || entry.section === "utilities" ? "primitives" : "guides";

@@ -2,6 +2,49 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
+## 0.22.6 - 2026-08-10
+
+- Kept the pure-render Divider primitive and explicit subpath server-safe for
+  React Server Component consumers.
+- Added public Agent Knowledge for Accordion and List and routed both from the
+  package-level selection and behavior-composition guides.
+
+## 0.22.5 - 2026-08-08
+
+- Kept Carousel's initial active slide aligned after hydration by scrolling
+  only its own viewport instead of delegating to `scrollIntoView()`.
+
+## 0.22.4 - 2026-08-08
+
+- Made Carousel looping continue in the requested direction from last to first
+  and first to last without cloning authored slide content, IDs, controls, or
+  form fields, including DOM-like environments without `requestAnimationFrame`.
+
+## 0.22.3
+
+- Made Carousel rotation-control activation independent of browser-specific
+  focus/click timing so pointer users reliably stop or start rotation in
+  Chromium, Firefox, and WebKit while keyboard focus still stops rotation.
+
+## 0.22.2
+
+- Made the Carousel viewport keyboard-focusable by default so its native
+  horizontal scroll region remains operable in Safari and satisfies the
+  scrollable-region accessibility contract.
+
+## 0.22.1
+
+- Fixed the Carousel rotation control so pointer focus and the following click
+  complete one stop action instead of immediately restarting rotation.
+
+## 0.22.0
+
+- Added the headless one-active-slide Carousel family with controlled and
+  uncontrolled selection and automatic rotation, optional Previous, Next,
+  grouped picker and rotation controls, native touch-scroll selection,
+  focus/hover/visibility pause policy, LTR/RTL support, public behavior state,
+  documentation, and Agent Knowledge.
+
 ## 0.21.0
 
 - Centered Navigation Menu's horizontal Viewport on its active trigger and
