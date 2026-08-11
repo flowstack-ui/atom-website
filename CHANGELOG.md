@@ -1,5 +1,23 @@
 # Atom UI Website Changelog
 
+## 1.1.0 — 2026-08-11
+
+- Synchronized the complete public documentation and source provenance with
+  exact published Atom `0.22.6`, including the Carousel release line,
+  server-safe Divider boundary, Accordion and List guidance, and reviewed
+  package release history.
+- Adopted exact published Brick `0.1.6`, keeping the presentation layer and its
+  transitive Atom dependency aligned with the direct live-specimen release.
+- Added Carousel to the public taxonomy, navigation, search and AI-readable
+  outputs, plus a route-scoped live specimen for selection, native horizontal
+  scrolling, picker controls, inactive-slide semantics, and reduced-motion-
+  safe application styling.
+- Expanded the release browser contract to all 71 public subpaths and derived
+  visitor-facing catalog counts from the committed navigation manifest so a
+  future synchronized component cannot leave stale totals in the product UI.
+- Updated the compatible transitive `nanoid` lockfile resolution from `3.3.16`
+  to `3.3.18`, clearing the newly reported high-severity audit advisory.
+
 ## 1.0.5 — 2026-08-07
 
 - Synchronized all public consumer documentation and provenance with exact

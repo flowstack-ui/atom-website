@@ -4,13 +4,14 @@ const formSlugs = new Set(["input", "textarea", "number-input", "otp-field", "pa
 const overlaySlugs = new Set(["menu", "menubar", "dropdown-menu", "context-menu", "dialog", "alert-dialog", "modal", "drawer", "popover", "hover-card", "tooltip", "toast", "navigation-menu"]);
 const expandingSlugs = new Set(["accordion", "collapsible", "tree", "tree-grid", "sidebar"]);
 const collectionSlugs = new Set(["data-grid", "feed", "list", "table", "scroll-area", "swipeable-item", "collection", "virtualizer"]);
-const structuralSlugs = new Set(["app-bar", "bottom-navigation", "breadcrumb", "nav-list", "pagination", "tabs", "toolbar", "aspect-ratio", "avatar", "badge", "divider", "image", "progress", "skip-link"]);
+const structuralSlugs = new Set(["app-bar", "bottom-navigation", "breadcrumb", "nav-list", "pagination", "tabs", "toolbar", "aspect-ratio", "avatar", "badge", "carousel", "divider", "image", "progress", "skip-link"]);
 const utilitySlugs = new Set(["direction", "hooks", "portal", "visually-hidden"]);
 
 const prompts: Record<string, string> = {
   accordion: "Use Enter to disclose a panel, then continue through its content.",
   "alert-dialog": "Open the decision, then cancel or confirm it with the keyboard.",
   button: "Press Enter, Space, or tap the action.",
+  carousel: "Use Previous, Next, the picker, or native horizontal scrolling to select one slide.",
   checkbox: "Toggle the control with Space and inspect its checked state.",
   clipboard: "Copy the value and watch the status announcement.",
   collapsible: "Open and close the region without moving its trigger.",

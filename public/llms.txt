@@ -45,6 +45,7 @@ Atom UI is an accessible, headless React primitive library and the behavioral fo
 - [Bottom Navigation](https://atom-ui.com/docs/components/bottom-navigation/)
 - [Breadcrumb](https://atom-ui.com/docs/components/breadcrumb/)
 - [Button](https://atom-ui.com/docs/components/button/)
+- [Carousel](https://atom-ui.com/docs/components/carousel/)
 - [Checkbox](https://atom-ui.com/docs/components/checkbox/)
 - [Checkbox Group](https://atom-ui.com/docs/components/checkbox-group/)
 - [Clipboard](https://atom-ui.com/docs/components/clipboard/)

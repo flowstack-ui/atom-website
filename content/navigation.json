@@ -42,6 +42,7 @@
         { "slug": "bottom-navigation", "title": "Bottom Navigation" },
         { "slug": "breadcrumb", "title": "Breadcrumb" },
         { "slug": "button", "title": "Button" },
+        { "slug": "carousel", "title": "Carousel" },
         { "slug": "checkbox", "title": "Checkbox" },
         { "slug": "checkbox-group", "title": "Checkbox Group" },
         { "slug": "clipboard", "title": "Clipboard" },

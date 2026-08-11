@@ -12,6 +12,7 @@ import { FrequentlyAskedQuestions } from "@/components/frequently-asked-question
 import { StructuredData } from "@/components/structured-data";
 import { WebsiteButton as Button } from "@/components/website-button";
 import { atomVersion, siteDescription, siteUrl } from "@/lib/site";
+import { primitiveCount } from "@/lib/docs-manifest";
 import { atomQuestions } from "@/lib/faqs";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -118,7 +119,7 @@ export default function Home() {
           </div>
           <div className="family-map">
             {families.map(({ icon: Icon, name, items }) => <Link key={name} href="/docs/components/" className="family-node"><span><Icon size={17} aria-hidden="true" /></span><div><strong>{name}</strong><small>{items}</small></div><ArrowRight size={15} aria-hidden="true" /></Link>)}
-            <div className="family-core"><Orbit aria-hidden="true" /><strong>70</strong><span>public subpaths</span></div>
+            <div className="family-core"><Orbit aria-hidden="true" /><strong>{primitiveCount}</strong><span>public subpaths</span></div>
           </div>
         </section>
 

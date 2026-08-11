@@ -8,6 +8,7 @@ import { Dialog } from "@flowstack-ui/brick/dialog";
 import { Input } from "@flowstack-ui/brick/input";
 import { ArrowRight, BookOpen, Orbit, Search, X } from "lucide-react";
 import { loadSearchIndex, searchDocuments, type SearchIndex } from "@/lib/search";
+import { primitiveCount } from "@/lib/docs-manifest";
 
 export function SiteSearch({ onNavigate }: { onNavigate?: () => void }) {
   const router = useRouter();
@@ -63,7 +64,7 @@ export function SiteSearch({ onNavigate }: { onNavigate?: () => void }) {
             autoComplete="off"
             value={query}
             onChange={(event) => setQuery(event.currentTarget.value)}
-            placeholder="Search 70 public subpaths…"
+            placeholder={`Search ${primitiveCount} public subpaths…`}
             startAdornment={<Search size={16} aria-hidden="true" />}
             clearable
             onClear={() => setQuery("")}
