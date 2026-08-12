@@ -6,7 +6,7 @@
     "description": "Atom's ion-cyan documentation theme with system-default light and dark appearances."
   },
   "compatibility": {
-    "brick": "^0.1.6"
+    "brick": "^0.1.9"
   },
   "appearances": {
     "supported": ["light", "dark"],

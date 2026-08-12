@@ -1,7 +1,7 @@
 {
   "$extensions": {
     "flowstack.theme": {
-      "brickVersion": "0.1.6",
+      "brickVersion": "0.1.9",
       "id": "atom-website",
       "schema": "flowstack.theme-tokens.v1"
     }

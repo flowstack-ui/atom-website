@@ -21,13 +21,13 @@
   "brickContract": {
     "package": {
       "name": "@flowstack-ui/brick",
-      "version": "0.1.6"
+      "version": "0.1.9"
     },
     "schema": "flowstack.brick-theme-contract.v1",
-    "version": 1
+    "version": 2
   },
   "compatibility": {
-    "brick": "^0.1.6"
+    "brick": "^0.1.9"
   },
   "extensionNamespaces": [
     "atom.site"
