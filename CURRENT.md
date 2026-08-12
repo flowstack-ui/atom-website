@@ -44,7 +44,8 @@ baseline while retaining the qualified website design and behavior.
   forced-colors handling, responsive footer, branded 404, and quiet Flowstack
   and Swifty endorsement.
 - Deterministic generated theme CSS, DTCG tokens, manifest, and validation
-  report, with the development-only Theme compiler absent from browser output.
+  report, with the light muted-text role qualified against Brick's maintained
+  surfaces and the development-only Theme compiler absent from browser output.
 - Unique metadata and canonical URLs, sitemap, robots, manifest, favicon,
   dynamic social image, linked AI-readable outputs, Vercel Analytics, security
   headers, and WebSite, Organization, SoftwareSourceCode, FAQ, CollectionPage,

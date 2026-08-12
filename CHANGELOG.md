@@ -12,6 +12,9 @@
 - Added build-time artifact drift checks and browser assertions proving the
   compiled theme identity, light/dark semantic values, system selection, and
   appearance switching without shipping the compiler to browsers.
+- Darkened the light muted-text role just enough to satisfy Theme's declared
+  4.5:1 normal-text contract across Brick's maintained base and canvas
+  surfaces.
 
 ## 1.1.0 — 2026-08-11
 
