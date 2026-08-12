@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22"
   },
   "browserslist": [
     "chrome 111",
@@ -18,7 +18,7 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3002",
     "predev:network": "npm run content:generate",
     "dev:network": "next dev --hostname 0.0.0.0 --port 3002",
-    "prebuild": "npm run content:generate",
+    "prebuild": "npm run content:generate && npm run theme:check",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
@@ -28,6 +28,8 @@
     "search:index": "node scripts/build-search-index.mjs",
     "syntax:sync": "node scripts/generate-syntax-tokens.mjs",
     "syntax:check": "node scripts/generate-syntax-tokens.mjs --check",
+    "theme:check": "node scripts/verify-theme.mjs",
+    "theme:compile": "flowstack-theme compile ./theme/atom-website.theme.json --contract ./theme/brick-theme-contract.json --out-dir ./src/app/theme/generated",
     "llms:sync": "node scripts/generate-llms.mjs",
     "content:generate": "npm run search:index && npm run syntax:sync && npm run llms:sync",
     "verify:repository-contract": "node scripts/verify-repository-contract.mjs",
@@ -57,6 +59,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
+    "@flowstack-ui/theme": "git+https://github.com/flowstack-ui/theme.git#dcfcca5f0d77a6ab08d03b3ad644177e94c1e150",
     "@playwright/test": "^1.62.0",
     "@shikijs/langs": "^4.4.1",
     "@types/node": "^20",

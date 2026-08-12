@@ -81,6 +81,35 @@ test("light and dark homepage and documentation have no automated accessibility 
   }
 });
 
+test("compiled Atom theme preserves system first paint and explicit appearance switching", async ({ page }) => {
+  const expected = {
+    light: { canvas: "#f7fbfb", text: "#102326", accent: "#006d79" },
+    dark: { canvas: "#071114", text: "#edf8f8", accent: "#5cdae3" },
+  } as const;
+
+  for (const appearance of ["light", "dark"] as const) {
+    await page.emulateMedia({ colorScheme: appearance });
+    await page.goto("/");
+    const root = page.locator("html");
+    await expect(root).toHaveAttribute("data-flowstack-theme", "atom-website");
+    await expect(root).toHaveAttribute("data-brick-appearance", appearance);
+    await expect(root).toHaveCSS("color-scheme", appearance);
+    const colors = await root.evaluate((element) => {
+      const styles = getComputedStyle(element);
+      return {
+        canvas: styles.getPropertyValue("--brick-color-surface-canvas").trim(),
+        text: styles.getPropertyValue("--brick-color-text-primary").trim(),
+        accent: styles.getPropertyValue("--brick-color-accent-solid").trim(),
+      };
+    });
+    expect(colors).toEqual(expected[appearance]);
+  }
+
+  await page.getByRole("button", { name: "Toggle color appearance" }).click();
+  await expect(page.locator("html")).toHaveAttribute("data-brick-appearance", "light");
+  expect(await page.evaluate(() => localStorage.getItem("atom-website-appearance"))).toBe("light");
+});
+
 test("Command or Control K opens search and focuses the input", async ({ page }) => {
   await page.goto("/");
   await page.keyboard.press(process.platform === "darwin" ? "Meta+K" : "Control+K");

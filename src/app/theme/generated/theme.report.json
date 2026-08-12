@@ -1,0 +1,16 @@
+{
+  "$schema": "flowstack.theme-report.v1",
+  "brickVersion": "0.1.6",
+  "counts": {
+    "brickInherited": 96,
+    "brickOverridden": 48,
+    "brickRequired": 144,
+    "componentInputs": 0,
+    "emitted": 197,
+    "foundations": 6,
+    "projectTokens": 47
+  },
+  "themeId": "atom-website",
+  "valid": true,
+  "warnings": []
+}

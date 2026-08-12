@@ -1,5 +1,18 @@
 # Atom UI Website Changelog
 
+## Unreleased
+
+- Migrated the application-owned ion-cyan light/dark theme from handwritten
+  Brick variables to a serializable Theme definition and deterministic CSS,
+  DTCG token, manifest, and report artifacts.
+- Preserved system-default first paint, explicit appearance persistence,
+  website-owned syntax and stage colors, and the existing visual expression
+  across desktop Chromium, desktop WebKit, Android Chromium, and iPhone
+  WebKit.
+- Added build-time artifact drift checks and browser assertions proving the
+  compiled theme identity, light/dark semantic values, system selection, and
+  appearance switching without shipping the compiler to browsers.
+
 ## 1.1.0 — 2026-08-11
 
 - Synchronized the complete public documentation and source provenance with
