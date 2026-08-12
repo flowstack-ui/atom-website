@@ -6,7 +6,7 @@ import { compileThemeFiles, writeThemeArtifacts } from "@flowstack-ui/theme";
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const source = resolve(repositoryRoot, "theme/atom-website.theme.json");
-const contract = resolve(repositoryRoot, "theme/brick-theme-contract.json");
+const contract = resolve(repositoryRoot, "node_modules/@flowstack-ui/brick/dist/theme-contract.json");
 const committedDirectory = resolve(repositoryRoot, "src/app/theme/generated");
 const temporaryDirectory = await mkdtemp(resolve(tmpdir(), "atom-website-theme-"));
 const artifactNames = [

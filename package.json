@@ -29,7 +29,7 @@
     "syntax:sync": "node scripts/generate-syntax-tokens.mjs",
     "syntax:check": "node scripts/generate-syntax-tokens.mjs --check",
     "theme:check": "node scripts/verify-theme.mjs",
-    "theme:compile": "flowstack-theme compile ./theme/atom-website.theme.json --contract ./theme/brick-theme-contract.json --out-dir ./src/app/theme/generated",
+    "theme:compile": "flowstack-theme compile ./theme/atom-website.theme.json --contract ./node_modules/@flowstack-ui/brick/dist/theme-contract.json --out-dir ./src/app/theme/generated",
     "llms:sync": "node scripts/generate-llms.mjs",
     "content:generate": "npm run search:index && npm run syntax:sync && npm run llms:sync",
     "verify:repository-contract": "node scripts/verify-repository-contract.mjs",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@flowstack-ui/atom": "0.22.6",
-    "@flowstack-ui/brick": "0.1.6",
+    "@flowstack-ui/brick": "0.1.9",
     "@icons-pack/react-simple-icons": "^13.11.1",
     "@vercel/analytics": "2.0.1",
     "github-slugger": "2.0.0",
@@ -59,7 +59,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
-    "@flowstack-ui/theme": "git+https://github.com/flowstack-ui/theme.git#dcfcca5f0d77a6ab08d03b3ad644177e94c1e150",
+    "@flowstack-ui/theme": "0.1.0",
     "@playwright/test": "^1.62.0",
     "@shikijs/langs": "^4.4.1",
     "@types/node": "^20",

@@ -1,7 +1,7 @@
 # Current Atom UI Website State
 
 Version two is published from `main` at [atom-ui.com](https://atom-ui.com).
-Website `1.1.0` adopts the synchronized Atom `0.22.6` and Brick `0.1.6`
+Website `1.1.0` adopts the synchronized Atom `0.22.6` and Brick `0.1.9`
 baseline while retaining the qualified website design and behavior.
 
 ## Implemented Version Two
@@ -11,7 +11,7 @@ baseline while retaining the qualified website design and behavior.
 - A permanent code-native origin mark, favicon, social artwork, and coherent
   ion-cyan light/dark Atom theme compiled from an application-owned Theme
   definition through Brick's public semantic contract.
-- Exact published `@flowstack-ui/brick` `0.1.6` as the presentation system and
+- Exact published `@flowstack-ui/brick` `0.1.9` as the presentation system and
   exact published `@flowstack-ui/atom` `0.22.6` as the direct live-specimen
   subject. Shell and reading UI use Brick; route-scoped specimens import Atom
   explicitly and receive only application-owned visual styling.
@@ -45,7 +45,8 @@ baseline while retaining the qualified website design and behavior.
   and Swifty endorsement.
 - Deterministic generated theme CSS, DTCG tokens, manifest, and validation
   report, with the light muted-text role qualified against Brick's maintained
-  surfaces and the development-only Theme compiler absent from browser output.
+  surfaces, the exact published `@flowstack-ui/theme` `0.1.0` compiler absent
+  from browser output, and no copied Brick contract or Git package dependency.
 - Unique metadata and canonical URLs, sitemap, robots, manifest, favicon,
   dynamic social image, linked AI-readable outputs, Vercel Analytics, security
   headers, and WebSite, Organization, SoftwareSourceCode, FAQ, CollectionPage,
@@ -73,7 +74,8 @@ baseline while retaining the qualified website design and behavior.
 
 - Documented product: `@flowstack-ui/atom` `0.22.6`
 - Exact Atom source commit: `content/atom-source.json`
-- Website presentation system: `@flowstack-ui/brick` `0.1.6`
+- Website presentation system: `@flowstack-ui/brick` `0.1.9`
+- Theme build tooling: `@flowstack-ui/theme` `0.1.0`
 - Website application version: `1.1.0`
 
 ## Remaining Release Gates

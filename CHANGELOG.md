@@ -15,6 +15,9 @@
 - Darkened the light muted-text role just enough to satisfy Theme's declared
   4.5:1 normal-text contract across Brick's maintained base and canvas
   surfaces.
+- Adopted published Brick `0.1.9` and Theme `0.1.0`, compiling directly from
+  Brick's packaged contract and removing the temporary copied contract and
+  immutable Theme Git dependency.
 
 ## 1.1.0 — 2026-08-11
 
