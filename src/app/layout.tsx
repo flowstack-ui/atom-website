@@ -21,6 +21,7 @@ import "@flowstack-ui/brick/styles/text.css";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import "./theme/generated/theme.css";
 import "./globals.css";
 
 const themeScript = `
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-brick-theme="atom" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" data-flowstack-theme="atom-website" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />

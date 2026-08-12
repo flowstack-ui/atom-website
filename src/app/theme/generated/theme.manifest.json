@@ -1,0 +1,42 @@
+{
+  "$schema": "flowstack.theme-manifest.v1",
+  "activation": {
+    "appearanceAttribute": "data-brick-appearance",
+    "cssLayer": "flowstack.theme",
+    "themeAttribute": "data-flowstack-theme"
+  },
+  "appearances": {
+    "default": "system",
+    "supported": [
+      "light",
+      "dark"
+    ]
+  },
+  "artifacts": {
+    "css": "theme.css",
+    "manifest": "theme.manifest.json",
+    "report": "theme.report.json",
+    "tokens": "theme.tokens.json"
+  },
+  "brickContract": {
+    "package": {
+      "name": "@flowstack-ui/brick",
+      "version": "0.1.6"
+    },
+    "schema": "flowstack.brick-theme-contract.v1",
+    "version": 1
+  },
+  "compatibility": {
+    "brick": "^0.1.6"
+  },
+  "extensionNamespaces": [
+    "atom.site"
+  ],
+  "guidance": {},
+  "requirements": {},
+  "theme": {
+    "description": "Atom's ion-cyan documentation theme with system-default light and dark appearances.",
+    "id": "atom-website",
+    "name": "Atom Website"
+  }
+}

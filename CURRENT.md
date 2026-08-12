@@ -9,8 +9,8 @@ baseline while retaining the qualified website design and behavior.
 - A designed product homepage that explains Atom, accessibility, headless
   ownership, the Atom-to-Brick relationship, primitive families, and adoption.
 - A permanent code-native origin mark, favicon, social artwork, and coherent
-  ion-cyan light/dark Atom theme assigned through Brick's public semantic
-  tokens.
+  ion-cyan light/dark Atom theme compiled from an application-owned Theme
+  definition through Brick's public semantic contract.
 - Exact published `@flowstack-ui/brick` `0.1.6` as the presentation system and
   exact published `@flowstack-ui/atom` `0.22.6` as the direct live-specimen
   subject. Shell and reading UI use Brick; route-scoped specimens import Atom
@@ -43,6 +43,8 @@ baseline while retaining the qualified website design and behavior.
 - Pre-paint appearance selection, local persistence, reduced-motion and
   forced-colors handling, responsive footer, branded 404, and quiet Flowstack
   and Swifty endorsement.
+- Deterministic generated theme CSS, DTCG tokens, manifest, and validation
+  report, with the development-only Theme compiler absent from browser output.
 - Unique metadata and canonical URLs, sitemap, robots, manifest, favicon,
   dynamic social image, linked AI-readable outputs, Vercel Analytics, security
   headers, and WebSite, Organization, SoftwareSourceCode, FAQ, CollectionPage,
