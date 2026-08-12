@@ -559,7 +559,7 @@
           },
           "muted": {
             "$type": "color",
-            "$value": "#687b7e"
+            "$value": "#66797c"
           },
           "primary": {
             "$type": "color",
