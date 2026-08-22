@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Regenerated the Theme report with stable 12-significant-digit contrast
+  serialization so Node runtime last-bit differences no longer invalidate an
+  otherwise identical theme build.
+- Replaced the incompatible Firefox 111 target list with FLOWSTACK's pinned
+  `baseline 2023 with downstream` floor and added desktop Firefox to the
+  portable release matrix.
 - Migrated the application-owned ion-cyan light/dark theme from handwritten
   Brick variables to a serializable Theme definition and deterministic CSS,
   DTCG token, manifest, and report artifacts.

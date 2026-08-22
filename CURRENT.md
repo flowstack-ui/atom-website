@@ -55,13 +55,13 @@ baseline while retaining the qualified website design and behavior.
   prerendered.
 - Exact published Brick owner styles for the sixteen used components, reducing
   emitted CSS by 59 percent from the correctness baseline without cascade drift.
-- Four-profile Chromium and WebKit verification covering both appearances,
+- Five-profile Chromium, Firefox, and WebKit verification covering both appearances,
   Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
   71-route specimen coverage, cross-family interaction, mobile canvas geometry,
   and 404 recovery. The current dependency audit has zero findings.
-- Brick owns Code Block's mobile text-inflation correction. The website keeps
-  an explicit iOS Safari production target and built iPhone WebKit evidence
-  proving that Next retains the required prefixed declaration and every
+- Brick owns Code Block's mobile text-inflation correction. The website uses
+  the shared pinned Baseline 2023 target and built iPhone WebKit evidence
+  proving that Next retains the required generated declaration and every
   Getting Started example resolves to one selected font size.
 - Mobile API-table scroll frames remain inside the documentation reading plane
   while their wide semantic contents scroll internally through the final

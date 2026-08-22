@@ -64,9 +64,15 @@ artifacts are current. Production imports only the generated CSS.
 
 Use `npm run check:focused` while editing content, `npm run check:repository`
 for a merge candidate, and `npm run check:release` for the production build
-plus desktop/mobile Chromium and WebKit smoke coverage. `npm run test:all` is
+plus desktop Chromium, Firefox, desktop WebKit, and mobile Chromium/WebKit
+smoke coverage. `npm run test:all` is
 the comprehensive release alias. Browser tests own strict preview port `4002`
 and never reuse an existing listener.
+
+The website declares the pinned `baseline 2023 with downstream` browser floor.
+Automated WebKit and mobile profiles are portable engine evidence; physical
+Safari, iOS, Android, browser chrome, and assistive-technology claims remain
+separate manual evidence.
 
 The production build uses native Next.js output. All known content routes are
 still prerendered as static HTML; no request-time application server behavior is

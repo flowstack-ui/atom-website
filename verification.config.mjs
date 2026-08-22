@@ -2,6 +2,10 @@ const verification = {
   schemaVersion: 1,
   id: "atom-website",
   kind: "public-prerendered-next-website",
+  browserSupport: {
+    query: "baseline 2023 with downstream",
+    portableEngines: ["chromium", "firefox", "webkit"],
+  },
   commands: {
     focused: "check:focused",
     repository: "check:repository",

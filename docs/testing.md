@@ -14,8 +14,8 @@ Use the explicit tiers:
 - `npm run check:focused` for content and type validation during editing;
 - `npm run check:repository` for the repository contract, complete content,
   types, lint, and production build;
-- `npm run check:release` for the repository gate plus desktop/mobile Chromium
-  and WebKit smoke coverage.
+- `npm run check:release` for the repository gate plus desktop Chromium,
+  Firefox, desktop WebKit, and mobile Chromium/WebKit smoke coverage.
 
 `npm run verify` aliases the repository tier and `npm run test:all` aliases the
 release tier. Browser tests start the built Next.js application on reserved
@@ -38,9 +38,14 @@ Review at least:
 - the 404 page.
 
 CI repeats content validation, type checking, linting, the production build,
-the dependency audit, generated-file cleanliness, and four parallel browser
+the dependency audit, generated-file cleanliness, and five parallel browser
 profiles on pull requests and `main`. A nightly workflow repeats complete
 release qualification on a clean remote runner.
+
+The package manifest and repository contract pin
+`baseline 2023 with downstream`. Browser automation qualifies portable engine
+behavior; physical Safari/iOS/Android and operating-system integrations remain
+separate evidence.
 
 ## Interaction Coverage
 
