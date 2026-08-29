@@ -346,6 +346,14 @@ validate file type, size, and content again on the server.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for native picker and form semantics,
+  dropzone enhancement, validation boundaries, file-list composition, and
+  same-file reselection behavior.
+
 ### 0.19.7
 
 - Related the visible Trigger to its Field label, description/error, required,

@@ -2,6 +2,39 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
+## 0.24.0 - 2026-08-28
+
+- Added headless `ColorPicker` opaque-hex selection with editable and native
+  inputs, preset triggers, optional Popover composition, read-only inspection,
+  and hidden form submission.
+
+- Added an export-led Agent Knowledge catalog and deterministic coverage report
+  that classify every public subpath and symbol, validate structured selection
+  destinations, reject stale generated output, and verify the same complete
+  discovery surface from the packed installed package before publication. All
+  Agent Knowledge build, archive, and installed-consumer paths now enforce the
+  closed 69-owner catalog with zero coverage failures.
+- Embedded original TypeScript sources in published JavaScript maps so package
+  consumers can inspect and bundle Atom without missing-source warnings.
+- Kept collapsible NavList section content mounted through styled exit motion,
+  exposed measured content-size hooks, and suppressed entrance animation for
+  initially open sections.
+- Kept Popover open while focus or pointer interaction moves into portalled
+  Atom controlled layers opened from its Content, including Dropdown Menu,
+  including browser focus transitions through the document during modal setup.
+
+## 0.23.0 - 2026-08-21
+
+- Added headless `DragDrop` behavior for labelled same-document sources and
+  targets, mouse/pen/touch and keyboard movement, invalid-release
+  cancellation, RTL-aware targeting, and localizable announcements.
+- Added the controlled `Reorder` ordered-collection preset with stable item
+  identities, before/after movement, focus continuity, and visible
+  Move-before/after/start/end alternatives that do not require dragging.
+- Added native URL-backed Pagination through `Root.getPageHref`, rendering
+  Item, Previous, and Next as real anchors while preserving button mode,
+  current-page semantics, browser navigation, and inert boundary controls.
+
 ## 0.22.6 - 2026-08-10
 
 - Kept the pure-render Divider primitive and explicit subpath server-safe for

@@ -135,6 +135,13 @@ mandatory chips. Those require separate interaction contracts.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.0
 
 - Added preventable `Content`/`Listbox.onInteractOutside` and moved outside

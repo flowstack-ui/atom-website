@@ -206,6 +206,13 @@ Use `getInputLabel` to localize every generated cell position label. A direct
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.2
 
 - Removed unsupported `aria-required` from the `role="group"` root while

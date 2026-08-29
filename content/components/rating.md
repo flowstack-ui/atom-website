@@ -225,6 +225,13 @@ Rating at a time.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.6
 
 - Resolved drag coordinates against the nearest Rating Item so a captured

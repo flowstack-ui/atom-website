@@ -361,6 +361,14 @@ Caption, `aria-label`, or `aria-labelledby`.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for hierarchical grid selection, indexed
+  relationships, expansion, active-cell focus, row selection, header actions,
+  and virtualization boundaries.
+
 ### 0.18.0
 
 - Added `ColumnHeader.onAction` with equivalent enabled pointer and active-cell

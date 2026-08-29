@@ -5,7 +5,7 @@ const configuredSiteUrl =
 
 export const siteUrl = configuredSiteUrl.replace(/\/$/, "");
 
-export const atomVersion = "0.22.6";
+export const atomVersion = "0.24.0";
 export const brickVersion = "0.1.6";
 export const siteName = "Atom UI";
 export const siteDescription =

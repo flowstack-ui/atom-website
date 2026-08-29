@@ -493,6 +493,13 @@ buffers match exact prefixes.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.7
 
 - Made one completed activation outside every open menu surface dismiss the
