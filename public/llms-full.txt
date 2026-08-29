@@ -2,6 +2,20 @@
 
 Canonical website: https://atom-ui.com/
 
+## Exact provenance
+
+- Package: `@flowstack-ui/atom`
+- Exact reviewed version: `0.24.0`
+- Source repository: https://github.com/flowstack-ui/atom
+- Exact source commit: `a6bf8c985d230cd2edeeda1275a05bf9db0f8379`
+- Last reviewed: `2026-08-29`
+
+## Related FLOWSTACK agent delivery
+
+Unified version-aware index: https://agents.brick-ui.com/llms.txt
+
+The unified FLOWSTACK index is a supplementary version-aware discovery route. It does not replace Atom's package or website as the source authority.
+
 This file mirrors the reviewed consumer-facing Markdown published by atom-ui.com. The linked website is canonical for current routes and metadata.
 
 Source: https://atom-ui.com/docs/overview/introduction/
@@ -205,6 +219,39 @@ Source: https://atom-ui.com/docs/overview/releases/
 # Releases
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
+
+## 0.24.0 - 2026-08-28
+
+- Added headless `ColorPicker` opaque-hex selection with editable and native
+  inputs, preset triggers, optional Popover composition, read-only inspection,
+  and hidden form submission.
+
+- Added an export-led Agent Knowledge catalog and deterministic coverage report
+  that classify every public subpath and symbol, validate structured selection
+  destinations, reject stale generated output, and verify the same complete
+  discovery surface from the packed installed package before publication. All
+  Agent Knowledge build, archive, and installed-consumer paths now enforce the
+  closed 69-owner catalog with zero coverage failures.
+- Embedded original TypeScript sources in published JavaScript maps so package
+  consumers can inspect and bundle Atom without missing-source warnings.
+- Kept collapsible NavList section content mounted through styled exit motion,
+  exposed measured content-size hooks, and suppressed entrance animation for
+  initially open sections.
+- Kept Popover open while focus or pointer interaction moves into portalled
+  Atom controlled layers opened from its Content, including Dropdown Menu,
+  including browser focus transitions through the document during modal setup.
+
+## 0.23.0 - 2026-08-21
+
+- Added headless `DragDrop` behavior for labelled same-document sources and
+  targets, mouse/pen/touch and keyboard movement, invalid-release
+  cancellation, RTL-aware targeting, and localizable announcements.
+- Added the controlled `Reorder` ordered-collection preset with stable item
+  identities, before/after movement, focus continuity, and visible
+  Move-before/after/start/end alternatives that do not require dragging.
+- Added native URL-backed Pagination through `Root.getPageHref`, rendering
+  Item, Previous, and Next as real anchors while preserving button mode,
+  current-page semantics, browser navigation, and inert boundary controls.
 
 ## 0.22.6 - 2026-08-10
 
@@ -1956,6 +2003,13 @@ Backdrop clicks do not dismiss the dialog.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.3
 
 - Inherited document-only overflow locking so sticky application chrome
@@ -2290,7 +2344,11 @@ need a descriptive title.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for structural media geometry, ratio
+  normalization, child semantics, and authoritative style composition.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -2461,7 +2519,11 @@ essential identity.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for entity identity, aligned image loading,
+  fallback timing, alternative text, decorative use, and grouping semantics.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -2567,7 +2629,11 @@ frequency of the update.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for passive contextual labels and counts,
+  owning-control context, noninteraction, and deliberate live announcement
+  boundaries.
 
 ### 0.3.3
 
@@ -4266,6 +4332,13 @@ children remain appropriate for concise options.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.6.16
 
 - Explicitly scrolled the first enabled Item into view when inline validation
@@ -4439,6 +4512,14 @@ only begins from Trigger activation after hydration.
 - Styled libraries may compose Clipboard into a Code Block copy control.
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for copying known text, truthful async
+  status, latest-operation concurrency, accessibility feedback, and the
+  secure-context boundary.
 
 ### 0.8.0
 
@@ -4618,7 +4699,11 @@ the user what will be revealed.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for single-disclosure selection, trigger
+  and region relationships, conditional persistence, orientation metadata,
+  and motion measurement boundaries.
 
 ### 0.20.9
 
@@ -4645,6 +4730,133 @@ the user what will be revealed.
 ### 0.1.0
 
 - Initial Atom release.
+
+---
+
+Source: https://atom-ui.com/docs/components/color-picker/
+
+# ColorPicker
+
+Color Picker is a headless compound control for hexadecimal color selection. It owns normalized controlled or uncontrolled state, form submission, preset selection, and optional Popover behavior; consumers own every visual treatment.
+
+## When to Use
+
+Use Color Picker when a form needs a color value selected through editable text, the browser's native color chooser, preset values, or a floating combination of those controls. Use a passive styled swatch when the interface only previews a color.
+
+## Features
+
+- Controlled and uncontrolled `#rrggbb` state with `#rgb` normalization.
+- Editable text and native `type="color"` inputs.
+- Accessible preset buttons with selected state.
+- Optional Popover trigger and content built on Atom's existing focus and dismissal behavior.
+- Hidden input form submission and Field state inheritance.
+
+This first version deliberately supports opaque hexadecimal color values, the browser-native chooser, and preset buttons. It does not claim parity with area pickers, alpha channels, channel sliders or inputs, eyedroppers, format switching, or color-space conversion. Those capabilities can extend the same Root state and compound anatomy later without moving visual presentation into Atom; each extension requires its own accessibility, pointer, keyboard, and form contract before it is added.
+
+## Import
+
+```tsx
+import { ColorPicker } from "@flowstack-ui/atom"
+```
+
+## Anatomy
+
+```tsx
+<ColorPicker.Root>
+  <ColorPicker.Label />
+  <ColorPicker.Control>
+    <ColorPicker.Input />
+    <ColorPicker.NativeInput />
+    <ColorPicker.Trigger />
+  </ColorPicker.Control>
+  <ColorPicker.Content>
+    <ColorPicker.SwatchTrigger />
+  </ColorPicker.Content>
+  <ColorPicker.HiddenInput />
+</ColorPicker.Root>
+```
+
+## API Reference
+
+### Root
+
+Renders a `div`, provides picker state to every part, and hosts optional Popover behavior.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | - |
+| `defaultValue` | `string` | `"#000000"` |
+| `onValueChange` | `(value: string) => void` | - |
+| `open` / `defaultOpen` | `boolean` | - / `false` |
+| `onOpenChange` | `(open, reason) => void` | - |
+| `disabled`, `readOnly`, `invalid`, `required` | `boolean` | `false` |
+| `name`, `form`, `inputId` | `string` | - |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"color-picker"` |
+| `[data-disabled]`, `[data-readonly]`, `[data-invalid]`, `[data-required]` | Present in the matching state |
+
+### Label
+
+Renders a `label` associated with the editable input.
+
+### Control
+
+Renders a structural `div` around controls.
+
+### Input
+
+Renders a text input. Valid `#rgb` and `#rrggbb` drafts update the picker; an invalid draft reverts on blur.
+
+### NativeInput
+
+Renders the browser-native `input[type=color]` and updates the shared value.
+
+### Trigger
+
+Renders Atom Popover's trigger with `data-slot="color-picker-trigger"`.
+
+### Content
+
+Renders positioned Atom Popover content and inherits its focus and dismissal contract.
+
+### SwatchTrigger
+
+Renders a preset `button` with `aria-pressed` and requires a hexadecimal `value`.
+
+### HiddenInput
+
+Renders the single hidden successful control used for form submission.
+
+## Examples
+
+```tsx
+import { ColorPicker } from "@flowstack-ui/atom"
+
+export function BrandColor() {
+  return (
+    <ColorPicker.Root name="brandColor" defaultValue="#5b5bd6">
+      <ColorPicker.Label>Brand color</ColorPicker.Label>
+      <ColorPicker.Control>
+        <ColorPicker.Input />
+        <ColorPicker.NativeInput />
+      </ColorPicker.Control>
+      <ColorPicker.HiddenInput />
+    </ColorPicker.Root>
+  )
+}
+```
+
+## Accessibility
+
+The editable and native inputs use native form semantics. `Label` names the editable text input through the native `for` relationship; `NativeInput` has the default accessible name “Open native color chooser,” which consumers may override. No generated `aria-labelledby` points to an optional or absent Label. Preset triggers are native buttons and expose `aria-pressed`; provide a descriptive `aria-label` when a hexadecimal value alone is not meaningful. Read-only pickers can still open for inspection while every mutating input and preset rejects edits. Optional floating content uses Atom Popover's keyboard, focus restoration, Escape, and outside-interaction behavior.
+
+## Changelog
+
+### 0.24.0
+
+- Added headless hexadecimal color selection, native and editable inputs, preset triggers, optional Popover composition, and hidden form submission.
 
 ---
 
@@ -5086,7 +5298,10 @@ disabled options marked with `disabled`.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.20.2
 
@@ -5574,6 +5789,13 @@ through a visible control as well.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.7
 
 - Kept the custom menu active on repeated secondary clicks, repositioned it at
@@ -6022,7 +6244,11 @@ Atom's composed pointer behavior with `event.preventDefault()`.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for grid selection, indexed semantics,
+  active-descendant focus, row selection, header actions, and virtualization
+  boundaries.
 
 ### 0.17.0
 
@@ -6357,6 +6583,13 @@ final callback receives the closing interaction and close reason.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.3
 
 - Inherited document-only overflow locking so sticky application chrome
@@ -6533,6 +6766,199 @@ no keyboard interaction.
 ### 0.1.0
 
 - Initial Atom release.
+
+---
+
+Source: https://atom-ui.com/docs/components/drag-drop/
+
+# DragDrop
+
+Headless same-document drag-and-drop primitives that own pointer and keyboard
+input, source and target registration, cancellation, and accessible
+announcements. `DragDrop` is a behavioral foundation for component authors; it
+does not choose an application's movement rules or visual presentation.
+
+## When to Use
+
+Use `DragDrop` when building a collection-specific movement component such as
+a Kanban board or another interface whose rules do not fit a linear list. Use
+[`Reorder`](/components/reorder) when a user only arranges one ordered list.
+Do not use this primitive for automatic data sorting, native file transfer, or
+freeform canvas coordinates.
+
+## Features
+
+- Mouse and pen movement after a distance threshold.
+- Touch movement after a short hold with movement cancellation. The explicit
+  Handle owns the gesture; the rest of the item and page remain scrollable.
+- Keyboard pickup, movement, commit, and cancellation.
+- Before/after linear targets and generic on-target drops.
+- Release-based pointer completion and cancellation on invalid release.
+- Localizable instructions and live announcements.
+- Vertical and horizontal behavior with RTL-aware horizontal movement.
+- Controlled lifecycle callbacks and stable behavior data attributes.
+
+## Import
+
+```tsx
+import { DragDrop } from "@flowstack-ui/atom";
+```
+
+## Anatomy
+
+```tsx
+<DragDrop.Root>
+  <DragDrop.DropTarget>
+    <DragDrop.Draggable>
+      <DragDrop.Handle />
+    </DragDrop.Draggable>
+  </DragDrop.DropTarget>
+</DragDrop.Root>
+```
+
+## API Reference
+
+### Root
+
+Provides drag state, registries, input handling, instructions, and an assertive
+live announcer. It renders no wrapping element; its children and two visually
+hidden support nodes are siblings.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `instructions` | `string` | required |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `disabled` | `boolean` | `false` |
+| `readOnly` | `boolean` | `false` |
+| `messages` | `DragDropMessages` | English defaults |
+| `onDragStart` | `(details) => void` | - |
+| `onDragMove` | `(details) => void` | - |
+| `onDragEnd` | `(details) => void` | - |
+| `onDragCancel` | `(details) => void` | - |
+
+The generated announcer has `aria-live="assertive"` and `aria-atomic="true"`.
+
+### DropTarget
+
+Registers an element as a valid destination. It renders a `div` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | required |
+| `label` | `string` | required |
+| `mode` | `"on" \| "before-after"` | `"on"` |
+| `disabled` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"drag-drop-drop-target"` |
+| `[data-value]` | Target identity |
+| `[data-drop-target]` | Present while targeted |
+| `[data-drop-position]` | `"on"`, `"before"`, or `"after"` while targeted |
+| `[data-disabled]` | Present when disabled |
+
+### Draggable
+
+Registers a labelled movement source and provides item context to its Handle.
+It renders a `div` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | required |
+| `label` | `string` | required |
+| `disabled` | `boolean` | `false` |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"drag-drop-draggable"` |
+| `[data-value]` | Source identity |
+| `[data-dragging]` | Present on the active source |
+| `[data-disabled]` | Present when disabled |
+
+During pointer movement, `--atom-drag-drop-x` and
+`--atom-drag-drop-y` contain the source displacement in CSS pixels. Atom does
+not apply a transform.
+
+### Handle
+
+Starts and controls movement. It renders a native `button` and must receive an
+accessible name describing the item it moves.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| ARIA attribute | Values |
+| --- | --- |
+| `aria-describedby` | Generated Root instruction ID |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"drag-drop-handle"` |
+| `[data-value]` | Source identity |
+| `[data-dragging]` | Present while controlling the active source |
+
+## Examples
+
+This generic example moves a source onto a destination. A finished interface
+must also provide a visible simple-pointer alternative appropriate to its job.
+
+```tsx
+import { DragDrop } from "@flowstack-ui/atom";
+
+export function DestinationExample() {
+  return (
+    <DragDrop.Root
+      instructions="Press Space or Enter to pick up. Use the arrow keys to choose a target, then press Space or Enter to drop."
+      onDragEnd={(details) => console.log(details)}
+    >
+      <DragDrop.DropTarget label="Review queue" value="review">
+        Review queue
+      </DragDrop.DropTarget>
+      <DragDrop.Draggable label="Approval request" value="approval-request">
+        Approval request
+        <DragDrop.Handle aria-label="Move Approval request" />
+      </DragDrop.Draggable>
+    </DragDrop.Root>
+  );
+}
+```
+
+## Accessibility
+
+There is no single WAI-ARIA drag-and-drop widget pattern. Atom keeps the handle
+a native button, associates it with authored instructions, and announces
+pickup, destination changes, drops, and cancellation. Consumers must provide
+human labels, localize the instruction/message copy, preserve keyed focus, and
+provide a visible operation that does not require a dragging movement, as
+required by [WCAG 2.2 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements).
+
+| Key | Description |
+| --- | --- |
+| `Space` / `Enter` | Picks up the source; commits while movement is active. |
+| `Arrow Up` / `Arrow Down` | Moves among vertical targets. |
+| `Arrow Left` / `Arrow Right` | Moves among horizontal targets and mirrors in RTL. |
+| `Home` / `End` | Moves to the first or last target. |
+| `Escape` | Cancels without committing. |
+
+Pointer changes commit on release. `pointercancel` and release without a valid
+target cancel the movement.
+
+## Changelog
+
+### Unreleased
+
+- No unreleased changes.
+
+### 0.23.0
+
+- Added the initial headless DragDrop foundation with pointer, touch-delay,
+  keyboard, target, cancellation, direction, and announcement behavior.
 
 ---
 
@@ -7284,6 +7710,13 @@ Trigger text that describes the menu.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.6
 
 - Inherited movement-gated submenu hover intent so opening a parent
@@ -7509,6 +7942,14 @@ An authored `onKeyDown` handler can call `preventDefault()` to cancel both the
 focus move and scrolling.
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for article-stream selection, logical
+  position and size metadata, loading state, focus movement, scrolling, and
+  virtualization boundaries.
 
 ### 0.19.8
 
@@ -8403,6 +8844,14 @@ validate file type, size, and content again on the server.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for native picker and form semantics,
+  dropzone enhancement, validation boundaries, file-list composition, and
+  same-file reselection behavior.
+
 ### 0.19.7
 
 - Related the visible Trigger to its Field label, description/error, required,
@@ -8654,9 +9103,10 @@ accessibility relationship, so never put required actions inside it.
   capability when the browser's available input devices change.
 - Uses configurable open and close delays and a safe pointer corridor that keeps
   Content open while the pointer crosses the gap from Trigger to Content.
-- Positions Content by trying alternate alignments on the requested side,
-  repeating them on the opposite side, and using perpendicular sides only as
-  final fallbacks; collision shift and Arrow coordinates follow the result.
+- Positions centered Content by shifting within the viewport before considering
+  placement fallbacks. Edge-aligned Content resolves alternate alignments before
+  shifting, and both modes retain opposite- and perpendicular-side fallbacks;
+  Arrow coordinates follow the resolved result.
 - Supports inline or custom-container portals.
 - Participates in topmost-layer Escape dismissal.
 
@@ -8822,6 +9272,15 @@ open HoverCard, so a Trigger link keeps its normal tap and long-press behavior.
 | `Escape` | Closes the topmost open HoverCard immediately. |
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+- Preserved centered Content alignment near viewport edges by shifting it into
+  view before considering alternate placements.
 
 ### 0.6.9
 
@@ -9317,7 +9776,11 @@ anything and do not replace native `disabled`, `required`, `readOnly`, or
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for native single-control labeling, state
+  metadata boundaries, and Field and Fieldset selection.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -9859,7 +10322,10 @@ buffers match exact prefixes.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.2.0
 
@@ -10369,6 +10835,13 @@ buffers match exact prefixes.
 | `Tab` / `Shift+Tab` | Closes all levels and moves after/before the owning composite |
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.20.7
 
@@ -10964,6 +11437,13 @@ typeahead behavior for printable-character searches.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.6
 
 - Inherited movement-gated submenu hover intent so opening a top-level menu
@@ -11385,6 +11865,13 @@ parts.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, primitive-author
+  composition, recurring mistakes, and validation.
+
 ### 0.20.3
 
 - Locked document overflow without also hiding body overflow, preserving
@@ -11592,6 +12079,13 @@ mandatory chips. Those require separate interaction contracts.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.0
 
 - Added preventable `Content`/`Listbox.onInteractOutside` and moved outside
@@ -11630,6 +12124,8 @@ and Listbox when the rows select values instead of navigating.
 - Supports active/current link state with configurable `aria-current` tokens.
 - Supports disabled links and disabled section interaction.
 - Supports collapsible sections with controlled and uncontrolled open state.
+- Keeps closing section content mounted through exit motion and exposes measured
+  content-size hooks for styled disclosure animation.
 - Supports `asChild` and `render` composition across every rendered part.
 - Keeps route behavior in consumer links while Atom owns ARIA and data attributes.
 
@@ -11849,9 +12345,11 @@ Contains section links. Renders a `div` by default.
 | `[data-orientation]` | `"vertical" \| "horizontal"` |
 | `[data-state]` | `"open" \| "closed"` |
 | `[data-collapsible]` | Present when the section is collapsible |
+| `[data-initial-open]` | Present while an initially open section has not transitioned |
 
-When closed, content unmounts unless `forceMount` is true. Forced closed content
-renders `hidden`.
+During a transition, SectionContent exposes `--content-height` and
+`--content-width` and remains mounted until a styled exit animation completes.
+When `forceMount` is true, closed content becomes `hidden` after that animation.
 
 Advanced compound components can use `useNavListContext` and
 `useNavListSectionContext`; the matching providers and context value types are
@@ -12557,6 +13055,13 @@ The inner input renders `role="spinbutton"`.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.0
 
 - Added compound Input, Increment, and Decrement parts while preserving the
@@ -12796,6 +13301,13 @@ Use `getInputLabel` to localize every generated cell position label. A direct
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.2
 
 - Removed unsupported `aria-required` from the `role="group"` root while
@@ -12855,6 +13367,8 @@ does not fetch, sort, or filter the data for you.
 - Supports sibling and boundary page counts.
 - Renders the calculated range through an optional `Items` shortcut.
 - Supports previous, next, page item, and decorative ellipsis parts.
+- Supports native URL-backed pagination through `getPageHref` without losing
+  reload, sharing, Back/Forward, or modified-click behavior.
 - Localizes generated page and direction labels from Root while preserving
   direct native `aria-label` overrides.
 
@@ -12898,6 +13412,7 @@ or negative, `Root` returns `null` and no pagination DOM is rendered.
 | `previousAriaLabel` | `string` | `"Previous page"` |
 | `nextAriaLabel` | `string` | `"Next page"` |
 | `getItemAriaLabel` | `(details: PaginationItemLabelDetails) => string` | generated English label |
+| `getPageHref` | `(details: PaginationPageHrefDetails) => string` | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -12918,6 +13433,13 @@ receive disabled state.
 has its own native `aria-label`. `previousAriaLabel` and `nextAriaLabel` follow
 the same precedence rule for their controls.
 
+When `getPageHref` is present, Item, Previous, and Next render native anchors
+instead of buttons. The callback receives the same page details as
+`getItemAriaLabel`. Control `page` from the current route in this mode. Anchor
+activation does not call `onPageChange`; the browser or router owns the route.
+An application may progressively enhance ordinary clicks through each part's
+`onClick`, but it must preserve modified clicks and the generated `href`.
+
 ### List
 
 Renders the ordered page list. Renders an `ol` by default.
@@ -12935,12 +13457,14 @@ Renders the ordered page list. Renders an `ol` by default.
 ### Previous
 
 Moves to the previous page. Renders an outer `li` and an inner `button` with
-`type="button"` by default. `asChild`, `render`, native props, and refs target
-the inner control.
+`type="button"` by default, or an anchor when Root provides `getPageHref`.
+`asChild`, `render`, native props, and refs target the inner control.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | - |
+| `target` | native anchor target | - |
+| `rel` | native anchor relationship | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -12955,7 +13479,8 @@ the inner control.
 | `[data-disabled]` | Present when disabled or on first page |
 
 `Previous` is disabled when `Root disabled` is true or the current page is the
-first page.
+first page. In link mode, a disabled Previous has no `href`, is removed from
+sequential focus, and exposes `aria-disabled="true"`.
 
 ### Items
 
@@ -12974,13 +13499,15 @@ label cannot accidentally name every page identically.
 ### Item
 
 Renders a page item. Renders an outer `li` and an inner `button` with
-`type="button"` by default. `asChild`, `render`, native props, and refs target
-the inner control.
+`type="button"` by default, or an anchor when Root provides `getPageHref`.
+`asChild`, `render`, native props, and refs target the inner control.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `page` | `number` | required |
 | `children` | `ReactNode` | page number |
+| `target` | native anchor target | - |
+| `rel` | native anchor relationship | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -12996,8 +13523,9 @@ the inner control.
 | `[data-page]` | Page number |
 | `[data-disabled]` | Present when disabled |
 
-Items are disabled when `Root disabled` is true. Page changes are clamped to
-the valid range before state updates.
+Items are disabled when `Root disabled` is true. In button mode, page changes
+are clamped before state updates. In link mode, disabled Items have no `href`
+and are removed from sequential focus.
 
 ### Ellipsis
 
@@ -13022,12 +13550,14 @@ Renders a decorative collapsed-page marker. Renders an outer `li` and an inner
 ### Next
 
 Moves to the next page. Renders an outer `li` and an inner `button` with
-`type="button"` by default. `asChild`, `render`, native props, and refs target
-the inner control.
+`type="button"` by default, or an anchor when Root provides `getPageHref`.
+`asChild`, `render`, native props, and refs target the inner control.
 
 | Prop | Type | Default |
 | --- | --- | --- |
 | `children` | `ReactNode` | - |
+| `target` | native anchor target | - |
+| `rel` | native anchor relationship | - |
 | `asChild` | `boolean` | `false` |
 | `render` | `RenderProp` | - |
 
@@ -13042,7 +13572,7 @@ the inner control.
 | `[data-disabled]` | Present when disabled or on last page |
 
 `Next` is disabled when `Root disabled` is true or the current page is the last
-page.
+page. Link-mode boundary behavior matches Previous.
 
 ## Examples
 
@@ -13087,6 +13617,34 @@ export function ResultsPagination() {
   );
 }
 ```
+
+### URL-Backed Results
+
+```tsx
+import { Pagination } from "@flowstack-ui/atom";
+
+export function SearchPagination({ page, totalPages }) {
+  return (
+    <Pagination.Root
+      page={page}
+      totalPages={totalPages}
+      getPageHref={({ page: destination }) =>
+        `/search?q=payments&page=${destination}`
+      }
+    >
+      <Pagination.List>
+        <Pagination.Previous>Previous</Pagination.Previous>
+        <Pagination.Items />
+        <Pagination.Next>Next</Pagination.Next>
+      </Pagination.List>
+    </Pagination.Root>
+  );
+}
+```
+
+This mode renders real anchors. Do not compose anchors through `asChild` while
+Root remains in button mode; that leaves button behavior on an anchor instead
+of selecting the URL-backed contract.
 
 ### Localize Generated Labels
 
@@ -13133,9 +13691,15 @@ type are also public exports.
 
 ### Unreleased
 
+- No unreleased changes.
+
+### 0.23.0
+
 - Added public Agent Knowledge for component selection, required composition,
   recurring mistakes, and validation.
-
+- Added native URL-backed Item, Previous, and Next destinations through
+  `Root.getPageHref` while preserving controlled button mode, current-page
+  semantics, modified clicks, and inert boundary controls.
 
 ### 0.16.0
 
@@ -13355,6 +13919,13 @@ separate live-region announcement.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.1
 
 - Fixed `Input` to inherit the containing Field's generated control ID,
@@ -13408,12 +13979,15 @@ page inside a floating box.
 - Configurable interaction-aware initial and final focus, including a
   touch-safe Content default and outside-dismissal focus preservation.
 - Optional anchor separate from the trigger.
-- Floating UI positioning that tries alternate alignments on the requested
-  side, repeats them on the opposite side, and uses perpendicular sides only as
-  final fallbacks; collision shift and Arrow coordinates follow the result.
+- Floating UI positioning that preserves centered alignment by shifting within
+  the viewport first. Edge-aligned content resolves alternate alignments before
+  shifting, and both modes retain opposite- and perpendicular-side fallbacks;
+  Arrow coordinates follow the resolved result.
 - Modal mode with focus trap, background isolation, and scroll lock.
 - Non-modal focus guards and layer-aware completed-activation outside
   dismissal with a preventable consumer event.
+- Portalled Atom controls opened by content, including Dropdown Menu, remain
+  inside the Popover interaction and focus boundary.
 - Stack-aware Escape dismissal for nested overlays.
 - Close button part and portal support.
 
@@ -13547,6 +14121,15 @@ from the mounted Anchor/Trigger and then `Direction.Provider`.
 method keeps Content open without cancelling the original destination click.
 Only the topmost registered layer receives an outside activation; dragged,
 cancelled, secondary-button, and multi-pointer sessions do not dismiss.
+Portalled Atom layers whose trigger is inside Content remain part of the same
+interaction boundary, so opening a Dropdown Menu or another controlled layer
+does not dismiss the Popover. When a browser temporarily moves focus to the
+document while activating a nested modal layer, Popover waits for that focus
+transaction to settle and preserves the parent boundary while its controlled
+portalled child remains open. This includes transient focus reported on the
+document body or root element by browsers while background isolation changes.
+While that child is open, it owns the active focus transaction; the parent
+Popover resumes ordinary focus-out dismissal after the child closes.
 
 | ARIA attribute | Values |
 | --- | --- |
@@ -13720,6 +14303,18 @@ opened by descendants.
 | `Tab` | In modal mode, focus remains trapped inside content. In non-modal mode, focus guards close the popover when tabbing away. |
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+- Preserved centered Content alignment near viewport edges by shifting it into
+  view before considering alternate placements.
+- Kept Popover open when focus or pointer interaction moves into any portalled
+  Atom controlled layer opened from its Content, including Dropdown Menu, even
+  when the browser briefly moves focus to the document during modal setup.
 
 ### 0.20.3
 
@@ -14106,7 +14701,12 @@ keyboard interaction.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for determinate and indeterminate work,
+  accessible naming and value text, normalized ranges, and Indicator
+  presentation boundaries.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -14283,6 +14883,13 @@ move focus so every option remains discoverable.
 | `Tab` | Enters or leaves the group through its single roving Tab stop. |
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.11.1
 
@@ -14563,6 +15170,13 @@ Rating at a time.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.6
 
 - Resolved drag coordinates against the nearest Rating Item so a captured
@@ -14615,6 +15229,229 @@ Rating at a time.
 ### 0.1.0
 
 - Initial Atom release.
+
+---
+
+Source: https://atom-ui.com/docs/components/reorder/
+
+# Reorder
+
+Headless primitives for manually arranging one controlled linear collection.
+`Reorder` composes `DragDrop` with ordered-list semantics, identity-array
+updates, keyboard movement, and direct single-activation movement controls.
+
+## When to Use
+
+Use `Reorder` when a person decides and saves the order of items in one list.
+Do not use it for automatic sorting by name, date, or status. Tables, trees,
+Kanban boards, and movement between containers need component-specific APIs
+that may reuse `DragDrop` internally.
+
+## Features
+
+- Controlled stable-identity order.
+- Native ordered-list and list-item defaults.
+- Mouse, pen, delayed-touch, and keyboard reordering.
+- Direct move before, after, to start, and to end controls.
+- Localizable instructions and live announcements.
+- Disabled, read-only, per-item disabled, vertical, horizontal, and RTL modes.
+- Drop-position state for styled layers without Atom-owned visuals.
+
+## Import
+
+```tsx
+import { Reorder } from "@flowstack-ui/atom";
+```
+
+## Anatomy
+
+```tsx
+<Reorder.Root>
+  <Reorder.Item>
+    <Reorder.Handle />
+    <Reorder.MoveBefore />
+    <Reorder.MoveAfter />
+    <Reorder.MoveToStart />
+    <Reorder.MoveToEnd />
+    <Reorder.DropIndicator />
+  </Reorder.Item>
+</Reorder.Root>
+```
+
+## API Reference
+
+### Root
+
+Owns the controlled identity order and renders an `ol` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `items` | `string[]` | required |
+| `onItemsChange` | `(items, details) => void` | required |
+| `getItemLabel` | `(value) => string` | required |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` |
+| `disabled` | `boolean` | `false` |
+| `readOnly` | `boolean` | `false` |
+| `instructions` | `string` | English keyboard instructions |
+| `messages` | `DragDropMessages` | English defaults |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"reorder"` |
+| `[data-orientation]` | `"vertical"` or `"horizontal"` |
+| `[data-disabled]` | Present when disabled |
+| `[data-readonly]` | Present when read-only |
+
+`onItemsChange` details include `activeValue`, `overValue`, `position`,
+`previousIndex`, `nextIndex`, and `input` (`keyboard`, `pointer`, or `control`).
+
+### Item
+
+Registers one stable identity and renders an `li` by default.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `value` | `string` | required |
+| `disabled` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"reorder-item"` |
+| `[data-value]` | Item identity |
+| `[data-dragging]` | Present while active |
+| `[data-drop-target]` | Present while targeted |
+| `[data-drop-position]` | `"before"` or `"after"` while targeted |
+| `[data-disabled]` | Present when disabled |
+
+### Handle
+
+Native button that starts and controls dragging. It must receive an accessible
+name such as `Move Verify production`.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `asChild` | `boolean` | `false` |
+| `render` | `RenderProp` | - |
+
+| ARIA attribute | Values |
+| --- | --- |
+| `aria-describedby` | Generated instruction ID |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"reorder-handle"` |
+| `[data-dragging]` | Present while active |
+
+### MoveBefore
+
+Native button that immediately moves the Item one logical position earlier.
+It disables at the first boundary.
+
+### MoveAfter
+
+Native button that immediately moves the Item one logical position later. It
+disables at the last boundary.
+
+### MoveToStart
+
+Native button that immediately moves the Item to the first position.
+
+### MoveToEnd
+
+Native button that immediately moves the Item to the last position.
+
+All movement buttons accept native button props, `asChild`, `render`, and
+consumer content. They emit `[data-slot]` and `[data-move]`, and require an
+authored accessible name.
+
+### DropIndicator
+
+Decorative `span` that exposes the proposed insertion position.
+
+| Prop | Type | Default |
+| --- | --- | --- |
+| `render` | `RenderProp` | - |
+
+| ARIA attribute | Values |
+| --- | --- |
+| `aria-hidden` | `true` |
+
+| Data attribute | Values |
+| --- | --- |
+| `[data-slot]` | `"reorder-drop-indicator"` |
+| `[data-state]` | `"active"` or `"inactive"` |
+| `[data-position]` | `"before"` or `"after"` while active |
+
+## Examples
+
+```tsx
+import { useState } from "react";
+import { Reorder } from "@flowstack-ui/atom";
+
+const labels: Record<string, string> = {
+  verify: "Verify production",
+  approve: "Request approval",
+  deploy: "Deploy release",
+};
+
+export function ReorderExample() {
+  const [items, setItems] = useState(["verify", "approve", "deploy"]);
+
+  return (
+    <Reorder.Root
+      items={items}
+      getItemLabel={(value) => labels[value] ?? value}
+      onItemsChange={(nextItems) => setItems(nextItems)}
+    >
+      {items.map((value) => (
+        <Reorder.Item key={value} value={value}>
+          <Reorder.Handle aria-label={`Move ${labels[value]}`}>
+            Move
+          </Reorder.Handle>
+          <span>{labels[value]}</span>
+          <Reorder.MoveBefore aria-label={`Move ${labels[value]} up`}>Up</Reorder.MoveBefore>
+          <Reorder.MoveAfter aria-label={`Move ${labels[value]} down`}>Down</Reorder.MoveAfter>
+          <Reorder.DropIndicator />
+        </Reorder.Item>
+      ))}
+    </Reorder.Root>
+  );
+}
+```
+
+## Accessibility
+
+`Root` and `Item` use native ordered-list semantics. Handles and movement
+operations are native buttons. The handle receives generated instructions and
+Root announces movement with human labels and one-based positions. Keep
+movement buttons visibly available: they are the simple-pointer alternative
+required by [WCAG 2.2 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements).
+
+| Key | Description |
+| --- | --- |
+| `Space` / `Enter` | Picks up from a Handle; commits while active. |
+| `Arrow Up` / `Arrow Down` | Moves within a vertical list. |
+| `Arrow Left` / `Arrow Right` | Moves within a horizontal list and mirrors in RTL. |
+| `Home` / `End` | Moves to the first or last position. |
+| `Escape` | Cancels without changing the identity order. |
+
+Use stable record IDs as `value`, render Items in the exact order supplied to
+Root, and preserve those keys after updates so focus remains on the moved
+control. Applications own persistence, Undo, failures, and conflicts.
+
+## Changelog
+
+### Unreleased
+
+- No unreleased changes.
+
+### 0.23.0
+
+- Added the initial controlled linear reorder preset with drag, keyboard,
+  direct movement controls, announcements, direction support, and drop state.
 
 ---
 
@@ -15271,6 +16108,13 @@ buffers match exact prefixes.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.4
 
 - Content/Listbox now resolves direction from its explicit `dir`, Trigger, or
@@ -15910,6 +16754,13 @@ Only one pointer session can control a Slider at a time.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.4
 
 - Finalize the latest pointer value when capture is lost instead of restoring
@@ -16133,6 +16984,14 @@ support alone is not the required single-pointer alternative to dragging.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for gesture-enhanced row actions, required
+  non-swipe fallbacks, pointer and scroll behavior, keyboard isolation,
+  logical direction, and action accessibility.
+
 ### 0.19.9
 
 - Preserved native vertical panning with an axis-compatible Content touch
@@ -16301,6 +17160,13 @@ Switch inherits state, control ID, and descriptions. Uncontrolled state resets
 to `defaultChecked`. Read-only switches remain focusable but cannot toggle.
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.6.16
 
@@ -16545,7 +17411,11 @@ Table adds no keyboard behavior; only interactive descendants enter the Tab orde
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for native table selection, structural and
+  header relationships, sorting metadata, and keyboard boundaries.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -17296,9 +18166,14 @@ separate UI when an action must keep a toast open while async work completes.
 
 ### Unreleased
 
+### 0.24.0
+
 - Documented a consumer-owned safe-area and application-chrome offset recipe,
   while explicitly avoiding an unverified automatic software-keyboard
   guarantee.
+- Added source-led Agent Knowledge for transient feedback selection, live
+  announcement ownership, queue timing, focus behavior, actions, dismissal,
+  and placement boundaries.
 
 ### 0.15.0
 
@@ -17431,7 +18306,10 @@ Provide visible text or an accessible label when the toggle contains only an ico
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.2.0
 
@@ -17597,7 +18475,10 @@ Root is one roving Tab stop and Items expose `aria-pressed`.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
 
 ### 0.2.0
 
@@ -17925,9 +18806,10 @@ the floating content contains buttons, links, or other controls.
   scrolling, a second touch, `touchcancel`, disabling, or Trigger unmount.
 - Starts finite touch dismissal after release: 1500 ms for plain and 3000 ms
   for rich.
-- Floating UI positioning that tries alternate alignments on the requested
-  side, repeats them on the opposite side, and uses perpendicular sides only as
-  final fallbacks; collision shift and Arrow coordinates follow the result.
+- Floating UI positioning that preserves centered alignment by shifting within
+  the viewport first. Edge-aligned content resolves alternate alignments before
+  shifting, and both modes retain opposite- and perpendicular-side fallbacks;
+  Arrow coordinates follow the resolved result.
 - `aria-describedby` wiring between trigger and tooltip content.
 - Portal and arrow parts.
 
@@ -18174,6 +19056,15 @@ scrolling, adding a second touch, receiving `touchcancel`, disabling the
 Trigger, or unmounting it cancels the touch session.
 
 ## Changelog
+
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+- Preserved centered Content alignment near viewport edges by shifting it into
+  view before considering alternate placements.
 
 ### 0.6.9
 
@@ -18451,7 +19342,11 @@ multi-character buffers match exact prefixes.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for one-dimensional hierarchy selection,
+  nested relationships, expansion and selection state, focus, typeahead,
+  forms, direction, and virtualization boundaries.
 
 ### 0.17.1
 
@@ -18841,6 +19736,14 @@ Caption, `aria-label`, or `aria-labelledby`.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for hierarchical grid selection, indexed
+  relationships, expansion, active-cell focus, row selection, header actions,
+  and virtualization boundaries.
+
 ### 0.18.0
 
 - Added `ColumnHeader.onAction` with equivalent enabled pointer and active-cell
@@ -19147,7 +20050,12 @@ direction-aware behavior owned by Atom components.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for native direction pairing, provider
+  scope, local overrides, nonrendering context, and bidirectional behavior
+  validation.
+
 ### 0.1.0
 
 - Initial Atom release.
@@ -19662,7 +20570,11 @@ but not visible. Do not use it to hide content from assistive technology; use
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for assistive-only text, accessible naming
+  context, visible-first decisions, focus safety, and authoritative hiding.
+
 ### 0.1.0
 
 - Initial Atom release.

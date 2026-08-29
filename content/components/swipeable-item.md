@@ -190,6 +190,14 @@ support alone is not the required single-pointer alternative to dragging.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added source-led Agent Knowledge for gesture-enhanced row actions, required
+  non-swipe fallbacks, pointer and scroll behavior, keyboard isolation,
+  logical direction, and action accessibility.
+
 ### 0.19.9
 
 - Preserved native vertical panning with an axis-compatible Content touch

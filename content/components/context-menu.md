@@ -418,6 +418,13 @@ through a visible control as well.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.7
 
 - Kept the custom menu active on repeated secondary clicks, repositioned it at

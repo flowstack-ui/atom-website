@@ -145,6 +145,13 @@ to `defaultChecked`. Read-only switches remain focusable but cannot toggle.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.6.16
 
 - Explicitly scrolled inline validation-directed focus into view.

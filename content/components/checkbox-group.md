@@ -280,6 +280,13 @@ children remain appropriate for concise options.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.6.16
 
 - Explicitly scrolled the first enabled Item into view when inline validation

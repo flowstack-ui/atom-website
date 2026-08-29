@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Synchronized the reviewed consumer documentation and release history with
+  exact Atom `0.24.0` at source commit
+  `a6bf8c985d230cd2edeeda1275a05bf9db0f8379`, and adopted exact Brick
+  `0.1.11` plus Theme `0.1.1`.
+- Added exact package-version and source-commit provenance to both AI-readable
+  outputs, plus a clearly supplementary link to the unified FLOWSTACK Agent
+  Knowledge index without changing Atom's source authority.
 - Migrated the application-owned ion-cyan light/dark theme from handwritten
   Brick variables to a serializable Theme definition and deterministic CSS,
   DTCG token, manifest, and report artifacts.
@@ -15,7 +22,7 @@
 - Darkened the light muted-text role just enough to satisfy Theme's declared
   4.5:1 normal-text contract across Brick's maintained base and canvas
   surfaces.
-- Adopted published Brick `0.1.9` and Theme `0.1.0`, compiling directly from
+- Adopted published Brick `0.1.11` and Theme `0.1.1`, compiling directly from
   Brick's packaged contract and removing the temporary copied contract and
   immutable Theme Git dependency.
 

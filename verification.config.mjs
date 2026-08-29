@@ -2,6 +2,17 @@ const verification = {
   schemaVersion: 1,
   id: "atom-website",
   kind: "public-prerendered-next-website",
+  publicPackageBaseline: {
+    dependencies: {
+      "@flowstack-ui/atom": "0.24.0",
+      "@flowstack-ui/brick": "0.1.11",
+    },
+    devDependencies: {
+      "@flowstack-ui/theme": "0.1.1",
+    },
+    provenance: "content/atom-source.json",
+    llmOutputs: ["public/llms.txt", "public/llms-full.txt"],
+  },
   commands: {
     focused: "check:focused",
     repository: "check:repository",

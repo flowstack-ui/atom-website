@@ -15,6 +15,15 @@ async function requirePath(path) {
 }
 
 if (configuration.schemaVersion !== 1) errors.push("unsupported verification schema");
+for (const section of ["dependencies", "devDependencies"]) {
+  for (const [name, version] of Object.entries(configuration.publicPackageBaseline[section])) {
+    if (packageJson[section]?.[name] !== version) errors.push(`${name} must remain pinned to exact ${version} in ${section}`);
+    if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/u.test(packageJson[section]?.[name] ?? "")) errors.push(`${name} is not an exact package version`);
+  }
+}
+const provenance = JSON.parse(await readFile(resolve(repositoryRoot, configuration.publicPackageBaseline.provenance), "utf8"));
+if (provenance.package !== "@flowstack-ui/atom" || provenance.version !== configuration.publicPackageBaseline.dependencies["@flowstack-ui/atom"] || !/^[0-9a-f]{40}$/u.test(provenance.sourceCommit)) errors.push("Atom content provenance does not match the exact public package baseline");
+for (const output of configuration.publicPackageBaseline.llmOutputs) await requirePath(output);
 for (const [role, script] of Object.entries(configuration.commands)) {
   if (!packageJson.scripts?.[script]) errors.push(`${role} requires npm script ${script}`);
 }

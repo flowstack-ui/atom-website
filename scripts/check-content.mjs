@@ -21,11 +21,23 @@ const brickManifest = JSON.parse(
     "utf8",
   ),
 );
+const themeManifest = JSON.parse(
+  await readFile(
+    path.join(root, "node_modules/@flowstack-ui/theme/package.json"),
+    "utf8",
+  ),
+);
 const websiteManifest = JSON.parse(
   await readFile(path.join(root, "package.json"), "utf8"),
 );
 const searchRecords = JSON.parse(
   await readFile(path.join(root, "public/search-index.json"), "utf8"),
+);
+const llmsOutputs = await Promise.all(
+  ["llms.txt", "llms-full.txt"].map(async (name) => ({
+    name,
+    content: await readFile(path.join(root, "public", name), "utf8"),
+  })),
 );
 
 const seenRoutes = new Set();
@@ -124,6 +136,9 @@ for (const route of seenRoutes) {
 if (provenance.package !== "@flowstack-ui/atom") {
   errors.push("Content provenance has the wrong package name");
 }
+if (provenance.sourceRepository !== "https://github.com/flowstack-ui/atom") {
+  errors.push("Content provenance has the wrong Atom source repository");
+}
 if (provenance.version !== atomManifest.version) {
   errors.push(
     `Content reviewed for Atom ${provenance.version}, installed ${atomManifest.version}`,
@@ -132,11 +147,34 @@ if (provenance.version !== atomManifest.version) {
 if (websiteManifest.dependencies["@flowstack-ui/brick"] !== brickManifest.version) {
   errors.push("Brick must be installed as the exact reviewed package version");
 }
+if (websiteManifest.dependencies["@flowstack-ui/atom"] !== atomManifest.version) {
+  errors.push("Atom must be installed as the exact reviewed package version");
+}
+if (websiteManifest.devDependencies["@flowstack-ui/theme"] !== themeManifest.version) {
+  errors.push("Theme must be installed as the exact reviewed package version");
+}
 if (brickManifest.dependencies["@flowstack-ui/atom"] !== atomManifest.version) {
   errors.push("Brick must resolve the exact reviewed Atom package version");
 }
 if (!/^[0-9a-f]{40}$/.test(provenance.sourceCommit)) {
   errors.push("Content provenance has no exact Atom source commit");
+}
+if (!/^\d{4}-\d{2}-\d{2}$/u.test(provenance.lastReviewed)) {
+  errors.push("Content provenance has no exact review date");
+}
+
+const requiredLlmProvenance = [
+  `Package: \`${provenance.package}\``,
+  `Exact reviewed version: \`${provenance.version}\``,
+  `Source repository: ${provenance.sourceRepository}`,
+  `Exact source commit: \`${provenance.sourceCommit}\``,
+  "https://agents.brick-ui.com/llms.txt",
+  "does not replace Atom's package or website as the source authority",
+];
+for (const { name, content } of llmsOutputs) {
+  for (const expected of requiredLlmProvenance) {
+    if (!content.includes(expected)) errors.push(`${name} is missing exact provenance or the supplementary Agent Tools boundary: ${expected}`);
+  }
 }
 
 if (errors.length) {

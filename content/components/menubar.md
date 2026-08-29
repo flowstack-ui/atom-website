@@ -475,6 +475,13 @@ typeahead behavior for printable-character searches.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.6
 
 - Inherited movement-gated submenu hover intent so opening a top-level menu

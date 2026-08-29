@@ -26,6 +26,12 @@ Components and Utilities together must account for every public Atom subpath.
 
 The installed Atom version and recorded content version must match.
 
+`public/llms.txt` and `public/llms-full.txt` repeat the exact package name,
+version, source repository, and source commit from this record. They link to
+the unified FLOWSTACK Agent Knowledge index as a supplementary version-aware
+discovery route; that link does not replace Atom's package or website as the
+source authority.
+
 ## Synchronization
 
 `npm run content:sync` deliberately refreshes the package-owned documentation
@@ -42,7 +48,8 @@ Review synchronized changes before committing them. Website-specific
 Introduction, Accessibility, Styling, Animation, Composition, server-rendering,
 and Hooks pages are not overwritten by the sync script.
 
-`npm run content:check` verifies that all 71 installed Atom subpaths are
+`npm run content:check` verifies that all 74 installed Atom subpaths are
 represented, synchronized pages include changelogs, source provenance is exact,
-the content tree contains no unlisted Markdown pages, and maintainer-only routes
-or evidence references have not leaked into public content.
+both AI-readable outputs carry the exact provenance and supplementary-delivery
+boundary, the content tree contains no unlisted Markdown pages, and maintainer-
+only routes or evidence references have not leaked into public content.

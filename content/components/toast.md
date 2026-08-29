@@ -348,9 +348,14 @@ separate UI when an action must keep a toast open while async work completes.
 
 ### Unreleased
 
+### 0.24.0
+
 - Documented a consumer-owned safe-area and application-chrome offset recipe,
   while explicitly avoiding an unverified automatic software-keyboard
   guarantee.
+- Added source-led Agent Knowledge for transient feedback selection, live
+  announcement ownership, queue timing, focus behavior, actions, dismissal,
+  and placement boundaries.
 
 ### 0.15.0
 

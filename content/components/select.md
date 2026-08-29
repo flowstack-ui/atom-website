@@ -503,6 +503,13 @@ buffers match exact prefixes.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.20.4
 
 - Content/Listbox now resolves direction from its explicit `dir`, Trigger, or

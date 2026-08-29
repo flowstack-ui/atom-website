@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 
 import { Checkbox } from "@flowstack-ui/atom/checkbox";
 import { CheckboxGroup } from "@flowstack-ui/atom/checkbox-group";
+import { ColorPicker } from "@flowstack-ui/atom/color-picker";
 import { Combobox } from "@flowstack-ui/atom/combobox";
 import { Listbox } from "@flowstack-ui/atom/listbox";
 import { MultiSelect } from "@flowstack-ui/atom/multi-select";
@@ -28,6 +29,11 @@ function CheckboxSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
 function CheckboxGroupSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   const values = ["keyboard", "voice", "touch"];
   return <DemoSurface className="atom-demo-field"><strong>Validation channels</strong><CheckboxGroup.Root allValues={values} aria-label="Validation channels" className="atom-demo-choice-list" defaultValue={["keyboard"]} onValueChange={(value) => onSignal(`selected: ${value.join(", ") || "none"}`)}><CheckboxGroup.Parent className="atom-demo-parent-choice">Select every channel</CheckboxGroup.Parent>{values.map((value) => <CheckboxGroup.Item className="atom-demo-choice" key={value} value={value}><span className="atom-demo-checkbox" aria-hidden="true">✓</span><span><CheckboxGroup.ItemLabel>{value[0].toUpperCase() + value.slice(1)}</CheckboxGroup.ItemLabel><CheckboxGroup.ItemDescription>{value === "keyboard" ? "Roving and activation keys" : value === "voice" ? "Announced relationships" : "Pointer-sized targets"}</CheckboxGroup.ItemDescription></span></CheckboxGroup.Item>)}</CheckboxGroup.Root></DemoSurface>;
+}
+
+function ColorPickerSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
+  const presets = ["#5b5bd6", "#0f766e", "#c2410c"];
+  return <DemoSurface className="atom-demo-field atom-demo-color-picker"><ColorPicker.Root name="missionColor" defaultValue={presets[0]} onValueChange={(value) => onSignal(`color: ${value}`)}><ColorPicker.Label>Mission color</ColorPicker.Label><ColorPicker.Control className="atom-demo-input-row"><ColorPicker.Input className="atom-demo-input" /><ColorPicker.NativeInput className="atom-demo-native-color" aria-label="Open mission color chooser" /></ColorPicker.Control><div className="atom-demo-swatches" aria-label="Mission color presets">{presets.map((value) => <ColorPicker.SwatchTrigger aria-label={`Use ${value}`} key={value} style={{ "--atom-demo-swatch": value } as CSSProperties} value={value}><span aria-hidden="true" /></ColorPicker.SwatchTrigger>)}</div><ColorPicker.HiddenInput /></ColorPicker.Root></DemoSurface>;
 }
 
 function RadioSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
@@ -67,6 +73,7 @@ export default function SelectionSpecimens(props: ExampleProps) {
   switch (props.slug) {
     case "checkbox": return <CheckboxSpecimen onSignal={props.onSignal} />;
     case "checkbox-group": return <CheckboxGroupSpecimen onSignal={props.onSignal} />;
+    case "color-picker": return <ColorPickerSpecimen onSignal={props.onSignal} />;
     case "radio-group": return <RadioSpecimen onSignal={props.onSignal} />;
     case "switch": return <SwitchSpecimen onSignal={props.onSignal} />;
     case "slider": return <SliderSpecimen onSignal={props.onSignal} />;

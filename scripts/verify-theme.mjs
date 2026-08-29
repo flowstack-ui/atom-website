@@ -23,7 +23,7 @@ try {
   assert.equal(compilation.manifest.theme.id, "atom-website");
   assert.equal(compilation.manifest.appearances.default, "system");
   assert.deepEqual(compilation.manifest.appearances.supported, ["light", "dark"]);
-  assert.equal(compilation.report.counts.brickRequired, 144);
+  assert.equal(compilation.report.counts.brickRequired, 154);
   assert.equal(compilation.report.counts.componentInputs, 0);
   assert.ok(compilation.report.counts.projectTokens > 0);
 

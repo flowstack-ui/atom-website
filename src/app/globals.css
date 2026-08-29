@@ -440,6 +440,12 @@
   .atom-demo-option:is([data-highlighted], [data-active]), .atom-demo-menu [role^="menuitem"]:is([data-highlighted], :focus-visible) { background: var(--brick-color-accent-soft); color: var(--brick-color-accent-text); outline: 0; }
   .atom-demo-listbox { min-width: 15rem; border: 1px solid var(--brick-color-border-default); border-radius: .75rem; padding: .4rem; background: var(--brick-color-surface-raised); }
   .atom-demo-listbox [data-slot="listbox-label"] { display: block; padding: .4rem .55rem; color: var(--brick-color-text-muted); font-size: .65rem; font-weight: 650; text-transform: uppercase; }
+  .atom-demo-color-picker [data-slot="color-picker"] { display: grid; gap: .65rem; }
+  .atom-demo-native-color { width: 2.6rem; min-width: 2.6rem; min-height: 2.6rem; overflow: hidden; border: 1px solid var(--brick-color-border-default); border-radius: .65rem; padding: .18rem; background: var(--brick-color-surface-raised); cursor: pointer; }
+  .atom-demo-swatches { display: flex; gap: .5rem; }
+  .atom-demo-swatches [data-slot="color-picker-swatch-trigger"] { display: grid; width: 2rem; height: 2rem; place-items: center; border: 2px solid transparent; border-radius: .55rem; padding: .2rem; background: transparent; cursor: pointer; }
+  .atom-demo-swatches [data-slot="color-picker-swatch-trigger"] > span { width: 100%; height: 100%; border-radius: .3rem; background: var(--atom-demo-swatch); box-shadow: inset 0 0 0 1px color-mix(in srgb, black, transparent 78%); }
+  .atom-demo-swatches [aria-pressed="true"] { border-color: var(--brick-color-accent-solid); }
 
   .atom-demo-appbar, .atom-demo-bottom-nav, .atom-demo-breadcrumb, .atom-demo-nav-list, .atom-demo-navigation-menu, .atom-demo-menubar, .atom-demo-pagination, .atom-demo-toolbar, .atom-demo-sidebar { border: 1px solid var(--brick-color-border-default); border-radius: .9rem; background: var(--brick-color-surface-raised); color: var(--brick-color-text-primary); box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--brick-color-shadow), transparent 68%); }
   .atom-demo-appbar { width: 100%; padding: .65rem .7rem; }
@@ -572,6 +578,28 @@
   .atom-demo-list li > span { color: var(--brick-color-accent-text); font-family: var(--site-font-mono); font-size: .65rem; }
   .atom-demo-list li > div { display: grid; gap: .1rem; }
   .atom-demo-list small { color: var(--brick-color-text-secondary); font-size: .62rem; }
+  .atom-demo-drag-drop { display: grid; width: 100%; gap: .65rem; }
+  .atom-demo-drag-drop > [data-slot="drag-drop-drop-target"], .atom-demo-drop-target { display: grid; min-height: 5.7rem; align-content: start; gap: .15rem; border: 1px dashed var(--brick-color-border-strong); border-radius: .85rem; padding: .7rem; background: color-mix(in srgb, var(--brick-color-surface-raised), transparent 3%); color: var(--brick-color-text-primary); }
+  .atom-demo-drop-target[data-drop-target] { border-color: var(--brick-color-accent-solid); background: var(--brick-color-accent-soft); }
+  .atom-demo-drop-target > strong { font-size: .72rem; }
+  .atom-demo-drop-target > small, .atom-demo-drop-empty { color: var(--brick-color-text-muted); font-size: .62rem; }
+  .atom-demo-drop-empty { margin-block: auto; text-align: center; }
+  .atom-demo-draggable { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .6rem; margin-block-start: .45rem; border: 1px solid var(--brick-color-border-default); border-radius: .65rem; padding: .55rem; background: var(--brick-color-surface-overlay); box-shadow: 0 .5rem 1.2rem color-mix(in srgb, var(--brick-color-shadow), transparent 78%); transform: translate(var(--atom-drag-drop-x, 0), var(--atom-drag-drop-y, 0)); }
+  .atom-demo-draggable[data-dragging] { position: relative; z-index: 2; }
+  .atom-demo-draggable > button, .atom-demo-reorder-item > button, .atom-demo-reorder-actions button { display: grid; width: 2rem; height: 2rem; place-items: center; border: 1px solid var(--brick-color-border-default); border-radius: .5rem; padding: 0; background: var(--brick-color-surface-subtle); color: var(--brick-color-text-secondary); cursor: grab; }
+  .atom-demo-draggable > span, .atom-demo-reorder-item > span { display: grid; gap: .1rem; }
+  .atom-demo-draggable small, .atom-demo-reorder-item small { color: var(--brick-color-text-secondary); font-size: .62rem; }
+  .atom-demo-drag-actions { display: flex; justify-content: flex-end; }
+  .atom-demo-drag-actions .atom-demo-button { min-height: 2.2rem; font-size: .68rem; }
+  .atom-demo-reorder { display: grid; gap: .45rem; margin: 0; padding: 0; list-style: none; }
+  .atom-demo-reorder-item { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .65rem; border: 1px solid var(--brick-color-border-default); border-radius: .7rem; padding: .55rem; background: var(--brick-color-surface-raised); color: var(--brick-color-text-primary); }
+  .atom-demo-reorder-item[data-dragging] { z-index: 2; transform: translate(var(--atom-drag-drop-x, 0), var(--atom-drag-drop-y, 0)); }
+  .atom-demo-reorder-actions { display: flex !important; grid-auto-flow: column; gap: .25rem !important; }
+  .atom-demo-reorder-actions button { width: 1.8rem; height: 1.8rem; cursor: pointer; }
+  .atom-demo-reorder-actions button:disabled { opacity: .35; cursor: not-allowed; }
+  .atom-demo-reorder-item [data-slot="reorder-drop-indicator"][data-state="active"] { position: absolute; inset-inline: .35rem; height: 2px; background: var(--brick-color-accent-solid); }
+  .atom-demo-reorder-item [data-slot="reorder-drop-indicator"][data-position="before"] { inset-block-start: -.3rem; }
+  .atom-demo-reorder-item [data-slot="reorder-drop-indicator"][data-position="after"] { inset-block-end: -.3rem; }
   .atom-demo-tree { border: 1px solid var(--brick-color-border-default); border-radius: .85rem; padding: .45rem; background: var(--brick-color-surface-raised); box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--brick-color-shadow), transparent 68%); }
   .atom-demo-tree [role="treeitem"] { border-radius: .5rem; padding: .42rem .55rem; font-size: .72rem; }
   .atom-demo-tree [role="treeitem"][aria-selected="true"] { background: var(--brick-color-accent-soft); color: var(--brick-color-accent-text); }

@@ -191,7 +191,7 @@ test("guide and primitive rails expose only their own information architecture",
 
 test("primitive overview groups compact cards across components and utilities", async ({ page }) => {
   await page.goto("/docs/components/");
-  await expect(page.getByText("71 primitives")).toBeVisible();
+  await expect(page.getByText("74 primitives")).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "Utilities", exact: true })).toBeVisible();
   const hooksCard = page.locator("#primitive-category-utilities article").filter({ hasText: /^Hooks/ });
   await expect(hooksCard.locator('[data-slot="card-action"] [data-slot="badge"]')).toHaveText("Utilities");
@@ -208,7 +208,7 @@ test("every public primitive route presents one live specimen and semantic featu
   test.skip(testInfo.project.name !== "desktop-chromium", "one canonical browser owns the complete primitive crawl");
   test.setTimeout(120_000);
 
-  expect(primitiveRoutes).toHaveLength(71);
+  expect(primitiveRoutes).toHaveLength(74);
   for (const route of primitiveRoutes) {
     await page.goto(route.path);
     await expect(page.getByRole("heading", { level: 1, name: route.title })).toBeVisible();

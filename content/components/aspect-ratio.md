@@ -87,7 +87,11 @@ need a descriptive title.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for structural media geometry, ratio
+  normalization, child semantics, and authoritative style composition.
+
 ### 0.1.0
 
 - Initial Atom release.

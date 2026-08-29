@@ -372,7 +372,11 @@ Atom's composed pointer behavior with `event.preventDefault()`.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for grid selection, indexed semantics,
+  active-descendant focus, row selection, header actions, and virtualization
+  boundaries.
 
 ### 0.17.0
 

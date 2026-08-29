@@ -95,7 +95,11 @@ frequency of the update.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for passive contextual labels and counts,
+  owning-control context, noninteraction, and deliberate live announcement
+  boundaries.
 
 ### 0.3.3
 

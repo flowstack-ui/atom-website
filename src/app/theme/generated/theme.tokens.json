@@ -1,7 +1,7 @@
 {
   "$extensions": {
     "flowstack.theme": {
-      "brickVersion": "0.1.9",
+      "brickVersion": "0.1.11",
       "id": "atom-website",
       "schema": "flowstack.theme-tokens.v1"
     }
@@ -162,6 +162,20 @@
             "$value": "#95c9f6"
           }
         },
+        "link": {
+          "text": {
+            "$type": "color",
+            "$value": "#abb5ff"
+          },
+          "text-hover": {
+            "$type": "color",
+            "$value": "#b7c1ff"
+          },
+          "text-pressed": {
+            "$type": "color",
+            "$value": "#c6cfff"
+          }
+        },
         "scrim": {
           "$type": "color",
           "$value": "#000000b8"
@@ -308,6 +322,14 @@
         }
       },
       "shadow": {
+        "floating": {
+          "$type": "shadow",
+          "$value": "0rem 0.75rem 2rem 0rem #00000042"
+        },
+        "modal": {
+          "$type": "shadow",
+          "$value": "0rem 1.5rem 4.5rem 0rem #0000007a"
+        },
         "raised": {
           "$type": "shadow",
           "$value": "0rem 0.5rem 1.5rem -0.25rem #00000080"
@@ -472,6 +494,20 @@
             "$value": "#105da9"
           }
         },
+        "link": {
+          "text": {
+            "$type": "color",
+            "$value": "#3a3a8f"
+          },
+          "text-hover": {
+            "$type": "color",
+            "$value": "#333185"
+          },
+          "text-pressed": {
+            "$type": "color",
+            "$value": "#2a2579"
+          }
+        },
         "scrim": {
           "$type": "color",
           "$value": "#1413128c"
@@ -618,6 +654,14 @@
         }
       },
       "shadow": {
+        "floating": {
+          "$type": "shadow",
+          "$value": "0rem 0.75rem 2rem 0rem #14131218"
+        },
+        "modal": {
+          "$type": "shadow",
+          "$value": "0rem 1.5rem 4.5rem 0rem #1413122c"
+        },
         "raised": {
           "$type": "shadow",
           "$value": "0rem 0.5rem 1.5rem -0.25rem #1413122e"

@@ -194,6 +194,13 @@ separate live-region announcement.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.19.1
 
 - Fixed `Input` to inherit the containing Field's generated control ID,

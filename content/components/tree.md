@@ -212,7 +212,11 @@ multi-character buffers match exact prefixes.
 
 ### Unreleased
 
-- No unreleased changes.
+### 0.24.0
+
+- Added source-led Agent Knowledge for one-dimensional hierarchy selection,
+  nested relationships, expansion and selection state, focus, typeahead,
+  forms, direction, and virtualization boundaries.
 
 ### 0.17.1
 

@@ -12,6 +12,20 @@ Atom UI is an accessible, headless React primitive library and the behavioral fo
 - [GitHub repository](https://github.com/flowstack-ui/atom)
 - [npm package](https://www.npmjs.com/package/@flowstack-ui/atom)
 
+## Exact provenance
+
+- Package: `@flowstack-ui/atom`
+- Exact reviewed version: `0.24.0`
+- Source repository: https://github.com/flowstack-ui/atom
+- Exact source commit: `a6bf8c985d230cd2edeeda1275a05bf9db0f8379`
+- Last reviewed: `2026-08-29`
+
+## Related FLOWSTACK agent delivery
+
+- [Unified FLOWSTACK Agent Knowledge index](https://agents.brick-ui.com/llms.txt)
+
+The unified FLOWSTACK index is a supplementary version-aware discovery route. It does not replace Atom's package or website as the source authority.
+
 ## Documentation map
 
 ### Overview
@@ -50,11 +64,13 @@ Atom UI is an accessible, headless React primitive library and the behavioral fo
 - [Checkbox Group](https://atom-ui.com/docs/components/checkbox-group/)
 - [Clipboard](https://atom-ui.com/docs/components/clipboard/)
 - [Collapsible](https://atom-ui.com/docs/components/collapsible/)
+- [Color Picker](https://atom-ui.com/docs/components/color-picker/)
 - [Combobox](https://atom-ui.com/docs/components/combobox/)
 - [Context Menu](https://atom-ui.com/docs/components/context-menu/)
 - [Data Grid](https://atom-ui.com/docs/components/data-grid/)
 - [Dialog](https://atom-ui.com/docs/components/dialog/)
 - [Divider](https://atom-ui.com/docs/components/divider/)
+- [Drag Drop](https://atom-ui.com/docs/components/drag-drop/)
 - [Drawer](https://atom-ui.com/docs/components/drawer/)
 - [Dropdown Menu](https://atom-ui.com/docs/components/dropdown-menu/)
 - [Feed](https://atom-ui.com/docs/components/feed/)
@@ -84,6 +100,7 @@ Atom UI is an accessible, headless React primitive library and the behavioral fo
 - [Progress](https://atom-ui.com/docs/components/progress/)
 - [Radio Group](https://atom-ui.com/docs/components/radio-group/)
 - [Rating](https://atom-ui.com/docs/components/rating/)
+- [Reorder](https://atom-ui.com/docs/components/reorder/)
 - [Scroll Area](https://atom-ui.com/docs/components/scroll-area/)
 - [Select](https://atom-ui.com/docs/components/select/)
 - [Sidebar](https://atom-ui.com/docs/components/sidebar/)

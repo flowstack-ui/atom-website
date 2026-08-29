@@ -167,6 +167,13 @@ move focus so every option remains discoverable.
 
 ## Changelog
 
+### Unreleased
+
+### 0.24.0
+
+- Added public Agent Knowledge for component selection, required composition,
+  recurring mistakes, and validation.
+
 ### 0.11.1
 
 - Made Root `dir="rtl"` control horizontal arrow-key navigation directly,

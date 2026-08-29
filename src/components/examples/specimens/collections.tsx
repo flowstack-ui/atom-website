@@ -1,9 +1,12 @@
 "use client";
 
-import { Archive, ChevronRight, Folder, Pin, Radio, Rocket } from "lucide-react";
+import { useState } from "react";
+import { Archive, ArrowDown, ArrowUp, ChevronRight, Folder, GripVertical, Pin, Radio, Rocket } from "lucide-react";
 import { DataGrid } from "@flowstack-ui/atom/data-grid";
+import { DragDrop } from "@flowstack-ui/atom/drag-drop";
 import { Feed } from "@flowstack-ui/atom/feed";
 import { List } from "@flowstack-ui/atom/list";
+import { Reorder } from "@flowstack-ui/atom/reorder";
 import { ScrollArea } from "@flowstack-ui/atom/scroll-area";
 import { SwipeableItem } from "@flowstack-ui/atom/swipeable-item";
 import { Table } from "@flowstack-ui/atom/table";
@@ -18,8 +21,26 @@ const rows = [
   ["Polaris", "Draft", "Voice"],
 ];
 
+const releaseLabels: Record<string, string> = {
+  verify: "Verify production",
+  approve: "Request approval",
+  deploy: "Deploy release",
+};
+
 function DataGridSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   return <DataGrid.Root aria-label="Mission validation" className="atom-demo-data-table" columnCount={3} defaultValue="Northstar" onValueChange={(value) => onSignal(`selected row: ${String(value)}`)} rowCount={rows.length + 1} selectionMode="single" selectOnRowClick><DataGrid.Header><DataGrid.Row rowIndex={1} selectable={false}><DataGrid.ColumnHeader columnIndex={1}>Mission</DataGrid.ColumnHeader><DataGrid.ColumnHeader columnIndex={2}>Status</DataGrid.ColumnHeader><DataGrid.ColumnHeader columnIndex={3}>Channel</DataGrid.ColumnHeader></DataGrid.Row></DataGrid.Header><DataGrid.Body>{rows.map((row, index) => <DataGrid.Row key={row[0]} rowIndex={index + 2} value={row[0]}><DataGrid.Cell columnIndex={1}>{row[0]}</DataGrid.Cell><DataGrid.Cell columnIndex={2}>{row[1]}</DataGrid.Cell><DataGrid.Cell columnIndex={3}>{row[2]}</DataGrid.Cell></DataGrid.Row>)}</DataGrid.Body></DataGrid.Root>;
+}
+
+function DragDropSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
+  const [queue, setQueue] = useState("intake");
+  const queues = [{ value: "intake", label: "Intake queue" }, { value: "review", label: "Review queue" }];
+  const moveTo = (value: string, input: "drag" | "button") => { setQueue(value); onSignal(`${input}: moved to ${value}`); };
+  return <div className="atom-demo-drag-drop"><DragDrop.Root instructions="Press Space or Enter to pick up. Use Up or Down to choose a queue, then press Space or Enter to drop." onDragEnd={(details) => moveTo(details.overValue, "drag")}>{queues.map((target) => <DragDrop.DropTarget className="atom-demo-drop-target" key={target.value} label={target.label} value={target.value}><strong>{target.label}</strong><small>{target.value === "intake" ? "New requests" : "Ready for review"}</small>{queue === target.value ? <DragDrop.Draggable className="atom-demo-draggable" label="Approval request" value="approval-request"><DragDrop.Handle aria-label="Move Approval request"><GripVertical size={16} /></DragDrop.Handle><span><strong>Approval request</strong><small>Keyboard and pointer movable</small></span></DragDrop.Draggable> : <span className="atom-demo-drop-empty">Drop here</span>}</DragDrop.DropTarget>)}</DragDrop.Root><div className="atom-demo-drag-actions" aria-label="Move Approval request without dragging">{queues.filter((target) => target.value !== queue).map((target) => <button className="atom-demo-button atom-demo-button--quiet" key={target.value} onClick={() => moveTo(target.value, "button")} type="button">Move to {target.label}</button>)}</div></div>;
+}
+
+function ReorderSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
+  const [items, setItems] = useState(["verify", "approve", "deploy"]);
+  return <Reorder.Root className="atom-demo-reorder" items={items} getItemLabel={(value) => releaseLabels[value] ?? value} onItemsChange={(nextItems, details) => { setItems(nextItems); onSignal(`${details.input}: ${releaseLabels[details.activeValue] ?? details.activeValue} to position ${details.nextIndex + 1}`); }}>{items.map((value, index) => <Reorder.Item className="atom-demo-reorder-item" key={value} value={value}><Reorder.DropIndicator /><Reorder.Handle aria-label={`Move ${releaseLabels[value]}`}><GripVertical size={16} /></Reorder.Handle><span><strong>{releaseLabels[value]}</strong><small>Step {index + 1} of {items.length}</small></span><span className="atom-demo-reorder-actions"><Reorder.MoveBefore aria-label={`Move ${releaseLabels[value]} up`}><ArrowUp size={15} /></Reorder.MoveBefore><Reorder.MoveAfter aria-label={`Move ${releaseLabels[value]} down`}><ArrowDown size={15} /></Reorder.MoveAfter></span></Reorder.Item>)}</Reorder.Root>;
 }
 
 function TableSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
@@ -53,9 +74,11 @@ function SwipeableSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
 export default function CollectionSpecimens(props: ExampleProps) {
   switch (props.slug) {
     case "data-grid": return <DataGridSpecimen onSignal={props.onSignal} />;
+    case "drag-drop": return <DragDropSpecimen onSignal={props.onSignal} />;
     case "table": return <TableSpecimen onSignal={props.onSignal} />;
     case "feed": return <FeedSpecimen onSignal={props.onSignal} />;
     case "list": return <ListSpecimen onSignal={props.onSignal} />;
+    case "reorder": return <ReorderSpecimen onSignal={props.onSignal} />;
     case "tree": return <TreeSpecimen onSignal={props.onSignal} />;
     case "tree-grid": return <TreeGridSpecimen onSignal={props.onSignal} />;
     case "scroll-area": return <ScrollAreaSpecimen onSignal={props.onSignal} />;
