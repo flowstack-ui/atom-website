@@ -71,7 +71,7 @@ async function writeContent(section, slug, source) {
 
 function mergeComponentHistory(readme, changelog) {
   const body = removeMaintainerSections(readme)
-    .replace(/\n## Changelog\s*\n+(?:See )?\[CHANGELOG\.md\]\(\.\/CHANGELOG\.md\)\.?\s*$/u, "")
+    .replace(/\n(?:## Changelog\s*\n+)?(?:See )?\[(?:Changelog|CHANGELOG\.md)\]\(\.\/CHANGELOG\.md\)\.?\s*$/u, "")
     .replace(/\]\(\.\.\/([^/)]+)\/README\.md\)/gu, "](/components/$1)")
     .trim();
   const history = changelog

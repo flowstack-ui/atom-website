@@ -4,8 +4,8 @@ const verification = {
   kind: "public-prerendered-next-website",
   publicPackageBaseline: {
     dependencies: {
-      "@flowstack-ui/atom": "0.24.0",
-      "@flowstack-ui/brick": "0.1.11",
+      "@flowstack-ui/atom": "0.25.1",
+      "@flowstack-ui/brick": "0.1.12",
     },
     devDependencies: {
       "@flowstack-ui/theme": "0.1.1",

@@ -2,10 +2,15 @@
 
 ## Unreleased
 
+- Synchronized the reviewed component documentation, live specimen, release
+  history, search corpus, and AI-readable outputs with exact Atom `0.25.1`,
+  adding complete public coverage for the headless Highlight primitive.
+- Adopted exact Brick `0.1.12` so the website presentation layer and its
+  transitive Atom dependency share the same `0.25.1` release baseline.
 - Synchronized the reviewed consumer documentation and release history with
-  exact Atom `0.24.0` at source commit
-  `a6bf8c985d230cd2edeeda1275a05bf9db0f8379`, and adopted exact Brick
-  `0.1.11` plus Theme `0.1.1`.
+  exact Atom `0.25.1` at source commit
+  `e1d6f3c3c0548905e9cb63a616f69afc6ad0c9aa`, and adopted exact Brick
+  `0.1.12` plus Theme `0.1.1`.
 - Added exact package-version and source-commit provenance to both AI-readable
   outputs, plus a clearly supplementary link to the unified FLOWSTACK Agent
   Knowledge index without changing Atom's source authority.
@@ -22,7 +27,7 @@
 - Darkened the light muted-text role just enough to satisfy Theme's declared
   4.5:1 normal-text contract across Brick's maintained base and canvas
   surfaces.
-- Adopted published Brick `0.1.11` and Theme `0.1.1`, compiling directly from
+- Adopted published Brick `0.1.12` and Theme `0.1.1`, compiling directly from
   Brick's packaged contract and removing the temporary copied contract and
   immutable Theme Git dependency.
 

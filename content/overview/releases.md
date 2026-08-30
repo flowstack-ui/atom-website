@@ -2,6 +2,19 @@
 
 Atom follows semantic versioning. The website and npm package release independently; this page mirrors the complete reviewed package changelog.
 
+## 0.25.1 - 2026-08-30
+
+- Prevented Highlight from accepting or forwarding `dangerouslySetInnerHTML`,
+  preserving its plain-text-derived output contract for typed, untyped, and
+  server-rendered consumers.
+
+## 0.25.0 - 2026-08-30
+
+- Added headless Highlight literal-query segmentation with stable offsets,
+  deterministic overlap handling, first/all and case options, Unicode-aware
+  whole-word matching, native mark semantics, server-safe rendering, public
+  documentation, and exact-version Agent Knowledge.
+
 ## 0.24.0 - 2026-08-28
 
 - Added headless `ColorPicker` opaque-hex selection with editable and native

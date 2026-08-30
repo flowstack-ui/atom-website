@@ -15,10 +15,10 @@ Atom UI is an accessible, headless React primitive library and the behavioral fo
 ## Exact provenance
 
 - Package: `@flowstack-ui/atom`
-- Exact reviewed version: `0.24.0`
+- Exact reviewed version: `0.25.1`
 - Source repository: https://github.com/flowstack-ui/atom
-- Exact source commit: `a6bf8c985d230cd2edeeda1275a05bf9db0f8379`
-- Last reviewed: `2026-08-29`
+- Exact source commit: `e1d6f3c3c0548905e9cb63a616f69afc6ad0c9aa`
+- Last reviewed: `2026-08-30`
 
 ## Related FLOWSTACK agent delivery
 
@@ -78,6 +78,7 @@ The unified FLOWSTACK index is a supplementary version-aware discovery route. It
 - [Fieldset](https://atom-ui.com/docs/components/fieldset/)
 - [File Upload](https://atom-ui.com/docs/components/file-upload/)
 - [Form](https://atom-ui.com/docs/components/form/)
+- [Highlight](https://atom-ui.com/docs/components/highlight/)
 - [Hover Card](https://atom-ui.com/docs/components/hover-card/)
 - [Image](https://atom-ui.com/docs/components/image/)
 - [Input](https://atom-ui.com/docs/components/input/)

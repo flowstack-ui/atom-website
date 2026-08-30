@@ -4,7 +4,7 @@ const formSlugs = new Set(["input", "textarea", "number-input", "otp-field", "pa
 const overlaySlugs = new Set(["menu", "menubar", "dropdown-menu", "context-menu", "dialog", "alert-dialog", "modal", "drawer", "popover", "hover-card", "tooltip", "toast", "navigation-menu"]);
 const expandingSlugs = new Set(["accordion", "collapsible", "tree", "tree-grid", "sidebar"]);
 const collectionSlugs = new Set(["data-grid", "drag-drop", "feed", "list", "reorder", "table", "scroll-area", "swipeable-item", "collection", "virtualizer"]);
-const structuralSlugs = new Set(["app-bar", "bottom-navigation", "breadcrumb", "nav-list", "pagination", "tabs", "toolbar", "aspect-ratio", "avatar", "badge", "carousel", "divider", "image", "progress", "skip-link"]);
+const structuralSlugs = new Set(["app-bar", "bottom-navigation", "breadcrumb", "nav-list", "pagination", "tabs", "toolbar", "aspect-ratio", "avatar", "badge", "carousel", "divider", "highlight", "image", "progress", "skip-link"]);
 const utilitySlugs = new Set(["direction", "hooks", "portal", "visually-hidden"]);
 
 const prompts: Record<string, string> = {
@@ -21,6 +21,7 @@ const prompts: Record<string, string> = {
   drawer: "Open the sheet and verify focus returns to the trigger.",
   "drag-drop": "Use the handle to move the request onto a queue, or choose its visible fallback action.",
   "hover-card": "Hover or focus the identity to reveal supporting information.",
+  highlight: "Edit the literal query and inspect the native mark elements generated in the excerpt.",
   menu: "Open the menu and move through its commands with arrow keys.",
   "navigation-menu": "Open a destination group and move through its links.",
   popover: "Open the non-modal layer and dismiss it with Escape.",
