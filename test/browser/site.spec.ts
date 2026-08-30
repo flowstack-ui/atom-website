@@ -62,7 +62,7 @@ test("public routes expose route-specific social metadata and an isolated 404 id
 });
 
 test("representative routes avoid viewport-level horizontal overflow", async ({ page }) => {
-  for (const path of ["/", "/docs/", "/docs/components/", "/docs/components/data-grid/"]) {
+  for (const path of ["/", "/docs/", "/docs/components/", "/docs/components/data-grid/", "/docs/components/highlight/"]) {
     await page.goto(path);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow, `${path} overflowed the viewport`).toBeLessThanOrEqual(1);
@@ -191,7 +191,7 @@ test("guide and primitive rails expose only their own information architecture",
 
 test("primitive overview groups compact cards across components and utilities", async ({ page }) => {
   await page.goto("/docs/components/");
-  await expect(page.getByText("74 primitives")).toBeVisible();
+  await expect(page.getByText("75 primitives")).toBeVisible();
   await expect(page.getByRole("heading", { level: 2, name: "Utilities", exact: true })).toBeVisible();
   const hooksCard = page.locator("#primitive-category-utilities article").filter({ hasText: /^Hooks/ });
   await expect(hooksCard.locator('[data-slot="card-action"] [data-slot="badge"]')).toHaveText("Utilities");
@@ -208,7 +208,7 @@ test("every public primitive route presents one live specimen and semantic featu
   test.skip(testInfo.project.name !== "desktop-chromium", "one canonical browser owns the complete primitive crawl");
   test.setTimeout(120_000);
 
-  expect(primitiveRoutes).toHaveLength(74);
+  expect(primitiveRoutes).toHaveLength(75);
   for (const route of primitiveRoutes) {
     await page.goto(route.path);
     await expect(page.getByRole("heading", { level: 1, name: route.title })).toBeVisible();
@@ -251,6 +251,14 @@ test("live specimens expose meaningful behavior across every example family", as
   await expect(page.getByRole("dialog", { name: "Ready for launch?" })).toBeVisible();
   await page.getByRole("button", { name: "Keep editing" }).click();
   await expect(page.getByRole("dialog", { name: "Ready for launch?" })).toHaveCount(0);
+
+  await page.goto("/docs/components/highlight/");
+  const highlightExample = page.locator(".atom-example");
+  const query = highlightExample.getByRole("textbox", { name: "Literal search query" });
+  await expect(highlightExample.locator("mark")).toHaveText("FLOWSTACK");
+  await query.fill("C++");
+  await expect(highlightExample.locator("mark")).toHaveText("C++");
+  await expect(highlightExample.locator(".atom-example__footer code")).toHaveText("literal query: C++");
 });
 
 test("repaired primitive specimens expose truthful state and stable geometry", async ({ page }, testInfo) => {

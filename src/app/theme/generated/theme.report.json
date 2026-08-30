@@ -1,6 +1,6 @@
 {
   "$schema": "flowstack.theme-report.v1",
-  "brickVersion": "0.1.11",
+  "brickVersion": "0.1.12",
   "contrast": {
     "algorithm": "wcag2-relative-luminance",
     "colorSpace": "srgb",

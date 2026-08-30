@@ -9,6 +9,7 @@ import { Badge } from "@flowstack-ui/atom/badge";
 import { Carousel } from "@flowstack-ui/atom/carousel";
 import { Collapsible } from "@flowstack-ui/atom/collapsible";
 import { Divider } from "@flowstack-ui/atom/divider";
+import { Highlight } from "@flowstack-ui/atom/highlight";
 import { Image } from "@flowstack-ui/atom/image";
 import { Progress } from "@flowstack-ui/atom/progress";
 import { SkipLink } from "@flowstack-ui/atom/skip-link";
@@ -81,6 +82,31 @@ function ImageSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   return <Image.Root className="atom-demo-image" onLoadingStatusChange={(status) => onSignal(`image status: ${status}`)} src="/favicon.svg"><Image.Content alt="Atom UI orbital brand mark" /><Image.Fallback><span>AT</span><strong>Atom brand mark</strong></Image.Fallback></Image.Root>;
 }
 
+function HighlightSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
+  const [query, setQuery] = useState("flowstack");
+  const text = "FLOWSTACK keeps C++ and café searches literal, predictable, and accessible.";
+
+  return (
+    <DemoSurface className="atom-demo-highlight">
+      <label htmlFor="demo-highlight-query">Literal search query</label>
+      <input
+        className="atom-demo-input"
+        id="demo-highlight-query"
+        onChange={(event) => {
+          const value = event.currentTarget.value;
+          setQuery(value);
+          onSignal(value ? `literal query: ${value}` : "no matches selected");
+        }}
+        value={query}
+      />
+      <p>
+        <Highlight.Root className="atom-demo-highlight__text" query={query} text={text} />
+      </p>
+      <small>Matching stays in Atom; query state, result navigation, and appearance stay with the application.</small>
+    </DemoSurface>
+  );
+}
+
 function ProgressSpecimen({ onSignal }: Pick<ExampleProps, "onSignal">) {
   const [value, setValue] = useState(68);
   const advance = () => { const next = value >= 100 ? 24 : Math.min(100, value + 8); setValue(next); onSignal(`aria-valuenow: ${next}`); };
@@ -100,6 +126,7 @@ export default function StructureSpecimens(props: ExampleProps) {
     case "badge": return <BadgeSpecimen onSignal={props.onSignal} />;
     case "carousel": return <CarouselSpecimen onSignal={props.onSignal} />;
     case "divider": return <DividerSpecimen onSignal={props.onSignal} />;
+    case "highlight": return <HighlightSpecimen onSignal={props.onSignal} />;
     case "image": return <ImageSpecimen onSignal={props.onSignal} />;
     case "progress": return <ProgressSpecimen onSignal={props.onSignal} />;
     case "skip-link": return <SkipLinkSpecimen onSignal={props.onSignal} />;

@@ -48,7 +48,7 @@ Review synchronized changes before committing them. Website-specific
 Introduction, Accessibility, Styling, Animation, Composition, server-rendering,
 and Hooks pages are not overwritten by the sync script.
 
-`npm run content:check` verifies that all 74 installed Atom subpaths are
+`npm run content:check` verifies that all 75 installed Atom subpaths are
 represented, synchronized pages include changelogs, source provenance is exact,
 both AI-readable outputs carry the exact provenance and supplementary-delivery
 boundary, the content tree contains no unlisted Markdown pages, and maintainer-
