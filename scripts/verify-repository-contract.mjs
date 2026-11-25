@@ -54,6 +54,20 @@ for (const path of configuration.browserConfigs) {
   } catch { /* missing path is already reported */ }
 }
 
+const browserFloor = configuration.browserSupport.query;
+if (packageJson.browserslist?.length !== 1 || packageJson.browserslist[0] !== browserFloor) {
+  errors.push(`package.json must declare ${browserFloor}`);
+}
+const browserSources = (await Promise.all(
+  configuration.browserConfigs.map((path) => readFile(resolve(repositoryRoot, path), "utf8").catch(() => "")),
+)).join("\n");
+const ciSource = await readFile(resolve(repositoryRoot, configuration.workflows.ci), "utf8").catch(() => "");
+for (const project of configuration.browserSupport.desktopProjects) {
+  if (!browserSources.includes(`name: "${project}"`) || !ciSource.includes(`project: ${project}`)) {
+    errors.push(`browser coverage is missing ${project} in Playwright or CI`);
+  }
+}
+
 if (errors.length > 0) {
   console.error(`Repository contract failed:\n- ${errors.join("\n- ")}`);
   process.exit(1);

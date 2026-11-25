@@ -55,6 +55,8 @@ jobs:
         include:
           - project: desktop-chromium
             engine: chromium
+          - project: desktop-firefox
+            engine: firefox
           - project: desktop-webkit
             engine: webkit
           - project: mobile-android-chromium
