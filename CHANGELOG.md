@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Adopt the Baseline 2023 browser target and add desktop Firefox to the
+  portable browser checks.
+- Update Next.js and its lint configuration to `16.4.6` and refresh patched
+  transitive dependencies.
+
 - Synchronized the reviewed component documentation, live specimen, release
   history, search corpus, and AI-readable outputs with exact Atom `0.25.1`,
   adding complete public coverage for the headless Highlight primitive.

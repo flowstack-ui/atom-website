@@ -55,7 +55,7 @@ baseline while retaining the qualified website design and behavior.
   prerendered.
 - Exact published Brick owner styles for the sixteen used components, reducing
   emitted CSS by 59 percent from the correctness baseline without cascade drift.
-- Four-profile Chromium and WebKit verification covering both appearances,
+- Five-profile Chromium, Firefox, and WebKit verification covering both appearances,
   Axe, horizontal overflow, search focus, responsive Drawers, route resolution,
   75-route specimen coverage, cross-family interaction, mobile canvas geometry,
   and 404 recovery. The current dependency audit has zero findings.
@@ -84,7 +84,8 @@ baseline while retaining the qualified website design and behavior.
   forced-colors evidence.
 
 Owner review has covered the complete localhost and public preview experience.
-The release gate passes in desktop/mobile Chromium and WebKit. Preview
+The release gate covers desktop Chromium, Firefox, and WebKit and mobile
+Chromium/WebKit. Preview
 Lighthouse measured 100 Accessibility, Best Practices, and Agentic Browsing;
 performance varied from 94–99 mobile and 99–100 desktop with zero layout shift
 and at most 30 ms total blocking time. Preview SEO is intentionally unscored

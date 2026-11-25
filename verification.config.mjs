@@ -30,6 +30,10 @@ const verification = {
     },
   ],
   browserConfigs: ["playwright.config.ts"],
+  browserSupport: {
+    query: "baseline 2023 with downstream",
+    desktopProjects: ["desktop-chromium", "desktop-firefox", "desktop-webkit"],
+  },
   workflows: {
     ci: ".github/workflows/ci.yml",
     nightly: ".github/workflows/nightly.yml",
